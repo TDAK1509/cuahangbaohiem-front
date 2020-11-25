@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">cuahangbaohiem-front</h1>
+    <button class="button">Button</button>
   </div>
 </template>
 
