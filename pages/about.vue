@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <nuxt-link to="/about">To about page</nuxt-link>
+    <nuxt-link to="/">To home page</nuxt-link>
   </div>
 </template>
 
@@ -8,6 +8,6 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "Home"
+  name: "About"
 });
 </script>
