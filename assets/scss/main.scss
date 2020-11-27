@@ -1,3 +1,7 @@
+@import "~bulma/sass/utilities/_all";
+
 $primary: green;
+
+$navbar-breakpoint: $tablet;
 
 @import "~bulma";

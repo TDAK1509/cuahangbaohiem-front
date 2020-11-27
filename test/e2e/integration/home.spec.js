@@ -1,6 +1,11 @@
 describe("Home", () => {
-  it("can go to home page", () => {
+  beforeEach(() => {
     cy.visit("/");
-    cy.contains("Header").should("be.visible");
+  });
+
+  it("renders logo, links, and buttons", () => {
+    cy.get("[data-cy=logo]").should("be.visible");
+    cy.contains("Về chúng tôi").should("be.visible");
+    cy.contains("Xe").should("be.visible");
   });
 });

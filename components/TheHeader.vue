@@ -3,7 +3,11 @@
     <nav class="navbar">
       <div class="navbar-brand">
         <nuxt-link class="navbar-item" to="/">
-          <img src="@/assets/images/logo.jpg" class="header__logo" />
+          <img
+            data-cy="logo"
+            src="@/assets/images/logo.jpg"
+            class="header__logo"
+          />
         </nuxt-link>
 
         <a class="navbar-burger burger" data-target="navbarMenu">
