@@ -7,7 +7,7 @@
 </template>
 
 <style>
-html {
+body {
   font-family: "Open Sans", sans-serif;
   font-size: 13pt;
 }
