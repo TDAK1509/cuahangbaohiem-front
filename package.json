@@ -11,7 +11,7 @@
     "lint": "yarn lint:js",
     "test": "jest",
     "e2e": "cypress open --browser chrome",
-    "e2e:silent": "cypress run"
+    "e2e:headless": "cypress run"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
@@ -36,6 +36,8 @@
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.5.0",
     "prettier": "^2.1.2",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
     "ts-jest": "^26.4.1",
     "vue-jest": "^3.0.4"
   }

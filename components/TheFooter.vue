@@ -1,5 +1,5 @@
 <template>
-  <footer>Footer</footer>
+  <footer><p class="has-text-primary">Footer</p></footer>
 </template>
 
 <script>
