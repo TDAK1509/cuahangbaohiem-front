@@ -6,7 +6,7 @@
           <nuxt-link data-cy="logo" class="header__logo" to="/" />
         </div>
 
-        <a class="navbar-burger burger" @click="toggleMenu">
+        <a ref="navbarBurger" class="navbar-burger burger" @click="toggleMenu">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -40,6 +40,7 @@ export default {
 
   methods: {
     toggleMenu() {
+      this.$refs.navbarBurger.classList.toggle("is-active");
       this.$refs.navbarMenu.classList.toggle("is-active");
     }
   }
