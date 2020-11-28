@@ -1,3 +1,5 @@
+const ERROR_NOT_A_NUMBER = "Vui lòng điền một con số.";
+
 describe("Page /xe/tinh-phi", () => {
   beforeEach(() => {
     cy.visit("/xe/tinh-phi");
@@ -28,6 +30,31 @@ describe("Page /xe/tinh-phi", () => {
         getCalculateButton().click();
         cy.wait(1000);
         assertResultBlockIsNotRendered();
+      });
+
+      it("if car value is not a number, show error", () => {
+        getCarValueField().type("not a number");
+        getCarYearField().type("2015");
+        getCalculateButton().click();
+        cy.contains(ERROR_NOT_A_NUMBER).should("be.visible");
+        cy.get(".tinh-phi__error").should("have.length", 1);
+      });
+
+      it("if car year is not a number, show error", () => {
+        getCarValueField().type("800");
+        getCarYearField().type("not a number");
+        getCalculateButton().click();
+        cy.contains(ERROR_NOT_A_NUMBER).should("be.visible");
+        cy.contains(ERROR_NOT_A_NUMBER).its("length").should("eq", 1);
+        cy.get(".tinh-phi__error").should("have.length", 1);
+      });
+
+      it("if both car value and car year are not numbers, show 2 errors", () => {
+        getCarValueField().type("not a number");
+        getCarYearField().type("not a number");
+        getCalculateButton().click();
+        cy.contains(ERROR_NOT_A_NUMBER).should("be.visible");
+        cy.get(".tinh-phi__error").should("have.length", 2);
       });
     });
 
