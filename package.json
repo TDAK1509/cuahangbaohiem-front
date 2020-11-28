@@ -11,7 +11,7 @@
     "lint": "yarn lint:js",
     "test": "jest",
     "e2e": "cypress open --browser chrome",
-    "e2e:silent": "cypress run"
+    "e2e:headless": "cypress run"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",

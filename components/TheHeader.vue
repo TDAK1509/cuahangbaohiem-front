@@ -1,14 +1,8 @@
 <template>
-  <header class="px-6">
+  <header class="px-6 py-3">
     <nav class="navbar">
       <div class="navbar-brand">
-        <nuxt-link class="navbar-item" to="/">
-          <img
-            data-cy="logo"
-            src="@/assets/images/logo.jpg"
-            class="header__logo"
-          />
-        </nuxt-link>
+        <nuxt-link data-cy="logo" class="navbar-item header__logo" to="/" />
 
         <a class="navbar-burger burger" data-target="navbarMenu">
           <span aria-hidden="true"></span>
@@ -45,8 +39,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$logo-size: 50px;
+
 .header__logo {
-  height: 100px;
-  width: auto;
+  background: url("~assets/images/logo.jpg") no-repeat center center;
+  background-size: cover;
+  height: $logo-size;
+  width: $logo-size;
 }
 </style>

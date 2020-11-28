@@ -90,5 +90,5 @@ sw.*
 *.swp
 
 # Cypress videos and screenshots
-/cypress/screenshots
-/cypress/videos
+/test/e2e/screenshots
+/test/e2e/videos
