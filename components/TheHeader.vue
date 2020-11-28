@@ -1,8 +1,10 @@
 <template>
-  <header class="px-6 py-3">
+  <header>
     <nav class="navbar">
       <div class="navbar-brand">
-        <nuxt-link data-cy="logo" class="navbar-item header__logo" to="/" />
+        <div class="navbar-item">
+          <nuxt-link data-cy="logo" class="header__logo" to="/" />
+        </div>
 
         <a class="navbar-burger burger" data-target="navbarMenu">
           <span aria-hidden="true"></span>
@@ -39,12 +41,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$logo-size: 50px;
+@import "~bulma/sass/utilities/initial-variables";
+
+$logo-size: 40px;
 
 .header__logo {
   background: url("~assets/images/logo.jpg") no-repeat center center;
   background-size: cover;
   height: $logo-size;
   width: $logo-size;
+}
+
+@media screen and (max-width: $tablet) {
+  $logo-size-mobile: 30px;
+  .header__logo {
+    height: $logo-size-mobile;
+    width: $logo-size-mobile;
+  }
 }
 </style>
