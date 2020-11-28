@@ -12,7 +12,12 @@
 
     <button data-cy="calculate-button" @click="calculate">TÍNH PHÍ</button>
 
-    <div v-if="hasResult" data-cy="result">Result</div>
+    <div v-if="hasResult" data-cy="result">
+      <div>PVI</div>
+      <div>Bảo Việt</div>
+      <div>Bảo Minh</div>
+      <div>MIC</div>
+    </div>
   </div>
 </template>
 

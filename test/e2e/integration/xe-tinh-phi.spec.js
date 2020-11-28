@@ -65,6 +65,16 @@ describe("Page /xe/tinh-phi", () => {
         getCalculateButton().click();
         assertResultBlockIsRendered();
       });
+
+      it("results show 4 insurance brands", () => {
+        getCarValueField().type("800");
+        getCarYearField().type("2015");
+        getCalculateButton().click();
+        cy.contains("PVI").should("be.visible");
+        cy.contains("Bảo Việt").should("be.visible");
+        cy.contains("Bảo Minh").should("be.visible");
+        cy.contains("MIC").should("be.visible");
+      });
     });
   });
 });
