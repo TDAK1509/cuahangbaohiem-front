@@ -19,8 +19,19 @@
 
       <div id="navbarMenu" class="navbar-menu">
         <div class="navbar-end">
-          <nuxt-link class="navbar-item" to="/about">Về chúng tôi</nuxt-link>
-          <a class="navbar-item">Xe</a>
+          <nuxt-link class="navbar-item" to="/ve-chung-toi">
+            Về chúng tôi
+          </nuxt-link>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">Xe</a>
+
+            <div class="navbar-dropdown">
+              <nuxt-link class="navbar-item" to="/xe/tinh-phi">
+                Tính phí bảo hiểm
+              </nuxt-link>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
