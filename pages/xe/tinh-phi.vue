@@ -1,10 +1,10 @@
 <template>
   <div>
-    <input data-cy="car-value" v-model="carValue" />
-    <input data-cy="car-year" v-model="carYear" />
+    <input v-model="carValue" data-cy="car-value" />
+    <input v-model="carYear" data-cy="car-year" />
     <button data-cy="calculate-button" @click="calculate">TÍNH PHÍ</button>
 
-    <div data-cy="result" v-if="hasResult">Result</div>
+    <div v-if="hasResult" data-cy="result">Result</div>
   </div>
 </template>
 

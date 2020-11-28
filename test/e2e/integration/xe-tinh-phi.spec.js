@@ -15,7 +15,7 @@ describe("Page /xe/tinh-phi", () => {
   });
 
   describe("on click calculate button", () => {
-    describe("error handling", () => {
+    describe("form error handling", () => {
       it("if car value is empty, does not show result", () => {
         getCarYearField().type("2015");
         getCalculateButton().click();
@@ -28,6 +28,15 @@ describe("Page /xe/tinh-phi", () => {
         getCalculateButton().click();
         cy.wait(1000);
         assertResultBlockIsNotRendered();
+      });
+    });
+
+    describe("form valid handling", () => {
+      it("shows result if car and year not empty", () => {
+        getCarValueField().type("800");
+        getCarYearField().type("2015");
+        getCalculateButton().click();
+        assertResultBlockIsRendered();
       });
     });
   });
@@ -47,4 +56,8 @@ function getCalculateButton() {
 
 function assertResultBlockIsNotRendered() {
   cy.get("[data-cy=result]").should("not.empty");
+}
+
+function assertResultBlockIsRendered() {
+  cy.get("[data-cy=result]").should("be.visible");
 }
