@@ -12,8 +12,8 @@
 
     <button data-cy="calculate-button" @click="calculate">TÍNH PHÍ</button>
 
-    <div v-if="hasResult" data-cy="result">
-      <ResultPvi />
+    <div v-if="showResult" data-cy="result">
+      <ResultPvi :car-value="carValue" :car-year="carYear" />
       <ResultBaoViet />
       <ResultBaoMinh />
       <ResultMic />
@@ -42,7 +42,7 @@ export default Vue.extend({
 
   data() {
     return {
-      hasResult: false,
+      showResult: false,
 
       carValue: null as string | null,
       isErrorCarValue: false,
@@ -92,7 +92,7 @@ export default Vue.extend({
         return;
       }
 
-      this.hasResult = true;
+      this.showResult = true;
     }
   }
 });
