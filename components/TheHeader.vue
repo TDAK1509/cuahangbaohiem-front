@@ -26,7 +26,7 @@
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">Xe</a>
 
-            <div class="navbar-dropdown">
+            <div class="navbar-dropdown is-right">
               <nuxt-link class="navbar-item" to="/xe/tinh-phi">
                 Tính phí bảo hiểm
               </nuxt-link>
