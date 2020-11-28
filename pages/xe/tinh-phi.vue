@@ -1,5 +1,9 @@
 <template>
-  <div>Tinh phi xe</div>
+  <div>
+    <input data-cy="car-value" />
+    <input data-cy="car-year" />
+    <button data-cy="calculate-button">TÍNH PHÍ</button>
+  </div>
 </template>
 
 <script>
