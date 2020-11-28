@@ -7,9 +7,10 @@ describe("ResultPvi.vue", () => {
     MockDate.set(new Date(2020, 1, 1));
   });
 
+  const thisYear = new Date().getFullYear();
+
   describe("carValue is < 500", () => {
     const carValue = 400;
-    const thisYear = new Date().getFullYear();
 
     it("given carYear's gap from today <= 3, renders 1.7% carValue", () => {
       const wrapper = shallowMount(ResultPvi, {
@@ -41,6 +42,80 @@ describe("ResultPvi.vue", () => {
         }
       });
       const expectInsuranceValue = (carValue * 2.35) / 100;
+      expect(wrapper.text()).toContain(expectInsuranceValue);
+    });
+  });
+
+  describe("500 <= carValue < 700", () => {
+    const carValue = 600;
+
+    it("given carYear's gap from today <= 3, renders 1.45% carValue", () => {
+      const wrapper = shallowMount(ResultPvi, {
+        propsData: {
+          carValue,
+          carYear: thisYear - 3
+        }
+      });
+      const expectInsuranceValue = (carValue * 1.45) / 100;
+      expect(wrapper.text()).toContain(expectInsuranceValue);
+    });
+
+    it("given carYear's gap from today > 3 & <=6, renders 1.74% carValue", () => {
+      const wrapper = shallowMount(ResultPvi, {
+        propsData: {
+          carValue,
+          carYear: thisYear - 4
+        }
+      });
+      const expectInsuranceValue = (carValue * 1.74) / 100;
+      expect(wrapper.text()).toContain(expectInsuranceValue);
+    });
+
+    it("given carYear's gap from today >= 6, renders 2% carValue", () => {
+      const wrapper = shallowMount(ResultPvi, {
+        propsData: {
+          carValue,
+          carYear: thisYear - 7
+        }
+      });
+      const expectInsuranceValue = (carValue * 2) / 100;
+      expect(wrapper.text()).toContain(expectInsuranceValue);
+    });
+  });
+
+  describe("carValue >= 700", () => {
+    const carValue = 800;
+
+    it("given carYear's gap from today <= 3, renders 1.28% carValue", () => {
+      const wrapper = shallowMount(ResultPvi, {
+        propsData: {
+          carValue,
+          carYear: thisYear - 3
+        }
+      });
+      const expectInsuranceValue = (carValue * 1.28) / 100;
+      expect(wrapper.text()).toContain(expectInsuranceValue);
+    });
+
+    it("given carYear's gap from today > 3 & <=6, renders 1.54% carValue", () => {
+      const wrapper = shallowMount(ResultPvi, {
+        propsData: {
+          carValue,
+          carYear: thisYear - 4
+        }
+      });
+      const expectInsuranceValue = (carValue * 1.54) / 100;
+      expect(wrapper.text()).toContain(expectInsuranceValue);
+    });
+
+    it("given carYear's gap from today >= 6, renders 1.76% carValue", () => {
+      const wrapper = shallowMount(ResultPvi, {
+        propsData: {
+          carValue,
+          carYear: thisYear - 7
+        }
+      });
+      const expectInsuranceValue = (carValue * 1.76) / 100;
       expect(wrapper.text()).toContain(expectInsuranceValue);
     });
   });

@@ -8,17 +8,8 @@
 <script lang="ts">
 import Vue from "vue";
 
-const CAR_VALUE_THRESHOLDS = [500, 700];
-const YEAR_THRESHOLDS = [3, 6, 10];
-
 export default Vue.extend({
   name: "ResultPVI",
-
-  data() {
-    return {
-      thisYear: new Date().getFullYear()
-    };
-  },
 
   props: {
     carValue: {
@@ -32,33 +23,85 @@ export default Vue.extend({
     }
   },
 
+  data() {
+    return {
+      thisYear: new Date().getFullYear()
+    };
+  },
+
   computed: {
     insuranceValue(): number {
       return (this.carValue * this.insuranceRate) / 100;
     },
 
     insuranceRate(): number {
-      if (this.carValue < CAR_VALUE_THRESHOLDS[0]) {
-        if (this.carYearGap <= YEAR_THRESHOLDS[0]) {
+      if (this.isCarValueInFirstThreshold) {
+        if (this.isCarYearInFirstThreshold) {
           return 1.7;
         }
 
-        if (
-          this.carYearGap > YEAR_THRESHOLDS[0] &&
-          this.carYearGap <= YEAR_THRESHOLDS[1]
-        ) {
+        if (this.isCarYearInSecondThreshold) {
           return 2.05;
         }
 
-        if (
-          this.carYearGap > YEAR_THRESHOLDS[1] &&
-          this.carYearGap <= YEAR_THRESHOLDS[2]
-        ) {
+        if (this.isCarYearGapInThirdThreshold) {
           return 2.35;
         }
       }
 
-      return 0;
+      if (this.isCarValueInSecondThreshold) {
+        if (this.isCarYearInFirstThreshold) {
+          return 1.45;
+        }
+
+        if (this.isCarYearInSecondThreshold) {
+          return 1.74;
+        }
+
+        if (this.isCarYearGapInThirdThreshold) {
+          return 2;
+        }
+      }
+
+      if (this.isCarValueInThirdThreshold) {
+        if (this.isCarYearInFirstThreshold) {
+          return 1.28;
+        }
+
+        if (this.isCarYearInSecondThreshold) {
+          return 1.54;
+        }
+
+        if (this.isCarYearGapInThirdThreshold) {
+          return 1.76;
+        }
+      }
+
+      return 100;
+    },
+
+    isCarValueInFirstThreshold(): boolean {
+      return this.carValue < 500;
+    },
+
+    isCarValueInSecondThreshold(): boolean {
+      return this.carValue >= 500 && this.carValue < 700;
+    },
+
+    isCarValueInThirdThreshold(): boolean {
+      return this.carValue >= 700;
+    },
+
+    isCarYearInFirstThreshold(): boolean {
+      return this.carYearGap <= 3;
+    },
+
+    isCarYearInSecondThreshold(): boolean {
+      return this.carYearGap > 3 && this.carYearGap <= 6;
+    },
+
+    isCarYearGapInThirdThreshold(): boolean {
+      return this.carYearGap > 6 && this.carYearGap <= 10;
     },
 
     carYearGap(): number {
