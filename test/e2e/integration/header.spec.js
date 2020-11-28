@@ -14,6 +14,13 @@ describe("Header", () => {
     cy.url().should("include", "/ve-chung-toi");
   });
 
+  it("clicks logo navigates to home page", () => {
+    cy.contains("Về chúng tôi").click();
+    cy.url().should("include", "/ve-chung-toi");
+    cy.get("[data-cy=logo]").click();
+    cy.url().should("eq", Cypress.config().baseUrl + "/");
+  });
+
   it("clicks 'Xe/Tính phí bảo hiểm' navigates to /xe/tinh-phi", () => {
     cy.contains("Tính phí bảo hiểm").click({ force: true });
     cy.url().should("include", "/xe/tinh-phi");
