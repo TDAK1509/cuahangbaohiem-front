@@ -6,14 +6,14 @@
           <nuxt-link data-cy="logo" class="header__logo" to="/" />
         </div>
 
-        <a class="navbar-burger burger" data-target="navbarMenu">
+        <a class="navbar-burger burger" @click="toggleMenu">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div id="navbarMenu" class="navbar-menu">
+      <div ref="navbarMenu" class="navbar-menu">
         <div class="navbar-end">
           <nuxt-link class="navbar-item" to="/ve-chung-toi">
             Về chúng tôi
@@ -36,7 +36,13 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+
+  methods: {
+    toggleMenu() {
+      this.$refs.navbarMenu.classList.toggle("is-active");
+    }
+  }
 };
 </script>
 
