@@ -1,44 +1,44 @@
 <template>
   <div class="container">
-    <div class="columns">
-      <form class="column" @submit.prevent="calculate">
-        <TextField
-          v-model="carValueInput"
-          data-cy="car-value"
-          label="Giá trị xe (triệu đồng)"
-          placeholder="800"
-          required
-          pattern="[0-9]*"
-          title="Vui lòng điền một con số."
-        />
+    <form @submit.prevent="calculate">
+      <TextField
+        v-model="carValueInput"
+        data-cy="car-value"
+        label="Giá trị xe (triệu đồng)"
+        placeholder="800"
+        required
+        pattern="[0-9]*"
+        title="Vui lòng điền một con số."
+      />
 
-        <TextField
-          v-model="carYearInput"
-          data-cy="car-year"
-          label="Năm sản xuất"
-          placeholder="2015"
-          required
-          pattern="[0-9]{4}"
-          title="Năm sản xuất không hợp lệ."
-        />
+      <TextField
+        v-model="carYearInput"
+        data-cy="car-year"
+        label="Năm sản xuất"
+        placeholder="2015"
+        required
+        pattern="[0-9]{4}"
+        title="Năm sản xuất không hợp lệ."
+      />
 
-        <div class="field">
-          <div class="control">
-            <button data-cy="calculate-button" class="button is-primary">
-              TÍNH PHÍ
-            </button>
-          </div>
-        </div>
-      </form>
-
-      <div class="column">
-        <div v-if="showResult && isFormValid" data-cy="result">
-          <ResultPvi :car-value="carValue" :car-year="carYear" />
-          <ResultBaoViet :car-value="carValue" :car-year="carYear" />
-          <ResultBaoMinh :car-value="carValue" :car-year="carYear" />
-          <ResultMic :car-value="carValue" :car-year="carYear" />
+      <div class="field">
+        <div class="control">
+          <button data-cy="calculate-button" class="button is-primary">
+            TÍNH PHÍ
+          </button>
         </div>
       </div>
+    </form>
+
+    <div
+      v-if="showResult && isFormValid"
+      class="mt-5 pt-5 tinh-phi__result"
+      data-cy="result"
+    >
+      <ResultPvi class="mb-5" :car-value="carValue" :car-year="carYear" />
+      <ResultBaoViet class="mb-5" :car-value="carValue" :car-year="carYear" />
+      <ResultBaoMinh class="mb-5" :car-value="carValue" :car-year="carYear" />
+      <ResultMic class="mb-5" :car-value="carValue" :car-year="carYear" />
     </div>
   </div>
 </template>
@@ -103,3 +103,11 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+@import "~bulma/sass/utilities/initial-variables";
+
+.tinh-phi__result {
+  border-top: 1px solid $grey-lighter;
+}
+</style>
