@@ -3,7 +3,7 @@
     <div class="columns">
       <form class="column" @submit.prevent="calculate">
         <TextField
-          v-model="carValue"
+          v-model="carValueInput"
           data-cy="car-value"
           label="Giá trị xe (triệu đồng)"
           placeholder="800"
@@ -13,7 +13,7 @@
         />
 
         <TextField
-          v-model="carYear"
+          v-model="carYearInput"
           data-cy="car-year"
           label="Năm sản xuất"
           placeholder="2015"
@@ -32,7 +32,7 @@
       </form>
 
       <div class="column">
-        <div v-if="showResult" data-cy="result">
+        <div v-if="showResult && isFormValid" data-cy="result">
           <ResultPvi :car-value="carValue" :car-year="carYear" />
           <ResultBaoViet :car-value="carValue" :car-year="carYear" />
           <ResultBaoMinh :car-value="carValue" :car-year="carYear" />
@@ -65,35 +65,39 @@ export default Vue.extend({
   data() {
     return {
       showResult: false,
-      carValue: null as string | null,
-      carYear: null as string | null
+      carValueInput: null as string | null,
+      carYearInput: null as string | null
     };
   },
 
   computed: {
     carValueIsNumber(): boolean {
-      if (!this.carValue) return false;
-      const carValue = parseInt(this.carValue);
+      if (!this.carValueInput) return false;
+      const carValue = parseInt(this.carValueInput);
       return Number.isInteger(carValue);
     },
 
     carYearIsNumber(): boolean {
-      if (!this.carYear) return false;
-      const carYear = parseInt(this.carYear);
+      if (!this.carYearInput) return false;
+      const carYear = parseInt(this.carYearInput);
       return Number.isInteger(carYear);
     },
 
     isFormValid(): boolean {
       return this.carValueIsNumber && this.carYearIsNumber;
+    },
+
+    carValue(): number {
+      return this.carValueIsNumber ? parseInt(this.carValueInput as string) : 0;
+    },
+
+    carYear(): number {
+      return this.carYearIsNumber ? parseInt(this.carYearInput as string) : 0;
     }
   },
 
   methods: {
     calculate() {
-      if (!this.carValue || !this.carYear) {
-        return;
-      }
-
       this.showResult = true;
     }
   }
