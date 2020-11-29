@@ -8,6 +8,7 @@
           label="Giá trị xe (triệu đồng)"
           :is-error="isErrorCarValue"
           :error-message="carValueErrorMessage"
+          placeholder="800"
         />
 
         <TextField
@@ -16,6 +17,7 @@
           label="Năm sản xuất"
           :is-error="isErrorCarYear"
           :error-message="carYearErrorMessage"
+          placeholder="2015"
         />
 
         <button data-cy="calculate-button" @click="calculate">TÍNH PHÍ</button>

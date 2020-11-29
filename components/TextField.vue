@@ -7,7 +7,7 @@
         :value="value"
         class="input"
         :class="{ 'is-danger': isError }"
-        placeholder="800"
+        :placeholder="placeholder"
         @input="$emit('input', $event.target.value)"
       />
 
@@ -39,6 +39,12 @@ export default {
     },
 
     label: {
+      type: String,
+      required: false,
+      default: ""
+    },
+
+    placeholder: {
       type: String,
       required: false,
       default: ""
