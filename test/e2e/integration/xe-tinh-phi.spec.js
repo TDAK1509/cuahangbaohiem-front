@@ -1,5 +1,3 @@
-const ERROR_NOT_A_NUMBER = "Vui lòng điền một con số.";
-
 describe("Page /xe/tinh-phi", () => {
   beforeEach(() => {
     cy.visit("/xe/tinh-phi");
@@ -34,14 +32,17 @@ describe("Page /xe/tinh-phi", () => {
         getCarValueField().type("not a number");
         getCarYearField().type("2015");
         getCalculateButton().click();
-        cy.assertHtml5FormValidation(getCarValueField(), ERROR_NOT_A_NUMBER);
+        const errorNotANumber = "Vui lòng điền một con số.";
+        cy.assertHtml5FormValidation(getCarValueField(), errorNotANumber);
       });
 
       it("if car year is not a number, shows HTML5 required validation", () => {
         getCarValueField().type("800");
         getCarYearField().type("not a number");
         getCalculateButton().click();
-        cy.assertHtml5FormValidation(getCarYearField(), ERROR_NOT_A_NUMBER);
+
+        const errorInvalidYear = "Năm sản xuất không hợp lệ.";
+        cy.assertHtml5FormValidation(getCarYearField(), errorInvalidYear);
       });
     });
 

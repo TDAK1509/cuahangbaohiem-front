@@ -18,8 +18,8 @@
           label="Năm sản xuất"
           placeholder="2015"
           required
-          pattern="[0-9]*"
-          title="Vui lòng điền một con số."
+          pattern="[0-9]{4}"
+          title="Năm sản xuất không hợp lệ."
         />
 
         <div class="field">
