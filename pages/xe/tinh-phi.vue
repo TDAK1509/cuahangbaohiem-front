@@ -22,7 +22,13 @@
           title="Vui lòng điền một con số."
         />
 
-        <button data-cy="calculate-button">TÍNH PHÍ</button>
+        <div class="field">
+          <div class="control">
+            <button data-cy="calculate-button" class="button is-primary">
+              TÍNH PHÍ
+            </button>
+          </div>
+        </div>
       </form>
 
       <div class="column">
