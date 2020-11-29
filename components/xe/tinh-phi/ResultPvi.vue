@@ -6,9 +6,10 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import mixins from "vue-typed-mixins";
+import CarThresholdMixin from "@/mixins/car-threshold";
 
-export default Vue.extend({
+export default mixins(CarThresholdMixin).extend({
   name: "ResultPVI",
 
   props: {
@@ -81,27 +82,27 @@ export default Vue.extend({
     },
 
     isCarValueInFirstThreshold(): boolean {
-      return this.carValue < 500;
+      return this.mixinIsCarValueInFirstThreshold(this.carValue);
     },
 
     isCarValueInSecondThreshold(): boolean {
-      return this.carValue >= 500 && this.carValue < 700;
+      return this.mixinIsCarValueInSecondThreshold(this.carValue);
     },
 
     isCarValueInThirdThreshold(): boolean {
-      return this.carValue >= 700;
+      return this.mixinIsCarValueInThirdThreshold(this.carValue);
     },
 
     isCarYearInFirstThreshold(): boolean {
-      return this.carYearGap <= 3;
+      return this.mixinIsCarYearInFirstThreshold(this.carYearGap);
     },
 
     isCarYearInSecondThreshold(): boolean {
-      return this.carYearGap > 3 && this.carYearGap <= 6;
+      return this.mixinIsCarYearInSecondThreshold(this.carYearGap);
     },
 
     isCarYearGapInThirdThreshold(): boolean {
-      return this.carYearGap > 6 && this.carYearGap <= 10;
+      return this.mixinIsCarYearInThirdThreshold(this.carYearGap);
     },
 
     carYearGap(): number {
