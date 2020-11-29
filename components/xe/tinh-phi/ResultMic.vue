@@ -129,6 +129,3 @@ export default mixins(CarThresholdMixin).extend({
   }
 });
 </script>
-
-<style>
-</style>

@@ -94,3 +94,4 @@ sw.*
 /test/e2e/videos
 
 test
+.eslintrc.js
