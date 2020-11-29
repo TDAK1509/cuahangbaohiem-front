@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="columns">
-      <div class="column">
+      <form class="column" @submit.prevent="calculate">
         <TextField
           v-model="carValue"
           data-cy="car-value"
@@ -9,6 +9,7 @@
           :is-error="isErrorCarValue"
           :error-message="carValueErrorMessage"
           placeholder="800"
+          required
         />
 
         <TextField
@@ -18,10 +19,11 @@
           :is-error="isErrorCarYear"
           :error-message="carYearErrorMessage"
           placeholder="2015"
+          required
         />
 
-        <button data-cy="calculate-button" @click="calculate">TÍNH PHÍ</button>
-      </div>
+        <button data-cy="calculate-button">TÍNH PHÍ</button>
+      </form>
 
       <div class="column">
         <div v-if="showResult" data-cy="result">

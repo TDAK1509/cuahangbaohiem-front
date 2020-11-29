@@ -7,7 +7,7 @@
         :value="value"
         class="input"
         :class="{ 'is-danger': isError }"
-        :placeholder="placeholder"
+        v-bind="$attrs"
         @input="$emit('input', $event.target.value)"
       />
 
@@ -26,6 +26,8 @@
 export default {
   name: "TextField",
 
+  inheritAttrs: false,
+
   model: {
     prop: "value",
     event: "input"
@@ -39,12 +41,6 @@ export default {
     },
 
     label: {
-      type: String,
-      required: false,
-      default: ""
-    },
-
-    placeholder: {
       type: String,
       required: false,
       default: ""
