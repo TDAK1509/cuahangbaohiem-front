@@ -31,6 +31,8 @@
         </div>
       </div>
     </nav>
+
+    <div class="header__hero"></div>
   </header>
 </template>
 
@@ -57,6 +59,13 @@ $logo-size: 40px;
   background-size: cover;
   height: $logo-size;
   width: $logo-size;
+}
+
+.header__hero {
+  background: url("~assets/images/hero.jpg") no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 430px;
 }
 
 @media screen and (max-width: $tablet) {
