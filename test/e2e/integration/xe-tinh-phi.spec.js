@@ -54,34 +54,13 @@ describe("Page /xe/tinh-phi", () => {
         assertResultBlockIsRendered();
       });
 
-      it("results show 4 insurance brands with correct insurance values", () => {
+      it("results show 4 insurance brands with correct insurance values and 4 BUY buttons", () => {
         getCarValueField().type("800");
         getCarYearField().type("2015");
         getCalculateButton().click();
 
-        cy.get("[data-cy=insurance-result]")
-          .eq(0)
-          .invoke("text")
-          .should("include", "PVI")
-          .should("include", "12.320.000");
-
-        cy.get("[data-cy=insurance-result]")
-          .eq(1)
-          .invoke("text")
-          .should("include", "Bảo Việt")
-          .should("include", "13.860.000");
-
-        cy.get("[data-cy=insurance-result]")
-          .eq(2)
-          .invoke("text")
-          .should("include", "Bảo Minh")
-          .should("include", "13.400.000");
-
-        cy.get("[data-cy=insurance-result]")
-          .eq(3)
-          .invoke("text")
-          .should("include", "MIC")
-          .should("include", "10.400.000");
+        assertResultShows4BrandsAndInsuranceValues();
+        assertResultShows4BuyButtons();
       });
     });
   });
@@ -101,4 +80,34 @@ function getCalculateButton() {
 
 function assertResultBlockIsRendered() {
   cy.get("[data-cy=result]").should("be.visible");
+}
+
+function assertResultShows4BrandsAndInsuranceValues() {
+  cy.get("[data-cy=insurance-result]")
+    .eq(0)
+    .invoke("text")
+    .should("include", "PVI")
+    .should("include", "12.320.000");
+
+  cy.get("[data-cy=insurance-result]")
+    .eq(1)
+    .invoke("text")
+    .should("include", "Bảo Việt")
+    .should("include", "13.860.000");
+
+  cy.get("[data-cy=insurance-result]")
+    .eq(2)
+    .invoke("text")
+    .should("include", "Bảo Minh")
+    .should("include", "13.400.000");
+
+  cy.get("[data-cy=insurance-result]")
+    .eq(3)
+    .invoke("text")
+    .should("include", "MIC")
+    .should("include", "10.400.000");
+}
+
+function assertResultShows4BuyButtons() {
+  cy.get("[data-cy=buy-button]").should("have.length", 4);
 }

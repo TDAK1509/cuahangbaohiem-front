@@ -2,6 +2,7 @@
   <div data-cy="insurance-result">
     <header>PVI</header>
     <p>{{ insuranceValue | millionDongs }}</p>
+    <button data-cy="buy-button" class="button">MUA</button>
   </div>
 </template>
 
