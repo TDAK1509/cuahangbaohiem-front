@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container is-fluid py-5 has-background-white-ter">
     <form @submit.prevent="calculate">
       <TextField
         v-model="carValueInput"
@@ -21,7 +21,7 @@
         title="Năm sản xuất không hợp lệ."
       />
 
-      <div class="field">
+      <div class="field mt-5">
         <div class="control">
           <button data-cy="calculate-button" class="button is-primary">
             TÍNH PHÍ
