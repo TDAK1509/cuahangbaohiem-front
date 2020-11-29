@@ -34,9 +34,9 @@
       <div class="column">
         <div v-if="showResult" data-cy="result">
           <ResultPvi :car-value="carValue" :car-year="carYear" />
-          <ResultBaoViet />
-          <ResultBaoMinh />
-          <ResultMic />
+          <ResultBaoViet :car-value="carValue" :car-year="carYear" />
+          <ResultBaoMinh :car-value="carValue" :car-year="carYear" />
+          <ResultMic :car-value="carValue" :car-year="carYear" />
         </div>
       </div>
     </div>

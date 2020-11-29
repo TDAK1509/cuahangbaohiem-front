@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div data-cy="insurance-result">
     <header>Bảo Việt</header>
-    <p>{{ insuranceValue }}</p>
+    <p>{{ insuranceValue | millionDongs }}</p>
   </div>
 </template>
 

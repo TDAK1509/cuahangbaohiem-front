@@ -54,14 +54,34 @@ describe("Page /xe/tinh-phi", () => {
         assertResultBlockIsRendered();
       });
 
-      it("results show 4 insurance brands", () => {
+      it("results show 4 insurance brands with correct insurance values", () => {
         getCarValueField().type("800");
         getCarYearField().type("2015");
         getCalculateButton().click();
-        cy.contains("PVI").should("be.visible");
-        cy.contains("Bảo Việt").should("be.visible");
-        cy.contains("Bảo Minh").should("be.visible");
-        cy.contains("MIC").should("be.visible");
+
+        cy.get("[data-cy=insurance-result]")
+          .eq(0)
+          .invoke("text")
+          .should("include", "PVI")
+          .should("include", "12.320.000");
+
+        cy.get("[data-cy=insurance-result]")
+          .eq(1)
+          .invoke("text")
+          .should("include", "Bảo Việt")
+          .should("include", "13.860.000");
+
+        cy.get("[data-cy=insurance-result]")
+          .eq(2)
+          .invoke("text")
+          .should("include", "Bảo Minh")
+          .should("include", "13.400.000");
+
+        cy.get("[data-cy=insurance-result]")
+          .eq(3)
+          .invoke("text")
+          .should("include", "MIC")
+          .should("include", "10.400.000");
       });
     });
   });
