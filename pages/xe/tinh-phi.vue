@@ -1,28 +1,39 @@
 <template>
-  <div>
-    <input v-model="carValue" data-cy="car-value" />
-    <p v-if="isErrorCarValue" class="tinh-phi__error">
-      {{ carValueErrorMessage }}
-    </p>
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <TextField
+          v-model="carValue"
+          label="Giá trị xe (triệu đồng)"
+          :is-error="isErrorCarValue"
+          :error-message="carValueErrorMessage"
+        />
 
-    <input v-model="carYear" data-cy="car-year" />
-    <p v-if="isErrorCarYear" class="tinh-phi__error">
-      {{ carYearErrorMessage }}
-    </p>
+        <TextField
+          v-model="carYear"
+          label="Năm sản xuất"
+          :is-error="isErrorCarYear"
+          :error-message="carYearErrorMessage"
+        />
 
-    <button data-cy="calculate-button" @click="calculate">TÍNH PHÍ</button>
+        <button data-cy="calculate-button" @click="calculate">TÍNH PHÍ</button>
+      </div>
 
-    <div v-if="showResult" data-cy="result">
-      <ResultPvi :car-value="carValue" :car-year="carYear" />
-      <ResultBaoViet />
-      <ResultBaoMinh />
-      <ResultMic />
+      <div class="column">
+        <div v-if="showResult" data-cy="result">
+          <ResultPvi :car-value="carValue" :car-year="carYear" />
+          <ResultBaoViet />
+          <ResultBaoMinh />
+          <ResultMic />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import TextField from "@/components/TextField.vue";
 import ResultPvi from "@/components/xe/tinh-phi/ResultPvi.vue";
 import ResultBaoViet from "@/components/xe/tinh-phi/ResultBaoViet.vue";
 import ResultBaoMinh from "@/components/xe/tinh-phi/ResultBaoMinh.vue";
@@ -34,6 +45,7 @@ export default Vue.extend({
   name: "TinhPhiXe",
 
   components: {
+    TextField,
     ResultPvi,
     ResultBaoViet,
     ResultBaoMinh,
@@ -81,11 +93,17 @@ export default Vue.extend({
       if (!this.carValueIsNumber) {
         this.isErrorCarValue = true;
         this.carValueErrorMessage = ERROR_NOT_A_NUMBER;
+      } else {
+        this.isErrorCarValue = false;
+        this.carValueErrorMessage = "";
       }
 
       if (!this.carYearIsNumber) {
         this.isErrorCarYear = true;
         this.carYearErrorMessage = ERROR_NOT_A_NUMBER;
+      } else {
+        this.isErrorCarYear = false;
+        this.carYearErrorMessage = "";
       }
 
       if (!this.isFormValid) {
@@ -97,6 +115,3 @@ export default Vue.extend({
   }
 });
 </script>
-
-<style>
-</style>
