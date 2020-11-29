@@ -1,17 +1,24 @@
 <template>
   <div data-cy="insurance-result">
-    <header>MIC</header>
-    <p>{{ insuranceValue | millionDongs }}</p>
-    <button data-cy="buy-button" class="button">MUA</button>
+    <ResultTable
+      logo-file-name="logo-mic.png"
+      company-name="MIC"
+      :insurance-value="insuranceValue"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import mixins from "vue-typed-mixins";
 import CarThresholdMixin from "@/mixins/car-threshold";
+import ResultTable from "./ResultTable.vue";
 
 export default mixins(CarThresholdMixin).extend({
   name: "ResultMIC",
+
+  components: {
+    ResultTable
+  },
 
   props: {
     carValue: {
