@@ -18,45 +18,30 @@ describe("Page /xe/tinh-phi", () => {
 
   describe("on click calculate button", () => {
     describe("form error handling", () => {
-      it("if car value is empty, does not show result but show HTML5 required validation", () => {
+      it("if car value is empty, shows HTML5 required validation", () => {
         getCarYearField().type("2015");
         getCalculateButton().click();
-        cy.wait(1000);
-        assertResultBlockIsNotRendered();
-        cy.get("input:invalid").should("have.length", 1);
+        cy.assertHtml5FormValidation();
       });
 
-      it("if car year is empty, does not show result but show HTML5 required validation", () => {
+      it("if car year is empty, shows HTML5 required validation", () => {
         getCarValueField().type("800");
         getCalculateButton().click();
-        cy.wait(1000);
-        assertResultBlockIsNotRendered();
-        cy.get("input:invalid").should("have.length", 1);
+        cy.assertHtml5FormValidation();
       });
 
-      it("if car value is not a number, show error", () => {
+      it("if car value is not a number, shows HTML5 required validation", () => {
         getCarValueField().type("not a number");
         getCarYearField().type("2015");
         getCalculateButton().click();
-        cy.contains(ERROR_NOT_A_NUMBER).should("be.visible");
-        getErrorMessage().should("have.length", 1);
+        cy.assertHtml5FormValidation(getCarValueField(), ERROR_NOT_A_NUMBER);
       });
 
-      it("if car year is not a number, show error", () => {
+      it("if car year is not a number, shows HTML5 required validation", () => {
         getCarValueField().type("800");
         getCarYearField().type("not a number");
         getCalculateButton().click();
-        cy.contains(ERROR_NOT_A_NUMBER).should("be.visible");
-        cy.contains(ERROR_NOT_A_NUMBER).its("length").should("eq", 1);
-        getErrorMessage().should("have.length", 1);
-      });
-
-      it("if both car value and car year are not numbers, show 2 errors", () => {
-        getCarValueField().type("not a number");
-        getCarYearField().type("not a number");
-        getCalculateButton().click();
-        cy.contains(ERROR_NOT_A_NUMBER).should("be.visible");
-        getErrorMessage().should("have.length", 2);
+        cy.assertHtml5FormValidation(getCarYearField(), ERROR_NOT_A_NUMBER);
       });
     });
 
@@ -91,14 +76,6 @@ function getCarYearField() {
 
 function getCalculateButton() {
   return cy.get("[data-cy=calculate-button]");
-}
-
-function getErrorMessage() {
-  return cy.get("[data-cy=error-message]");
-}
-
-function assertResultBlockIsNotRendered() {
-  cy.get("[data-cy=result]").should("not.empty");
 }
 
 function assertResultBlockIsRendered() {
