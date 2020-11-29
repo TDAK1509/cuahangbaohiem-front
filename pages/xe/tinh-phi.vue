@@ -4,6 +4,7 @@
       <div class="column">
         <TextField
           v-model="carValue"
+          data-cy="car-value"
           label="Giá trị xe (triệu đồng)"
           :is-error="isErrorCarValue"
           :error-message="carValueErrorMessage"
@@ -11,6 +12,7 @@
 
         <TextField
           v-model="carYear"
+          data-cy="car-year"
           label="Năm sản xuất"
           :is-error="isErrorCarYear"
           :error-message="carYearErrorMessage"

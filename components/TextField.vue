@@ -5,7 +5,6 @@
     <div class="control has-icons-right">
       <input
         :value="value"
-        data-cy="car-value"
         class="input"
         :class="{ 'is-danger': isError }"
         placeholder="800"
@@ -17,7 +16,7 @@
       </span>
     </div>
 
-    <p v-if="isError" class="tinh-phi__error help is-danger">
+    <p v-if="isError" data-cy="error-message" class="help is-danger">
       {{ errorMessage }}
     </p>
   </div>

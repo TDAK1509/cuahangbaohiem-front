@@ -37,7 +37,7 @@ describe("Page /xe/tinh-phi", () => {
         getCarYearField().type("2015");
         getCalculateButton().click();
         cy.contains(ERROR_NOT_A_NUMBER).should("be.visible");
-        cy.get(".tinh-phi__error").should("have.length", 1);
+        getErrorMessage().should("have.length", 1);
       });
 
       it("if car year is not a number, show error", () => {
@@ -46,7 +46,7 @@ describe("Page /xe/tinh-phi", () => {
         getCalculateButton().click();
         cy.contains(ERROR_NOT_A_NUMBER).should("be.visible");
         cy.contains(ERROR_NOT_A_NUMBER).its("length").should("eq", 1);
-        cy.get(".tinh-phi__error").should("have.length", 1);
+        getErrorMessage().should("have.length", 1);
       });
 
       it("if both car value and car year are not numbers, show 2 errors", () => {
@@ -54,7 +54,7 @@ describe("Page /xe/tinh-phi", () => {
         getCarYearField().type("not a number");
         getCalculateButton().click();
         cy.contains(ERROR_NOT_A_NUMBER).should("be.visible");
-        cy.get(".tinh-phi__error").should("have.length", 2);
+        getErrorMessage().should("have.length", 2);
       });
     });
 
@@ -89,6 +89,10 @@ function getCarYearField() {
 
 function getCalculateButton() {
   return cy.get("[data-cy=calculate-button]");
+}
+
+function getErrorMessage() {
+  return cy.get("[data-cy=error-message]");
 }
 
 function assertResultBlockIsNotRendered() {
