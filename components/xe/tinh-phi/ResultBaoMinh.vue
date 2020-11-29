@@ -37,45 +37,15 @@ export default mixins(CarThresholdMixin).extend({
 
     insuranceRate(): number {
       if (this.isCarValueInFirstThreshold) {
-        if (this.isCarYearInFirstThreshold) {
-          return 1.52;
-        }
-
-        if (this.isCarYearInSecondThreshold) {
-          return 1.774;
-        }
-
-        if (this.isCarYearGapInThirdThreshold) {
-          return 1.906;
-        }
+        return this.getFirstThresholdInsuranceRate;
       }
 
       if (this.isCarValueInSecondThreshold) {
-        if (this.isCarYearInFirstThreshold) {
-          return 1.443;
-        }
-
-        if (this.isCarYearInSecondThreshold) {
-          return 1.675;
-        }
-
-        if (this.isCarYearGapInThirdThreshold) {
-          return 1.807;
-        }
+        return this.getSecondThresholdInsuranceRate;
       }
 
       if (this.isCarValueInThirdThreshold) {
-        if (this.isCarYearInFirstThreshold) {
-          return 1.443;
-        }
-
-        if (this.isCarYearInSecondThreshold) {
-          return 1.675;
-        }
-
-        if (this.isCarYearGapInThirdThreshold) {
-          return 1.807;
-        }
+        return this.getThirdThresholdInsuranceRate;
       }
 
       return 100;
@@ -91,6 +61,54 @@ export default mixins(CarThresholdMixin).extend({
 
     isCarValueInThirdThreshold(): boolean {
       return this.mixinIsCarValueInThirdThreshold(this.carValue);
+    },
+
+    getFirstThresholdInsuranceRate(): number {
+      if (this.isCarYearInFirstThreshold) {
+        return 1.52;
+      }
+
+      if (this.isCarYearInSecondThreshold) {
+        return 1.774;
+      }
+
+      if (this.isCarYearGapInThirdThreshold) {
+        return 1.906;
+      }
+
+      return 100;
+    },
+
+    getSecondThresholdInsuranceRate(): number {
+      if (this.isCarYearInFirstThreshold) {
+        return 1.443;
+      }
+
+      if (this.isCarYearInSecondThreshold) {
+        return 1.675;
+      }
+
+      if (this.isCarYearGapInThirdThreshold) {
+        return 1.807;
+      }
+
+      return 100;
+    },
+
+    getThirdThresholdInsuranceRate(): number {
+      if (this.isCarYearInFirstThreshold) {
+        return 1.443;
+      }
+
+      if (this.isCarYearInSecondThreshold) {
+        return 1.675;
+      }
+
+      if (this.isCarYearGapInThirdThreshold) {
+        return 1.807;
+      }
+
+      return 100;
     },
 
     isCarYearInFirstThreshold(): boolean {
