@@ -18,18 +18,20 @@ describe("Page /xe/tinh-phi", () => {
 
   describe("on click calculate button", () => {
     describe("form error handling", () => {
-      it("if car value is empty, does not show result", () => {
+      it("if car value is empty, does not show result but show HTML5 required validation", () => {
         getCarYearField().type("2015");
         getCalculateButton().click();
         cy.wait(1000);
         assertResultBlockIsNotRendered();
+        cy.get("input:invalid").should("have.length", 1);
       });
 
-      it("if car year is empty, does not show result", () => {
+      it("if car year is empty, does not show result but show HTML5 required validation", () => {
         getCarValueField().type("800");
         getCalculateButton().click();
         cy.wait(1000);
         assertResultBlockIsNotRendered();
+        cy.get("input:invalid").should("have.length", 1);
       });
 
       it("if car value is not a number, show error", () => {
