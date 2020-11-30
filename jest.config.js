@@ -15,5 +15,6 @@ module.exports = {
     "<rootDir>/components/**/*.vue",
     "<rootDir>/pages/**/*.vue"
   ],
-  testMatch: ["<rootDir>/test/unit/**/*.spec.js"]
+  setupFiles: ["<rootDir>/test/unit/jest-setup.js"],
+  testMatch: ["<rootDir>/test/unit/**/?(*.)(spec|test).js"]
 };
