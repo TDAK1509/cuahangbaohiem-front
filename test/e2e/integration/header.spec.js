@@ -5,18 +5,18 @@ describe("Header", () => {
 
   it("renders logo, links, and buttons", () => {
     cy.get("[data-cy=logo]").should("be.visible");
-    cy.contains("Về chúng tôi").should("be.visible");
+    cy.contains("Giới thiệu").should("be.visible");
     cy.contains("Xe").should("be.visible");
   });
 
-  it("clicks 'Về chúng tôi' navigates to /ve-chung-toi", () => {
-    cy.contains("Về chúng tôi").click();
-    cy.url().should("include", "/ve-chung-toi");
+  it("clicks 'Giới thiệu' navigates to /gioi-thieu", () => {
+    cy.contains("Giới thiệu").click();
+    cy.url().should("include", "/gioi-thieu");
   });
 
   it("clicks logo navigates to home page", () => {
-    cy.contains("Về chúng tôi").click();
-    cy.url().should("include", "/ve-chung-toi");
+    cy.contains("Giới thiệu").click();
+    cy.url().should("include", "/gioi-thieu");
     cy.get("[data-cy=logo]").click();
     cy.url().should("eq", Cypress.config().baseUrl + "/");
   });

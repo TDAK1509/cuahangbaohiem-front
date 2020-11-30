@@ -18,8 +18,8 @@
 
       <div ref="navbarMenu" class="navbar-menu">
         <div class="navbar-end">
-          <nuxt-link class="navbar-item" to="/ve-chung-toi">
-            Về chúng tôi
+          <nuxt-link class="navbar-item" to="/gioi-thieu">
+            Giới thiệu
           </nuxt-link>
 
           <div class="navbar-item has-dropdown is-hoverable">
