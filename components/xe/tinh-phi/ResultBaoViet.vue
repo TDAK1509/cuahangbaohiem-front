@@ -11,14 +11,9 @@
 <script lang="ts">
 import mixins from "vue-typed-mixins";
 import CarThresholdMixin from "@/mixins/car-threshold";
-import ResultTable from "./ResultTable.vue";
 
 export default mixins(CarThresholdMixin).extend({
   name: "ResultBaoViet",
-
-  components: {
-    ResultTable
-  },
 
   props: {
     carValue: {

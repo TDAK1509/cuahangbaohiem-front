@@ -47,22 +47,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import TextField from "@/components/TextField.vue";
-import ResultPvi from "@/components/xe/tinh-phi/ResultPvi.vue";
-import ResultBaoViet from "@/components/xe/tinh-phi/ResultBaoViet.vue";
-import ResultBaoMinh from "@/components/xe/tinh-phi/ResultBaoMinh.vue";
-import ResultMic from "@/components/xe/tinh-phi/ResultMic.vue";
 
 export default Vue.extend({
   name: "TinhPhiXe",
-
-  components: {
-    TextField,
-    ResultPvi,
-    ResultBaoViet,
-    ResultBaoMinh,
-    ResultMic
-  },
 
   data() {
     return {
