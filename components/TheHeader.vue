@@ -2,9 +2,12 @@
   <header>
     <nav class="navbar">
       <div class="navbar-brand">
-        <div class="navbar-item">
-          <nuxt-link data-cy="logo" class="header__logo" to="/" />
-        </div>
+        <nuxt-link data-cy="logo" to="/">
+          <img
+            class="image header__logo px-2 py-2"
+            src="~assets/images/logo.jpg"
+          />
+        </nuxt-link>
 
         <a ref="navbarBurger" class="navbar-burger burger" @click="toggleMenu">
           <span aria-hidden="true"></span>
@@ -13,18 +16,22 @@
         </a>
       </div>
 
-      <div ref="navbarMenu" class="navbar-menu">
+      <div ref="navbarMenu" id="nav" class="navbar-menu">
         <div class="navbar-end">
-          <nuxt-link class="navbar-item" to="/ve-chung-toi">
-            Về chúng tôi
+          <nuxt-link class="navbar-item header__single-link" to="/gioi-thieu">
+            Giới thiệu
           </nuxt-link>
 
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Xe</a>
+            <a class="navbar-link">Tính phí bảo hiểm</a>
 
             <div class="navbar-dropdown is-right">
-              <nuxt-link class="navbar-item" to="/xe/tinh-phi">
-                Tính phí bảo hiểm
+              <nuxt-link
+                data-cy="insurance-car"
+                class="navbar-item"
+                to="/xe/tinh-phi"
+              >
+                Xe
               </nuxt-link>
             </div>
           </div>
@@ -38,33 +45,41 @@
 export default {
   name: "Header",
 
+  mounted() {
+    this.hideDropdownOnClickNuxtLink();
+  },
+
   methods: {
     toggleMenu() {
       this.$refs.navbarBurger.classList.toggle("is-active");
       this.$refs.navbarMenu.classList.toggle("is-active");
+    },
+
+    hideDropdownOnClickNuxtLink() {
+      this.$refs.navbarMenu.querySelectorAll(".has-dropdown").forEach((el) => {
+        el.addEventListener("click", () => {
+          const menu = el.querySelector(".navbar-dropdown");
+          menu.style.display = "none";
+          setTimeout(() => {
+            el.blur();
+            menu.style.display = "";
+          }, 200);
+        });
+      });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "~bulma/sass/utilities/initial-variables";
-
-$logo-size: 40px;
+@import "~assets/scss/_colors";
 
 .header__logo {
-  background: url("~assets/images/logo.jpg") no-repeat center center;
-  background-size: cover;
-  height: $logo-size;
-  width: $logo-size;
+  height: 60px;
+  width: auto;
 }
 
-@media screen and (max-width: $tablet) {
-  $logo-size-mobile: 30px;
-
-  .header__logo {
-    height: $logo-size-mobile;
-    width: $logo-size-mobile;
-  }
+.header__single-link.is-active {
+  color: $link;
 }
 </style>
