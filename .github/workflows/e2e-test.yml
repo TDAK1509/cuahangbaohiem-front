@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Serve site at localhost
-        run: yarn dev
+        run: (yarn dev&)
       - name: Run E2E test
         uses: cypress-io/github-action@v2
         env:
