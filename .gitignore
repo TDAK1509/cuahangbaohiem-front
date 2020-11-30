@@ -92,3 +92,6 @@ sw.*
 # Cypress videos and screenshots
 /test/e2e/screenshots
 /test/e2e/videos
+
+# Local Netlify folder
+.netlify
