@@ -9,18 +9,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Install node version 12
         uses: actions/setup-node@v1
         with:
           node-version: "12"
+
       - name: Cache node modules
         uses: actions/cache@v2
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn-lock.json') }}
+
       - name: Install dependencies
         run: yarn
+
       - name: Lint
         run: yarn lint
+
       - name: Unit test
         run: yarn test
