@@ -34,3 +34,10 @@ jobs:
           wait-on-timeout: 300
           browser: ${{ env.BROWSER }}
           headless: true
+      - name: Remove E2E Label
+        uses: actions-ecosystem/action-remove-labels@v1
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            E2E
