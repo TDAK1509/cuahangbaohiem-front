@@ -2,9 +2,12 @@
   <header>
     <nav class="navbar">
       <div class="navbar-brand">
-        <div class="navbar-item">
-          <nuxt-link data-cy="logo" class="header__logo" to="/" />
-        </div>
+        <nuxt-link data-cy="logo" to="/">
+          <img
+            class="image header__logo px-2 py-2"
+            src="~assets/images/logo.jpg"
+          />
+        </nuxt-link>
 
         <a ref="navbarBurger" class="navbar-burger burger" @click="toggleMenu">
           <span aria-hidden="true"></span>
@@ -48,23 +51,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~bulma/sass/utilities/initial-variables";
-
-$logo-size: 40px;
-
 .header__logo {
-  background: url("~assets/images/logo.jpg") no-repeat center center;
-  background-size: cover;
-  height: $logo-size;
-  width: $logo-size;
-}
-
-@media screen and (max-width: $tablet) {
-  $logo-size-mobile: 30px;
-
-  .header__logo {
-    height: $logo-size-mobile;
-    width: $logo-size-mobile;
-  }
+  height: 60px;
+  width: auto;
 }
 </style>
