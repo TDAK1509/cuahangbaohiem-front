@@ -16,7 +16,7 @@
         </a>
       </div>
 
-      <div ref="navbarMenu" class="navbar-menu">
+      <div ref="navbarMenu" id="nav" class="navbar-menu">
         <div class="navbar-end">
           <nuxt-link class="navbar-item header__single-link" to="/gioi-thieu">
             Giới thiệu
@@ -45,10 +45,27 @@
 export default {
   name: "Header",
 
+  mounted() {
+    this.hideDropdownOnClickNuxtLink();
+  },
+
   methods: {
     toggleMenu() {
       this.$refs.navbarBurger.classList.toggle("is-active");
       this.$refs.navbarMenu.classList.toggle("is-active");
+    },
+
+    hideDropdownOnClickNuxtLink() {
+      this.$refs.navbarMenu.querySelectorAll(".has-dropdown").forEach((el) => {
+        el.addEventListener("click", () => {
+          const menu = el.querySelector(".navbar-dropdown");
+          menu.style.display = "none";
+          setTimeout(() => {
+            el.blur();
+            menu.style.display = "";
+          }, 200);
+        });
+      });
     }
   }
 };
