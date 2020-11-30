@@ -1,26 +1,27 @@
 <template>
-  <div class="box">
-    <div class="media">
-      <div class="media-left">
-        <figure class="result-table__logo-container">
-          <img
-            class="result-table__logo"
-            :src="require(`../../../assets/images/${logoFileName}`)"
-            :alt="`Logo ${companyName}`"
-          />
-        </figure>
-      </div>
+  <div class="card">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <h3 class="title is-size-4">{{ companyName }}</h3>
+        </div>
 
-      <div class="media-content">
-        <div class="content">
-          <h3 class="title">{{ companyName }}</h3>
-          <p class="subtitle is-5">
-            Phí bảo hiểm: {{ insuranceValue | millionDongs }}
-          </p>
+        <div class="media-content">
+          <figure class="image">
+            <img
+              class="result-table__logo"
+              :src="require(`../../../assets/images/${logoFileName}`)"
+              :alt="`Logo ${companyName}`"
+            />
+          </figure>
         </div>
       </div>
 
-      <div class="media-right">
+      <div class="content">
+        <p>Phí bảo hiểm: {{ insuranceValue | millionDongs }}</p>
+      </div>
+
+      <div>
         <button data-cy="buy-button" class="button is-warning">MUA NGAY</button>
       </div>
     </div>
@@ -64,18 +65,9 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-$logo-max-height: 50px;
-
-.result-table__logo-container {
-  width: 150px;
-  height: $logo-max-height;
-  display: flex;
-  align-items: center;
-}
-
 .result-table__logo {
   display: block;
   width: auto;
-  max-height: $logo-max-height;
+  max-height: 30px;
 }
 </style>

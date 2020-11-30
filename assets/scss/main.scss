@@ -1,8 +1,2 @@
-$primary: #53b380;
-$link: $primary;
-
-@import "~bulma/sass/utilities/_all";
-
-$navbar-breakpoint: $tablet;
-
-@import "~bulma";
+@import "_bulma";
+@import "_helper";
