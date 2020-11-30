@@ -18,7 +18,7 @@
 
       <div ref="navbarMenu" class="navbar-menu">
         <div class="navbar-end">
-          <nuxt-link class="navbar-item" to="/gioi-thieu">
+          <nuxt-link class="navbar-item header__single-link" to="/gioi-thieu">
             Giới thiệu
           </nuxt-link>
 
@@ -55,8 +55,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/_colors";
+
 .header__logo {
   height: 60px;
   width: auto;
+}
+
+.header__single-link.is-active {
+  color: $link;
 }
 </style>

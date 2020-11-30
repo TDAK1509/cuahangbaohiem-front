@@ -35,6 +35,10 @@ export default {
 
   modules: [],
 
+  router: {
+    linkActiveClass: "is-active"
+  },
+
   build: {
     postcss: {
       preset: {
