@@ -1,0 +1,36 @@
+name: E2E test
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  e2e-test:
+    if: contains(github.event.pull_request.labels.*.name, 'E2E')
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install node version 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn-lock.json') }}
+      - name: Install dependencies
+        run: yarn
+      - name: Serve site at localhost
+        run: yarn dev
+      - name: Run E2E test
+        uses: cypress-io/github-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          install: false
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 300
+          browser: ${{ env.BROWSER }}
+          headless: true
