@@ -1,6 +1,7 @@
 <template>
   <div>
     <TheHeader />
+    <TheHero />
     <Nuxt />
     <TheFooter />
   </div>

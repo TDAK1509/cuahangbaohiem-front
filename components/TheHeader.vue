@@ -61,6 +61,7 @@ $logo-size: 40px;
 
 @media screen and (max-width: $tablet) {
   $logo-size-mobile: 30px;
+
   .header__logo {
     height: $logo-size-mobile;
     width: $logo-size-mobile;

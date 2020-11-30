@@ -1,5 +1,9 @@
 <template>
-  <footer><p class="has-text-primary">Footer</p></footer>
+  <footer>
+    <a href="https://www.freepik.com/photos/background"
+      >Background photo created by snowing - www.freepik.com</a
+    >
+  </footer>
 </template>
 
 <script>

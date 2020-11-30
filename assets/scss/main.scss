@@ -1,9 +1,2 @@
-@import "~bulma/sass/utilities/_all";
-
-$primary: #f7a223;
-
-$link: $primary;
-
-$navbar-breakpoint: $tablet;
-
-@import "~bulma";
+@import "_bulma";
+@import "_helper";
