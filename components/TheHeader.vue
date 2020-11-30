@@ -31,7 +31,8 @@
                 class="navbar-item"
                 to="/xe/tinh-phi"
               >
-                Xe
+                <span class="icon is-medium"><i class="fas fa-car"></i></span>
+                <span class="is-size-6">Bảo hiểm xe</span>
               </nuxt-link>
             </div>
           </div>
