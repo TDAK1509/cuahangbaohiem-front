@@ -16,7 +16,7 @@
         </a>
       </div>
 
-      <div ref="navbarMenu" id="nav" class="navbar-menu">
+      <div ref="navbarMenu" class="navbar-menu">
         <div class="navbar-end">
           <nuxt-link class="navbar-item header__single-link" to="/gioi-thieu">
             Giới thiệu
