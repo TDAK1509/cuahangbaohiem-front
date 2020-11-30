@@ -1,46 +1,48 @@
 <template>
-  <div class="container is-fluid py-5 has-background-white-ter">
-    <form @submit.prevent="calculate">
-      <TextField
-        v-model="carValueInput"
-        data-cy="car-value"
-        label="Giá trị xe (triệu đồng)"
-        placeholder="800"
-        required
-        pattern="[0-9]*"
-        title="Vui lòng điền một con số."
-      />
+  <section class="section">
+    <div class="container">
+      <form @submit.prevent="calculate">
+        <TextField
+          v-model="carValueInput"
+          data-cy="car-value"
+          label="Giá trị xe (triệu đồng)"
+          placeholder="800"
+          required
+          pattern="[0-9]*"
+          title="Vui lòng điền một con số."
+        />
 
-      <TextField
-        v-model="carYearInput"
-        data-cy="car-year"
-        label="Năm sản xuất"
-        placeholder="2015"
-        required
-        pattern="[0-9]{4}"
-        title="Năm sản xuất không hợp lệ."
-      />
+        <TextField
+          v-model="carYearInput"
+          data-cy="car-year"
+          label="Năm sản xuất"
+          placeholder="2015"
+          required
+          pattern="[0-9]{4}"
+          title="Năm sản xuất không hợp lệ."
+        />
 
-      <div class="field mt-5">
-        <div class="control">
-          <button data-cy="calculate-button" class="button is-primary">
-            TÍNH PHÍ
-          </button>
+        <div class="field mt-5">
+          <div class="control">
+            <button data-cy="calculate-button" class="button is-primary">
+              TÍNH PHÍ
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
 
-    <div
-      v-if="showResult && isFormValid"
-      class="mt-5 pt-5 tinh-phi__result"
-      data-cy="result"
-    >
-      <ResultPvi class="mb-5" :car-value="carValue" :car-year="carYear" />
-      <ResultBaoViet class="mb-5" :car-value="carValue" :car-year="carYear" />
-      <ResultBaoMinh class="mb-5" :car-value="carValue" :car-year="carYear" />
-      <ResultMic class="mb-5" :car-value="carValue" :car-year="carYear" />
+      <div
+        v-if="showResult && isFormValid"
+        class="mt-5 pt-5 tinh-phi__result"
+        data-cy="result"
+      >
+        <ResultPvi class="mb-5" :car-value="carValue" :car-year="carYear" />
+        <ResultBaoViet class="mb-5" :car-value="carValue" :car-year="carYear" />
+        <ResultBaoMinh class="mb-5" :car-value="carValue" :car-year="carYear" />
+        <ResultMic class="mb-5" :car-value="carValue" :car-year="carYear" />
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
