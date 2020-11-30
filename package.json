@@ -11,7 +11,9 @@
     "lint": "yarn lint:js",
     "test": "jest",
     "e2e": "cypress open --browser chrome",
-    "e2e:headless": "cypress run"
+    "e2e:headless": "cypress run",
+    "deploy:netlify": "netlify deploy --dir=dist --prod",
+    "deploy": "yarn lint && yarn generate && yarn deploy:netlify"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
