@@ -111,6 +111,14 @@ describe("Page /xe/tinh-phi", () => {
         getPopupBuyButton().click();
         cy.assertHtml5FormValidation();
       });
+
+      it("if phone contains letters, shows HTML5 error", () => {
+        getPopupEmail().type("test@gmail.com");
+        getPopupPhone().type("invalidPhone123");
+        getPopupNote().type("some note");
+        getPopupBuyButton().click();
+        cy.assertHtml5FormValidation();
+      });
     });
   });
 });

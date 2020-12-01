@@ -1,8 +1,21 @@
 <template>
   <form data-cy="buy-popup" @submit.prevent="submit">
-    <TextField v-model="email" data-cy="email" type="email" required />
+    <TextField
+      v-model="email"
+      data-cy="email"
+      type="email"
+      name="email"
+      required
+    />
 
-    <TextField v-model="phone" data-cy="phone" required />
+    <TextField
+      v-model="phone"
+      data-cy="phone"
+      type="tel"
+      name="phone"
+      pattern="^[0-9]*$"
+      required
+    />
 
     <TextField v-model="note" data-cy="note" required />
 
