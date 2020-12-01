@@ -75,11 +75,34 @@ describe("Page /xe/tinh-phi", () => {
 
     it("shows popup with inputs email, phone, note, CANCEL button and BUY button", () => {
       getPopup().should("be.visible");
-      getPopup().find("[data-cy=email]").should("be.visible");
-      getPopup().find("[data-cy=phone]").should("be.visible");
-      getPopup().find("[data-cy=note]").should("be.visible");
-      getPopup().find("[data-cy=cancel-button]").should("be.visible");
-      getPopup().find("[data-cy=buy-button]").should("be.visible");
+      getPopupEmail().should("be.visible");
+      getPopupPhone().should("be.visible");
+      getPopupNote().should("be.visible");
+      getPopupBuyButton().should("be.visible");
+      getPopupCancelButton().should("be.visible");
+    });
+
+    describe("form error handling", () => {
+      it("if email is empty, shows HTML5 required validation", () => {
+        getPopupPhone().type("01234567");
+        getPopupNote().type("some note");
+        getPopupBuyButton().click();
+        cy.assertHtml5FormValidation();
+      });
+
+      it("if phone is empty, shows HTML5 required validation", () => {
+        getPopupEmail().type("test@gmail.com");
+        getPopupNote().type("some note");
+        getPopupBuyButton().click();
+        cy.assertHtml5FormValidation();
+      });
+
+      it("if note is empty, shows HTML5 required validation", () => {
+        getPopupEmail().type("test@gmail.com");
+        getPopupPhone().type("01234567");
+        getPopupBuyButton().click();
+        cy.assertHtml5FormValidation();
+      });
     });
   });
 });
@@ -102,6 +125,26 @@ function getResultBuyButton() {
 
 function getPopup() {
   return cy.get("[data-cy=buy-popup]");
+}
+
+function getPopupEmail() {
+  return getPopup().find("[data-cy=email]");
+}
+
+function getPopupPhone() {
+  return getPopup().find("[data-cy=phone]");
+}
+
+function getPopupNote() {
+  return getPopup().find("[data-cy=note]");
+}
+
+function getPopupBuyButton() {
+  return getPopup().find("[data-cy=buy-button]");
+}
+
+function getPopupCancelButton() {
+  return getPopup().find("[data-cy=cancel-button]");
 }
 
 function assertResultBlockIsRendered() {

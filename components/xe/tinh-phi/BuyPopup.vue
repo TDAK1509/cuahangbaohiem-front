@@ -1,34 +1,10 @@
 <template>
-  <form data-cy="buy-popup">
-    <TextField
-      v-model="email"
-      data-cy="email"
-      label="Năm sản xuất"
-      placeholder="2015"
-      required
-      pattern="[0-9]{4}"
-      title="Năm sản xuất không hợp lệ."
-    />
+  <form data-cy="buy-popup" @submit.prevent="submit">
+    <TextField v-model="email" data-cy="email" label="Năm sản xuất" required />
 
-    <TextField
-      v-model="phone"
-      data-cy="phone"
-      label="Năm sản xuất"
-      placeholder="2015"
-      required
-      pattern="[0-9]{4}"
-      title="Năm sản xuất không hợp lệ."
-    />
+    <TextField v-model="phone" data-cy="phone" required />
 
-    <TextField
-      v-model="note"
-      data-cy="note"
-      label="Năm sản xuất"
-      placeholder="2015"
-      required
-      pattern="[0-9]{4}"
-      title="Năm sản xuất không hợp lệ."
-    />
+    <TextField v-model="note" data-cy="note" required />
 
     <div>
       <button data-cy="cancel-button" class="button is-warning">X</button>
@@ -47,6 +23,12 @@ export default {
       phone: "",
       note: ""
     };
+  },
+
+  methods: {
+    submit() {
+      console.log("submit");
+    }
   }
 };
 </script>
