@@ -103,6 +103,14 @@ describe("Page /xe/tinh-phi", () => {
         getPopupBuyButton().click();
         cy.assertHtml5FormValidation();
       });
+
+      it("if email is not correctly formatted, shows HTML5 error", () => {
+        getPopupEmail().type("invalid-email");
+        getPopupPhone().type("01234567");
+        getPopupNote().type("some note");
+        getPopupBuyButton().click();
+        cy.assertHtml5FormValidation();
+      });
     });
   });
 });

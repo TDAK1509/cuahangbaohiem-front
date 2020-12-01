@@ -1,6 +1,6 @@
 <template>
   <form data-cy="buy-popup" @submit.prevent="submit">
-    <TextField v-model="email" data-cy="email" label="Năm sản xuất" required />
+    <TextField v-model="email" data-cy="email" type="email" required />
 
     <TextField v-model="phone" data-cy="phone" required />
 
