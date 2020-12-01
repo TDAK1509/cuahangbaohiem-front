@@ -64,6 +64,24 @@ describe("Page /xe/tinh-phi", () => {
       });
     });
   });
+
+  describe("On click BUY button", () => {
+    beforeEach(() => {
+      getCarValueField().type("800");
+      getCarYearField().type("2015");
+      getCalculateButton().click();
+      getResultBuyButton().first().click();
+    });
+
+    it("shows popup with inputs email, phone, note, CANCEL button and BUY button", () => {
+      getPopup().should("be.visible");
+      getPopup().find("[data-cy=email]").should("be.visible");
+      getPopup().find("[data-cy=phone]").should("be.visible");
+      getPopup().find("[data-cy=note]").should("be.visible");
+      getPopup().find("[data-cy=cancel-button]").should("be.visible");
+      getPopup().find("[data-cy=buy-button]").should("be.visible");
+    });
+  });
 });
 
 function getCarValueField() {
@@ -76,6 +94,14 @@ function getCarYearField() {
 
 function getCalculateButton() {
   return cy.get("[data-cy=calculate-button]");
+}
+
+function getResultBuyButton() {
+  return cy.get("[data-cy=buy-button]");
+}
+
+function getPopup() {
+  return cy.get("[data-cy=buy-popup]");
 }
 
 function assertResultBlockIsRendered() {
@@ -109,5 +135,5 @@ function assertResultShows4BrandsAndInsuranceValues() {
 }
 
 function assertResultShows4BuyButtons() {
-  cy.get("[data-cy=buy-button]").should("have.length", 4);
+  getResultBuyButton().should("have.length", 4);
 }
