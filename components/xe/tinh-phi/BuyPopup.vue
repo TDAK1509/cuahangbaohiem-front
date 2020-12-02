@@ -1,13 +1,31 @@
 <template>
   <div class="modal" :class="{ 'is-active': show }">
     <div class="modal-background"></div>
-    <div class="modal-content">
-      <div class="box">
-        <form data-cy="buy-popup" @submit.prevent="submit" @keydown.esc="close">
+    <div class="modal-card">
+      <header class="modal-card-head has-background-info">
+        <p class="modal-card-title has-text-white" style="font-weight: 700">
+          {{ title }}: {{ insuranceValue }}
+        </p>
+        <button class="delete" data-cy="popup-cancel-button" @click="close" />
+      </header>
+
+      <section class="modal-card-body">
+        <p>
+          Vui lòng điền thông tin liên lạc của bạn, chúng tôi sẽ liên lạc với
+          bạn để tư vấn mua gói bảo hiểm bạn đã chọn.
+        </p>
+
+        <form
+          class="mt-4"
+          data-cy="buy-popup"
+          @submit.prevent="submit"
+          @keydown.esc="close"
+        >
           <TextField
             ref="email"
             v-model="email"
             data-cy="email"
+            label="Email của bạn"
             type="email"
             name="email"
             required
@@ -16,32 +34,25 @@
           <TextField
             v-model="phone"
             data-cy="phone"
+            label="Số điện thoại của bạn"
             type="tel"
             name="phone"
             pattern="^[0-9]*$"
             required
           />
 
-          <TextField v-model="note" data-cy="note" />
+          <TextField v-model="note" data-cy="note" label="Lời nhắn của bạn" />
 
-          <div>
-            <button
-              data-cy="popup-cancel-button"
-              class="button is-warning"
-              type="button"
-              @click="close"
-            >
-              X
-            </button>
-            <button data-cy="popup-buy-button" class="button is-warning">
-              MUA NGAY
-            </button>
+          <div class="field mt-4">
+            <div class="control">
+              <button data-cy="popup-buy-button" class="button is-info">
+                XÁC NHẬN
+              </button>
+            </div>
           </div>
         </form>
-      </div>
+      </section>
     </div>
-
-    <button class="modal-close is-large" @click="close"></button>
   </div>
 </template>
 
@@ -58,6 +69,18 @@ export default {
     show: {
       type: Boolean,
       default: false
+    },
+
+    title: {
+      type: String,
+      required: false,
+      default: ""
+    },
+
+    insuranceValue: {
+      type: String,
+      required: false,
+      default: ""
     }
   },
 

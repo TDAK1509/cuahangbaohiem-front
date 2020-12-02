@@ -34,7 +34,12 @@
       </div>
     </div>
 
-    <BuyPopup v-if="showPopup" v-model="showPopup" />
+    <BuyPopup
+      v-if="showPopup"
+      v-model="showPopup"
+      :title="companyName"
+      :insurance-value="insuranceValue | millionDongs"
+    />
   </div>
 </template>
 
