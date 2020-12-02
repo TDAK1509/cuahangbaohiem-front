@@ -1,7 +1,7 @@
 <template>
   <div class="modal" :class="{ 'is-active': show }">
     <div class="modal-background"></div>
-    <div class="modal-card">
+    <div class="modal-card" data-cy="buy-popup">
       <header class="modal-card-head has-background-info">
         <p class="modal-card-title has-text-white" style="font-weight: 700">
           {{ title }}: {{ insuranceValue }}
@@ -15,12 +15,7 @@
           bạn để tư vấn mua gói bảo hiểm bạn đã chọn.
         </p>
 
-        <form
-          class="mt-4"
-          data-cy="buy-popup"
-          @submit.prevent="submit"
-          @keydown.esc="close"
-        >
+        <form class="mt-4" @submit.prevent="submit" @keydown.esc="close">
           <TextField
             ref="email"
             v-model="email"
@@ -41,7 +36,16 @@
             required
           />
 
-          <TextField v-model="note" data-cy="note" label="Lời nhắn của bạn" />
+          <div class="field">
+            <label class="label">Lời nhắn của bạn</label>
+            <div class="control">
+              <textarea
+                v-model="note"
+                data-cy="note"
+                class="textarea"
+              ></textarea>
+            </div>
+          </div>
 
           <div class="field mt-4">
             <div class="control">
