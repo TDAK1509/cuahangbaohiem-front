@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <BuyPopup v-model="showPopup" />
+    <BuyPopup v-if="showPopup" v-model="showPopup" />
   </div>
 </template>
 

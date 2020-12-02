@@ -3,8 +3,9 @@
     <div class="modal-background"></div>
     <div class="modal-content">
       <div class="box">
-        <form data-cy="buy-popup" @submit.prevent="submit">
+        <form data-cy="buy-popup" @submit.prevent="submit" @keydown.esc="close">
           <TextField
+            ref="email"
             v-model="email"
             data-cy="email"
             type="email"
@@ -68,6 +69,10 @@ export default {
     };
   },
 
+  mounted() {
+    this.focusOnEmailTextField();
+  },
+
   methods: {
     submit() {
       console.log("submit");
@@ -75,6 +80,10 @@ export default {
 
     close() {
       this.$emit("input", false);
+    },
+
+    focusOnEmailTextField() {
+      this.$refs.email.$el.querySelector("input").focus();
     }
   }
 };

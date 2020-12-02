@@ -105,8 +105,15 @@ describe("Page /xe/tinh-phi", () => {
     });
 
     it("on click CLOSE button", () => {
+      getVisiblePopup().should("be.visible");
       getPopupCancelButton().click();
-      getPopup().should("not.be.visible");
+      getPopup().should("not.be.exist");
+    });
+
+    it("on press ESC close popup", () => {
+      getVisiblePopup().should("be.visible");
+      getPopupEmail().type("{esc}");
+      getPopup().should("not.be.exist");
     });
   });
 });
