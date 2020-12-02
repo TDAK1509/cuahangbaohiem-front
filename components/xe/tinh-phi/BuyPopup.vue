@@ -21,7 +21,7 @@
             required
           />
 
-          <TextField v-model="note" data-cy="note" required />
+          <TextField v-model="note" data-cy="note" />
 
           <div>
             <button

@@ -91,10 +91,6 @@ describe("Page /xe/tinh-phi", () => {
         getPopupPhone().should(assertFailedHtml5FormValidation);
       });
 
-      it("if note is empty, shows HTML5 required validation", () => {
-        getPopupNote().should(assertFailedHtml5FormValidation);
-      });
-
       it("if email is not correctly formatted, shows HTML5 error", () => {
         getPopupEmail()
           .type("invalid-email")
