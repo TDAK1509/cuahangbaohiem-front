@@ -17,32 +17,31 @@ describe("Page /xe/tinh-phi", () => {
   describe("on click calculate button", () => {
     describe("form error handling", () => {
       it("if car value is empty, shows HTML5 required validation", () => {
-        getCarYearField().type("2015");
-        getCalculateButton().click();
-        cy.assertHtml5FormValidation();
+        getCarValueField().should(assertFailedHtml5FormValidation);
       });
 
       it("if car year is empty, shows HTML5 required validation", () => {
-        getCarValueField().type("800");
-        getCalculateButton().click();
-        cy.assertHtml5FormValidation();
+        getCarYearField().should(assertFailedHtml5FormValidation);
       });
 
       it("if car value is not a number, shows HTML5 required validation", () => {
-        getCarValueField().type("not a number");
-        getCarYearField().type("2015");
-        getCalculateButton().click();
         const errorNotANumber = "Vui lòng điền một con số.";
-        cy.assertHtml5FormValidation(getCarValueField(), errorNotANumber);
+
+        getCarValueField()
+          .type("not a number")
+          .should(($el) => {
+            assertFailedHtml5FormValidationWithMessage($el, errorNotANumber);
+          });
       });
 
       it("if car year is not a number, shows HTML5 required validation", () => {
-        getCarValueField().type("800");
-        getCarYearField().type("not a number");
-        getCalculateButton().click();
-
         const errorInvalidYear = "Năm sản xuất không hợp lệ.";
-        cy.assertHtml5FormValidation(getCarYearField(), errorInvalidYear);
+
+        getCarYearField()
+          .type("not a number")
+          .should(($el) => {
+            assertFailedHtml5FormValidationWithMessage($el, errorInvalidYear);
+          });
       });
     });
 
@@ -75,6 +74,7 @@ describe("Page /xe/tinh-phi", () => {
 
     it("shows popup with inputs email, phone, note, CANCEL button and BUY button", () => {
       getPopup().should("be.visible");
+      getVisiblePopup().should("have.length", 1);
       getPopupEmail().should("be.visible");
       getPopupPhone().should("be.visible");
       getPopupNote().should("be.visible");
@@ -84,41 +84,33 @@ describe("Page /xe/tinh-phi", () => {
 
     describe("form error handling", () => {
       it("if email is empty, shows HTML5 required validation", () => {
-        getPopupPhone().type("01234567");
-        getPopupNote().type("some note");
-        getPopupBuyButton().click();
-        cy.assertHtml5FormValidation();
+        getPopupEmail().should(assertFailedHtml5FormValidation);
       });
 
       it("if phone is empty, shows HTML5 required validation", () => {
-        getPopupEmail().type("test@gmail.com");
-        getPopupNote().type("some note");
-        getPopupBuyButton().click();
-        cy.assertHtml5FormValidation();
+        getPopupPhone().should(assertFailedHtml5FormValidation);
       });
 
       it("if note is empty, shows HTML5 required validation", () => {
-        getPopupEmail().type("test@gmail.com");
-        getPopupPhone().type("01234567");
-        getPopupBuyButton().click();
-        cy.assertHtml5FormValidation();
+        getPopupNote().should(assertFailedHtml5FormValidation);
       });
 
       it("if email is not correctly formatted, shows HTML5 error", () => {
-        getPopupEmail().type("invalid-email");
-        getPopupPhone().type("01234567");
-        getPopupNote().type("some note");
-        getPopupBuyButton().click();
-        cy.assertHtml5FormValidation();
+        getPopupEmail()
+          .type("invalid-email")
+          .should(assertFailedHtml5FormValidation);
       });
 
       it("if phone contains letters, shows HTML5 error", () => {
-        getPopupEmail().type("test@gmail.com");
-        getPopupPhone().type("invalidPhone123");
-        getPopupNote().type("some note");
-        getPopupBuyButton().click();
-        cy.assertHtml5FormValidation();
+        getPopupPhone()
+          .type("invalidPhone123")
+          .should(assertFailedHtml5FormValidation);
       });
+    });
+
+    it("on click CLOSE button", () => {
+      getPopupCancelButton().click();
+      getPopup().should("not.be.visible");
     });
   });
 });
@@ -143,24 +135,28 @@ function getPopup() {
   return cy.get("[data-cy=buy-popup]");
 }
 
+function getVisiblePopup() {
+  return cy.get("[data-cy=buy-popup]:visible");
+}
+
 function getPopupEmail() {
-  return getPopup().find("[data-cy=email]");
+  return getVisiblePopup().find("[data-cy=email]");
 }
 
 function getPopupPhone() {
-  return getPopup().find("[data-cy=phone]");
+  return getVisiblePopup().find("[data-cy=phone]");
 }
 
 function getPopupNote() {
-  return getPopup().find("[data-cy=note]");
+  return getVisiblePopup().find("[data-cy=note]");
 }
 
 function getPopupBuyButton() {
-  return getPopup().find("[data-cy=buy-button]");
+  return getVisiblePopup().find("[data-cy=popup-buy-button]");
 }
 
 function getPopupCancelButton() {
-  return getPopup().find("[data-cy=cancel-button]");
+  return getVisiblePopup().find("[data-cy=popup-cancel-button]");
 }
 
 function assertResultBlockIsRendered() {
@@ -195,4 +191,13 @@ function assertResultShows4BrandsAndInsuranceValues() {
 
 function assertResultShows4BuyButtons() {
   getResultBuyButton().should("have.length", 4);
+}
+
+function assertFailedHtml5FormValidation($el) {
+  expect($el.get(0).checkValidity()).to.equal(false);
+}
+
+function assertFailedHtml5FormValidationWithMessage($el, message) {
+  assertFailedHtml5FormValidation($el);
+  expect($el.get(0).title).to.contain(message);
 }

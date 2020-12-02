@@ -23,16 +23,3 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-
-Cypress.Commands.add(
-  "assertHtml5FormValidation",
-  (cypressGetDOM = null, message = "") => {
-    cy.get("input:invalid").should("have.length", 1);
-
-    if (cypressGetDOM && message) {
-      cypressGetDOM.then(($input) => {
-        expect($input[0].title).to.eq(message);
-      });
-    }
-  }
-);
