@@ -7,10 +7,21 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
+@import "~bulma/sass/utilities/_all";
+
+:root {
+  font-size: 13pt;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
-  font-size: 13pt;
+}
+
+@media only screen and (max-width: $tablet) {
+  :root {
+    font-size: 0.9rem;
+  }
 }
 
 *,
