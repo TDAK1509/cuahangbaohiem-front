@@ -16,10 +16,10 @@
         </p>
 
         <form
+          ref="form"
           class="mt-4"
           netlify
           name="car_insurance"
-          ref="form"
           @submit.prevent="submit"
           @keydown.esc="close"
         >
