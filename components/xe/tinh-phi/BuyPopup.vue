@@ -15,7 +15,14 @@
           bạn để tư vấn mua gói bảo hiểm bạn đã chọn.
         </p>
 
-        <form class="mt-4" @submit.prevent="submit" @keydown.esc="close">
+        <form
+          class="mt-4"
+          netlify
+          name="car_insurance"
+          ref="form"
+          @submit.prevent="submit"
+          @keydown.esc="close"
+        >
           <TextField
             ref="email"
             v-model="email"
@@ -43,15 +50,26 @@
                 v-model="note"
                 data-cy="note"
                 class="textarea"
+                name="note"
               ></textarea>
             </div>
           </div>
 
           <div class="field mt-4">
             <div class="control">
-              <button data-cy="popup-buy-button" class="button is-info">
+              <button
+                v-if="!isSuccess"
+                data-cy="popup-buy-button"
+                class="button is-info"
+                :class="{ 'is-loading': loading }"
+              >
                 XÁC NHẬN
               </button>
+
+              <p v-else class="has-text-success">
+                Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên
+                lạc với bạn trong thời gian sớm nhất!
+              </p>
             </div>
           </div>
         </form>
@@ -92,7 +110,9 @@ export default {
     return {
       email: "",
       phone: "",
-      note: ""
+      note: "",
+      loading: false,
+      isSuccess: false
     };
   },
 
@@ -101,8 +121,35 @@ export default {
   },
 
   methods: {
-    submit() {
-      console.log("submit");
+    async submit() {
+      this.loading = true;
+
+      const myForm = this.$refs.form;
+      const formData = new FormData(myForm);
+
+      try {
+        await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData).toString()
+        });
+        this.clearForm();
+        this.alertSuccess();
+      } catch (error) {
+        alert("Đã có lỗi xảy ra, vui lòng thử lại sau.");
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    clearForm() {
+      this.email = "";
+      this.phone = "";
+      this.note = "";
+    },
+
+    alertSuccess() {
+      this.isSuccess = true;
     },
 
     close() {
@@ -115,6 +162,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>
