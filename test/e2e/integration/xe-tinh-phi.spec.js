@@ -72,14 +72,16 @@ describe("Page /xe/tinh-phi", () => {
       getResultBuyButton().first().click();
     });
 
-    it("shows popup with inputs email, phone, note, CANCEL button and BUY button", () => {
-      getPopup().should("be.visible");
-      getVisiblePopup().should("have.length", 1);
-      getPopupEmail().should("be.visible");
-      getPopupPhone().should("be.visible");
-      getPopupNote().should("be.visible");
-      getPopupBuyButton().should("be.visible");
-      getPopupCancelButton().should("be.visible");
+    describe("rendering", () => {
+      it("shows popup with inputs email, phone, note, CANCEL button and BUY button", () => {
+        getPopup().should("be.visible");
+        getVisiblePopup().should("have.length", 1);
+        getPopupEmail().should("be.visible");
+        getPopupPhone().should("be.visible");
+        getPopupNote().should("be.visible");
+        getPopupBuyButton().should("be.visible");
+        getPopupCancelButton().should("be.visible");
+      });
     });
 
     describe("form error handling", () => {
@@ -104,16 +106,31 @@ describe("Page /xe/tinh-phi", () => {
       });
     });
 
-    it("on click CLOSE button", () => {
-      getVisiblePopup().should("be.visible");
-      getPopupCancelButton().click();
-      getPopup().should("not.be.exist");
+    describe("closing popup", () => {
+      it("on click CLOSE button", () => {
+        getVisiblePopup().should("be.visible");
+        getPopupCancelButton().click();
+        getPopup().should("not.be.exist");
+      });
+
+      it("on press ESC close popup", () => {
+        getVisiblePopup().should("be.visible");
+        getPopupEmail().type("{esc}");
+        getPopup().should("not.be.exist");
+      });
     });
 
-    it("on press ESC close popup", () => {
-      getVisiblePopup().should("be.visible");
-      getPopupEmail().type("{esc}");
-      getPopup().should("not.be.exist");
+    describe("submitting form successfully", () => {
+      it("shows success message and clear inputs", () => {
+        getPopupEmail().type("test@gmail.com");
+        getPopupPhone().type("1234567");
+        getPopupBuyButton().click();
+        cy.contains(
+          "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
+        ).should("be.visible");
+        getPopupEmail().should("have.value", "");
+        getPopupPhone().should("have.value", "");
+      });
     });
   });
 });

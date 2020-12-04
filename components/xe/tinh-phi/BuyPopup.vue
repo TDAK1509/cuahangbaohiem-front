@@ -16,7 +16,6 @@
         </p>
 
         <form
-          ref="form"
           class="mt-4"
           name="car_insurance"
           @submit.prevent="submit"
@@ -120,18 +119,10 @@ export default {
   },
 
   methods: {
-    async submit() {
+    submit() {
       this.loading = true;
 
-      const myForm = this.$refs.form;
-      const formData = new FormData(myForm);
-
       try {
-        await fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(formData).toString()
-        });
         this.clearForm();
         this.alertSuccess();
       } catch (error) {
