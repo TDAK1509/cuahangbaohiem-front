@@ -18,7 +18,6 @@
         <form
           ref="form"
           class="mt-4"
-          netlify
           name="car_insurance"
           @submit.prevent="submit"
           @keydown.esc="close"
