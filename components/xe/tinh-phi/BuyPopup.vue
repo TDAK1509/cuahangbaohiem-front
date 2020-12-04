@@ -22,7 +22,15 @@
           @keydown.esc="close"
         >
           <TextField
-            ref="email"
+            ref="name"
+            v-model="name"
+            data-cy="name"
+            label="Tên của bạn"
+            pattern="^[a-zA-Z\s]*$"
+            required
+          />
+
+          <TextField
             v-model="email"
             data-cy="email"
             label="Email của bạn"
@@ -106,6 +114,7 @@ export default {
 
   data() {
     return {
+      name: "",
       email: "",
       phone: "",
       note: "",
@@ -115,7 +124,7 @@ export default {
   },
 
   mounted() {
-    this.focusOnEmailTextField();
+    this.focusOnNameTextField();
   },
 
   methods: {
@@ -133,6 +142,7 @@ export default {
     },
 
     clearForm() {
+      this.name = "";
       this.email = "";
       this.phone = "";
       this.note = "";
@@ -146,8 +156,8 @@ export default {
       this.$emit("input", false);
     },
 
-    focusOnEmailTextField() {
-      this.$refs.email.$el.querySelector("input").focus();
+    focusOnNameTextField() {
+      this.$refs.name.$el.querySelector("input").focus();
     }
   }
 };

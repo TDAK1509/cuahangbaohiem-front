@@ -73,30 +73,42 @@ describe("Page /xe/tinh-phi", () => {
     });
 
     describe("rendering", () => {
-      it("shows popup with inputs email, phone, note, CANCEL button and BUY button", () => {
+      it("shows popup with inputs name, email, phone, note, CANCEL button and BUY button", () => {
         getPopup().should("be.visible");
         getVisiblePopup().should("have.length", 1);
+        getPopupName().should("be.visible");
         getPopupEmail().should("be.visible");
         getPopupPhone().should("be.visible");
         getPopupNote().should("be.visible");
-        getPopupBuyButton().should("be.visible");
-        getPopupCancelButton().should("be.visible");
+        // exist instead of visible because need to scroll down
+        getPopupBuyButton().should("be.exist");
+        getPopupCancelButton().should("be.exist");
       });
     });
 
     describe("form error handling", () => {
-      it("if email is empty, shows HTML5 required validation", () => {
-        getPopupEmail().should(assertFailedHtml5FormValidation);
+      it("if name is empty, shows HTML5 required validation", () => {
+        getPopupName().should(assertFailedHtml5FormValidation);
       });
 
-      it("if phone is empty, shows HTML5 required validation", () => {
-        getPopupPhone().should(assertFailedHtml5FormValidation);
+      it("if name contains number, shows HTML5 required validation", () => {
+        getPopupName()
+          .type("123Michael Jackson")
+          .should(assertFailedHtml5FormValidation);
+      });
+
+      it("if email is empty, shows HTML5 required validation", () => {
+        getPopupEmail().should(assertFailedHtml5FormValidation);
       });
 
       it("if email is not correctly formatted, shows HTML5 error", () => {
         getPopupEmail()
           .type("invalid-email")
           .should(assertFailedHtml5FormValidation);
+      });
+
+      it("if phone is empty, shows HTML5 required validation", () => {
+        getPopupPhone().should(assertFailedHtml5FormValidation);
       });
 
       it("if phone contains letters, shows HTML5 error", () => {
@@ -122,6 +134,7 @@ describe("Page /xe/tinh-phi", () => {
 
     describe("submitting form successfully", () => {
       it("shows success message and clear inputs", () => {
+        getPopupName().type("Michael Jackson");
         getPopupEmail().type("test@gmail.com");
         getPopupPhone().type("1234567");
         getPopupBuyButton().click();
@@ -157,6 +170,10 @@ function getPopup() {
 
 function getVisiblePopup() {
   return cy.get("[data-cy=buy-popup]:visible");
+}
+
+function getPopupName() {
+  return getVisiblePopup().find("[data-cy=name]");
 }
 
 function getPopupEmail() {
