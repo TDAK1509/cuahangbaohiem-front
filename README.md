@@ -40,18 +40,29 @@ $ yarn test --watch
 
 #### E2E Test
 
+- Step 1: Serve frontend and backend
+
 ```bash
 # Serve in localhost first
 $ yarn dev
 
 # And then serve Firestore service
 $ yarn backend
+```
 
-# Open cypress for E2E tests
+- Step 2: Run E2E
+
+```bash
 $ yarn e2e
 
 # Or in headless mode
 $ yarn e2e:headless
+```
+
+**Notes: can run E2E without backend for one shot (only `yarn dev` is required)**
+
+```bash
+$ yarn e2e:onetime
 ```
 
 ## Deploy
