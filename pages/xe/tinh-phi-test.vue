@@ -47,7 +47,7 @@ export default {
 
   mounted() {
     if (process.env.NODE_ENV === "production") {
-      this.$router.push("/");
+      this.$router.push("/404");
     }
   }
 };
