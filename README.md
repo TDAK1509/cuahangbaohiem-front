@@ -6,6 +6,9 @@ $ yarn install
 
 # serve with hot reload at localhost:3000
 $ yarn dev
+
+# run another terminal for Firestore service
+$ yarn backend
 ```
 
 ## Test
@@ -27,6 +30,9 @@ $ yarn test --watch
 ```bash
 # Serve in localhost first
 $ yarn dev
+
+# And then serve Firestore service
+$ yarn backend
 
 # Open cypress for E2E tests
 $ yarn e2e
