@@ -41,7 +41,13 @@ export default {
 
   computed: {
     firstCarInsuranceRequest() {
-      return this.carInsuranceRequests[0];
+      return this.carInsuranceRequests[this.carInsuranceRequests.length - 1];
+    }
+  },
+
+  mounted() {
+    if (process.env.NODE_ENV === "production") {
+      this.$router.push("/");
     }
   }
 };
