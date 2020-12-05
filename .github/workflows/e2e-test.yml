@@ -27,7 +27,6 @@ jobs:
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
-          HAHA: test
         run: |
           line1="FIREBASE_API_KEY=${FIREBASE_API_KEY}"
           line2="FIREBASE_AUTH_DOMAIN=${FIREBASE_AUTH_DOMAIN}"
@@ -37,36 +36,33 @@ jobs:
           line6="FIREBASE_MESSAGING_SENDER_ID=${FIREBASE_MESSAGING_SENDER_ID}"
           line7="FIREBASE_APP_ID=${FIREBASE_APP_ID}"
           line8="FIREBASE_MEASUREMENT_ID=${FIREBASE_MEASUREMENT_ID}"
-          line0="test=${HAHA}"
 
-          printf "${line0}${line1}\n${line2}\n${line3}\n${line4}\n${line5}\n${line6}\n${line7}\n${line8}\n" > .env
+          printf "{line1}\n${line2}\n${line3}\n${line4}\n${line5}\n${line6}\n${line7}\n${line8}\n" > .env
 
-          cat .env
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
-      # - name: Cache node modules
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: "**/node_modules"
-      #     key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: "/home/runner/.cache/firebase/emulators"
+          key: firebase-emulator
 
-      # - name: Cache node modules
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: "/home/runner/.cache/firebase/emulators"
-      #     key: firebase-emulator
+      - name: Install dependencies
+        run: yarn
 
-      # - name: Install dependencies
-      #   run: yarn
+      - name: Serve site at localhost
+        run: (yarn dev&)
 
-      # - name: Serve site at localhost
-      #   run: (yarn dev&)
-
-      # - name: Run E2E
-      #   env:
-      #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
-      #   run: |
-      #     npm install -g firebase-tools
-      #     firebase emulators:exec "yarn e2e:headless" --token ${FIREBASE_TOKEN}
+      - name: Run E2E
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+        run: |
+          npm install -g firebase-tools
+          firebase emulators:exec "yarn e2e:headless" --token ${FIREBASE_TOKEN}
 
       - name: Remove E2E Label
         uses: actions-ecosystem/action-remove-labels@v1

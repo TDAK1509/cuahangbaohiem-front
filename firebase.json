@@ -8,8 +8,7 @@
       "port": 8081
     },
     "ui": {
-      "enabled": true,
-      "port": 5000
+      "enabled": true
     }
   }
 }
