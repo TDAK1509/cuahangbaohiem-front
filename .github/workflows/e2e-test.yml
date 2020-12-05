@@ -60,9 +60,11 @@ jobs:
         run: (yarn dev&)
 
       - name: Serve Firestore as backend
+        uses: w9jds/firebase-action@master
+        with:
+          args: emulators:start --only firestore
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
-        run: (yarn backend --token ${FIREBASE_TOKEN}&)
 
       - name: Run E2E test
         uses: cypress-io/github-action@v2
