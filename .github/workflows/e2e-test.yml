@@ -63,7 +63,11 @@ jobs:
       - name: Run E2E
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+          CYPRESS_BASE_URL: http://localhost:3000
         run: |
+          npm install --save-dev wait-on
+
+          npx wait-on ${CYPRESS_BASE_URL} && \
           firebase emulators:exec "yarn e2e:headless" --token ${FIREBASE_TOKEN}
 
       - name: Remove E2E Label
