@@ -1,30 +1,45 @@
 <template>
-  <div class="card">
-    <div class="card-content">
-      <div class="media">
-        <div class="media-left">
-          <h3 class="title is-size-4">{{ companyName }}</h3>
+  <div>
+    <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <h3 class="title is-size-4">{{ companyName }}</h3>
+          </div>
+
+          <div class="media-content">
+            <figure class="image">
+              <img
+                class="result-table__logo"
+                :src="require(`../../../assets/images/${logoFileName}`)"
+                :alt="`Logo ${companyName}`"
+              />
+            </figure>
+          </div>
         </div>
 
-        <div class="media-content">
-          <figure class="image">
-            <img
-              class="result-table__logo"
-              :src="require(`../../../assets/images/${logoFileName}`)"
-              :alt="`Logo ${companyName}`"
-            />
-          </figure>
+        <div class="content">
+          <p>Phí bảo hiểm: {{ insuranceValue | millionDongs }}</p>
         </div>
-      </div>
 
-      <div class="content">
-        <p>Phí bảo hiểm: {{ insuranceValue | millionDongs }}</p>
-      </div>
-
-      <div>
-        <button data-cy="buy-button" class="button is-warning">MUA NGAY</button>
+        <div>
+          <button
+            data-cy="buy-button"
+            class="button is-warning"
+            @click="showPopup = true"
+          >
+            MUA NGAY
+          </button>
+        </div>
       </div>
     </div>
+
+    <BuyPopup
+      v-if="showPopup"
+      v-model="showPopup"
+      :title="companyName"
+      :insurance-value="insuranceValue | millionDongs"
+    />
   </div>
 </template>
 
@@ -60,6 +75,12 @@ export default Vue.extend({
       required: false,
       default: 0
     }
+  },
+
+  data() {
+    return {
+      showPopup: false
+    };
   }
 });
 </script>

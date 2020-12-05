@@ -17,32 +17,31 @@ describe("Page /xe/tinh-phi", () => {
   describe("on click calculate button", () => {
     describe("form error handling", () => {
       it("if car value is empty, shows HTML5 required validation", () => {
-        getCarYearField().type("2015");
-        getCalculateButton().click();
-        cy.assertHtml5FormValidation();
+        getCarValueField().should(assertFailedHtml5FormValidation);
       });
 
       it("if car year is empty, shows HTML5 required validation", () => {
-        getCarValueField().type("800");
-        getCalculateButton().click();
-        cy.assertHtml5FormValidation();
+        getCarYearField().should(assertFailedHtml5FormValidation);
       });
 
       it("if car value is not a number, shows HTML5 required validation", () => {
-        getCarValueField().type("not a number");
-        getCarYearField().type("2015");
-        getCalculateButton().click();
         const errorNotANumber = "Vui lòng điền một con số.";
-        cy.assertHtml5FormValidation(getCarValueField(), errorNotANumber);
+
+        getCarValueField()
+          .type("not a number")
+          .should(($el) => {
+            assertFailedHtml5FormValidationWithMessage($el, errorNotANumber);
+          });
       });
 
       it("if car year is not a number, shows HTML5 required validation", () => {
-        getCarValueField().type("800");
-        getCarYearField().type("not a number");
-        getCalculateButton().click();
-
         const errorInvalidYear = "Năm sản xuất không hợp lệ.";
-        cy.assertHtml5FormValidation(getCarYearField(), errorInvalidYear);
+
+        getCarYearField()
+          .type("not a number")
+          .should(($el) => {
+            assertFailedHtml5FormValidationWithMessage($el, errorInvalidYear);
+          });
       });
     });
 
@@ -64,6 +63,96 @@ describe("Page /xe/tinh-phi", () => {
       });
     });
   });
+
+  describe("On click BUY button", () => {
+    beforeEach(() => {
+      getCarValueField().type("800");
+      getCarYearField().type("2015");
+      getCalculateButton().click();
+      getResultBuyButton().first().click();
+    });
+
+    describe("rendering", () => {
+      it("shows popup with inputs name, email, phone, note, CANCEL button and BUY button", () => {
+        getPopup().should("be.visible");
+        getVisiblePopup().should("have.length", 1);
+        getPopupName().should("be.visible");
+        getPopupEmail().should("be.visible");
+        getPopupPhone().should("be.visible");
+        getPopupNote().should("be.visible");
+        // exist instead of visible because need to scroll down
+        getPopupBuyButton().should("be.exist");
+        getPopupCancelButton().should("be.exist");
+      });
+    });
+
+    describe("form error handling", () => {
+      it("if name is empty, shows HTML5 required validation", () => {
+        getPopupName().should(assertFailedHtml5FormValidation);
+      });
+
+      it("if name contains number, shows HTML5 required validation", () => {
+        getPopupName()
+          .type("123Michael Jackson")
+          .should(assertFailedHtml5FormValidation);
+      });
+
+      it("if email is empty, shows HTML5 required validation", () => {
+        getPopupEmail().should(assertFailedHtml5FormValidation);
+      });
+
+      it("if email is not correctly formatted, shows HTML5 error", () => {
+        getPopupEmail()
+          .type("invalid-email")
+          .should(assertFailedHtml5FormValidation);
+      });
+
+      it("if phone is empty, shows HTML5 required validation", () => {
+        getPopupPhone().should(assertFailedHtml5FormValidation);
+      });
+
+      it("if phone contains letters, shows HTML5 error", () => {
+        getPopupPhone()
+          .type("invalidPhone123")
+          .should(assertFailedHtml5FormValidation);
+      });
+    });
+
+    describe("closing popup", () => {
+      it("on click CLOSE button", () => {
+        getVisiblePopup().should("be.visible");
+        getPopupCancelButton().click();
+        getPopup().should("not.be.exist");
+      });
+
+      it("on press ESC close popup", () => {
+        getVisiblePopup().should("be.visible");
+        getPopupEmail().type("{esc}");
+        getPopup().should("not.be.exist");
+      });
+    });
+
+    describe("submitting form successfully", () => {
+      it("shows success message and clear inputs", () => {
+        getPopupName().type("Michael Jackson");
+        getPopupEmail().type("test@gmail.com");
+        getPopupPhone().type("1234567");
+        getPopupBuyButton().click();
+        cy.contains(
+          "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
+        ).should("be.visible");
+        getPopupEmail().should("have.value", "");
+        getPopupPhone().should("have.value", "");
+      });
+
+      it("form request is saved to firebase", () => {
+        cy.visit("/xe/tinh-phi-test");
+        cy.contains("Michael Jackson").should("be.visible");
+        cy.contains("test@gmail.com").should("be.visible");
+        cy.contains("1234567").should("be.visible");
+      });
+    });
+  });
 });
 
 function getCarValueField() {
@@ -76,6 +165,42 @@ function getCarYearField() {
 
 function getCalculateButton() {
   return cy.get("[data-cy=calculate-button]");
+}
+
+function getResultBuyButton() {
+  return cy.get("[data-cy=buy-button]");
+}
+
+function getPopup() {
+  return cy.get("[data-cy=buy-popup]");
+}
+
+function getVisiblePopup() {
+  return cy.get("[data-cy=buy-popup]:visible");
+}
+
+function getPopupName() {
+  return getVisiblePopup().find("[data-cy=name]");
+}
+
+function getPopupEmail() {
+  return getVisiblePopup().find("[data-cy=email]");
+}
+
+function getPopupPhone() {
+  return getVisiblePopup().find("[data-cy=phone]");
+}
+
+function getPopupNote() {
+  return getVisiblePopup().find("[data-cy=note]");
+}
+
+function getPopupBuyButton() {
+  return getVisiblePopup().find("[data-cy=popup-buy-button]");
+}
+
+function getPopupCancelButton() {
+  return getVisiblePopup().find("[data-cy=popup-cancel-button]");
 }
 
 function assertResultBlockIsRendered() {
@@ -109,5 +234,14 @@ function assertResultShows4BrandsAndInsuranceValues() {
 }
 
 function assertResultShows4BuyButtons() {
-  cy.get("[data-cy=buy-button]").should("have.length", 4);
+  getResultBuyButton().should("have.length", 4);
+}
+
+function assertFailedHtml5FormValidation($el) {
+  expect($el.get(0).checkValidity()).to.equal(false);
+}
+
+function assertFailedHtml5FormValidationWithMessage($el, message) {
+  assertFailedHtml5FormValidation($el);
+  expect($el.get(0).title).to.contain(message);
 }
