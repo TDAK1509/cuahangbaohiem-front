@@ -14,6 +14,9 @@ Then update the `.env` file with correct values.
 # install dependencies
 $ yarn install
 
+# install firebase-tools
+$ yarn global add firebase-tools
+
 # serve with hot reload at localhost:3000
 $ yarn dev
 
