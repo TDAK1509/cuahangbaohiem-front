@@ -44,6 +44,12 @@ jobs:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn-lock.json') }}
 
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: "/home/runner/.cache/firebase/emulators"
+          key: firebase-emulator
+
       - name: Install dependencies
         run: yarn
 
@@ -64,7 +70,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           install: false
-          wait-on: "http://localhost:3000"
+          wait-on: "http://localhost:3000,http://localhost:5000"
           wait-on-timeout: 300
           browser: ${{ env.BROWSER }}
           headless: true
