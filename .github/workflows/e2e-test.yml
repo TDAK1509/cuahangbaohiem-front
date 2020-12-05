@@ -39,7 +39,7 @@ jobs:
           line8="FIREBASE_MEASUREMENT_ID=${FIREBASE_MEASUREMENT_ID}"
           line0="test=${HAHA}"
 
-          printf "${line1}\n${line2}\n${line3}\n${line4}\n${line5}\n${line6}\n${line7}\n${line8}\n" > .env
+          printf "${line0}${line1}\n${line2}\n${line3}\n${line4}\n${line5}\n${line6}\n${line7}\n${line8}\n" > .env
 
           cat .env
 
