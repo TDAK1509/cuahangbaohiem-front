@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import Fire from "@/models/fire";
 
 Fire.init();
