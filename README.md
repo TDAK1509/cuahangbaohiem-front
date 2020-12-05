@@ -1,3 +1,13 @@
+## SETUP
+
+Create `.env`
+
+```
+$ cp .env.sample .env
+```
+
+Then update the `.env` file with correct values.
+
 ## Development
 
 ```bash
