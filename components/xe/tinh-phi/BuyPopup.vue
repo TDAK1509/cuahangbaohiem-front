@@ -84,8 +84,11 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+import Insurance, { CarInsurance } from "@/models/insurance";
+
+export default Vue.extend({
   name: "BuyPopup",
 
   model: {
@@ -128,10 +131,11 @@ export default {
   },
 
   methods: {
-    submit() {
+    async submit() {
       this.loading = true;
 
       try {
+        await this.saveRequestToServer();
         this.clearForm();
         this.alertSuccess();
       } catch (error) {
@@ -139,6 +143,16 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+
+    saveRequestToServer() {
+      const request: CarInsurance = {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        note: this.note || ""
+      };
+      return Insurance.saveCarInsuranceRequestToServer(request);
     },
 
     clearForm() {
@@ -157,8 +171,12 @@ export default {
     },
 
     focusOnNameTextField() {
-      this.$refs.name.$el.querySelector("input").focus();
+      const nameField = this.$refs.name as Vue;
+
+      if (nameField) {
+        (nameField.$el.querySelector("input") as HTMLElement).focus();
+      }
     }
   }
-};
+});
 </script>

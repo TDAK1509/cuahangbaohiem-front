@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/analytics";
 
 export default class FireBase {
   public static init() {
@@ -23,12 +24,17 @@ export default class FireBase {
   public static getFireStoreDb() {
     const db = firebase.firestore();
 
-    if (location.hostname === "localhost") {
-      db.settings({
-        host: "localhost:8081",
-        experimentalForceLongPolling: true,
-        ssl: false
-      });
+    if (process.env.NODE_ENV === "development") {
+      try {
+        db.settings({
+          host: "localhost:8081",
+          experimentalForceLongPolling: true,
+          ssl: false
+        });
+      } catch {
+        /* eslint-disable */
+        console.warn("Firestore is initialized already");
+      }
     }
 
     return db;
