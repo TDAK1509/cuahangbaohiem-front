@@ -1,6 +1,5 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
-import "firebase/analytics";
 
 export default class FireBase {
   public static init() {
@@ -17,7 +16,6 @@ export default class FireBase {
 
     if (firebase.apps.length === 0) {
       firebase.initializeApp(firebaseConfig);
-      firebase.analytics();
     }
   }
 
