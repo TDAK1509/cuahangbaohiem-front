@@ -144,6 +144,13 @@ describe("Page /xe/tinh-phi", () => {
         getPopupEmail().should("have.value", "");
         getPopupPhone().should("have.value", "");
       });
+
+      it("form request is saved to firebase", () => {
+        cy.visit("/xe/tinh-phi-test");
+        cy.contains("Michael Jackson").should("be.visible");
+        cy.contains("test@gmail.com").should("be.visible");
+        cy.contains("1234567").should("be.visible");
+      });
     });
   });
 });
