@@ -86,7 +86,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Insurance, { CarInsurance } from "@/models/insurance";
+import CarInsuranceRequestController from "@/controller/car-insurance-request";
+
+const requestController = new CarInsuranceRequestController();
 
 export default Vue.extend({
   name: "BuyPopup",
@@ -146,13 +148,11 @@ export default Vue.extend({
     },
 
     saveRequestToServer() {
-      const request: CarInsurance = {
-        name: this.name,
-        email: this.email,
-        phone: this.phone,
-        note: this.note || ""
-      };
-      return Insurance.saveCarInsuranceRequestToServer(request);
+      requestController.setName(this.name);
+      requestController.setEmail(this.email);
+      requestController.setPhone(this.phone);
+      requestController.setNote(this.note);
+      return requestController.save();
     },
 
     clearForm() {

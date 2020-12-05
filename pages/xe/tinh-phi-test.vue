@@ -6,36 +6,43 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
-import Insurance, { CarInsurance } from "@/models/insurance";
+import Fire from "@/models/fire";
 
-export default Vue.extend({
+Fire.init();
+const db = Fire.getFireStoreDb();
+const FIREBASE_CAR_INSURANCE_COLLECTION = "car_insurance";
+
+async function getCarInsuranceRequests() {
+  const querySnapshot = await db
+    .collection(FIREBASE_CAR_INSURANCE_COLLECTION)
+    .get();
+
+  if (querySnapshot.docs.length === 0) {
+    return [];
+  }
+  return querySnapshot.docs.map((doc) => doc.data());
+}
+
+export default {
   name: "TinhPhiXeTest",
 
   async asyncData() {
-    const carInsuranceRequests: CarInsurance[] = await Insurance.getCarInsuranceRequests();
+    const carInsuranceRequests = await getCarInsuranceRequests();
     return { carInsuranceRequests };
   },
 
   data() {
     return {
-      carInsuranceRequests: [] as CarInsurance[]
+      carInsuranceRequests: []
     };
   },
 
   computed: {
-    firstCarInsuranceRequest(): CarInsurance {
+    firstCarInsuranceRequest() {
       return this.carInsuranceRequests[0];
     }
   }
-});
+};
 </script>
-
-<style lang="scss" scoped>
-@import "~bulma/sass/utilities/initial-variables";
-
-.tinh-phi__result {
-  border-top: 1px solid $grey-lighter;
-}
-</style>
