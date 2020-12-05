@@ -36,6 +36,7 @@ jobs:
           line6="FIREBASE_MESSAGING_SENDER_ID=${FIREBASE_MESSAGING_SENDER_ID}"
           line7="FIREBASE_APP_ID=${FIREBASE_APP_ID}"
           line8="FIREBASE_MEASUREMENT_ID=${FIREBASE_MEASUREMENT_ID}"
+
           printf "${line1}\n${line2}\n${line3}\n${line4}\n${line5}\n${line6}\n${line7}\n${line8}\n" > .env
 
       - name: Cache node modules
@@ -53,31 +54,17 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Install firebase-cli
-        run: yarn global add firebase-tools
-
       - name: Serve site at localhost
         run: (yarn dev&)
 
-      - name: Serve Firestore as backend
-        uses: w9jds/firebase-action@master
-        with:
-          args: emulators:start --only firestore
+      - name: Install firebase-cli
+        run: yarn global add firebase-tools
+
+      - name: Run E2E
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
-
-      - name: Run E2E test
-        uses: cypress-io/github-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          install: false
-          wait-on: "http://localhost:5000/firestore"
-          wait-on-timeout: 300
-          browser: ${{ env.BROWSER }}
-          headless: true
-
-      - run: curl http://localhost:5000
+        run: |
+          firebase emulators:exec "yarn e2e:headless" --token ${FIREBASE_TOKEN}
 
       - name: Remove E2E Label
         uses: actions-ecosystem/action-remove-labels@v1
