@@ -18,7 +18,9 @@
           label="Năm sản xuất"
           placeholder="2015"
           required
-          pattern="[0-9]{4}"
+          pattern="[0-9]*"
+          minlength="4"
+          maxlength="4"
           title="Năm sản xuất không hợp lệ."
         />
 
@@ -33,6 +35,7 @@
 
       <div
         v-if="showResult && isFormValid"
+        ref="result"
         class="mt-5 pt-5 tinh-phi__result"
         data-cy="result"
       >
@@ -88,6 +91,14 @@ export default Vue.extend({
   methods: {
     calculate() {
       this.showResult = true;
+      this.scrollToResultDOM();
+    },
+
+    scrollToResultDOM() {
+      Vue.nextTick().then(() => {
+        const resultDOM = this.$refs.result as Element;
+        resultDOM.scrollIntoView({ behavior: "smooth" });
+      });
     }
   }
 });

@@ -20,7 +20,7 @@ body {
 
 @media only screen and (max-width: $tablet) {
   :root {
-    font-size: 0.9rem;
+    font-size: 16px;
   }
 }
 

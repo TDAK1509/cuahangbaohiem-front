@@ -3,6 +3,8 @@
     <p>{{ firstCarInsuranceRequest.name }}</p>
     <p>{{ firstCarInsuranceRequest.email }}</p>
     <p>{{ firstCarInsuranceRequest.phone }}</p>
+    <p>{{ firstCarInsuranceRequest.insuranceCompany }}</p>
+    <p>{{ firstCarInsuranceRequest.insuranceValue }}</p>
   </div>
 </template>
 
