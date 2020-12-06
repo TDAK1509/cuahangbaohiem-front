@@ -3,15 +3,18 @@
     <div class="modal-background"></div>
     <div class="modal-card" data-cy="buy-popup">
       <header class="modal-card-head has-background-info">
-        <p class="modal-card-title has-text-white" style="font-weight: 700">
-          {{ title }}: {{ insuranceValue }}
+        <p
+          class="modal-card-insuranceCompany has-text-white"
+          style="font-weight: 700"
+        >
+          {{ insuranceCompany }}: {{ insuranceValue }}
         </p>
         <button class="delete" data-cy="popup-cancel-button" @click="close" />
       </header>
 
       <section class="modal-card-body">
         <BuyPopupForm
-          :insurance-company="title"
+          :insurance-company="insuranceCompany"
           :insurance-value="insuranceValue"
         />
       </section>
@@ -36,7 +39,7 @@ export default Vue.extend({
       default: false
     },
 
-    title: {
+    insuranceCompany: {
       type: String,
       required: false,
       default: ""
