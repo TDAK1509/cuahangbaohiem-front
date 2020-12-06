@@ -60,16 +60,6 @@ export default Vue.extend({
     };
   },
 
-  watch: {
-    showResult(newValue: boolean) {
-      if (newValue) {
-        Vue.nextTick().then(() => {
-          this.$refs.result.scrollIntoView({ behavior: "smooth" });
-        });
-      }
-    }
-  },
-
   computed: {
     carValueIsNumber(): boolean {
       if (!this.carValueInput) return false;
@@ -99,6 +89,14 @@ export default Vue.extend({
   methods: {
     calculate() {
       this.showResult = true;
+      this.scrollToResultDOM();
+    },
+
+    scrollToResultDOM() {
+      Vue.nextTick().then(() => {
+        const resultDOM = this.$refs.result as Element;
+        resultDOM.scrollIntoView({ behavior: "smooth" });
+      });
     }
   }
 });
