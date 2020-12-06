@@ -13,6 +13,7 @@
         <BuyPopupForm
           :insurance-company="insuranceCompany"
           :insurance-value="insuranceValue"
+          @esc="close"
         />
       </section>
     </div>

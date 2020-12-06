@@ -10,7 +10,7 @@
         class="mt-4"
         name="car_insurance"
         @submit.prevent="submit"
-        @keydown.esc="close"
+        @keydown.esc="onEscPress"
       >
         <TextField
           ref="name"
@@ -151,6 +151,10 @@ export default Vue.extend({
       if (nameField) {
         (nameField.$el.querySelector("input") as HTMLElement).focus();
       }
+    },
+
+    onEscPress() {
+      this.$emit("esc");
     }
   }
 });
