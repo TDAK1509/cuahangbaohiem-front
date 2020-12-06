@@ -141,8 +141,6 @@ describe("Page /xe/tinh-phi", () => {
         cy.contains(
           "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
         ).should("be.visible");
-        getPopupEmail().should("have.value", "");
-        getPopupPhone().should("have.value", "");
       });
 
       it("form request is saved to firebase", () => {

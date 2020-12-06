@@ -18,7 +18,9 @@
           label="Năm sản xuất"
           placeholder="2015"
           required
-          pattern="[0-9]{4}"
+          pattern="[0-9]*"
+          minlength="4"
+          maxlength="4"
           title="Năm sản xuất không hợp lệ."
         />
 
