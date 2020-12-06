@@ -115,7 +115,6 @@ export default Vue.extend({
 
       try {
         await this.saveRequestToServer();
-        this.clearForm();
         this.alertSuccess();
       } catch (error) {
         alert("Đã có lỗi xảy ra, vui lòng thử lại sau.");
@@ -132,13 +131,6 @@ export default Vue.extend({
       requestController.setInsuranceCompany(this.insuranceCompany);
       requestController.setInsuranceValue(this.insuranceValue);
       return requestController.save();
-    },
-
-    clearForm() {
-      this.name = "";
-      this.email = "";
-      this.phone = "";
-      this.note = "";
     },
 
     alertSuccess() {
