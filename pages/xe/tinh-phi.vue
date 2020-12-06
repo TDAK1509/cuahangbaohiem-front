@@ -33,6 +33,7 @@
 
       <div
         v-if="showResult && isFormValid"
+        ref="result"
         class="mt-5 pt-5 tinh-phi__result"
         data-cy="result"
       >
@@ -57,6 +58,16 @@ export default Vue.extend({
       carValueInput: null as string | null,
       carYearInput: null as string | null
     };
+  },
+
+  watch: {
+    showResult(newValue: boolean) {
+      if (newValue) {
+        Vue.nextTick().then(() => {
+          this.$refs.result.scrollIntoView({ behavior: "smooth" });
+        });
+      }
+    }
   },
 
   computed: {
