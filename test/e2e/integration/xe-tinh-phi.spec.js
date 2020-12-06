@@ -148,6 +148,8 @@ describe("Page /xe/tinh-phi", () => {
         cy.contains("Michael Jackson").should("be.visible");
         cy.contains("test@gmail.com").should("be.visible");
         cy.contains("1234567").should("be.visible");
+        cy.contains("PVI").should("be.visible");
+        cy.contains("12.320.000 ₫").should("be.visible");
       });
     });
   });

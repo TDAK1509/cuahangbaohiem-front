@@ -82,6 +82,18 @@ const requestController = new CarInsuranceRequestController();
 export default Vue.extend({
   name: "BuyPopupForm",
 
+  props: {
+    insuranceCompany: {
+      type: String,
+      required: true
+    },
+
+    insuranceValue: {
+      type: String,
+      required: true
+    }
+  },
+
   data() {
     return {
       name: "",
@@ -117,6 +129,8 @@ export default Vue.extend({
       requestController.setEmail(this.email);
       requestController.setPhone(this.phone);
       requestController.setNote(this.note);
+      requestController.setInsuranceCompany(this.insuranceCompany);
+      requestController.setInsuranceValue(this.insuranceValue);
       return requestController.save();
     },
 

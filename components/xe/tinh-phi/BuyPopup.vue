@@ -10,7 +10,10 @@
       </header>
 
       <section class="modal-card-body">
-        <BuyPopupForm />
+        <BuyPopupForm
+          :insurance-company="title"
+          :insurance-value="insuranceValue"
+        />
       </section>
     </div>
   </div>

@@ -7,12 +7,16 @@ export default class CarInsuranceRequestController {
   private email: string;
   private phone: string;
   private note: string;
+  private insuranceCompany: string;
+  private insuranceValue: string;
 
   constructor() {
     this.name = "";
     this.email = "";
     this.phone = "";
     this.note = "";
+    this.insuranceCompany = "";
+    this.insuranceValue = "";
   }
 
   public setName(name: string) {
@@ -31,12 +35,22 @@ export default class CarInsuranceRequestController {
     this.note = note;
   }
 
+  public setInsuranceCompany(insuranceCompany: string) {
+    this.insuranceCompany = insuranceCompany;
+  }
+
+  public setInsuranceValue(insuranceValue: string) {
+    this.insuranceValue = insuranceValue;
+  }
+
   public save() {
     const request: CarInsuranceRequest = {
       name: this.name,
       email: this.email,
       phone: this.phone,
-      note: this.note
+      note: this.note,
+      insuranceCompany: this.insuranceCompany,
+      insuranceValue: this.insuranceValue
     };
     return CarInsuranceRequestModel.save(request);
   }

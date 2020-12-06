@@ -9,6 +9,8 @@ export interface CarInsuranceRequest {
   email: string;
   phone: string;
   note?: string;
+  insuranceCompany: string;
+  insuranceValue: string;
 }
 
 export default class CarInsuranceRequestModel {
