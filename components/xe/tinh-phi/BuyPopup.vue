@@ -3,7 +3,7 @@
     <div class="modal-background"></div>
     <div class="modal-card" data-cy="buy-popup">
       <header class="modal-card-head has-background-info">
-        <p class="modal-card-insuranceCompany has-text-white bold">
+        <p class="modal-card-title has-text-white bold">
           {{ insuranceCompany }}: {{ insuranceValue }}
         </p>
         <button class="delete" data-cy="popup-cancel-button" @click="close" />
