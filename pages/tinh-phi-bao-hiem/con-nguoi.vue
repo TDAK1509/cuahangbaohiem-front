@@ -1,9 +1,9 @@
 <template>
-  <div>suc khoe</div>
+  <div>Con Nguoi</div>
 </template>
 
 <script>
 export default {
-  name: "SucKhoe"
+  name: "ConNguoi"
 };
 </script>

@@ -36,12 +36,25 @@
               </nuxt-link>
 
               <nuxt-link
-                data-cy="insurance-health"
+                data-cy="insurance-accident"
                 class="navbar-item"
-                to="/tinh-phi-bao-hiem/suc-khoe"
+                to="/tinh-phi-bao-hiem/tai-nan"
               >
-                <span class="icon is-medium"><i class="fas fa-heart"></i></span>
-                <span class="is-size-6">Bảo hiểm sức khỏe</span>
+                <span class="icon is-medium">
+                  <i class="fas fa-car-crash" />
+                </span>
+                <span class="is-size-6">Bảo hiểm tai nạn</span>
+              </nuxt-link>
+
+              <nuxt-link
+                data-cy="insurance-human"
+                class="navbar-item"
+                to="/tinh-phi-bao-hiem/con-nguoi"
+              >
+                <span class="icon is-medium">
+                  <i class="fas fa-male" />
+                </span>
+                <span class="is-size-6">Bảo hiểm con người</span>
               </nuxt-link>
             </div>
           </div>
