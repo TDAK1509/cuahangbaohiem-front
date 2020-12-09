@@ -34,6 +34,15 @@
                 <span class="icon is-medium"><i class="fas fa-car"></i></span>
                 <span class="is-size-6">Bảo hiểm ô tô</span>
               </nuxt-link>
+
+              <nuxt-link
+                data-cy="insurance-health"
+                class="navbar-item"
+                to="/tinh-phi-bao-hiem/suc-khoe"
+              >
+                <span class="icon is-medium"><i class="fas fa-heart"></i></span>
+                <span class="is-size-6">Bảo hiểm sức khỏe</span>
+              </nuxt-link>
             </div>
           </div>
 

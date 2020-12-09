@@ -35,8 +35,11 @@ describe("Header", () => {
     cy.url().should("include", "/tinh-phi-bao-hiem/o-to");
   });
 
-  // it("clicks 'Tính phí bảo hiểm > Bảo hiểm sức khỏe' navigates to /tinh-phi-bao-hiem/suc-khoe", () => {
-  //   cy.get("[data-cy=insurance-health]").click({ force: true });
-  //   cy.url().should("include", "/tinh-phi-bao-hiem/o-to");
-  // });
+  it("clicks 'Tính phí bảo hiểm > Bảo hiểm sức khỏe' navigates to /tinh-phi-bao-hiem/suc-khoe", () => {
+    cy.get("[data-cy=insurance-health]").should(($el) => {
+      expect($el.text()).to.include("Bảo hiểm sức khỏe");
+    });
+    cy.get("[data-cy=insurance-health]").click({ force: true });
+    cy.url().should("include", "/tinh-phi-bao-hiem/suc-khoe");
+  });
 });
