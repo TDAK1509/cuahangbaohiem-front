@@ -21,8 +21,8 @@ describe("Header", () => {
     cy.url().should("eq", Cypress.config().baseUrl + "/");
   });
 
-  it("clicks 'Xe/Tính phí bảo hiểm' navigates to /xe/tinh-phi", () => {
+  it("clicks 'Tính phí bảo hiểm > Ô tô' navigates to /tinh-phi-bao-hiem/o-to", () => {
     cy.get("[data-cy=insurance-car]").click({ force: true });
-    cy.url().should("include", "/xe/tinh-phi");
+    cy.url().should("include", "/tinh-phi-bao-hiem/o-to");
   });
 });
