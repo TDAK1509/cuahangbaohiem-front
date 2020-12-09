@@ -32,7 +32,7 @@
                 to="/tinh-phi-bao-hiem/o-to"
               >
                 <span class="icon is-medium"><i class="fas fa-car"></i></span>
-                <span class="is-size-6">Bảo hiểm xe</span>
+                <span class="is-size-6">Bảo hiểm ô tô</span>
               </nuxt-link>
             </div>
           </div>

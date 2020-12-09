@@ -28,6 +28,9 @@ describe("Header", () => {
   });
 
   it("clicks 'Tính phí bảo hiểm > Bảo hiểm ô tô' navigates to /tinh-phi-bao-hiem/o-to", () => {
+    cy.get("[data-cy=insurance-car]").should(($el) => {
+      expect($el.text()).to.include("Bảo hiểm ô tô");
+    });
     cy.get("[data-cy=insurance-car]").click({ force: true });
     cy.url().should("include", "/tinh-phi-bao-hiem/o-to");
   });
