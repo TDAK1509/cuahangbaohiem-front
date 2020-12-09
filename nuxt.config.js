@@ -31,7 +31,11 @@ export default {
 
   components: true,
 
-  buildModules: ["@nuxt/typescript-build", "@nuxtjs/dotenv"],
+  buildModules: [
+    "@nuxt/typescript-build",
+    "@nuxtjs/dotenv",
+    "@nuxtjs/router-extras"
+  ],
 
   modules: [],
 

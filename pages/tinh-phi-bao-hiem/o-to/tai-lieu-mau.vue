@@ -1,0 +1,18 @@
+<router>
+{
+  name: "tai-lieu-mau-o-to"
+}
+</router>
+
+<template>
+  <div>tai-lieu-mau</div>
+</template>
+
+<script>
+export default {
+  name: "TaiLieuMauOto"
+};
+</script>
+
+<style>
+</style>

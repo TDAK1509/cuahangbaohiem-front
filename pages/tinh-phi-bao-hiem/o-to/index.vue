@@ -1,6 +1,33 @@
+<router>
+{
+  name: "tinh-phi-o-to"
+}
+</router>
+
 <template>
   <section class="section">
     <div class="container">
+      <ul class="tab">
+        <li>
+          <nuxt-link :to="{ name: 'tinh-phi-o-to' }"
+            >TÍNH PHÍ & ĐẶT MUA</nuxt-link
+          >
+        </li>
+        <li>
+          <nuxt-link :to="{ name: 'quyen-loi-o-to' }">QUYỀN LỢI</nuxt-link>
+        </li>
+        <li>
+          <nuxt-link :to="{ name: 'boi-thuong-o-to' }">BỒI THƯỜNG</nuxt-link>
+        </li>
+        <li>
+          <nuxt-link :to="{ name: 'khuyen-mai-o-to' }">KHUYẾN MÃI</nuxt-link>
+        </li>
+        <li>
+          <nuxt-link :to="{ name: 'tai-lieu-mau-o-to' }"
+            >TÀI LIỆU MẪU</nuxt-link
+          >
+        </li>
+      </ul>
       <form @submit.prevent="calculate">
         <TextField
           v-model="carValueInput"
