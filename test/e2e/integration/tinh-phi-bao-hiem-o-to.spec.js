@@ -1,6 +1,6 @@
-describe("Page /xe/tinh-phi", () => {
+describe("Page /tinh-phi-bao-hiem/o-to", () => {
   beforeEach(() => {
-    cy.visit("/xe/tinh-phi");
+    cy.visit("/tinh-phi-bao-hiem/o-to");
   });
 
   describe("rendering", () => {
@@ -144,7 +144,7 @@ describe("Page /xe/tinh-phi", () => {
       });
 
       it("form request is saved to firebase", () => {
-        cy.visit("/xe/tinh-phi-test");
+        cy.visit("/tinh-phi-bao-hiem/o-to-test");
         cy.contains("Michael Jackson").should("be.visible");
         cy.contains("test@gmail.com").should("be.visible");
         cy.contains("1234567").should("be.visible");

@@ -27,15 +27,23 @@
 
             <div class="navbar-dropdown is-right">
               <nuxt-link
-                data-cy="insurance-car"
+                v-for="(nav, index) in navs"
+                :key="index"
+                :data-cy="nav.dataCy"
                 class="navbar-item"
-                to="/xe/tinh-phi"
+                :to="nav.to"
               >
-                <span class="icon is-medium"><i class="fas fa-car"></i></span>
-                <span class="is-size-6">Bảo hiểm xe</span>
+                <span class="icon is-medium">
+                  <i :class="nav.iconClass" />
+                </span>
+                <span class="is-size-6">{{ nav.text }}</span>
               </nuxt-link>
             </div>
           </div>
+
+          <nuxt-link class="navbar-item header__single-link" to="/huong-dan">
+            Hướng dẫn
+          </nuxt-link>
         </div>
       </div>
     </nav>
@@ -45,6 +53,33 @@
 <script>
 export default {
   name: "Header",
+
+  data() {
+    return {
+      navs: [
+        {
+          dataCy: "insurance-car",
+          to: "/tinh-phi-bao-hiem/o-to",
+          iconClass: "fas fa-car",
+          text: "Bảo hiểm ô tô"
+        },
+
+        {
+          dataCy: "insurance-accident",
+          to: "/tinh-phi-bao-hiem/tai-nan",
+          iconClass: "fas fa-car-crash",
+          text: "Bảo hiểm tai nạn"
+        },
+
+        {
+          dataCy: "insurance-human",
+          to: "/tinh-phi-bao-hiem/con-nguoi",
+          iconClass: "fas fa-male",
+          text: "Bảo hiểm con người"
+        }
+      ]
+    };
+  },
 
   mounted() {
     this.hideDropdownOnClickNuxtLink();
