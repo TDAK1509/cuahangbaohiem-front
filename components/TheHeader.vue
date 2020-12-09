@@ -22,10 +22,6 @@
             Giới thiệu
           </nuxt-link>
 
-          <nuxt-link class="navbar-item header__single-link" to="/huong-dan">
-            Hướng dẫn
-          </nuxt-link>
-
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">Tính phí bảo hiểm</a>
 
@@ -40,6 +36,10 @@
               </nuxt-link>
             </div>
           </div>
+
+          <nuxt-link class="navbar-item header__single-link" to="/huong-dan">
+            Hướng dẫn
+          </nuxt-link>
         </div>
       </div>
     </nav>
