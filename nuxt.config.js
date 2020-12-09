@@ -50,6 +50,6 @@ export default {
   },
 
   generate: {
-    exclude: [/\/xe\/tinh-phi-test/]
+    exclude: [/test/]
   }
 };
