@@ -2,7 +2,7 @@
   <section class="section">
     <div class="container">
       <div class="content">
-        <h3>ABOUT US</h3>
+        <h3>HUONG DAN</h3>
         <p v-for="i in 4" :key="i">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
           temporibus suscipit corporis repudiandae molestiae consectetur
@@ -18,6 +18,6 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "GioiThieu"
+  name: "HuongDan"
 });
 </script>
