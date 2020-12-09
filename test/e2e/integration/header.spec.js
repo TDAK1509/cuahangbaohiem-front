@@ -29,26 +29,29 @@ describe("Header", () => {
 
   describe("Tính phí bảo hiểm", () => {
     it("clicks 'Bảo hiểm ô tô' navigates to /tinh-phi-bao-hiem/o-to", () => {
-      cy.get("[data-cy=insurance-car]").should(($el) => {
-        expect($el.text()).to.include("Bảo hiểm ô tô");
-      });
-      cy.get("[data-cy=insurance-car]").click({ force: true });
+      cy.get("[data-cy=insurance-car]")
+        .should(($el) => {
+          expect($el.text()).to.include("Bảo hiểm ô tô");
+        })
+        .click({ force: true });
       cy.url().should("include", "/tinh-phi-bao-hiem/o-to");
     });
 
     it("clicks 'Bảo hiểm tai nạn' navigates to /tinh-phi-bao-hiem/tai-nan", () => {
-      cy.get("[data-cy=insurance-accident]").should(($el) => {
-        expect($el.text()).to.include("Bảo hiểm tai nạn");
-      });
-      cy.get("[data-cy=insurance-accident]").click({ force: true });
+      cy.get("[data-cy=insurance-accident]")
+        .should(($el) => {
+          expect($el.text()).to.include("Bảo hiểm tai nạn");
+        })
+        .click({ force: true });
       cy.url().should("include", "/tinh-phi-bao-hiem/tai-nan");
     });
 
     it("clicks 'Bảo hiểm con người' navigates to /tinh-phi-bao-hiem/con-nguoi", () => {
-      cy.get("[data-cy=insurance-human]").should(($el) => {
-        expect($el.text()).to.include("Bảo hiểm con người");
-      });
-      cy.get("[data-cy=insurance-human]").click({ force: true });
+      cy.get("[data-cy=insurance-human]")
+        .should(($el) => {
+          expect($el.text()).to.include("Bảo hiểm con người");
+        })
+        .click({ force: true });
       cy.url().should("include", "/tinh-phi-bao-hiem/con-nguoi");
     });
   });
