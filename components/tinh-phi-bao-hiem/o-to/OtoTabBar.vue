@@ -18,48 +18,58 @@
 </template>
 
 <script>
+const indexRouteName = "tinh-phi-o-to";
+const quyenLoiRouteName = "quyen-loi-o-to";
+const boiThuongRouteName = "boi-thuong-o-to";
+const khuyenMaiRouteName = "khuyen-mai-o-to";
+const taiLieuMauRouteName = "tai-lieu-mau-o-to";
+
 export default {
   name: "OtoTabBar",
 
-  data() {
-    return {
-      tabs: [
+  computed: {
+    tabs() {
+      return [
         {
-          to: { name: "tinh-phi-o-to" },
+          to: { name: indexRouteName },
           iconClass: "fas fa-image",
           text: "TÍNH PHÍ & ĐẶT MUA",
-          active: true
+          active: this.routeName === indexRouteName
         },
 
         {
-          to: { name: "quyen-loi-o-to" },
+          to: { name: quyenLoiRouteName },
           iconClass: "fas fa-image",
           text: "QUYỀN LỢI",
-          active: false
+          active: this.routeName === quyenLoiRouteName
         },
 
         {
-          to: { name: "boi-thuong-o-to" },
+          to: { name: boiThuongRouteName },
           iconClass: "fas fa-image",
           text: "BỒI THƯỜNG",
-          active: false
+          active: this.routeName === boiThuongRouteName
         },
 
         {
-          to: { name: "khuyen-mai-o-to" },
+          to: { name: khuyenMaiRouteName },
           iconClass: "fas fa-image",
           text: "KHUYẾN MÃI",
-          active: false
+          active: this.routeName === khuyenMaiRouteName
         },
 
         {
-          to: { name: "tai-lieu-mau-o-to" },
+          to: { name: taiLieuMauRouteName },
           iconClass: "fas fa-image",
           text: "TÀI LIỆU MẪU",
-          active: false
+          active: this.routeName === taiLieuMauRouteName
         }
-      ]
-    };
+      ];
+    },
+
+    routeName() {
+      return this.$route.name;
+    }
   }
 };
 </script>
