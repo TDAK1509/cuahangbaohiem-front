@@ -10,7 +10,9 @@
 
 <script>
 export default {
-  name: "TaiLieuMauOto"
+  name: "TaiLieuMauOto",
+
+  layout: "calculator"
 };
 </script>
 

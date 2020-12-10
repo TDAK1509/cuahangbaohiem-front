@@ -10,7 +10,9 @@
 
 <script>
 export default {
-  name: "KhuyenMaiOto"
+  name: "KhuyenMaiOto",
+
+  layout: "calculator"
 };
 </script>
 
