@@ -2,7 +2,7 @@
   <div>
     <TheHeader />
     <TheHero />
-    <OtoTabBar />
+    <CarTabBar />
     <Nuxt />
     <TheFooter />
   </div>
