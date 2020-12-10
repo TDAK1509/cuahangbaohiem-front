@@ -23,6 +23,7 @@ jobs:
           path: |
             "**/node_modules"
             "**/.config/yarn/global"
+            "/home/runner/.cache/Cypress/6.0.0/Cypress/Cypress"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install dependencies
