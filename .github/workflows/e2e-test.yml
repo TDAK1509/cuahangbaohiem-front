@@ -22,9 +22,16 @@ jobs:
         with:
           path: |
             "**/node_modules"
-            "**/.config/yarn/global"
             "/home/runner/.cache/Cypress/6.0.0/Cypress/Cypress"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Cache firebase emulators
+        uses: actions/cache@v2
+        with:
+          path: |
+            "**/.config/yarn/global"
+            "/home/runner/.cache/firebase/emulators"
+          key: firebase-cache-v1
 
       - name: Install dependencies
         run: |
