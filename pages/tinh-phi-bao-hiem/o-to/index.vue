@@ -7,6 +7,14 @@
 <template>
   <section class="section">
     <div class="container">
+      <h1 class="title is-flex is-align-items-center">
+        <span class="icon mr-4">
+          <i class="fas fa-car" />
+        </span>
+
+        <span>Bảo hiểm ô tô</span>
+      </h1>
+
       <form @submit.prevent="calculate">
         <TextField
           v-model="carValueInput"
