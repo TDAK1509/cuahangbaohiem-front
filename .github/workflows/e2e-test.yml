@@ -42,7 +42,8 @@ jobs:
         run: |
           jq '
               .video = false |
-              .screenshotOnRunFailure = false
+              .screenshotOnRunFailure = false |
+              .defaultCommandTimeout = 15000
             ' cypress.json > tmp.$$.json && mv tmp.$$.json cypress.json
 
       - name: Serve site at localhost
