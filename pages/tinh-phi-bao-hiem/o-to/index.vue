@@ -7,8 +7,6 @@
 <template>
   <section class="section">
     <div class="container">
-      <OtoTabBar />
-
       <form @submit.prevent="calculate">
         <TextField
           v-model="carValueInput"
@@ -61,6 +59,8 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "TinhPhiOto",
+
+  layout: "calculator",
 
   data() {
     return {

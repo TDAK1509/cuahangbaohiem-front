@@ -7,16 +7,16 @@
 <template>
   <div>
     <section class="section">
-      <div class="container">
-        <OtoTabBar />
-      </div>
+      <div class="container"></div>
     </section>
   </div>
 </template>
 
 <script>
 export default {
-  name: "QuyenLoiOto"
+  name: "QuyenLoiOto",
+
+  layout: "calculator"
 };
 </script>
 
