@@ -38,6 +38,13 @@ jobs:
           yarn
           yarn global add firebase-tools
 
+      - name: Update cypress.json
+        run: |
+          jq '
+              .video = false |
+              .screenshotOnRunFailure = false
+            ' cypress.json > tmp.$$.json && mv tmp.$$.json cypress.json
+
       - name: Serve site at localhost
         run: (yarn dev&)
 
