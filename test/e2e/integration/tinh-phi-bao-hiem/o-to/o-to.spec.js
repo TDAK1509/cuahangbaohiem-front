@@ -12,6 +12,12 @@ describe("Page /tinh-phi-bao-hiem/o-to", () => {
       cy.contains("TÀI LIỆU MẪU").should("be.visible");
     });
 
+    it("TÍNH PHÍ & ĐẶT MUA tab should be active", () => {
+      cy.get("li.is-active").should(($el) => {
+        expect($el.text()).to.contain("TÍNH PHÍ & ĐẶT MUA");
+      });
+    });
+
     it("clicks QUYEN LOI goes to /tinh-phi-bao-hiem/o-to/quyen-loi", () => {
       cy.contains("QUYỀN LỢI").click();
       cy.url().should("include", "/tinh-phi-bao-hiem/o-to/quyen-loi");

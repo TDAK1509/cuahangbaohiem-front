@@ -5,7 +5,13 @@
 </router>
 
 <template>
-  <div>Quyen loi oto</div>
+  <div>
+    <section class="section">
+      <div class="container">
+        <OtoTabBar />
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
