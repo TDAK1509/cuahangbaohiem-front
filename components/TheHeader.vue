@@ -5,7 +5,7 @@
         <nuxt-link data-cy="logo" to="/">
           <img
             class="image header__logo px-2 py-2"
-            src="~assets/images/logo.jpg"
+            src="~assets/images/logo.png"
           />
         </nuxt-link>
 

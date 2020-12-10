@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
-import ResultBaoMinh from "@/components/xe/tinh-phi/ResultBaoMinh.vue";
+import ResultBaoMinh from "@/components/insurance/car/ResultBaoMinh.vue";
 import MockDate from "mockdate";
 
 describe("ResultBaoMinh.vue", () => {
