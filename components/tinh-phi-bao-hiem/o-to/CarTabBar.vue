@@ -1,19 +1,21 @@
 <template>
-  <div class="tabs is-toggle is-fullwidth">
-    <ul>
-      <li
-        v-for="(tab, index) in tabs"
-        :key="index"
-        :class="{ 'is-active': tab.active }"
-      >
-        <nuxt-link :to="tab.to" class="is-flex is-flex-direction-column">
-          <p class="icon is-large">
-            <i :class="tab.iconClass" />
-          </p>
-          <p class="bold">{{ tab.text }}</p>
-        </nuxt-link>
-      </li>
-    </ul>
+  <div class="container">
+    <div class="tabs is-toggle is-fullwidth">
+      <ul>
+        <li
+          v-for="(tab, index) in tabs"
+          :key="index"
+          :class="{ 'is-active': tab.active }"
+        >
+          <nuxt-link :to="tab.to" class="is-flex is-flex-direction-column">
+            <p class="icon is-large">
+              <i :class="tab.iconClass" />
+            </p>
+            <p class="bold">{{ tab.text }}</p>
+          </nuxt-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
