@@ -27,7 +27,17 @@ jobs:
         run: yarn
 
       - name: Serve site at localhost
-        run: (yarn dev && yarn e2e:onetime&)
+        run: (yarn dev&)
+
+      - name: Wait for localhost to be served
+        run: |
+          until [ -n "$(curl --silent http://localhost:3000 | grep 'logo')" ]; do
+            printf '.'
+            sleep 5
+          done
+
+      - name: Run E2E with cypress
+        run: yarn e2e:onetime
 
       - name: Remove E2E Label
         uses: actions-ecosystem/action-remove-labels@v1
