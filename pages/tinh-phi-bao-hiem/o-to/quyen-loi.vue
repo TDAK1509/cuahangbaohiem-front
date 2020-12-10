@@ -19,6 +19,3 @@ export default {
   layout: "calculator"
 };
 </script>
-
-<style>
-</style>
