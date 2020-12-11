@@ -21,8 +21,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            "**/node_modules"
-            "/home/runner/.cache/Cypress/6.0.0/Cypress/Cypress"
+            **/node_modules
+            /home/runner/.cache/Cypress/6.0.0/Cypress/Cypress
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install dependencies
