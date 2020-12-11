@@ -12,8 +12,8 @@
     "test": "jest",
     "e2e": "cypress open --browser chrome",
     "e2e:headless": "cypress run",
-    "e2e:onetime": "firebase emulators:exec 'yarn e2e:headless'",
-    "backend": "firebase emulators:start --only firestore",
+    "e2e:onetime": "npx firebase emulators:exec 'yarn e2e:headless'",
+    "backend": "npx firebase emulators:start --only firestore",
     "deploy:netlify": "netlify deploy --dir=dist --prod",
     "deploy": "yarn lint && yarn generate && yarn deploy:netlify"
   },
@@ -41,6 +41,7 @@
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "firebase-tools": "^8.18.1",
     "jest": "^26.5.0",
     "mockdate": "^3.0.2",
     "prettier": "^2.1.2",
