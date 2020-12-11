@@ -68,5 +68,11 @@ jobs:
             sleep 5
           done
 
+      - name: Cache firebase emulator
+        uses: actions/cache@v2
+        with:
+          path: "/home/runner/.cache/firebase/emulators"
+          key: firebase-emulator-v1
+
       - name: Run E2E with cypress
         run: yarn e2e:onetime
