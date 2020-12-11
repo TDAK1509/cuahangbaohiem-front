@@ -1,9 +1,9 @@
 name: E2E test
 
 on:
+  push:
   # pull_request:
   #   types: [labeled]
-  push:
 
 jobs:
   e2e-test:
