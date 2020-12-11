@@ -58,8 +58,6 @@ jobs:
           echo "FIREBASE_APP_ID=$FIREBASE_APP_ID" >> .env
           echo "FIREBASE_MEASUREMENT_ID=$FIREBASE_MEASUREMENT_ID" >> .env
 
-          cat .env
-
       - name: Update cypress.json
         run: |
           jq '
