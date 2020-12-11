@@ -1,0 +1,75 @@
+name: E2E test
+
+on:
+  push:
+
+jobs:
+  e2e-test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install node version 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+            /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        run: |
+          yarn
+
+      - name: Create .env file
+        env:
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+          FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
+        run: |
+          echo "FIREBASE_API_KEY=$FIREBASE_API_KEY" > .env
+          echo "FIREBASE_AUTH_DOMAIN=$FIREBASE_AUTH_DOMAIN" >> .env
+          echo "FIREBASE_DATABASE_URL=$FIREBASE_DATABASE_URL" >> .env
+          echo "FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID" >> .env
+          echo "FIREBASE_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET" >> .env
+          echo "FIREBASE_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID" >> .env
+          echo "FIREBASE_APP_ID=$FIREBASE_APP_ID" >> .env
+          echo "FIREBASE_MEASUREMENT_ID=$FIREBASE_MEASUREMENT_ID" >> .env
+
+      - name: Update cypress.json
+        run: |
+          jq '
+              .video = false |
+              .screenshotOnRunFailure = false |
+              .defaultCommandTimeout = 15000
+            ' cypress.json > tmp.$$.json && mv tmp.$$.json cypress.json
+
+      - name: Serve site at localhost
+        run: (yarn dev&)
+
+      - name: Wait for localhost to be served
+        run: |
+          until [ -n "$(curl --silent http://localhost:3000 | grep 'logo')" ]; do
+            printf '.'
+            sleep 5
+          done
+
+      - name: Cache firebase emulator
+        uses: actions/cache@v2
+        with:
+          path: "/home/runner/.cache/firebase/emulators"
+          key: firebase-emulator-v1
+
+      - name: Run E2E with cypress
+        run: yarn e2e:onetime
