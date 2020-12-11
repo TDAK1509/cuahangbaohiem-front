@@ -7,7 +7,7 @@ on:
 
 jobs:
   e2e-test:
-    # if: contains(github.event.pull_request.labels.*.name, 'E2E')12
+    # if: contains(github.event.pull_request.labels.*.name, 'E2E')123
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
