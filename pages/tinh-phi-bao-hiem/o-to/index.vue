@@ -1,6 +1,6 @@
 <router>
 {
-  name: "tinh-phi-o-to"
+  name: "tinh-phi_o-to"
 }
 </router>
 

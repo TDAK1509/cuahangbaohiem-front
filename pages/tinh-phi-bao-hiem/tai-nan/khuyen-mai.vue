@@ -1,16 +1,16 @@
 <router>
 {
-  name: "boi-thuong_o-to"
+  name: "khuyen-mai_tai-nan"
 }
 </router>
 
 <template>
-  <div>boi-thuong</div>
+  <div>khuyeanb mai</div>
 </template>
 
 <script>
 export default {
-  name: "BoiThuongOto",
+  name: "KhuyenMaiTaiNan",
 
   layout: "calculator"
 };

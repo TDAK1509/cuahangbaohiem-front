@@ -1,6 +1,6 @@
 <router>
 {
-  name: "quyen-loi_o-to"
+  name: "quyen-loi_tai-nan"
 }
 </router>
 
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "QuyenLoiOto",
+  name: "QuyenLoiTaiNan",
 
   layout: "calculator"
 };

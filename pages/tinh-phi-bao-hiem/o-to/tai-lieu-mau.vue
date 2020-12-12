@@ -1,6 +1,6 @@
 <router>
 {
-  name: "tai-lieu-mau-o-to"
+  name: "tai-lieu-mau_o-to"
 }
 </router>
 

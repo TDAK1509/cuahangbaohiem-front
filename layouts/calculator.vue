@@ -2,11 +2,26 @@
   <div>
     <TheHeader />
     <TheHero />
-    <CarTabBar />
+    <InsuranceTabBar :insurance-type="insuranceType" />
     <Nuxt />
     <TheFooter />
   </div>
 </template>
+
+<script>
+export default {
+  name: "LayoutCalculator",
+
+  computed: {
+    insuranceType() {
+      const regex = /_([\w-]+)$/;
+      const routeName = this.$route.name;
+      const matches = routeName.match(regex);
+      return matches[1];
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 @import "~bulma/sass/utilities/_all";

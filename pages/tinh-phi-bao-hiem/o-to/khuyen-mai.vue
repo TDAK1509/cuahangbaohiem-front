@@ -1,6 +1,6 @@
 <router>
 {
-  name: "khuyen-mai-o-to"
+  name: "khuyen-mai_o-to"
 }
 </router>
 

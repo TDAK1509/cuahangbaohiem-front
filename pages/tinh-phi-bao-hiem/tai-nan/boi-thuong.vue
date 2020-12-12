@@ -1,6 +1,6 @@
 <router>
 {
-  name: "boi-thuong_o-to"
+  name: "boi-thuong_tai-nan"
 }
 </router>
 
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "BoiThuongOto",
+  name: "BoiThuongTaiNan",
 
   layout: "calculator"
 };

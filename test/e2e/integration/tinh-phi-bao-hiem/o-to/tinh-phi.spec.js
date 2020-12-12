@@ -38,7 +38,7 @@ describe("Page /tinh-phi-bao-hiem/o-to", () => {
       cy.url().should("include", "/tinh-phi-bao-hiem/o-to/tai-lieu-mau");
     });
 
-    it("clicks TÍNH PHÍ & ĐẶT MUA to /tinh-phi-bao-hiem/o-to/tin", () => {
+    it("clicks TÍNH PHÍ & ĐẶT MUA to /tinh-phi-bao-hiem/o-to", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").click();
       cy.url().should("match", /\/tinh-phi-bao-hiem\/o-to\/?$/);
     });

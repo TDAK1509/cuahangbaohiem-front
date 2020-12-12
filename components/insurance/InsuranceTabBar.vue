@@ -20,51 +20,62 @@
 </template>
 
 <script>
-const indexRouteName = "tinh-phi-o-to";
-const quyenLoiRouteName = "quyen-loi-o-to";
-const boiThuongRouteName = "boi-thuong-o-to";
-const khuyenMaiRouteName = "khuyen-mai-o-to";
-const taiLieuMauRouteName = "tai-lieu-mau-o-to";
-
 export default {
-  name: "CarTabBar",
+  name: "InsuranceTabBar",
+
+  props: {
+    insuranceType: {
+      type: String,
+      required: true
+    }
+  },
+
+  data() {
+    return {
+      indexRouteName: `tinh-phi_${this.insuranceType}`,
+      quyenLoiRouteName: `quyen-loi_${this.insuranceType}`,
+      boiThuongRouteName: `boi-thuong_${this.insuranceType}`,
+      khuyenMaiRouteName: `khuyen-mai_${this.insuranceType}`,
+      taiLieuMauRouteName: `tai-lieu-mau_${this.insuranceType}`
+    };
+  },
 
   computed: {
     tabs() {
       return [
         {
-          to: { name: indexRouteName },
+          to: { name: this.indexRouteName },
           iconClass: "fas fa-calculator fa-2x",
           text: "TÍNH PHÍ & ĐẶT MUA",
-          active: this.routeName === indexRouteName
+          active: this.routeName === this.indexRouteName
         },
 
         {
-          to: { name: quyenLoiRouteName },
+          to: { name: this.quyenLoiRouteName },
           iconClass: "fas fa-list-alt fa-2x",
           text: "QUYỀN LỢI",
-          active: this.routeName === quyenLoiRouteName
+          active: this.routeName === this.quyenLoiRouteName
         },
 
         {
-          to: { name: boiThuongRouteName },
+          to: { name: this.boiThuongRouteName },
           iconClass: "fas fa-hand-holding-usd fa-2x",
           text: "BỒI THƯỜNG",
-          active: this.routeName === boiThuongRouteName
+          active: this.routeName === this.boiThuongRouteName
         },
 
         {
-          to: { name: khuyenMaiRouteName },
+          to: { name: this.khuyenMaiRouteName },
           iconClass: "fas fa-gift fa-2x",
           text: "KHUYẾN MÃI",
-          active: this.routeName === khuyenMaiRouteName
+          active: this.routeName === this.khuyenMaiRouteName
         },
 
         {
-          to: { name: taiLieuMauRouteName },
+          to: { name: this.taiLieuMauRouteName },
           iconClass: "fas fa-file-alt fa-2x",
           text: "TÀI LIỆU MẪU",
-          active: this.routeName === taiLieuMauRouteName
+          active: this.routeName === this.taiLieuMauRouteName
         }
       ];
     },
