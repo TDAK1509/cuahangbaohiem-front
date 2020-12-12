@@ -1,6 +1,6 @@
-describe("Page /tinh-phi-bao-hiem/o-to/boi-thuong", () => {
+describe("Page /san-pham/tai-nan/tai-lieu-mau", () => {
   beforeEach(() => {
-    cy.visit("/tinh-phi-bao-hiem/o-to/boi-thuong");
+    cy.visit("/san-pham/tai-nan/tai-lieu-mau");
   });
 
   describe("tab bar", () => {
@@ -12,9 +12,9 @@ describe("Page /tinh-phi-bao-hiem/o-to/boi-thuong", () => {
       cy.contains("TÀI LIỆU MẪU").should("be.visible");
     });
 
-    it("BỒI THƯỜNG tab should be active", () => {
+    it("TÀI LIỆU MẪU tab should be active", () => {
       cy.get("li.is-active").should(($el) => {
-        expect($el.text()).to.contain("BỒI THƯỜNG");
+        expect($el.text()).to.contain("TÀI LIỆU MẪU");
       });
     });
   });

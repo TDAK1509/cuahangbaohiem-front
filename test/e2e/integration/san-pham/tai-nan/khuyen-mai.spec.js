@@ -1,6 +1,6 @@
-describe("Page /tinh-phi-bao-hiem/tai-nan/khuyen-mai", () => {
+describe("Page /san-pham/tai-nan/khuyen-mai", () => {
   beforeEach(() => {
-    cy.visit("/tinh-phi-bao-hiem/tai-nan/khuyen-mai");
+    cy.visit("/san-pham/tai-nan/khuyen-mai");
   });
 
   describe("tab bar", () => {

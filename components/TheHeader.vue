@@ -23,7 +23,7 @@
           </nuxt-link>
 
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Tính phí bảo hiểm</a>
+            <a class="navbar-link">Sản phẩm</a>
 
             <div class="navbar-dropdown is-right">
               <nuxt-link
@@ -59,56 +59,56 @@ export default {
       navs: [
         {
           dataCy: "insurance-car",
-          to: "/tinh-phi-bao-hiem/o-to",
+          to: "/san-pham/o-to",
           iconClass: "fas fa-car",
           text: "Bảo hiểm ô tô"
         },
 
         {
           dataCy: "insurance-accident",
-          to: "/tinh-phi-bao-hiem/tai-nan",
+          to: "/san-pham/tai-nan",
           iconClass: "fas fa-car-crash",
           text: "Bảo hiểm tai nạn 24/24"
         },
 
         {
           dataCy: "insurance-personal-health",
-          to: "/tinh-phi-bao-hiem/suc-khoe-ca-nhan",
+          to: "/san-pham/suc-khoe-ca-nhan",
           iconClass: "fas fa-file-medical",
           text: "Bảo hiểm sức khỏe cá nhân"
         },
 
         {
           dataCy: "insurance-cancer",
-          to: "/tinh-phi-bao-hiem/benh-ung-thu",
+          to: "/san-pham/benh-ung-thu",
           iconClass: "fas fa-disease",
           text: "Bảo hiểm bệnh ung thư"
         },
 
         {
           dataCy: "insurance-house",
-          to: "/tinh-phi-bao-hiem/nha-tu-nhan",
+          to: "/san-pham/nha-tu-nhan",
           iconClass: "fas fa-house-damage",
           text: "Bảo hiểm nhà tư nhân"
         },
 
         {
           dataCy: "insurance-motorbike",
-          to: "/tinh-phi-bao-hiem/xe-may",
+          to: "/san-pham/xe-may",
           iconClass: "fas fa-motorcycle",
           text: "Bảo hiểm xe máy"
         },
 
         {
           dataCy: "insurance-travel",
-          to: "/tinh-phi-bao-hiem/du-lich-quoc-te",
+          to: "/san-pham/du-lich-quoc-te",
           iconClass: "fas fa-plane-departure",
           text: "Bảo hiểm du lịch quốc tế"
         },
 
         {
           dataCy: "insurance-life",
-          to: "/tinh-phi-bao-hiem/nhan-tho",
+          to: "/san-pham/nhan-tho",
           iconClass: "fas fa-male",
           text: "Bảo hiểm nhân thọ"
         }

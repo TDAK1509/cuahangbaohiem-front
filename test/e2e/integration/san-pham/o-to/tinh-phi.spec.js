@@ -1,6 +1,6 @@
-describe("Page /tinh-phi-bao-hiem/o-to", () => {
+describe("Page /san-pham/o-to", () => {
   beforeEach(() => {
-    cy.visit("/tinh-phi-bao-hiem/o-to");
+    cy.visit("/san-pham/o-to");
   });
 
   describe("tab bar", () => {
@@ -18,29 +18,29 @@ describe("Page /tinh-phi-bao-hiem/o-to", () => {
       });
     });
 
-    it("clicks QUYEN LOI goes to /tinh-phi-bao-hiem/o-to/quyen-loi", () => {
+    it("clicks QUYEN LOI goes to /san-pham/o-to/quyen-loi", () => {
       cy.contains("QUYỀN LỢI").click();
-      cy.url().should("include", "/tinh-phi-bao-hiem/o-to/quyen-loi");
+      cy.url().should("include", "/san-pham/o-to/quyen-loi");
     });
 
-    it("clicks BỒI THƯỜNG to /tinh-phi-bao-hiem/o-to/boi-thuong", () => {
+    it("clicks BỒI THƯỜNG to /san-pham/o-to/boi-thuong", () => {
       cy.contains("BỒI THƯỜNG").click();
-      cy.url().should("include", "/tinh-phi-bao-hiem/o-to/boi-thuong");
+      cy.url().should("include", "/san-pham/o-to/boi-thuong");
     });
 
-    it("clicks KHUYẾN MÃI to /tinh-phi-bao-hiem/o-to/khuyen-mai", () => {
+    it("clicks KHUYẾN MÃI to /san-pham/o-to/khuyen-mai", () => {
       cy.contains("KHUYẾN MÃI").click();
-      cy.url().should("include", "/tinh-phi-bao-hiem/o-to/khuyen-mai");
+      cy.url().should("include", "/san-pham/o-to/khuyen-mai");
     });
 
-    it("clicks TÀI LIỆU MẪU goes to /tinh-phi-bao-hiem/o-to/tai-lieu-mau", () => {
+    it("clicks TÀI LIỆU MẪU goes to /san-pham/o-to/tai-lieu-mau", () => {
       cy.contains("TÀI LIỆU MẪU").click();
-      cy.url().should("include", "/tinh-phi-bao-hiem/o-to/tai-lieu-mau");
+      cy.url().should("include", "/san-pham/o-to/tai-lieu-mau");
     });
 
-    it("clicks TÍNH PHÍ & ĐẶT MUA to /tinh-phi-bao-hiem/o-to", () => {
+    it("clicks TÍNH PHÍ & ĐẶT MUA to /san-pham/o-to", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").click();
-      cy.url().should("match", /\/tinh-phi-bao-hiem\/o-to\/?$/);
+      cy.url().should("match", /\/san-pham\/o-to\/?$/);
     });
   });
 
@@ -185,7 +185,7 @@ describe("Page /tinh-phi-bao-hiem/o-to", () => {
       });
 
       it("form request is saved to firebase", () => {
-        cy.visit("/tinh-phi-bao-hiem/o-to/test");
+        cy.visit("/san-pham/o-to/test");
         cy.contains("Michael Jackson").should("be.visible");
         cy.contains("test@gmail.com").should("be.visible");
         cy.contains("1234567").should("be.visible");

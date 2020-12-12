@@ -1,6 +1,6 @@
-describe("Page /tinh-phi-bao-hiem/tai-nan", () => {
+describe("Page /san-pham/tai-nan", () => {
   beforeEach(() => {
-    cy.visit("/tinh-phi-bao-hiem/tai-nan");
+    cy.visit("/san-pham/tai-nan");
   });
 
   describe("tab bar", () => {
@@ -18,29 +18,29 @@ describe("Page /tinh-phi-bao-hiem/tai-nan", () => {
       });
     });
 
-    it("clicks QUYEN LOI goes to /tinh-phi-bao-hiem/tai-nan/quyen-loi", () => {
+    it("clicks QUYEN LOI goes to /san-pham/tai-nan/quyen-loi", () => {
       cy.contains("QUYỀN LỢI").click();
-      cy.url().should("include", "/tinh-phi-bao-hiem/tai-nan/quyen-loi");
+      cy.url().should("include", "/san-pham/tai-nan/quyen-loi");
     });
 
-    it("clicks BỒI THƯỜNG to /tinh-phi-bao-hiem/tai-nan/boi-thuong", () => {
+    it("clicks BỒI THƯỜNG to /san-pham/tai-nan/boi-thuong", () => {
       cy.contains("BỒI THƯỜNG").click();
-      cy.url().should("include", "/tinh-phi-bao-hiem/tai-nan/boi-thuong");
+      cy.url().should("include", "/san-pham/tai-nan/boi-thuong");
     });
 
-    it("clicks KHUYẾN MÃI to /tinh-phi-bao-hiem/tai-nan/khuyen-mai", () => {
+    it("clicks KHUYẾN MÃI to /san-pham/tai-nan/khuyen-mai", () => {
       cy.contains("KHUYẾN MÃI").click();
-      cy.url().should("include", "/tinh-phi-bao-hiem/tai-nan/khuyen-mai");
+      cy.url().should("include", "/san-pham/tai-nan/khuyen-mai");
     });
 
-    it("clicks TÀI LIỆU MẪU goes to /tinh-phi-bao-hiem/tai-nan/tai-lieu-mau", () => {
+    it("clicks TÀI LIỆU MẪU goes to /san-pham/tai-nan/tai-lieu-mau", () => {
       cy.contains("TÀI LIỆU MẪU").click();
-      cy.url().should("include", "/tinh-phi-bao-hiem/tai-nan/tai-lieu-mau");
+      cy.url().should("include", "/san-pham/tai-nan/tai-lieu-mau");
     });
 
-    it("clicks TÍNH PHÍ & ĐẶT MUA to /tinh-phi-bao-hiem/tai-nan", () => {
+    it("clicks TÍNH PHÍ & ĐẶT MUA to /san-pham/tai-nan", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").click();
-      cy.url().should("match", /\/tinh-phi-bao-hiem\/tai-nan\/?$/);
+      cy.url().should("match", /\/san-pham\/tai-nan\/?$/);
     });
   });
 });

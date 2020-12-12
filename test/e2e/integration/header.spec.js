@@ -6,7 +6,7 @@ describe("Header", () => {
   it("renders logo, links, and buttons", () => {
     cy.get("[data-cy=logo]").should("be.visible");
     cy.contains("Giới thiệu").should("be.visible");
-    cy.contains("Tính phí bảo hiểm").should("be.visible");
+    cy.contains("Sản phẩm").should("be.visible");
     cy.contains("Hướng dẫn").should("be.visible");
   });
 
@@ -27,77 +27,77 @@ describe("Header", () => {
     cy.url().should("eq", Cypress.config().baseUrl + "/");
   });
 
-  describe("Tính phí bảo hiểm", () => {
-    it("clicks 'Bảo hiểm ô tô' navigates to /tinh-phi-bao-hiem/o-to", () => {
+  describe("Sản phẩm", () => {
+    it("clicks 'Bảo hiểm ô tô' navigates to /san-pham/o-to", () => {
       cy.get("[data-cy=insurance-car]")
         .should(($el) => {
           expect($el.text()).to.include("Bảo hiểm ô tô");
         })
         .click({ force: true });
-      cy.url().should("include", "/tinh-phi-bao-hiem/o-to");
+      cy.url().should("include", "/san-pham/o-to");
     });
 
-    it("clicks 'Bảo hiểm tai nạn 24/24' navigates to /tinh-phi-bao-hiem/tai-nan", () => {
+    it("clicks 'Bảo hiểm tai nạn 24/24' navigates to /san-pham/tai-nan", () => {
       cy.get("[data-cy=insurance-accident]")
         .should(($el) => {
           expect($el.text()).to.include("Bảo hiểm tai nạn 24/24");
         })
         .click({ force: true });
-      cy.url().should("include", "/tinh-phi-bao-hiem/tai-nan");
+      cy.url().should("include", "/san-pham/tai-nan");
     });
 
-    it("clicks 'Bảo hiểm sức khỏe cá nhân' navigates to /tinh-phi-bao-hiem/suc-khoe-ca-nhan", () => {
+    it("clicks 'Bảo hiểm sức khỏe cá nhân' navigates to /san-pham/suc-khoe-ca-nhan", () => {
       cy.get("[data-cy=insurance-personal-health]")
         .should(($el) => {
           expect($el.text()).to.include("Bảo hiểm sức khỏe cá nhân");
         })
         .click({ force: true });
-      cy.url().should("include", "/tinh-phi-bao-hiem/suc-khoe-ca-nhan");
+      cy.url().should("include", "/san-pham/suc-khoe-ca-nhan");
     });
 
-    it("clicks 'Bảo hiểm bệnh ung thư' navigates to /tinh-phi-bao-hiem/benh-ung-thu", () => {
+    it("clicks 'Bảo hiểm bệnh ung thư' navigates to /san-pham/benh-ung-thu", () => {
       cy.get("[data-cy=insurance-cancer]")
         .should(($el) => {
           expect($el.text()).to.include("Bảo hiểm bệnh ung thư");
         })
         .click({ force: true });
-      cy.url().should("include", "/tinh-phi-bao-hiem/benh-ung-thu");
+      cy.url().should("include", "/san-pham/benh-ung-thu");
     });
 
-    it("clicks 'Bảo hiểm nhà tư nhân' navigates to /tinh-phi-bao-hiem/nha-tu-nhan", () => {
+    it("clicks 'Bảo hiểm nhà tư nhân' navigates to /san-pham/nha-tu-nhan", () => {
       cy.get("[data-cy=insurance-house]")
         .should(($el) => {
           expect($el.text()).to.include("Bảo hiểm nhà tư nhân");
         })
         .click({ force: true });
-      cy.url().should("include", "/tinh-phi-bao-hiem/nha-tu-nhan");
+      cy.url().should("include", "/san-pham/nha-tu-nhan");
     });
 
-    it("clicks 'Bảo hiểm xe máy' navigates to /tinh-phi-bao-hiem/xe-may", () => {
+    it("clicks 'Bảo hiểm xe máy' navigates to /san-pham/xe-may", () => {
       cy.get("[data-cy=insurance-motorbike]")
         .should(($el) => {
           expect($el.text()).to.include("Bảo hiểm xe máy");
         })
         .click({ force: true });
-      cy.url().should("include", "/tinh-phi-bao-hiem/xe-may");
+      cy.url().should("include", "/san-pham/xe-may");
     });
 
-    it("clicks 'Bảo hiểm du lịch quốc tế' navigates to /tinh-phi-bao-hiem/du-lich-quoc-te", () => {
+    it("clicks 'Bảo hiểm du lịch quốc tế' navigates to /san-pham/du-lich-quoc-te", () => {
       cy.get("[data-cy=insurance-travel]")
         .should(($el) => {
           expect($el.text()).to.include("Bảo hiểm du lịch quốc tế");
         })
         .click({ force: true });
-      cy.url().should("include", "/tinh-phi-bao-hiem/du-lich-quoc-te");
+      cy.url().should("include", "/san-pham/du-lich-quoc-te");
     });
 
-    it("clicks 'Bảo hiểm nhân thọ' navigates to /tinh-phi-bao-hiem/nhan-tho", () => {
+    it("clicks 'Bảo hiểm nhân thọ' navigates to /san-pham/nhan-tho", () => {
       cy.get("[data-cy=insurance-life]")
         .should(($el) => {
           expect($el.text()).to.include("Bảo hiểm nhân thọ");
         })
         .click({ force: true });
-      cy.url().should("include", "/tinh-phi-bao-hiem/nhan-tho");
+      cy.url().should("include", "/san-pham/nhan-tho");
     });
   });
 });

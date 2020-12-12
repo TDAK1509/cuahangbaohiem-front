@@ -1,6 +1,6 @@
-describe("Page /tinh-phi-bao-hiem/o-to/quyen-loi", () => {
+describe("Page /san-pham/o-to/boi-thuong", () => {
   beforeEach(() => {
-    cy.visit("/tinh-phi-bao-hiem/o-to/quyen-loi");
+    cy.visit("/san-pham/o-to/boi-thuong");
   });
 
   describe("tab bar", () => {
@@ -12,9 +12,9 @@ describe("Page /tinh-phi-bao-hiem/o-to/quyen-loi", () => {
       cy.contains("TÀI LIỆU MẪU").should("be.visible");
     });
 
-    it("QUYEN LOI tab should be active", () => {
+    it("BỒI THƯỜNG tab should be active", () => {
       cy.get("li.is-active").should(($el) => {
-        expect($el.text()).to.contain("QUYỀN LỢI");
+        expect($el.text()).to.contain("BỒI THƯỜNG");
       });
     });
   });
