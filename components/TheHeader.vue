@@ -74,35 +74,35 @@ export default {
         {
           dataCy: "insurance-personal-health",
           to: "/tinh-phi-bao-hiem/suc-khoe-ca-nhan",
-          iconClass: "fas fa-male",
+          iconClass: "fas fa-file-medical",
           text: "Bảo hiểm sức khỏe cá nhân"
         },
 
         {
           dataCy: "insurance-cancer",
           to: "/tinh-phi-bao-hiem/benh-ung-thu",
-          iconClass: "fas fa-male",
+          iconClass: "fas fa-disease",
           text: "Bảo hiểm bệnh ung thư"
         },
 
         {
           dataCy: "insurance-house",
           to: "/tinh-phi-bao-hiem/nha-tu-nhan",
-          iconClass: "fas fa-male",
+          iconClass: "fas fa-house-damage",
           text: "Bảo hiểm nhà tư nhân"
         },
 
         {
           dataCy: "insurance-motorbike",
           to: "/tinh-phi-bao-hiem/xe-may",
-          iconClass: "fas fa-male",
+          iconClass: "fas fa-motorcycle",
           text: "Bảo hiểm xe máy"
         },
 
         {
           dataCy: "insurance-travel",
           to: "/tinh-phi-bao-hiem/du-lich-quoc-te",
-          iconClass: "fas fa-male",
+          iconClass: "fas fa-plane-departure",
           text: "Bảo hiểm du lịch quốc tế"
         },
 
