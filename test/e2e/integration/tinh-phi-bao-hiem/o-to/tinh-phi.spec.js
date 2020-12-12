@@ -185,7 +185,7 @@ describe("Page /tinh-phi-bao-hiem/o-to", () => {
       });
 
       it("form request is saved to firebase", () => {
-        cy.visit("/tinh-phi-bao-hiem/o-to-test");
+        cy.visit("/tinh-phi-bao-hiem/o-to/test");
         cy.contains("Michael Jackson").should("be.visible");
         cy.contains("test@gmail.com").should("be.visible");
         cy.contains("1234567").should("be.visible");
