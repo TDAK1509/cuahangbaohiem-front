@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header">
     <nav class="navbar">
       <div class="navbar-brand">
         <nuxt-link data-cy="logo" to="/">
@@ -144,6 +144,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/_colors";
+
+.header {
+  position: sticky;
+  top: 0;
+}
 
 .header__logo {
   height: 60px;
