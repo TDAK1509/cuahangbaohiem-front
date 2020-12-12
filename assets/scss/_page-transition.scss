@@ -1,11 +1,11 @@
 .page-enter-active {
-  animation: in 0.4s;
+  animation: page-in 0.4s;
 }
 .page-leave-active {
-  animation: out 0.1s;
+  animation: page-out 0.1s;
 }
 
-@keyframes in {
+@keyframes page-in {
   0% {
     transform: scale(0.9);
     opacity: 0;
@@ -17,7 +17,7 @@
   }
 }
 
-@keyframes out {
+@keyframes page-out {
   0% {
     transform: scale(1);
     opacity: 1;
@@ -27,4 +27,14 @@
     transform: scale(0.9);
     opacity: 0;
   }
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 0.15s;
+}
+
+.layout-enter,
+.layout-leave-active {
+  opacity: 0;
 }
