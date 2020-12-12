@@ -1,5 +1,5 @@
 <template>
-  <section class="hero is-large is-dark">
+  <section class="hero is-medium is-dark">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">Primary bold title</h1>
