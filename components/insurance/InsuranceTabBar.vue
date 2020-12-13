@@ -30,16 +30,6 @@ export default {
     }
   },
 
-  data() {
-    return {
-      indexRouteName: `tinh-phi_${this.insuranceType}`,
-      quyenLoiRouteName: `quyen-loi_${this.insuranceType}`,
-      boiThuongRouteName: `boi-thuong_${this.insuranceType}`,
-      khuyenMaiRouteName: `khuyen-mai_${this.insuranceType}`,
-      taiLieuMauRouteName: `tai-lieu-mau_${this.insuranceType}`
-    };
-  },
-
   computed: {
     tabs() {
       return [
@@ -82,6 +72,26 @@ export default {
 
     routeName() {
       return this.$route.name;
+    },
+
+    indexRouteName() {
+      return `tinh-phi_${this.insuranceType}`;
+    },
+
+    quyenLoiRouteName() {
+      return `quyen-loi_${this.insuranceType}`;
+    },
+
+    boiThuongRouteName() {
+      return `boi-thuong_${this.insuranceType}`;
+    },
+
+    khuyenMaiRouteName() {
+      return `khuyen-mai_${this.insuranceType}`;
+    },
+
+    taiLieuMauRouteName() {
+      return `tai-lieu-mau_${this.insuranceType}`;
     }
   }
 };
