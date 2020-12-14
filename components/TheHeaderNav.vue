@@ -1,5 +1,11 @@
 <template>
   <nav class="header-nav">
+    <div class="header-nav__burger">
+      <span class="icon is-large has-text-dark">
+        <i class="fas fa-2x fa-bars"></i>
+      </span>
+    </div>
+
     <ul class="header-nav__ul">
       <li class="header-nav__li">
         <nuxt-link class="header__single-link" to="/gioi-thieu">
@@ -113,14 +119,19 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/_colors";
+@import "~assets/scss/_helper";
 
 .header-nav {
   height: 100%;
+  flex: 1;
+}
+
+.header-nav__burger {
+  display: none;
 }
 
 .header-nav__ul {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   height: 100%;
 }
@@ -186,5 +197,20 @@ export default {
   background: $primary;
   color: #fff;
   cursor: default;
+}
+
+@media only screen and (max-width: $mobile) {
+  .header-nav__ul {
+    display: none;
+  }
+
+  .header-nav__burger {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
