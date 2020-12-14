@@ -12,17 +12,13 @@
           <div class="center header-nav__dropdown-label">
             Sản phẩm
 
-            <span class="icon has-text-dark header-nav__dropdown-icon">
-              <i class="fas fa-chevron-down"></i>
+            <span class="icon has-text-dark">
+              <i class="fas fa-angle-down"></i>
             </span>
           </div>
 
           <ul class="header-nav__dropdown-content">
-            <li
-              v-for="(nav, index) in navs"
-              :key="index"
-              class="header-nav__dropdown-li"
-            >
+            <li v-for="(nav, index) in navs" :key="index">
               <nuxt-link
                 :data-cy="nav.dataCy"
                 :to="nav.to"
@@ -159,10 +155,6 @@ export default {
   cursor: default;
 }
 
-.header-nav__dropdown-icon {
-  margin-top: -4px;
-}
-
 .header-nav__dropdown-content {
   display: flex;
   flex-direction: column;
@@ -176,18 +168,16 @@ export default {
   visibility: visible;
 }
 
-.header-nav__dropdown-li {
+.header-nav__dropdown-link {
+  color: inherit;
   padding: 8px 8px;
   background: #fff;
   width: 300px;
+  display: block;
 }
 
-.header-nav__dropdown-li:hover {
+.header-nav__dropdown-link:hover {
   background: $grey-lighter;
   cursor: pointer;
-}
-
-.header-nav__dropdown-link {
-  color: inherit;
 }
 </style>
