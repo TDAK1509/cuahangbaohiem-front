@@ -15,12 +15,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/_z-index";
+
 .header {
   position: sticky;
   top: 0;
   display: flex;
   align-items: center;
   height: 75px;
+  z-index: $z-index-header;
 }
 
 .header__logo {
