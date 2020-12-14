@@ -77,7 +77,7 @@ export default {
 
         {
           dataCy: "insurance-cancer",
-          to: "/san-pham/benh-ung-thu",
+          to: "/san-pham/ung-thu",
           iconClass: "fas fa-disease",
           text: "Bảo hiểm bệnh ung thư"
         },
