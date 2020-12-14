@@ -180,4 +180,11 @@ export default {
   background: $grey-lighter;
   cursor: pointer;
 }
+
+.header-nav__dropdown-link.is-active,
+.header-nav__dropdown-link.is-active:hover {
+  background: $primary;
+  color: #fff;
+  cursor: default;
+}
 </style>
