@@ -20,6 +20,7 @@ export default {
   top: 0;
   display: flex;
   align-items: center;
+  height: 75px;
 }
 
 .header__logo {

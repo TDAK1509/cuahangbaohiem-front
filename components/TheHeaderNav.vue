@@ -7,26 +7,36 @@
         </nuxt-link>
       </li>
 
-      <li class="header-nav__li">Sản phẩm</li>
+      <li class="header-nav__li">
+        <div class="header-nav__dropdown">
+          <div class="center header-nav__dropdown-label">
+            Sản phẩm
 
-      <!-- <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Sản phẩm</a>
+            <span class="icon has-text-dark header-nav__dropdown-icon">
+              <i class="fas fa-chevron-down"></i>
+            </span>
+          </div>
 
-            <div class="navbar-dropdown">
+          <ul class="header-nav__dropdown-content">
+            <li
+              v-for="(nav, index) in navs"
+              :key="index"
+              class="header-nav__dropdown-li"
+            >
               <nuxt-link
-                v-for="(nav, index) in navs"
-                :key="index"
                 :data-cy="nav.dataCy"
-                class="navbar-item"
                 :to="nav.to"
+                class="header-nav__dropdown-link"
               >
                 <span class="icon is-medium">
                   <i :class="nav.iconClass" />
                 </span>
                 <span class="is-size-6">{{ nav.text }}</span>
               </nuxt-link>
-            </div>
-          </div> -->
+            </li>
+          </ul>
+        </div>
+      </li>
 
       <li class="header-nav__li">
         <nuxt-link class="header__single-link" to="/huong-dan">
@@ -108,13 +118,22 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/_colors";
 
+.header-nav {
+  height: 100%;
+}
+
 .header-nav__ul {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 .header-nav__li {
   margin-left: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .header__single-link {
@@ -127,5 +146,48 @@ export default {
 
 .header__single-link.is-active {
   color: $link;
+}
+
+.header-nav__dropdown {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-nav__dropdown-label {
+  cursor: default;
+}
+
+.header-nav__dropdown-icon {
+  margin-top: -4px;
+}
+
+.header-nav__dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  visibility: hidden;
+}
+
+.header-nav__dropdown:hover .header-nav__dropdown-content {
+  visibility: visible;
+}
+
+.header-nav__dropdown-li {
+  padding: 8px 8px;
+  background: #fff;
+  width: 300px;
+}
+
+.header-nav__dropdown-li:hover {
+  background: $grey-lighter;
+  cursor: pointer;
+}
+
+.header-nav__dropdown-link {
+  color: inherit;
 }
 </style>
