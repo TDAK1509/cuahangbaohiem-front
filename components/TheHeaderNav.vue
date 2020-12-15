@@ -1,5 +1,5 @@
 <template>
-  <nav class="header-nav">
+  <nav ref="nav" class="header-nav">
     <div class="header-nav__burger">
       <span class="icon is-large has-text-dark" @click="toggleShowNav">
         <i class="fas fa-2x fa-bars"></i>
@@ -8,7 +8,7 @@
 
     <ul v-show="showNav" class="header-nav__ul">
       <li class="header-nav__li">
-        <nuxt-link class="header__single-link" to="/gioi-thieu">
+        <nuxt-link class="header__single-link header__link" to="/gioi-thieu">
           Giới thiệu
         </nuxt-link>
       </li>
@@ -28,7 +28,7 @@
               <nuxt-link
                 :data-cy="nav.dataCy"
                 :to="nav.to"
-                class="header-nav__dropdown-link"
+                class="header-nav__dropdown-link header__link"
               >
                 <span class="icon is-medium">
                   <i :class="nav.iconClass" />
@@ -41,7 +41,7 @@
       </li>
 
       <li class="header-nav__li">
-        <nuxt-link class="header__single-link" to="/huong-dan">
+        <nuxt-link class="header__single-link header__link" to="/huong-dan">
           Hướng dẫn
         </nuxt-link>
       </li>
@@ -119,14 +119,30 @@ export default {
   },
 
   mounted() {
-    if (window.innerWidth < MOBILE_BREAKPOINT) {
-      this.showNav = false;
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+    if (isMobile) {
+      this.closeNav();
+      this.closeNavOnRouteChange();
     }
   },
 
   methods: {
     toggleShowNav() {
       this.showNav = !this.showNav;
+    },
+
+    closeNav() {
+      this.showNav = false;
+    },
+
+    closeNavOnRouteChange() {
+      const dropdownLinks = this.$refs.nav.querySelectorAll(".header__link");
+
+      dropdownLinks.forEach((dropdownLink) => {
+        dropdownLink.addEventListener("click", () => {
+          this.closeNav();
+        });
+      });
     }
   }
 };
