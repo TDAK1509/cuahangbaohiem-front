@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container insurance-tab-bar">
     <div class="tabs is-toggle is-fullwidth">
       <ul>
         <li
@@ -96,3 +96,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/_z-index";
+
+.insurance-tab-bar {
+  z-index: $z-index-section;
+}
+</style>
