@@ -15,7 +15,7 @@
 
       <li class="header-nav__li">
         <div class="header-nav__dropdown">
-          <div class="center header-nav__dropdown-label">
+          <div class="header-nav__dropdown-label">
             Sản phẩm
 
             <span class="icon has-text-dark">
@@ -118,17 +118,9 @@ export default {
     };
   },
 
-  computed: {
-    screenWidth() {
-      return window.innerWidth;
-    }
-  },
-
-  watch: {
-    screenWidth(newScreenWidth) {
-      if (newScreenWidth < MOBILE_BREAKPOINT) {
-        this.showNav = false;
-      }
+  mounted() {
+    if (window.innerWidth < MOBILE_BREAKPOINT) {
+      this.showNav = false;
     }
   },
 
@@ -187,6 +179,9 @@ export default {
 
 .header-nav__dropdown-label {
   cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-nav__dropdown-content {
@@ -224,10 +219,21 @@ export default {
 
 @media only screen and (max-width: $mobile) {
   $header-height: 75px;
+  $border-color-mobile: $grey;
 
   .header-nav {
     position: relative;
   }
+
+  .header-nav__burger {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+  }
+
   .header-nav__ul {
     display: block;
     background: #fff;
@@ -239,15 +245,30 @@ export default {
 
   .header-nav__li {
     height: auto;
+    margin-left: 0;
+    padding: 15px;
+    border-bottom: 1px solid $border-color-mobile;
   }
 
-  .header-nav__burger {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
-    height: 100%;
+  .header-nav__dropdown {
+    display: block;
+    text-align: left;
+  }
+
+  .header-nav__dropdown-label {
+    justify-content: flex-start;
+  }
+
+  .header-nav__dropdown-content {
+    display: block;
+    position: static;
+    top: 0;
+    left: 0;
+    visibility: visible;
+  }
+
+  .header-nav__dropdown-link {
+    padding: 15px;
   }
 }
 </style>
