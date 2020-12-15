@@ -55,13 +55,13 @@ describe("Header", () => {
       cy.url().should("include", "/san-pham/suc-khoe-ca-nhan");
     });
 
-    it("clicks 'Bảo hiểm bệnh ung thư' navigates to /san-pham/benh-ung-thu", () => {
+    it("clicks 'Bảo hiểm bệnh ung thư' navigates to /san-pham/ung-thu", () => {
       cy.get("[data-cy=insurance-cancer]")
         .should(($el) => {
           expect($el.text()).to.include("Bảo hiểm bệnh ung thư");
         })
         .click({ force: true });
-      cy.url().should("include", "/san-pham/benh-ung-thu");
+      cy.url().should("include", "/san-pham/ung-thu");
     });
 
     it("clicks 'Bảo hiểm nhà tư nhân' navigates to /san-pham/nha-tu-nhan", () => {
