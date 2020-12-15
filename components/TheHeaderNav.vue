@@ -1,12 +1,12 @@
 <template>
   <nav class="header-nav">
     <div class="header-nav__burger">
-      <span class="icon is-large has-text-dark">
+      <span class="icon is-large has-text-dark" @click="toggleShowNav">
         <i class="fas fa-2x fa-bars"></i>
       </span>
     </div>
 
-    <ul class="header-nav__ul">
+    <ul v-show="showNav" class="header-nav__ul">
       <li class="header-nav__li">
         <nuxt-link class="header__single-link" to="/gioi-thieu">
           Giới thiệu
@@ -50,11 +50,14 @@
 </template>
 
 <script>
+import { MOBILE_BREAKPOINT } from "@/utils/breakpoint";
+
 export default {
   name: "HeaderNav",
 
   data() {
     return {
+      showNav: true,
       navs: [
         {
           dataCy: "insurance-car",
@@ -113,6 +116,26 @@ export default {
         }
       ]
     };
+  },
+
+  computed: {
+    screenWidth() {
+      return window.innerWidth;
+    }
+  },
+
+  watch: {
+    screenWidth(newScreenWidth) {
+      if (newScreenWidth < MOBILE_BREAKPOINT) {
+        this.showNav = false;
+      }
+    }
+  },
+
+  methods: {
+    toggleShowNav() {
+      this.showNav = !this.showNav;
+    }
   }
 };
 </script>
@@ -145,14 +168,14 @@ export default {
 
 .header__single-link {
   color: $grey-darker;
-}
 
-.header__single-link:hover {
-  color: $link;
-}
+  &.is-active {
+    color: $link;
+  }
 
-.header__single-link.is-active {
-  color: $link;
+  &:hover {
+    color: $link;
+  }
 }
 
 .header-nav__dropdown {
@@ -185,23 +208,37 @@ export default {
   background: #fff;
   width: 300px;
   display: block;
-}
 
-.header-nav__dropdown-link:hover {
-  background: $grey-lighter;
-  cursor: pointer;
-}
+  &:hover {
+    background: $grey-lighter;
+    cursor: pointer;
+  }
 
-.header-nav__dropdown-link.is-active,
-.header-nav__dropdown-link.is-active:hover {
-  background: $primary;
-  color: #fff;
-  cursor: default;
+  &.is-active,
+  &.is-active:hover {
+    background: $primary;
+    color: #fff;
+    cursor: default;
+  }
 }
 
 @media only screen and (max-width: $mobile) {
+  $header-height: 75px;
+
+  .header-nav {
+    position: relative;
+  }
   .header-nav__ul {
-    display: none;
+    display: block;
+    background: #fff;
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    width: 100%;
+  }
+
+  .header-nav__li {
+    height: auto;
   }
 
   .header-nav__burger {

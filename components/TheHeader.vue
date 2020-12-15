@@ -16,6 +16,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/_z-index";
+@import "~assets/scss/_colors";
 
 .header {
   position: sticky;
@@ -24,6 +25,7 @@ export default {
   align-items: center;
   height: 75px;
   z-index: $z-index-header;
+  border-bottom: 1px solid $grey-darker;
 }
 
 .header__logo {
