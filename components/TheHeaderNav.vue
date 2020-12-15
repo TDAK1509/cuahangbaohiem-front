@@ -150,7 +150,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/_colors";
-@import "~assets/scss/_helper";
+@import "~assets/scss/_breakpoints";
 
 .header-nav {
   height: 100%;
