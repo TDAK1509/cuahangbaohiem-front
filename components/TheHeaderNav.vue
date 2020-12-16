@@ -277,7 +277,7 @@ export default {
   .header-nav__dropdown-label {
     justify-content: flex-start;
 
-    .icon {
+    &.icon {
       display: none;
     }
   }
