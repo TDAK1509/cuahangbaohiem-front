@@ -14,3 +14,11 @@ export default {
   name: "Hero"
 };
 </script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/_z-index";
+
+.hero {
+  z-index: $z-index-hero;
+}
+</style>
