@@ -257,6 +257,8 @@ export default {
     top: $header-height;
     left: 0;
     width: 100%;
+    height: calc(100% - #{$header-height});
+    overflow: auto;
   }
 
   .header-nav__li {
@@ -273,6 +275,10 @@ export default {
 
   .header-nav__dropdown-label {
     justify-content: flex-start;
+
+    .icon {
+      display: none;
+    }
   }
 
   .header-nav__dropdown-content {
