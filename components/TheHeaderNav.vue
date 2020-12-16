@@ -23,7 +23,7 @@
             </span>
           </div>
 
-          <ul class="header-nav__dropdown-content">
+          <ul class="header-nav__dropdown-ul">
             <li v-for="(nav, index) in navs" :key="index">
               <nuxt-link
                 :data-cy="nav.dataCy"
@@ -200,7 +200,7 @@ export default {
   justify-content: center;
 }
 
-.header-nav__dropdown-content {
+.header-nav__dropdown-ul {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -209,7 +209,7 @@ export default {
   visibility: hidden;
 }
 
-.header-nav__dropdown:hover .header-nav__dropdown-content {
+.header-nav__dropdown:hover .header-nav__dropdown-ul {
   visibility: visible;
 }
 
@@ -271,6 +271,7 @@ export default {
   .header-nav__dropdown {
     display: block;
     text-align: left;
+    width: 100%;
   }
 
   .header-nav__dropdown-label {
@@ -281,16 +282,18 @@ export default {
     }
   }
 
-  .header-nav__dropdown-content {
+  .header-nav__dropdown-ul {
     display: block;
     position: static;
     top: 0;
     left: 0;
     visibility: visible;
+    margin-top: 1rem;
   }
 
   .header-nav__dropdown-link {
     padding: 15px;
+    width: 100%;
   }
 }
 </style>
