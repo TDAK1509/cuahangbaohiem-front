@@ -23,7 +23,7 @@
             </span>
           </div>
 
-          <ul class="header-nav__dropdown-content">
+          <ul class="header-nav__dropdown-ul">
             <li v-for="(nav, index) in navs" :key="index">
               <nuxt-link
                 :data-cy="nav.dataCy"
@@ -200,7 +200,7 @@ export default {
   justify-content: center;
 }
 
-.header-nav__dropdown-content {
+.header-nav__dropdown-ul {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -209,7 +209,7 @@ export default {
   visibility: hidden;
 }
 
-.header-nav__dropdown:hover .header-nav__dropdown-content {
+.header-nav__dropdown:hover .header-nav__dropdown-ul {
   visibility: visible;
 }
 
@@ -257,25 +257,32 @@ export default {
     top: $header-height;
     left: 0;
     width: 100%;
+    height: calc(100% - #{$header-height});
+    overflow: auto;
   }
 
   .header-nav__li {
     height: auto;
     margin-left: 0;
-    padding: 15px;
     border-bottom: 1px solid $border-color-mobile;
   }
 
   .header-nav__dropdown {
     display: block;
     text-align: left;
+    width: 100%;
   }
 
   .header-nav__dropdown-label {
     justify-content: flex-start;
+    padding: 15px;
+
+    .icon {
+      display: none;
+    }
   }
 
-  .header-nav__dropdown-content {
+  .header-nav__dropdown-ul {
     display: block;
     position: static;
     top: 0;
@@ -285,6 +292,17 @@ export default {
 
   .header-nav__dropdown-link {
     padding: 15px;
+    width: 100%;
+  }
+
+  .header__single-link {
+    width: 100%;
+    padding: 15px;
+
+    &.is-active {
+      background: $primary;
+      color: #fff;
+    }
   }
 }
 </style>
