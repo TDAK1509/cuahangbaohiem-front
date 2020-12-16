@@ -25,7 +25,7 @@ export default {
   align-items: center;
   height: 75px;
   z-index: $z-index-header;
-  border-bottom: 1px solid $grey-darker;
+  border-bottom: 1px solid $grey-light;
   background: #fff;
 }
 
