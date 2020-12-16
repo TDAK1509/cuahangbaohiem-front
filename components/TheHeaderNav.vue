@@ -264,7 +264,6 @@ export default {
   .header-nav__li {
     height: auto;
     margin-left: 0;
-    padding: 15px;
     border-bottom: 1px solid $border-color-mobile;
   }
 
@@ -276,8 +275,9 @@ export default {
 
   .header-nav__dropdown-label {
     justify-content: flex-start;
+    padding: 15px;
 
-    &.icon {
+    .icon {
       display: none;
     }
   }
@@ -288,12 +288,21 @@ export default {
     top: 0;
     left: 0;
     visibility: visible;
-    margin-top: 1rem;
   }
 
   .header-nav__dropdown-link {
     padding: 15px;
     width: 100%;
+  }
+
+  .header__single-link {
+    width: 100%;
+    padding: 15px;
+
+    &.is-active {
+      background: $primary;
+      color: #fff;
+    }
   }
 }
 </style>
