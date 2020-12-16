@@ -26,6 +26,7 @@ export default {
   height: 75px;
   z-index: $z-index-header;
   border-bottom: 1px solid $grey-darker;
+  background: #fff;
 }
 
 .header__logo {
