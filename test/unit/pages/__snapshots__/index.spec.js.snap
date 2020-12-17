@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/index.vue matches snapshot 1`] = `
+<div
+  class="container"
+>
+  <section
+    class="section"
+  >
+    <div
+      class="container"
+    >
+      <h4
+        class="title mb-6 has-text-centered"
+      >
+        Các Sản Phẩm Bảo Hiểm
+      </h4>
+       
+      <homeroundedbuttoncontainer>
+        <homeroundedbutton
+          icon-class="fas fa-car"
+          icon-color-class="has-text-info"
+          label="Bảo hiểm ô tô"
+          to="/san-pham/o-to"
+        />
+        <homeroundedbutton
+          icon-class="fas fa-car-crash"
+          icon-color-class="has-text-danger"
+          label="Bảo hiểm tai nạn 24/24"
+          to="/san-pham/tai-nan"
+        />
+        <homeroundedbutton
+          icon-class="fas fa-file-medical"
+          icon-color-class="has-text-success"
+          label="Bảo hiểm sức khỏe cá nhân"
+          to="/san-pham/suc-khoe-ca-nhan"
+        />
+        <homeroundedbutton
+          icon-class="fas fa-disease"
+          icon-color-class="has-text-warning"
+          label="Bảo hiểm bệnh ung thư"
+          to="/san-pham/ung-thu"
+        />
+        <homeroundedbutton
+          icon-class="fas fa-house-damage"
+          icon-color-class="has-text-info"
+          label="Bảo hiểm nhà tư nhân"
+          to="/san-pham/nha-tu-nhan"
+        />
+        <homeroundedbutton
+          icon-class="fas fa-motorcycle"
+          icon-color-class="has-text-danger"
+          label="Bảo hiểm xe máy"
+          to="/san-pham/xe-may"
+        />
+        <homeroundedbutton
+          icon-class="fas fa-plane-departure"
+          icon-color-class="has-text-success"
+          label="Bảo hiểm du lịch quốc tế"
+          to="/san-pham/du-lich-quoc-te"
+        />
+        <homeroundedbutton
+          icon-class="fas fa-male"
+          icon-color-class="has-text-warning"
+          label="Bảo hiểm nhân thọ"
+          to="/san-pham/nhan-tho"
+        />
+      </homeroundedbuttoncontainer>
+    </div>
+  </section>
+</div>
+`;
