@@ -1,5 +1,13 @@
 <template>
-  <div class="home-rounded-button">{{ label }}</div>
+  <div class="home-rounded-button">
+    <div>
+      <span class="icon is-large">
+        <i class="fa-3x" :class="iconClass" />
+      </span>
+    </div>
+
+    <p class="is-size-7">{{ label }}</p>
+  </div>
 </template>
 
 <script>
@@ -10,6 +18,11 @@ export default {
     label: {
       type: String,
       default: ""
+    },
+
+    iconClass: {
+      type: String,
+      default: "fas fa-car"
     }
   }
 };
@@ -26,6 +39,7 @@ $button-size: 160px;
   width: $button-size;
   height: $button-size;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
