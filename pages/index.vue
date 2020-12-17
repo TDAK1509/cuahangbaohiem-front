@@ -2,24 +2,82 @@
   <div class="container">
     <section class="section">
       <div class="container">
-        <div class="content">
-          <h3>WE'RE AT HOME PAGE</h3>
-          <p v-for="i in 4" :key="i">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-            temporibus suscipit corporis repudiandae molestiae consectetur
-            molestias eius, facilis minus perspiciatis accusantium blanditiis
-            vel culpa provident, enim recusandae nemo nostrum autem.
-          </p>
-        </div>
+        <HomeRoundedButtonContainer>
+          <HomeRoundedButton
+            v-for="(nav, index) in navs"
+            :key="index"
+            :label="nav.text"
+          />
+        </HomeRoundedButtonContainer>
       </div>
     </section>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
+<script>
+export default {
+  name: "Home",
 
-export default Vue.extend({
-  name: "Home"
-});
+  data() {
+    return {
+      navs: [
+        {
+          dataCy: "insurance-car",
+          to: "/san-pham/o-to",
+          iconClass: "fas fa-car",
+          text: "Bảo hiểm ô tô"
+        },
+
+        {
+          dataCy: "insurance-accident",
+          to: "/san-pham/tai-nan",
+          iconClass: "fas fa-car-crash",
+          text: "Bảo hiểm tai nạn 24/24"
+        },
+
+        {
+          dataCy: "insurance-personal-health",
+          to: "/san-pham/suc-khoe-ca-nhan",
+          iconClass: "fas fa-file-medical",
+          text: "Bảo hiểm sức khỏe cá nhân"
+        },
+
+        {
+          dataCy: "insurance-cancer",
+          to: "/san-pham/ung-thu",
+          iconClass: "fas fa-disease",
+          text: "Bảo hiểm bệnh ung thư"
+        },
+
+        {
+          dataCy: "insurance-house",
+          to: "/san-pham/nha-tu-nhan",
+          iconClass: "fas fa-house-damage",
+          text: "Bảo hiểm nhà tư nhân"
+        },
+
+        {
+          dataCy: "insurance-motorbike",
+          to: "/san-pham/xe-may",
+          iconClass: "fas fa-motorcycle",
+          text: "Bảo hiểm xe máy"
+        },
+
+        {
+          dataCy: "insurance-travel",
+          to: "/san-pham/du-lich-quoc-te",
+          iconClass: "fas fa-plane-departure",
+          text: "Bảo hiểm du lịch quốc tế"
+        },
+
+        {
+          dataCy: "insurance-life",
+          to: "/san-pham/nhan-tho",
+          iconClass: "fas fa-male",
+          text: "Bảo hiểm nhân thọ"
+        }
+      ]
+    };
+  }
+};
 </script>
