@@ -6,7 +6,9 @@
           <HomeRoundedButton
             v-for="(nav, index) in navs"
             :key="index"
+            :to="nav.to"
             :label="nav.text"
+            :icon-class="nav.iconClass"
           />
         </HomeRoundedButtonContainer>
       </div>

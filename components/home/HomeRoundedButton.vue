@@ -1,5 +1,5 @@
 <template>
-  <div class="home-rounded-button">
+  <nuxt-link class="home-rounded-button" :to="to">
     <div>
       <span class="icon is-large">
         <i class="fa-3x" :class="iconClass" />
@@ -7,7 +7,7 @@
     </div>
 
     <p class="is-size-7">{{ label }}</p>
-  </div>
+  </nuxt-link>
 </template>
 
 <script>
@@ -15,6 +15,11 @@ export default {
   name: "HomeRoundedButton",
 
   props: {
+    to: {
+      type: String,
+      default: ""
+    },
+
     label: {
       type: String,
       default: ""
@@ -44,5 +49,10 @@ $button-size: 160px;
   justify-content: center;
   text-align: center;
   padding: 0.7rem;
+  color: $grey-darker;
+
+  &:hover {
+    color: $primary;
+  }
 }
 </style>
