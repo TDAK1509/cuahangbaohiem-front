@@ -1,7 +1,7 @@
 <template>
   <nuxt-link class="home-rounded-button" :to="to">
     <div>
-      <span class="icon is-large">
+      <span class="icon is-large" :class="iconColorClass">
         <i class="fa-3x" :class="iconClass" />
       </span>
     </div>
@@ -28,6 +28,11 @@ export default {
     iconClass: {
       type: String,
       default: "fas fa-car"
+    },
+
+    iconColorClass: {
+      type: String,
+      default: ""
     }
   }
 };
