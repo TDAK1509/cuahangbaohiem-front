@@ -2,6 +2,8 @@
   <div class="container">
     <section class="section">
       <div class="container">
+        <h4 class="title mb-6 has-text-centered">Các Sản Phẩm Bảo Hiểm</h4>
+
         <HomeRoundedButtonContainer>
           <HomeRoundedButton
             v-for="(nav, index) in navs"
