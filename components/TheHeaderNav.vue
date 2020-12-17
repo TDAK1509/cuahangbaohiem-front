@@ -51,7 +51,9 @@
 
 <script>
 import { MOBILE_BREAKPOINT } from "@/utils/breakpoint";
-import navs from "@/json/navs.json";
+import InsuranceNavs from "@/utils/insurance-navs";
+
+const insuranceNavs = new InsuranceNavs();
 
 export default {
   name: "HeaderNav",
@@ -59,7 +61,7 @@ export default {
   data() {
     return {
       showNav: true,
-      navs
+      navs: insuranceNavs.headerNavs
     };
   },
 
