@@ -38,7 +38,7 @@ export default class InsuranceNavs {
       } else if (index % 4 === 1) {
         return { ...nav, iconColorClass: "has-text-danger" };
       } else if (index % 4 === 2) {
-        return { ...nav, iconColorClass: "" };
+        return { ...nav, iconColorClass: "has-text-success" };
       } else {
         return { ...nav, iconColorClass: "has-text-warning" };
       }

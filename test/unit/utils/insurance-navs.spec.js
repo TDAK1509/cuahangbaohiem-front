@@ -29,7 +29,7 @@ function getHomeNavs() {
     },
 
     {
-      iconColorClass: "",
+      iconColorClass: "has-text-success",
       to: "/san-pham/suc-khoe-ca-nhan",
       iconClass: "fas fa-file-medical",
       text: "Bảo hiểm sức khỏe cá nhân"
@@ -57,7 +57,7 @@ function getHomeNavs() {
     },
 
     {
-      iconColorClass: "",
+      iconColorClass: "has-text-success",
       to: "/san-pham/du-lich-quoc-te",
       iconClass: "fas fa-plane-departure",
       text: "Bảo hiểm du lịch quốc tế"
