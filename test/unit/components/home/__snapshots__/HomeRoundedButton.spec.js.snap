@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeRoundedButton.vue matches snapshot 1`] = `
+<nuxt-link
+  class="home-rounded-button"
+  to="/to-link"
+>
+  <div>
+    <span
+      class="icon is-large icon-color-class"
+    >
+      <i
+        class="fa-3x icon-class"
+      />
+    </span>
+  </div>
+   
+  <p
+    class="is-size-7"
+  >
+    Label
+  </p>
+</nuxt-link>
+`;
