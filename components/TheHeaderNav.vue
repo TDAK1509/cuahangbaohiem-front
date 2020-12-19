@@ -51,6 +51,7 @@
 
 <script>
 import { MOBILE_BREAKPOINT } from "@/utils/breakpoint";
+import debounce from "lodash/debounce";
 import InsuranceNavs from "@/utils/insurance-navs";
 
 const insuranceNavs = new InsuranceNavs();
@@ -61,16 +62,32 @@ export default {
   data() {
     return {
       showNav: true,
-      navs: insuranceNavs.headerNavs
+      navs: insuranceNavs.headerNavs,
+      onWindowResize: () => {}
     };
   },
 
   mounted() {
-    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-    if (isMobile) {
-      this.closeNav();
-      this.closeNavOnRouteChange();
+    const vm = this;
+
+    function updateNavBehavior() {
+      const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+      if (isMobile) {
+        vm.closeNav();
+        vm.closeNavOnRouteChange();
+      } else {
+        vm.showNav = true;
+      }
     }
+
+    updateNavBehavior();
+    this.onWindowResize = debounce(updateNavBehavior, 300);
+
+    window.addEventListener("resize", this.onWindowResize);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onWindowResize);
   },
 
   methods: {
