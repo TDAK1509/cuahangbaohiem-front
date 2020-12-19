@@ -10,7 +10,7 @@
             :key="index"
             :to="nav.to"
             :label="nav.text"
-            :icon-class="nav.iconClass"
+            :icon-class="`${nav.iconClass} ${iconSizeClass}`"
             :icon-color-class="nav.iconColorClass"
           />
         </HomeRoundedButtonContainer>
@@ -21,6 +21,8 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { MOBILE_BREAKPOINT } from "@/utils/breakpoint";
+import debounce from "lodash/debounce";
 import InsuranceNavs from "@/utils/insurance-navs";
 
 const insuranceNavs = new InsuranceNavs();
@@ -30,8 +32,28 @@ export default Vue.extend({
 
   data() {
     return {
-      navs: insuranceNavs.homeNavs
+      navs: insuranceNavs.homeNavs,
+      iconSizeClass: "fa-3x",
+      onWindowResize: null as null | (() => any)
     };
+  },
+
+  mounted() {
+    const vm = this;
+
+    function updateIsMobile() {
+      const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+      vm.iconSizeClass = isMobile ? "fa-2x" : "fa-3x";
+    }
+
+    updateIsMobile();
+    this.onWindowResize = debounce(updateIsMobile, 300);
+
+    window.addEventListener("resize", this.onWindowResize);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onWindowResize as () => any);
   }
 });
 </script>

@@ -2,7 +2,7 @@
   <nuxt-link class="home-rounded-button" :to="to">
     <div>
       <span class="icon is-large" :class="iconColorClass">
-        <i :class="iconFinalClasses" />
+        <i :class="iconClass" />
       </span>
     </div>
 
@@ -12,7 +12,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { MOBILE_BREAKPOINT } from "@/utils/breakpoint";
 
 export default Vue.extend({
   name: "HomeRoundedButton",
@@ -36,17 +35,6 @@ export default Vue.extend({
     iconColorClass: {
       type: String,
       default: ""
-    }
-  },
-
-  computed: {
-    iconFinalClasses(): string {
-      const sizeClass = this.isMobile ? "fa-2x" : "fa-3x";
-      return `${sizeClass} ${this.iconClass}`;
-    },
-
-    isMobile(): boolean {
-      return window.innerWidth <= MOBILE_BREAKPOINT;
     }
   }
 });
