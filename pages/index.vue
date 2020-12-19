@@ -36,7 +36,7 @@ export default Vue.extend({
     return {
       navs: insuranceNavs.homeNavs,
       iconSizeClass: "fa-3x",
-      onWindowResize: null as null | (() => any)
+      onWindowResize: () => {}
     };
   },
 
