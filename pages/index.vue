@@ -2,7 +2,9 @@
   <div class="container">
     <section class="section">
       <div class="container">
-        <h4 class="title mb-6 has-text-centered">Các Sản Phẩm Bảo Hiểm</h4>
+        <h4 class="title has-text-centered home__title">
+          Các Sản Phẩm Bảo Hiểm
+        </h4>
 
         <HomeRoundedButtonContainer>
           <HomeRoundedButton
@@ -57,3 +59,19 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+@import "~assets/scss/_breakpoints";
+
+.home__title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: $mobile) {
+  .home__title {
+    font-size: 1.4rem;
+    margin-bottom: 1.4rem;
+  }
+}
+</style>
