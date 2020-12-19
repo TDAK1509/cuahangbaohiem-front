@@ -10,7 +10,7 @@ exports[`HomeRoundedButton.vue matches snapshot 1`] = `
       class="icon is-large icon-color-class"
     >
       <i
-        class="fa-3x icon-class"
+        class="icon-class"
       />
     </span>
   </div>
