@@ -32,12 +32,6 @@ const insuranceNavs = new InsuranceNavs();
 export default Vue.extend({
   name: "Home",
 
-  head() {
-    return {
-      title: "Cửa hàng bảo hiểm"
-    };
-  },
-
   data() {
     return {
       navs: insuranceNavs.homeNavs,
@@ -62,6 +56,12 @@ export default Vue.extend({
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onWindowResize as () => any);
+  },
+
+  head() {
+    return {
+      title: "Cửa hàng bảo hiểm"
+    };
   }
 });
 </script>
