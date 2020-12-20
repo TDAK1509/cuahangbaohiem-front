@@ -3,11 +3,9 @@
     <div class="hero-body">
       <img src="~assets/images/hero.jpg" class="hero__img" />
 
-      <div class="container">
-        <div class="hero__hotline-container">
-          <h1 class="title hero__title has-text-black mb-1">Hotline:</h1>
-          <h1 class="title hero__title has-text-white">0123456789</h1>
-        </div>
+      <div class="hero__hotline-container">
+        <h1 class="title hero__title has-text-black mb-1">Hotline:</h1>
+        <h1 class="title hero__title has-text-white">0123456789</h1>
       </div>
     </div>
   </section>
@@ -41,7 +39,10 @@ export default {
 }
 
 .hero__hotline-container {
-  text-align: right;
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
 }
 
 @media only screen and (max-width: $mobile) {
