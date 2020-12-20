@@ -61,7 +61,7 @@ export default {
 
   data() {
     return {
-      showNav: true,
+      showNav: false,
       navs: insuranceNavs.headerNavs,
       onWindowResize: () => {}
     };
