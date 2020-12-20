@@ -1,10 +1,15 @@
 <template>
-  <section class="hero is-medium is-dark">
+  <section class="hero is-large">
     <div class="hero-body">
       <img src="~assets/images/hero.jpg" class="hero__img" />
 
       <div class="hero__hotline-container">
-        <h1 class="title hero__title has-text-black mb-1">Hotline:</h1>
+        <h1 class="title hero__title has-text-black mb-1">
+          <span class="icon">
+            <i class="fas fa-phone-volume"></i>
+          </span>
+          <span>Hotline:</span>
+        </h1>
         <h1 class="title hero__title has-text-white">0123456789</h1>
       </div>
     </div>
