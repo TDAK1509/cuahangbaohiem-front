@@ -2,7 +2,7 @@ export default {
   target: "static",
 
   head: {
-    title: "cuahangbaohiem-front",
+    title: "Cửa hàng bảo hiểm | Sản phẩm",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },

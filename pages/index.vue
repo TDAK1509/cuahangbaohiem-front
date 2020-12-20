@@ -32,6 +32,12 @@ const insuranceNavs = new InsuranceNavs();
 export default Vue.extend({
   name: "Home",
 
+  head() {
+    return {
+      title: "Cửa hàng bảo hiểm"
+    };
+  },
+
   data() {
     return {
       navs: insuranceNavs.homeNavs,

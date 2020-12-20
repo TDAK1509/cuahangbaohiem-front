@@ -18,6 +18,12 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "GioiThieu"
+  name: "GioiThieu",
+
+  head() {
+    return {
+      title: "Cửa hàng bảo hiểm | Giới thiệu"
+    };
+  }
 });
 </script>
