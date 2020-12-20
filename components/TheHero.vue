@@ -59,6 +59,10 @@ export default {
 }
 
 @media only screen and (max-width: $mobile) {
+  .hero-body {
+    min-height: 200px;
+  }
+
   .hero__title {
     font-size: 1.5rem;
   }

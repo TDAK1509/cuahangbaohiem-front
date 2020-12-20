@@ -56,6 +56,12 @@ export default Vue.extend({
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onWindowResize as () => any);
+  },
+
+  head() {
+    return {
+      title: "Cửa hàng bảo hiểm"
+    };
   }
 });
 </script>
