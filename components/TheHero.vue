@@ -10,7 +10,9 @@
           </span>
           <span>Hotline:</span>
         </h1>
-        <h1 class="title hero__title has-text-white">0123456789</h1>
+        <a :href="`tel:${hotline}`" class="title hero__title has-text-white">
+          {{ hotline }}
+        </a>
       </div>
     </div>
   </section>
@@ -18,7 +20,13 @@
 
 <script>
 export default {
-  name: "Hero"
+  name: "Hero",
+
+  data() {
+    return {
+      hotline: "0123456789"
+    };
+  }
 };
 </script>
 
