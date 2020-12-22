@@ -27,7 +27,7 @@ export default {
 
   css: ["@/assets/scss/main.scss"],
 
-  plugins: [],
+  plugins: [{ src: "~/plugins/vue-fb-customer-chat.js", ssr: false }],
 
   components: true,
 
