@@ -75,9 +75,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import CarInsuranceRequestController from "@/controller/car-insurance-request";
-
-const requestController = new CarInsuranceRequestController();
+import CarInsuranceRequestController, {
+  CarInsuranceRequest
+} from "@/controller/car-insurance-request";
 
 export default Vue.extend({
   name: "BuyPopupForm",
@@ -124,13 +124,16 @@ export default Vue.extend({
     },
 
     saveRequestToServer() {
-      requestController.setName(this.name);
-      requestController.setEmail(this.email);
-      requestController.setPhone(this.phone);
-      requestController.setNote(this.note);
-      requestController.setInsuranceCompany(this.insuranceCompany);
-      requestController.setInsuranceValue(this.insuranceValue);
-      return requestController.save();
+      const requestController = new CarInsuranceRequestController();
+      const carInsuranceRequest: CarInsuranceRequest = {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        note: this.note,
+        insuranceCompany: this.insuranceCompany,
+        insuranceValue: this.insuranceValue
+      };
+      return requestController.save(carInsuranceRequest);
     },
 
     alertSuccess() {

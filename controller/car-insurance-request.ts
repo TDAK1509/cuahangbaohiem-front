@@ -1,49 +1,24 @@
 import CarInsuranceRequestModel, {
-  CarInsuranceRequest
+  RawCarInsuranceRequest
 } from "@/models/car-insurance-request";
 
+export interface CarInsuranceRequest {
+  name: string;
+  email: string;
+  phone: string;
+  note?: string;
+  insuranceCompany: string;
+  insuranceValue: string;
+}
+
 export default class CarInsuranceRequestController {
-  private name: string;
-  private email: string;
-  private phone: string;
-  private note: string;
-  private insuranceCompany: string;
-  private insuranceValue: string;
+  public save(requestFromClient: CarInsuranceRequest) {
+    const requestToSaveToServer: RawCarInsuranceRequest = {
+      ...requestFromClient,
+      date: new Date().toString(),
+      isDone: false
+    };
 
-  constructor() {
-    this.name = "";
-    this.email = "";
-    this.phone = "";
-    this.note = "";
-    this.insuranceCompany = "";
-    this.insuranceValue = "";
-  }
-
-  public setName(name: string) {
-    this.name = name;
-  }
-
-  public setEmail(email: string) {
-    this.email = email;
-  }
-
-  public setPhone(phone: string) {
-    this.phone = phone;
-  }
-
-  public setNote(note: string) {
-    this.note = note;
-  }
-
-  public setInsuranceCompany(insuranceCompany: string) {
-    this.insuranceCompany = insuranceCompany;
-  }
-
-  public setInsuranceValue(insuranceValue: string) {
-    this.insuranceValue = insuranceValue;
-  }
-
-  public save(request: CarInsuranceRequest) {
-    return CarInsuranceRequestModel.save(request);
+    return CarInsuranceRequestModel.save(requestToSaveToServer);
   }
 }
