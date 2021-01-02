@@ -43,15 +43,7 @@ export default class CarInsuranceRequestController {
     this.insuranceValue = insuranceValue;
   }
 
-  public save() {
-    const request: CarInsuranceRequest = {
-      name: this.name,
-      email: this.email,
-      phone: this.phone,
-      note: this.note,
-      insuranceCompany: this.insuranceCompany,
-      insuranceValue: this.insuranceValue
-    };
+  public save(request: CarInsuranceRequest) {
     return CarInsuranceRequestModel.save(request);
   }
 }
