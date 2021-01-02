@@ -2,14 +2,15 @@ import { shallowMount } from "@vue/test-utils";
 import ResultMic from "@/components/insurance/car/ResultMic.vue";
 import MockDate from "mockdate";
 
+let thisYear;
+
 describe("ResultMic.vue", () => {
+  beforeAll(() => {
+    MockDate.set(new Date(2020, 1, 1));
+    thisYear = new Date().getFullYear();
+  });
+
   describe("Insurance Value", () => {
-    beforeAll(() => {
-      MockDate.set(new Date(2020, 1, 1));
-    });
-
-    const thisYear = new Date().getFullYear();
-
     describe("carValue is < 500", () => {
       const carValue = 400;
 
