@@ -8,14 +8,10 @@
           :height="carousel.height"
           :display="3"
           :space="carousel.space"
+          :border="0"
         >
           <slide v-for="(product, i) in products" :key="i" :index="i">
-            <nuxt-link :to="product.to" class="product__slide-container">
-              <ProductSlide
-                :text="product.text"
-                :icon-class="product.iconClass"
-              />
-            </nuxt-link>
+            <ProductSlide v-bind="product" />
           </slide>
         </carousel-3d>
       </div>
@@ -66,7 +62,7 @@ export default Vue.extend({
       if (this.isMobile) {
         return { width: 200, height: 300, space: 100 };
       }
-      return { width: 360, height: 300, space: 400 };
+      return { width: 350, height: 500, space: 300 };
     }
   },
 
@@ -81,14 +77,3 @@ export default Vue.extend({
   }
 });
 </script>
-
-<style lang="scss" scoped>
-.product__slide-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-</style>
