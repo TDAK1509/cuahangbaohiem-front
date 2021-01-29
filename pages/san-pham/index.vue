@@ -11,12 +11,10 @@
         >
           <slide v-for="(product, i) in products" :key="i" :index="i">
             <nuxt-link :to="product.to" class="product__slide-container">
-              <div>
-                <span class="icon is-large">
-                  <i :class="product.iconClass" />
-                </span>
-                <p>{{ product.text }}</p>
-              </div>
+              <ProductSlide
+                :text="product.text"
+                :icon-class="product.iconClass"
+              />
             </nuxt-link>
           </slide>
         </carousel-3d>
