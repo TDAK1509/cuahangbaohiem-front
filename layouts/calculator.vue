@@ -1,7 +1,6 @@
 <template>
   <div>
     <TheHeader />
-    <TheHero />
     <InsuranceTabBar :insurance-type="insuranceType" />
     <Nuxt />
     <TheFooter />
