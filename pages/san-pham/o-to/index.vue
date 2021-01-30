@@ -116,6 +116,12 @@ export default Vue.extend({
         resultDOM.scrollIntoView({ behavior: "smooth" });
       });
     }
+  },
+
+  head() {
+    return {
+      title: "Tính phí ô tô | Cửa hàng bảo hiểm"
+    };
   }
 });
 </script>
