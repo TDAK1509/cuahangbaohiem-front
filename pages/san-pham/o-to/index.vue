@@ -63,9 +63,21 @@
           :car-value="carValue"
           :car-year-threshold="carYearThreshold"
         />
-        <!-- <ResultBaoViet class="mb-5" :car-value="carValue" :car-year="carYear" />
-        <ResultBaoMinh class="mb-5" :car-value="carValue" :car-year="carYear" />
-        <ResultMic class="mb-5" :car-value="carValue" :car-year="carYear" /> -->
+        <ResultBaoViet
+          class="mb-5"
+          :car-value="carValue"
+          :car-year-threshold="carYearThreshold"
+        />
+        <ResultBaoMinh
+          class="mb-5"
+          :car-value="carValue"
+          :car-year-threshold="carYearThreshold"
+        />
+        <ResultMic
+          class="mb-5"
+          :car-value="carValue"
+          :car-year-threshold="carYearThreshold"
+        />
       </div>
     </div>
   </section>
