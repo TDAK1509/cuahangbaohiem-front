@@ -1,17 +1,17 @@
 <template>
   <div class="container insurance-tab-bar">
-    <div class="tabs is-toggle is-fullwidth">
+    <div class="tabs is-toggle is-fullwidth is-small">
       <ul>
         <li
           v-for="(tab, index) in tabs"
           :key="index"
           :class="{ 'is-active': tab.active }"
         >
-          <nuxt-link :to="tab.to" class="is-flex is-flex-direction-column">
-            <p class="icon is-large">
+          <nuxt-link :to="tab.to" class="">
+            <span class="icon is-large">
               <i :class="tab.iconClass" />
-            </p>
-            <p class="bold">{{ tab.text }}</p>
+            </span>
+            <span class="bold">{{ tab.text }}</span>
           </nuxt-link>
         </li>
       </ul>
