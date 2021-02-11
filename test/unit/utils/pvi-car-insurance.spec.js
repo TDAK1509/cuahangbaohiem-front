@@ -35,5 +35,16 @@ describe("class Pvi", () => {
       const expectedCarInsuranceValue = carValue * 1.4;
       expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
     });
+
+    it("if car year threshold > 10, returns 0", () => {
+      const carValue = 100;
+      const invalidCarYearThreshold = 69;
+      const pvi = new Pvi();
+      const carInsuranceValue = pvi.getCarInsuranceValue(
+        carValue,
+        invalidCarYearThreshold
+      );
+      expect(carInsuranceValue).toBe(0);
+    });
   });
 });
