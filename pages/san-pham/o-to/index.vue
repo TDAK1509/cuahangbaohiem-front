@@ -28,7 +28,7 @@
 
         <div class="field">
           <label class="label">Năm sản xuất</label>
-          <div class="control" data-cy="car-year">
+          <div class="control" data-cy="car-year-threshold">
             <p v-for="{ text, value } in carYearRadios" :key="value">
               <label class="radio">
                 <input
@@ -40,6 +40,17 @@
                 {{ text }}
               </label>
             </p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Năm sản xuất</label>
+
+          <div class="control" data-cy="addons">
+            <label class="checkbox">
+              <input type="checkbox" />
+              Remember me
+            </label>
           </div>
         </div>
 
