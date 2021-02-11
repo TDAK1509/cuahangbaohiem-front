@@ -1,19 +1,19 @@
-import BaoMinhCarInsurance from "~/utils/insurance-companies/bao-minh-car-insurance";
-import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car";
+import MicCarInsurance from "~/utils/car-insurance/mic-car-insurance";
+import { CarYearThreshold, CarInsuranceAddOn } from "~/utils/car-insurance/car";
 
-describe("class BaoMinhCarInsurance", () => {
+describe("class MicCarInsurance", () => {
   describe("getCarInsuranceValue()", () => {
     describe("if car year threshold is <= 3 years", () => {
       it("if no addons, returns car value * 1.2", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
         const addons = [];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.2;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -22,19 +22,19 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 1000;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
         const addons = [];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
 
         let expectedCarInsuranceValue = carValue * 1.2;
-        let carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        let carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
 
         const newCarValue = 100;
-        baoMinhCarInsurance.setCarValue(newCarValue);
-        carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        micCarInsurance.setCarValue(newCarValue);
+        carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         expectedCarInsuranceValue = newCarValue * 1.2;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -43,20 +43,20 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
         const addons = [];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
 
         const expectedCarInsuranceValue = carValue * 1.2;
-        let carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        let carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         expect(carInsuranceValue).not.toBe(expectedCarInsuranceValue);
 
-        baoMinhCarInsurance.setCarYearThreshold(
+        micCarInsurance.setCarYearThreshold(
           CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
         );
-        carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
 
@@ -64,18 +64,18 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
         const addons = [CarInsuranceAddOn.OPTION_1];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
 
         const expectedCarInsuranceValue = 100 * 1.2;
-        let carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        let carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         expect(carInsuranceValue).not.toBe(expectedCarInsuranceValue);
 
-        baoMinhCarInsurance.setAddons([]);
-        carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        micCarInsurance.setAddons([]);
+        carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
 
@@ -83,12 +83,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
         const addons = [CarInsuranceAddOn.OPTION_1];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.21;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -97,12 +97,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
         const addons = [CarInsuranceAddOn.OPTION_2];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.22;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -111,12 +111,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
         const addons = [CarInsuranceAddOn.OPTION_1, CarInsuranceAddOn.OPTION_2];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.23;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -127,12 +127,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
         const addons = [];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.3;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -141,12 +141,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
         const addons = [CarInsuranceAddOn.OPTION_1];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.31;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -155,12 +155,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
         const addons = [CarInsuranceAddOn.OPTION_2];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.32;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -169,12 +169,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
         const addons = [CarInsuranceAddOn.OPTION_1, CarInsuranceAddOn.OPTION_2];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.33;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -185,12 +185,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.OVER_6_YEARS;
         const addons = [];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.4;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -199,12 +199,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.OVER_6_YEARS;
         const addons = [CarInsuranceAddOn.OPTION_1];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.41;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -213,12 +213,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.OVER_6_YEARS;
         const addons = [CarInsuranceAddOn.OPTION_2];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.42;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -227,12 +227,12 @@ describe("class BaoMinhCarInsurance", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.OVER_6_YEARS;
         const addons = [CarInsuranceAddOn.OPTION_1, CarInsuranceAddOn.OPTION_2];
-        const baoMinhCarInsurance = new BaoMinhCarInsurance(
+        const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
           addons
         );
-        const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+        const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
         const expectedCarInsuranceValue = carValue * 1.43;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
@@ -242,12 +242,12 @@ describe("class BaoMinhCarInsurance", () => {
       const carValue = 100;
       const invalidCarYearThreshold = 69;
       const addons = [];
-      const baoMinhCarInsurance = new BaoMinhCarInsurance(
+      const micCarInsurance = new MicCarInsurance(
         carValue,
         invalidCarYearThreshold,
         addons
       );
-      const carInsuranceValue = baoMinhCarInsurance.getCarInsuranceValue();
+      const carInsuranceValue = micCarInsurance.getCarInsuranceValue();
       expect(carInsuranceValue).toBe(0);
     });
   });

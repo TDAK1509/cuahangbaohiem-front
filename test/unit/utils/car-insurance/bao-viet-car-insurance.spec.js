@@ -1,5 +1,5 @@
-import BaoVietCarInsurance from "~/utils/insurance-companies/bao-viet-car-insurance";
-import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car";
+import BaoVietCarInsurance from "~/utils/car-insurance/bao-viet-car-insurance";
+import { CarYearThreshold, CarInsuranceAddOn } from "~/utils/car-insurance/car";
 
 describe("class BaoVietCarInsurance", () => {
   describe("getCarInsuranceValue()", () => {

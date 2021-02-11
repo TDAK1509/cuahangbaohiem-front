@@ -1,4 +1,4 @@
-import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car";
+import { CarYearThreshold, CarInsuranceAddOn } from "~/utils/car-insurance/car";
 
 export default class BaoMinhCarInsurance {
   private carValue!: number;

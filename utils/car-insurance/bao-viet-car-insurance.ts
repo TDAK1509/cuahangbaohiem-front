@@ -1,6 +1,6 @@
-import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car";
+import { CarYearThreshold, CarInsuranceAddOn } from "~/utils/car-insurance/car";
 
-export default class PviCarInsurance {
+export default class BaoVietCarInsurance {
   private carValue!: number;
   private carYearThreshold!: CarYearThreshold;
   private addons!: CarInsuranceAddOn[];
