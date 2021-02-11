@@ -44,7 +44,7 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe("rendering", () => {
+  describe.skip("rendering", () => {
     it("should render enough inputs", () => {
       cy.get("[data-cy=car-value]").should("be.visible");
       cy.get("[data-cy=car-year-threshold]").should("be.visible");
@@ -68,14 +68,10 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe.skip("on click calculate button", () => {
-    describe("form error handling", () => {
+  describe("on click calculate button", () => {
+    describe.skip("form error handling", () => {
       it("if car value is empty, shows HTML5 required validation", () => {
         getCarValueField().should(assertFailedHtml5FormValidation);
-      });
-
-      it("if car year is empty, shows HTML5 required validation", () => {
-        getCarYearField().should(assertFailedHtml5FormValidation);
       });
 
       it("if car value is not a number, shows HTML5 required validation", () => {
@@ -85,16 +81,6 @@ describe("Page /san-pham/o-to", () => {
           .type("not a number")
           .should(($el) => {
             assertFailedHtml5FormValidationWithMessage($el, errorNotANumber);
-          });
-      });
-
-      it("if car year is not a number, shows HTML5 required validation", () => {
-        const errorInvalidYear = "Năm sản xuất không hợp lệ.";
-
-        getCarYearField()
-          .type("not a number")
-          .should(($el) => {
-            assertFailedHtml5FormValidationWithMessage($el, errorInvalidYear);
           });
       });
     });
