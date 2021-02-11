@@ -29,12 +29,6 @@ export default Vue.extend({
     }
   },
 
-  data() {
-    return {
-      thisYear: new Date().getFullYear()
-    };
-  },
-
   computed: {
     insuranceValue(): number {
       return pvi.getCarInsuranceValue(this.carValue, this.carYearThreshold);
