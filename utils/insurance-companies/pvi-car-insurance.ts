@@ -46,6 +46,13 @@ export default class PviCarInsurance {
   }
 
   private getCarInsuranceRateForLessThan3YearsThreshold(): number {
+    if (
+      this.addons.includes(CarInsuranceAddOn.OPTION_1) &&
+      this.addons.includes(CarInsuranceAddOn.OPTION_2)
+    ) {
+      return 1.23;
+    }
+
     if (this.addons.includes(CarInsuranceAddOn.OPTION_1)) {
       return 1.21;
     }
