@@ -28,12 +28,14 @@ describe("class Pvi", () => {
           addons
         );
 
-        const expectedCarInsuranceValue = 100 * 1.2;
+        let expectedCarInsuranceValue = carValue * 1.2;
         let carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
-        expect(carInsuranceValue).not.toBe(expectedCarInsuranceValue);
+        expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
 
-        pviCarInsurance.setCarValue(100);
+        const newCarValue = 100;
+        pviCarInsurance.setCarValue(newCarValue);
         carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+        expectedCarInsuranceValue = newCarValue * 1.2;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
 
@@ -47,7 +49,7 @@ describe("class Pvi", () => {
           addons
         );
 
-        const expectedCarInsuranceValue = 100 * 1.2;
+        const expectedCarInsuranceValue = carValue * 1.2;
         let carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
         expect(carInsuranceValue).not.toBe(expectedCarInsuranceValue);
 
