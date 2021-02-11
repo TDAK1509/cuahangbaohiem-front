@@ -1,7 +1,7 @@
 import PviCarInsurance from "~/utils/insurance-companies/pvi-car-insurance";
 import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car";
 
-describe("class Pvi", () => {
+describe("class PviCarInsurance", () => {
   describe("getCarInsuranceValue()", () => {
     describe("if car year threshold is <= 3 years", () => {
       it("if no addons, returns car value * 1.2", () => {
