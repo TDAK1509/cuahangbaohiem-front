@@ -32,7 +32,7 @@
             <p v-for="{ text, value } in carYearRadios" :key="value">
               <label class="radio">
                 <input
-                  v-model="carYearInput"
+                  v-model="carYearThreshold"
                   :value="value"
                   type="radio"
                   name="car_year"
@@ -58,10 +58,14 @@
         class="mt-5 pt-5 tinh-phi__result"
         data-cy="result"
       >
-        <ResultPvi class="mb-5" :car-value="carValue" :car-year="carYear" />
-        <ResultBaoViet class="mb-5" :car-value="carValue" :car-year="carYear" />
+        <ResultPvi
+          class="mb-5"
+          :car-value="carValue"
+          :car-year-threshold="carYearThreshold"
+        />
+        <!-- <ResultBaoViet class="mb-5" :car-value="carValue" :car-year="carYear" />
         <ResultBaoMinh class="mb-5" :car-value="carValue" :car-year="carYear" />
-        <ResultMic class="mb-5" :car-value="carValue" :car-year="carYear" />
+        <ResultMic class="mb-5" :car-value="carValue" :car-year="carYear" /> -->
       </div>
     </div>
   </section>
@@ -69,6 +73,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { CarYearThreshold } from "@/utils/car";
 
 export default Vue.extend({
   name: "TinhPhiOto",
@@ -79,11 +84,14 @@ export default Vue.extend({
     return {
       showResult: false,
       carValueInput: null as string | null,
-      carYearInput: 0,
+      carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
       carYearRadios: [
-        { text: "Dưới 3 năm", value: 0 },
-        { text: "Từ 3 đến 6 năm", value: 1 },
-        { text: "Từ 6 đến 10 năm", value: 2 }
+        {
+          text: "Dưới 3 năm",
+          value: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
+        },
+        { text: "Từ 3 đến 6 năm", value: CarYearThreshold.FROM_3_TO_6_YEARS },
+        { text: "Từ 6 đến 10 năm", value: CarYearThreshold.OVER_6_YEARS }
       ]
     };
   },
@@ -95,22 +103,12 @@ export default Vue.extend({
       return Number.isInteger(carValue);
     },
 
-    carYearIsNumber(): boolean {
-      if (!this.carYearInput) return false;
-      const carYear = parseInt(this.carYearInput);
-      return Number.isInteger(carYear);
-    },
-
     isFormValid(): boolean {
-      return this.carValueIsNumber && this.carYearIsNumber;
+      return this.carValueIsNumber;
     },
 
     carValue(): number {
       return this.carValueIsNumber ? parseInt(this.carValueInput as string) : 0;
-    },
-
-    carYear(): number {
-      return this.carYearIsNumber ? parseInt(this.carYearInput as string) : 0;
     }
   },
 
