@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Pvi from "@/utils/pvi";
+import Pvi from "@/utils/insurance-companies/pvi";
 
 const pvi = new Pvi();
 

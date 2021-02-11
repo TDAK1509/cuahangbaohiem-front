@@ -1,4 +1,4 @@
-import { CarYearThreshold } from "./car";
+import { CarYearThreshold } from "@/utils/car";
 
 export default class Pvi {
   public getCarInsuranceValue(
