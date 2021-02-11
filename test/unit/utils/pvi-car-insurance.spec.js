@@ -18,6 +18,65 @@ describe("class Pvi", () => {
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
 
+      it("setCarValue() is working", () => {
+        const carValue = 1000;
+        const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
+        const addons = [];
+        const pviCarInsurance = new PviCarInsurance(
+          carValue,
+          carYearThreshold,
+          addons
+        );
+
+        const expectedCarInsuranceValue = 100 * 1.2;
+        let carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+        expect(carInsuranceValue).not.toBe(expectedCarInsuranceValue);
+
+        pviCarInsurance.setCarValue(100);
+        carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+        expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
+      });
+
+      it("setCarYearThreshold() is working", () => {
+        const carValue = 100;
+        const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
+        const addons = [];
+        const pviCarInsurance = new PviCarInsurance(
+          carValue,
+          carYearThreshold,
+          addons
+        );
+
+        const expectedCarInsuranceValue = 100 * 1.2;
+        let carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+        expect(carInsuranceValue).not.toBe(expectedCarInsuranceValue);
+
+        pviCarInsurance.setCarYearThreshold(
+          CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
+        );
+        carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+        expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
+      });
+
+      it("setAddons() is working", () => {
+        const carValue = 100;
+        const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
+        const addons = [CarInsuranceAddOn.OPTION_1];
+        const pviCarInsurance = new PviCarInsurance(
+          carValue,
+          carYearThreshold,
+          addons
+        );
+
+        const expectedCarInsuranceValue = 100 * 1.2;
+        let carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+        expect(carInsuranceValue).not.toBe(expectedCarInsuranceValue);
+
+        pviCarInsurance.setAddons([]);
+        carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+        expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
+      });
+
       it("if add on 1, returns car value * 1.21", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
