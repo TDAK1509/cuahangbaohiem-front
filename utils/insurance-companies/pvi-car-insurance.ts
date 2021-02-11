@@ -84,6 +84,21 @@ export default class PviCarInsurance {
   }
 
   private getCarInsuranceRateForOver6Years(): number {
+    if (
+      this.addons.includes(CarInsuranceAddOn.OPTION_1) &&
+      this.addons.includes(CarInsuranceAddOn.OPTION_2)
+    ) {
+      return 1.43;
+    }
+
+    if (this.addons.includes(CarInsuranceAddOn.OPTION_1)) {
+      return 1.41;
+    }
+
+    if (this.addons.includes(CarInsuranceAddOn.OPTION_2)) {
+      return 1.42;
+    }
+
     return 1.4;
   }
 }
