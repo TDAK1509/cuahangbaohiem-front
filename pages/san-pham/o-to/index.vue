@@ -85,7 +85,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { CarYearThreshold } from "@/utils/car";
+import { CarYearThreshold } from "@/utils/car-insurance/car";
 
 export default Vue.extend({
   name: "TinhPhiOto",
