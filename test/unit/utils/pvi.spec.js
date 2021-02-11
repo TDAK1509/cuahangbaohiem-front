@@ -1,5 +1,5 @@
 import Pvi from "~/utils/insurance-companies/pvi";
-import { CarYearThreshold } from "@/utils/car";
+import { CarYearThreshold, CarInsuranceAddOns } from "@/utils/car";
 
 describe("class Pvi", () => {
   describe("getCarInsuranceValue()", () => {
@@ -12,6 +12,19 @@ describe("class Pvi", () => {
           CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
         );
         const expectedCarInsuranceValue = carValue * 1.2;
+        expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
+      });
+
+      it("if add on 1, returns car value * 1.21", () => {
+        const carValue = 100;
+        const addons = [CarInsuranceAddOns.OPTION_1];
+        const pvi = new Pvi();
+        const carInsuranceValue = pvi.getCarInsuranceValue(
+          carValue,
+          CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
+          addons
+        );
+        const expectedCarInsuranceValue = carValue * 1.21;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
     });

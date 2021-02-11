@@ -3,3 +3,9 @@ export enum CarYearThreshold {
   FROM_3_TO_6_YEARS,
   OVER_6_YEARS
 }
+
+export enum CarInsuranceAddOns {
+  OPTION_1,
+  OPTION_2,
+  OPTION_3
+}
