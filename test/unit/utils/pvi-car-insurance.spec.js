@@ -136,6 +136,48 @@ describe("class Pvi", () => {
         const expectedCarInsuranceValue = carValue * 1.3;
         expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
       });
+
+      it("if add on 1, returns car value * 1.31", () => {
+        const carValue = 100;
+        const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
+        const addons = [CarInsuranceAddOn.OPTION_1];
+        const pviCarInsurance = new PviCarInsurance(
+          carValue,
+          carYearThreshold,
+          addons
+        );
+        const carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+        const expectedCarInsuranceValue = carValue * 1.31;
+        expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
+      });
+
+      it("if add on 2, returns car value * 1.32", () => {
+        const carValue = 100;
+        const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
+        const addons = [CarInsuranceAddOn.OPTION_2];
+        const pviCarInsurance = new PviCarInsurance(
+          carValue,
+          carYearThreshold,
+          addons
+        );
+        const carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+        const expectedCarInsuranceValue = carValue * 1.32;
+        expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
+      });
+
+      it("if add on both 1 & 2, returns car value * 1.33", () => {
+        const carValue = 100;
+        const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
+        const addons = [CarInsuranceAddOn.OPTION_1, CarInsuranceAddOn.OPTION_2];
+        const pviCarInsurance = new PviCarInsurance(
+          carValue,
+          carYearThreshold,
+          addons
+        );
+        const carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+        const expectedCarInsuranceValue = carValue * 1.33;
+        expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
+      });
     });
 
     describe("if 6 < car year threshold <= 10", () => {
