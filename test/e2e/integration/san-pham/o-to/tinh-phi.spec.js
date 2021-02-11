@@ -85,20 +85,21 @@ describe("Page /san-pham/o-to", () => {
       });
     });
 
-    describe.skip("form valid handling", () => {
-      it("shows result if car and year not empty", () => {
+    describe("form valid handling", () => {
+      it("shows result if car value not empty", () => {
         getCarValueField().type("800");
-        getCarYearField().type("2015");
         getCalculateButton().click();
         assertResultBlockIsRendered();
       });
 
       it("results show 4 insurance brands with correct insurance values and 4 BUY buttons", () => {
         getCarValueField().type("800");
-        getCarYearField().type("2015");
         getCalculateButton().click();
 
-        assertResultShows4BrandsAndInsuranceValues();
+        assertPviInsuranceValue("960.000.000");
+        assertBaoVietInsuranceValue("960.000.000");
+        assertBaoMinhInsuranceValue("960.000.000");
+        assertMicInsuranceValue("960.000.000");
         assertResultShows4BuyButtons();
       });
     });
@@ -247,30 +248,36 @@ function assertResultBlockIsRendered() {
   cy.get("[data-cy=result]").should("be.visible");
 }
 
-function assertResultShows4BrandsAndInsuranceValues() {
+function assertPviInsuranceValue(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(0)
     .invoke("text")
     .should("include", "PVI")
-    .should("include", "12.320.000");
+    .should("include", value);
+}
 
+function assertBaoVietInsuranceValue(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(1)
     .invoke("text")
     .should("include", "Bảo Việt")
-    .should("include", "13.860.000");
+    .should("include", value);
+}
 
+function assertBaoMinhInsuranceValue(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(2)
     .invoke("text")
     .should("include", "Bảo Minh")
-    .should("include", "13.400.000");
+    .should("include", value);
+}
 
+function assertMicInsuranceValue(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(3)
     .invoke("text")
     .should("include", "MIC")
-    .should("include", "10.400.000");
+    .should("include", value);
 }
 
 function assertResultShows4BuyButtons() {
