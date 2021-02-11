@@ -11,6 +11,7 @@
 <script lang="ts">
 import Vue from "vue";
 import PviCarInsurance from "@/utils/car-insurance/pvi-car-insurance";
+import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car-insurance/car";
 
 export default Vue.extend({
   name: "ResultPVI",
@@ -22,14 +23,23 @@ export default Vue.extend({
     },
 
     carYearThreshold: {
-      type: Number,
+      type: Number as () => CarYearThreshold,
+      required: true
+    },
+
+    addons: {
+      type: Array as () => CarInsuranceAddOn[],
       required: true
     }
   },
 
   data() {
     return {
-      pvi: new PviCarInsurance(this.carValue, this.carYearThreshold, [])
+      pvi: new PviCarInsurance(
+        this.carValue,
+        this.carYearThreshold,
+        this.addons
+      )
     };
   },
 

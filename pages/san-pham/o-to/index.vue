@@ -49,7 +49,7 @@
           <div class="control" data-cy="addons">
             <p v-for="{ text, value } in insuranceAddOns" :key="value">
               <label class="checkbox">
-                <input type="checkbox" :value="value" />
+                <input v-model="addons" type="checkbox" :value="value" />
                 {{ text }}
               </label>
             </p>
@@ -75,21 +75,25 @@
           class="mb-5"
           :car-value="carValue"
           :car-year-threshold="carYearThreshold"
+          :addons="addons"
         />
         <ResultBaoViet
           class="mb-5"
           :car-value="carValue"
           :car-year-threshold="carYearThreshold"
+          :addons="addons"
         />
         <ResultBaoMinh
           class="mb-5"
           :car-value="carValue"
           :car-year-threshold="carYearThreshold"
+          :addons="addons"
         />
         <ResultMic
           class="mb-5"
           :car-value="carValue"
           :car-year-threshold="carYearThreshold"
+          :addons="addons"
         />
       </div>
     </div>
@@ -110,6 +114,7 @@ export default Vue.extend({
       showResult: false,
       carValueInput: null as string | null,
       carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
+      addons: [] as CarInsuranceAddOn[],
       carYearRadios: [
         {
           text: "Dưới 3 năm",

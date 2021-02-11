@@ -11,6 +11,7 @@
 <script lang="ts">
 import Vue from "vue";
 import BaoMinhCarInsurance from "@/utils/car-insurance/bao-minh-car-insurance";
+import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car-insurance/car";
 
 export default Vue.extend({
   name: "ResultBaoMinh",
@@ -22,14 +23,23 @@ export default Vue.extend({
     },
 
     carYearThreshold: {
-      type: Number,
+      type: Number as () => CarYearThreshold,
+      required: true
+    },
+
+    addons: {
+      type: Array as () => CarInsuranceAddOn[],
       required: true
     }
   },
 
   data() {
     return {
-      baoMinh: new BaoMinhCarInsurance(this.carValue, this.carYearThreshold, [])
+      baoMinh: new BaoMinhCarInsurance(
+        this.carValue,
+        this.carYearThreshold,
+        this.addons
+      )
     };
   },
 

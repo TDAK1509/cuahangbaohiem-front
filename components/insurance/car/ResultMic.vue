@@ -11,6 +11,7 @@
 <script lang="ts">
 import Vue from "vue";
 import MicCarInsurance from "@/utils/car-insurance/mic-car-insurance";
+import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car-insurance/car";
 
 export default Vue.extend({
   name: "ResultMic",
@@ -22,14 +23,23 @@ export default Vue.extend({
     },
 
     carYearThreshold: {
-      type: Number,
+      type: Number as () => CarYearThreshold,
+      required: true
+    },
+
+    addons: {
+      type: Array as () => CarInsuranceAddOn[],
       required: true
     }
   },
 
   data() {
     return {
-      mic: new MicCarInsurance(this.carValue, this.carYearThreshold, [])
+      mic: new MicCarInsurance(
+        this.carValue,
+        this.carYearThreshold,
+        this.addons
+      )
     };
   },
 
