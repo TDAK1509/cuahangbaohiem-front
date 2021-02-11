@@ -47,10 +47,12 @@
           <label class="label">Tùy chọn bổ sung</label>
 
           <div class="control" data-cy="addons">
-            <label class="checkbox">
-              <input type="checkbox" />
-              Remember me
-            </label>
+            <p v-for="{ text, value } in insuranceAddOns" :key="value">
+              <label class="checkbox">
+                <input type="checkbox" :value="value" />
+                {{ text }}
+              </label>
+            </p>
           </div>
         </div>
 
@@ -96,7 +98,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { CarYearThreshold } from "@/utils/car-insurance/car";
+import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car-insurance/car";
 
 export default Vue.extend({
   name: "TinhPhiOto",
@@ -115,6 +117,16 @@ export default Vue.extend({
         },
         { text: "Từ 3 đến 6 năm", value: CarYearThreshold.FROM_3_TO_6_YEARS },
         { text: "Từ 6 đến 10 năm", value: CarYearThreshold.OVER_6_YEARS }
+      ],
+      insuranceAddOns: [
+        {
+          text: "Option 1",
+          value: CarInsuranceAddOn.OPTION_1
+        },
+        {
+          text: "Option 2",
+          value: CarInsuranceAddOn.OPTION_2
+        }
       ]
     };
   },
