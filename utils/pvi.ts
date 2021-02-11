@@ -11,7 +11,7 @@ export default class Pvi {
       case CarYearThreshold.FROM_3_TO_6_YEARS:
         return carValue * 1.3;
       case CarYearThreshold.OVER_6_YEARS:
-        return carValue * 1.2;
+        return carValue * 1.4;
       default:
         return 0;
     }
