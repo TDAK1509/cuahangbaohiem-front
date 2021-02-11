@@ -49,6 +49,11 @@ export default class PviCarInsurance {
     if (this.addons.includes(CarInsuranceAddOn.OPTION_1)) {
       return 1.21;
     }
+
+    if (this.addons.includes(CarInsuranceAddOn.OPTION_2)) {
+      return 1.22;
+    }
+
     return 1.2;
   }
 

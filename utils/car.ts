@@ -6,6 +6,5 @@ export enum CarYearThreshold {
 
 export enum CarInsuranceAddOn {
   OPTION_1,
-  OPTION_2,
-  OPTION_3
+  OPTION_2
 }
