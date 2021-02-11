@@ -10,12 +10,10 @@
 
 <script lang="ts">
 import Vue from "vue";
-import BaoMinh from "@/utils/insurance-companies/bao-minh";
-
-const baoMinh = new BaoMinh();
+import BaoMinhCarInsurance from "@/utils/car-insurance/bao-minh-car-insurance";
 
 export default Vue.extend({
-  name: "ResultbaoMinh",
+  name: "ResultBaoMinh",
 
   props: {
     carValue: {
@@ -29,9 +27,15 @@ export default Vue.extend({
     }
   },
 
+  data() {
+    return {
+      baoMinh: new BaoMinhCarInsurance(this.carValue, this.carYearThreshold, [])
+    };
+  },
+
   computed: {
     insuranceValue(): number {
-      return baoMinh.getCarInsuranceValue(this.carValue, this.carYearThreshold);
+      return this.baoMinh.getCarInsuranceValue();
     }
   }
 });

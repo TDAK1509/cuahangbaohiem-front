@@ -10,12 +10,10 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Mic from "@/utils/insurance-companies/mic";
-
-const mic = new Mic();
+import MicCarInsurance from "@/utils/car-insurance/mic-car-insurance";
 
 export default Vue.extend({
-  name: "Resultmic",
+  name: "ResultMic",
 
   props: {
     carValue: {
@@ -29,9 +27,15 @@ export default Vue.extend({
     }
   },
 
+  data() {
+    return {
+      mic: new MicCarInsurance(this.carValue, this.carYearThreshold, [])
+    };
+  },
+
   computed: {
     insuranceValue(): number {
-      return mic.getCarInsuranceValue(this.carValue, this.carYearThreshold);
+      return this.mic.getCarInsuranceValue();
     }
   }
 });

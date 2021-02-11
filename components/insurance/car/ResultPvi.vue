@@ -10,9 +10,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Pvi from "@/utils/insurance-companies/pvi";
-
-const pvi = new Pvi();
+import PviCarInsurance from "@/utils/car-insurance/pvi-car-insurance";
 
 export default Vue.extend({
   name: "ResultPVI",
@@ -29,9 +27,15 @@ export default Vue.extend({
     }
   },
 
+  data() {
+    return {
+      pvi: new PviCarInsurance(this.carValue, this.carYearThreshold, [])
+    };
+  },
+
   computed: {
     insuranceValue(): number {
-      return pvi.getCarInsuranceValue(this.carValue, this.carYearThreshold);
+      return this.pvi.getCarInsuranceValue();
     }
   }
 });
