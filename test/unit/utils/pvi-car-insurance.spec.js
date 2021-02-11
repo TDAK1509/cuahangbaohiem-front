@@ -1,4 +1,4 @@
-import PviCarInsurance from "~/utils/insurance-companies/pvi";
+import PviCarInsurance from "~/utils/insurance-companies/pvi-car-insurance";
 import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car";
 
 describe("class Pvi", () => {
