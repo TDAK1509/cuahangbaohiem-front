@@ -54,6 +54,18 @@ describe("Page /san-pham/o-to", () => {
     it("should render Calculate button", () => {
       getCalculateButton().should("be.visible");
     });
+
+    it("car year threshold should have 3 radios", () => {
+      cy.get("[data-cy=car-year-threshold]")
+        .get("input[type=radio]")
+        .should("have.length", 3);
+    });
+
+    it("addons should have 2 checkboxes", () => {
+      cy.get("[data-cy=addons]")
+        .get("input[type=checkbox]")
+        .should("have.length", 2);
+    });
   });
 
   describe.skip("on click calculate button", () => {

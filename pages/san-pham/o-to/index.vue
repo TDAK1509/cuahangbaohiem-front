@@ -44,7 +44,7 @@
         </div>
 
         <div class="field">
-          <label class="label">Năm sản xuất</label>
+          <label class="label">Tùy chọn bổ sung</label>
 
           <div class="control" data-cy="addons">
             <label class="checkbox">
