@@ -26,17 +26,22 @@
           title="Vui lòng điền một con số."
         />
 
-        <TextField
-          v-model="carYearInput"
-          data-cy="car-year"
-          label="Năm sản xuất"
-          placeholder="2015"
-          required
-          pattern="[0-9]*"
-          minlength="4"
-          maxlength="4"
-          title="Năm sản xuất không hợp lệ."
-        />
+        <div class="field">
+          <label class="label">Năm sản xuất</label>
+          <div class="control" data-cy="car-year">
+            <p v-for="{ text, value } in carYearRadios" :key="value">
+              <label class="radio">
+                <input
+                  v-model="carYearInput"
+                  :value="value"
+                  type="radio"
+                  name="car_year"
+                />
+                {{ text }}
+              </label>
+            </p>
+          </div>
+        </div>
 
         <div class="field mt-5">
           <div class="control">
@@ -74,7 +79,12 @@ export default Vue.extend({
     return {
       showResult: false,
       carValueInput: null as string | null,
-      carYearInput: null as string | null
+      carYearInput: 0,
+      carYearRadios: [
+        { text: "Dưới 3 năm", value: 0 },
+        { text: "Từ 3 đến 6 năm", value: 1 },
+        { text: "Từ 6 đến 10 năm", value: 2 }
+      ]
     };
   },
 
