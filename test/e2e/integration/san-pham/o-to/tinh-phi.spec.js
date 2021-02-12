@@ -139,6 +139,27 @@ describe("Page /san-pham/o-to", () => {
         assertMicInsuranceValue("123.000.000");
         assertResultShows4BuyButtons();
       });
+
+      it("reselecting addons works", () => {
+        getCarValueField().type("100");
+        cy.contains("Option 1").click();
+        getCalculateButton().click();
+
+        assertPviInsuranceValue("121.000.000");
+        assertBaoVietInsuranceValue("121.000.000");
+        assertBaoMinhInsuranceValue("121.000.000");
+        assertMicInsuranceValue("121.000.000");
+        assertResultShows4BuyButtons();
+
+        cy.contains("Option 1").click();
+        cy.contains("Option 2").click();
+        getCalculateButton().click();
+        assertPviInsuranceValue("122.000.000");
+        assertBaoVietInsuranceValue("122.000.000");
+        assertBaoMinhInsuranceValue("122.000.000");
+        assertMicInsuranceValue("122.000.000");
+        assertResultShows4BuyButtons();
+      });
     });
   });
 
