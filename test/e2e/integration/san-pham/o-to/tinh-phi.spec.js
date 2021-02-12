@@ -68,8 +68,8 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe("on click calculate button", () => {
-    describe.skip("form error handling", () => {
+  describe.skip("on click calculate button", () => {
+    describe("form error handling", () => {
       it("if car value is empty, shows HTML5 required validation", () => {
         getCarValueField().should(assertFailedHtml5FormValidation);
       });
@@ -163,10 +163,9 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe.skip("On click BUY button", () => {
+  describe("On click BUY button", () => {
     beforeEach(() => {
-      getCarValueField().type("800");
-      getCarYearField().type("2015");
+      getCarValueField().type("100");
       getCalculateButton().click();
       getResultBuyButton().first().click();
     });
@@ -256,10 +255,6 @@ describe("Page /san-pham/o-to", () => {
 
 function getCarValueField() {
   return cy.get("[data-cy=car-value]");
-}
-
-function getCarYearField() {
-  return cy.get("[data-cy=car-year]");
 }
 
 function getCalculateButton() {
