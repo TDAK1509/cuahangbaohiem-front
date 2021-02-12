@@ -114,6 +114,18 @@ describe("Page /san-pham/o-to", () => {
         assertMicInsuranceValue("121.000.000");
         assertResultShows4BuyButtons();
       });
+
+      it("tick second addon shows results with correct value", () => {
+        getCarValueField().type("100");
+        cy.contains("Option 2").click();
+        getCalculateButton().click();
+
+        assertPviInsuranceValue("122.000.000");
+        assertBaoVietInsuranceValue("122.000.000");
+        assertBaoMinhInsuranceValue("122.000.000");
+        assertMicInsuranceValue("122.000.000");
+        assertResultShows4BuyButtons();
+      });
     });
   });
 
