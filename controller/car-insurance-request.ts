@@ -7,6 +7,9 @@ export interface CarInsuranceRequest {
   email: string;
   phone: string;
   note?: string;
+  carValue: string;
+  carYearThreshold: string;
+  addons: string[];
   insuranceCompany: string;
   insuranceValue: string;
 }
