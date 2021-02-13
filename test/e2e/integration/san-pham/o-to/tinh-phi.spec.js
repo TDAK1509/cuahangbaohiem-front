@@ -164,77 +164,107 @@ describe("Page /san-pham/o-to", () => {
   });
 
   describe("On click BUY button", () => {
-    beforeEach(() => {
-      getCarValueField().type("100");
-      getCalculateButton().click();
-      getResultBuyButton().first().click();
-    });
+    describe("without addon", () => {
+      beforeEach(() => {
+        getCarValueField().type("100");
+        getCalculateButton().click();
+        getResultBuyButton().first().click();
+      });
 
-    describe.skip("rendering", () => {
-      it("shows popup with inputs name, email, phone, note, CANCEL button and BUY button", () => {
-        getPopup().should("be.visible");
-        getVisiblePopup().should("have.length", 1);
-        getPopupName().should("be.visible");
-        getPopupEmail().should("be.visible");
-        getPopupPhone().should("be.visible");
-        getPopupNote().should("be.visible");
-        // exist instead of visible because need to scroll down
-        getPopupBuyButton().should("be.exist");
-        getPopupCancelButton().should("be.exist");
+      describe.skip("rendering", () => {
+        it("shows popup with inputs name, email, phone, note, CANCEL button and BUY button", () => {
+          getPopup().should("be.visible");
+          getVisiblePopup().should("have.length", 1);
+          getPopupName().should("be.visible");
+          getPopupEmail().should("be.visible");
+          getPopupPhone().should("be.visible");
+          getPopupNote().should("be.visible");
+          // exist instead of visible because need to scroll down
+          getPopupBuyButton().should("be.exist");
+          getPopupCancelButton().should("be.exist");
+        });
+      });
+
+      describe.skip("form error handling", () => {
+        it("if name is empty, shows HTML5 required validation", () => {
+          getPopupName().should(assertFailedHtml5FormValidation);
+        });
+
+        it("if name contains number, shows HTML5 required validation", () => {
+          getPopupName()
+            .type("123Michael Jackson")
+            .should(assertFailedHtml5FormValidation);
+        });
+
+        it("if email is empty, shows HTML5 required validation", () => {
+          getPopupEmail().should(assertFailedHtml5FormValidation);
+        });
+
+        it("if email is not correctly formatted, shows HTML5 error", () => {
+          getPopupEmail()
+            .type("invalid-email")
+            .should(assertFailedHtml5FormValidation);
+        });
+
+        it("if phone is empty, shows HTML5 required validation", () => {
+          getPopupPhone().should(assertFailedHtml5FormValidation);
+        });
+
+        it("if phone contains letters, shows HTML5 error", () => {
+          getPopupPhone()
+            .type("invalidPhone123")
+            .should(assertFailedHtml5FormValidation);
+        });
+      });
+
+      describe.skip("closing popup", () => {
+        it("on click CLOSE button", () => {
+          getVisiblePopup().should("be.visible");
+          getPopupCancelButton().click();
+          getPopup().should("not.be.exist");
+        });
+
+        it("on press ESC close popup", () => {
+          getVisiblePopup().should("be.visible");
+          getPopupEmail().type("{esc}");
+          getPopup().should("not.be.exist");
+        });
+      });
+
+      describe("submitting form successfully", () => {
+        it("shows success message and clear inputs", () => {
+          getPopupName().type("Michael Jackson");
+          getPopupEmail().type("test@gmail.com");
+          getPopupPhone().type("1234567");
+          getPopupBuyButton().click();
+          cy.contains(
+            "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
+          ).should("be.visible");
+        });
+
+        it("form request is saved to firebase", () => {
+          cy.visit("/san-pham/o-to/test");
+          cy.contains("Michael Jackson").should("be.visible");
+          cy.contains("test@gmail.com").should("be.visible");
+          cy.contains("1234567").should("be.visible");
+          cy.contains("PVI").should("be.visible");
+          cy.contains("120.000.000 VND").should("be.visible");
+        });
       });
     });
 
-    describe.skip("form error handling", () => {
-      it("if name is empty, shows HTML5 required validation", () => {
-        getPopupName().should(assertFailedHtml5FormValidation);
+    describe("form succeeds with addon", () => {
+      beforeEach(() => {
+        getCarValueField().type("100");
+        cy.contains("Option 1").click();
+        getCalculateButton().click();
+        getResultBuyButton().first().click();
       });
 
-      it("if name contains number, shows HTML5 required validation", () => {
-        getPopupName()
-          .type("123Michael Jackson")
-          .should(assertFailedHtml5FormValidation);
-      });
-
-      it("if email is empty, shows HTML5 required validation", () => {
-        getPopupEmail().should(assertFailedHtml5FormValidation);
-      });
-
-      it("if email is not correctly formatted, shows HTML5 error", () => {
-        getPopupEmail()
-          .type("invalid-email")
-          .should(assertFailedHtml5FormValidation);
-      });
-
-      it("if phone is empty, shows HTML5 required validation", () => {
-        getPopupPhone().should(assertFailedHtml5FormValidation);
-      });
-
-      it("if phone contains letters, shows HTML5 error", () => {
-        getPopupPhone()
-          .type("invalidPhone123")
-          .should(assertFailedHtml5FormValidation);
-      });
-    });
-
-    describe.skip("closing popup", () => {
-      it("on click CLOSE button", () => {
-        getVisiblePopup().should("be.visible");
-        getPopupCancelButton().click();
-        getPopup().should("not.be.exist");
-      });
-
-      it("on press ESC close popup", () => {
-        getVisiblePopup().should("be.visible");
-        getPopupEmail().type("{esc}");
-        getPopup().should("not.be.exist");
-      });
-    });
-
-    describe("submitting form successfully", () => {
       it("shows success message and clear inputs", () => {
-        getPopupName().type("Michael Jackson");
-        getPopupEmail().type("test@gmail.com");
-        getPopupPhone().type("1234567");
+        getPopupName().type("Son Tung MTP");
+        getPopupEmail().type("sontung@gmail.com");
+        getPopupPhone().type("111222333");
         getPopupBuyButton().click();
         cy.contains(
           "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
@@ -243,11 +273,13 @@ describe("Page /san-pham/o-to", () => {
 
       it("form request is saved to firebase", () => {
         cy.visit("/san-pham/o-to/test");
-        cy.contains("Michael Jackson").should("be.visible");
-        cy.contains("test@gmail.com").should("be.visible");
-        cy.contains("1234567").should("be.visible");
+        cy.contains("Son Tung MTP").should("be.visible");
+        cy.contains("sontung@gmail.com").should("be.visible");
+        cy.contains("111222333").should("be.visible");
         cy.contains("PVI").should("be.visible");
-        cy.contains("120.000.000 VND").should("be.visible");
+        cy.contains("100.000.000 VND").should("be.visible");
+        cy.contains("Option 1").should("be.visible");
+        cy.contains("121.000.000 VND").should("be.visible");
       });
     });
   });
