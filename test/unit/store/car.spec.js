@@ -1,31 +1,40 @@
-import { state, mutations, actions } from "@/store/car";
+import { state, mutations, actions, getters } from "@/store/car";
 import CarInsuranceRequest, {
   CarYearThreshold,
   CarInsuranceAddOn
 } from "@/controller/car-insurance-request";
 
-jest.mock("@/controller/car-insurance-request");
-
-let mockSave = jest.fn();
-
 describe("store/car", () => {
   let _state;
 
   beforeEach(() => {
-    CarInsuranceRequest.mockClear();
-
     _state = state();
+  });
 
-    const mockCarInsuranceRequestInstance =
-      CarInsuranceRequest.mock.instances[0];
-    mockSave = mockCarInsuranceRequestInstance.save;
+  describe("getters", () => {
+    it("insuranceRequest() returns all keys from state but 'controller'", () => {
+      const insuranceRequest = getters.insuranceRequest(_state);
+      const expected = {
+        carValue: "",
+        carYearThreshold: "Dưới 3 năm",
+        addons: [],
+        insuranceCompany: "",
+        insuranceValue: "",
+        name: "",
+        email: "",
+        phone: "",
+        note: ""
+      };
+      expect(insuranceRequest).toMatchObject(expected);
+      expect(insuranceRequest.controller).toBe(undefined);
+    });
   });
 
   describe("mutations", () => {
     it("setCarValue() updates state.carValue", () => {
-      expect(_state.carValue).toBe(0);
-      mutations.setCarValue(_state, 1);
-      expect(_state.carValue).toBe(1);
+      expect(_state.carValue).toBe("");
+      mutations.setCarValue(_state, "1");
+      expect(_state.carValue).toBe("1");
     });
 
     it("setCarYearThreshold() updates state.carYearThreshold", () => {
@@ -81,6 +90,10 @@ describe("store/car", () => {
 
   describe("actions", () => {
     it("saveRequest saves request information from getters", async () => {
+      const mockSave = jest.fn();
+      expect(_state.controller.save).not.toBe(undefined);
+      _state.controller.save = mockSave;
+
       const insuranceRequest = { key: "value" };
       const getters = {
         insuranceRequest
