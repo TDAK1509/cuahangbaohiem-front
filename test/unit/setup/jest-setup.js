@@ -1,0 +1,1 @@
+require("./ingore-console-warning");
