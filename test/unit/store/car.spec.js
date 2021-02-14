@@ -1,17 +1,27 @@
-import { state, mutations } from "@/store/car";
-import {
+import { state, mutations, actions } from "@/store/car";
+import CarInsuranceRequest, {
   CarYearThreshold,
   CarInsuranceAddOn
 } from "@/controller/car-insurance-request";
 
+jest.mock("@/controller/car-insurance-request");
+
+let mockSave = jest.fn();
+
 describe("store/car", () => {
+  let _state;
+
+  beforeEach(() => {
+    CarInsuranceRequest.mockClear();
+
+    _state = state();
+
+    const mockCarInsuranceRequestInstance =
+      CarInsuranceRequest.mock.instances[0];
+    mockSave = mockCarInsuranceRequestInstance.save;
+  });
+
   describe("mutations", () => {
-    let _state;
-
-    beforeEach(() => {
-      _state = state();
-    });
-
     it("setCarValue() updates state.carValue", () => {
       expect(_state.carValue).toBe(0);
       mutations.setCarValue(_state, 1);
@@ -66,6 +76,20 @@ describe("store/car", () => {
       expect(_state.note).toBe("");
       mutations.setNote(_state, "dummy note");
       expect(_state.note).toBe("dummy note");
+    });
+  });
+
+  describe("actions", () => {
+    it("saveRequest saves request information from getters", async () => {
+      const insuranceRequest = { key: "value" };
+      const getters = {
+        insuranceRequest
+      };
+
+      await actions.saveRequest({ state: _state, getters });
+
+      expect(mockSave).toHaveBeenCalledTimes(1);
+      expect(mockSave).toHaveBeenCalledWith(insuranceRequest);
     });
   });
 });

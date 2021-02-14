@@ -1,10 +1,13 @@
-import { MutationTree } from "vuex";
-import {
+import { MutationTree, ActionTree, GetterTree } from "vuex";
+import { RootState } from "@/store";
+import CarInsuranceRequestController, {
   CarYearThreshold,
-  CarInsuranceAddOn
+  CarInsuranceAddOn,
+  CarInsuranceRequest
 } from "@/controller/car-insurance-request";
 
 export const state = () => ({
+  controller: new CarInsuranceRequestController(),
   carValue: 0,
   carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
   addons: [] as CarInsuranceAddOn[],
@@ -17,6 +20,14 @@ export const state = () => ({
 });
 
 export type CarState = ReturnType<typeof state>;
+
+export const getters: GetterTree<RootState, CarState> = {
+  insuranceRequest(state): CarInsuranceRequest {
+    return {
+      ...state
+    } as CarInsuranceRequest;
+  }
+};
 
 export const mutations: MutationTree<CarState> = {
   setCarValue(state: CarState, payload: number) {
@@ -53,5 +64,12 @@ export const mutations: MutationTree<CarState> = {
 
   setNote(state: CarState, payload: string) {
     state.note = payload;
+  }
+};
+
+export const actions: ActionTree<CarState, RootState> = {
+  async saveRequest({ state, getters }) {
+    const request = getters.insuranceRequest;
+    await state.controller.save(request);
   }
 };
