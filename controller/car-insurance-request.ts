@@ -47,4 +47,12 @@ export default class CarInsuranceRequestController {
 
     return "Dưới 3 năm";
   }
+
+  public getAddOnLabel(addon: CarInsuranceAddOn) {
+    if (addon === CarInsuranceAddOn.OPTION_2) {
+      return "Option 2";
+    }
+
+    return "Option 1";
+  }
 }

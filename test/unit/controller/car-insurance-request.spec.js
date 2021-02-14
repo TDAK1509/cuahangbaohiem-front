@@ -1,5 +1,6 @@
 import CarInsuranceRequestController, {
-  CarYearThreshold
+  CarYearThreshold,
+  CarInsuranceAddOn
 } from "@/controller/car-insurance-request";
 import CarInsuranceRequestModel from "@/models/car-insurance-request";
 import MockDate from "mockdate";
@@ -57,6 +58,20 @@ describe("CarInsuranceRequestController", () => {
         CarYearThreshold.OVER_6_YEARS
       );
       expect(result).toBe("Từ 6 đến 10 năm");
+    });
+  });
+
+  describe("getAddOnLabel()", () => {
+    it("returns 'Option 1' add on is option 1", () => {
+      const controller = new CarInsuranceRequestController();
+      const result = controller.getAddOnLabel(CarInsuranceAddOn.OPTION_1);
+      expect(result).toBe("Option 1");
+    });
+
+    it("returns 'Option 2' add on is option 2", () => {
+      const controller = new CarInsuranceRequestController();
+      const result = controller.getAddOnLabel(CarInsuranceAddOn.OPTION_2);
+      expect(result).toBe("Option 2");
     });
   });
 });
