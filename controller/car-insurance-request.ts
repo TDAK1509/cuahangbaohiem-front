@@ -35,4 +35,16 @@ export default class CarInsuranceRequestController {
 
     return CarInsuranceRequestModel.save(requestToSaveToServer);
   }
+
+  public getCarYearThresholdLabel(carYearThreshold: CarYearThreshold) {
+    if (carYearThreshold === CarYearThreshold.FROM_3_TO_6_YEARS) {
+      return "Từ 3 đến 6 năm";
+    }
+
+    if (carYearThreshold === CarYearThreshold.OVER_6_YEARS) {
+      return "Từ 6 đến 10 năm";
+    }
+
+    return "Dưới 3 năm";
+  }
 }
