@@ -1,5 +1,8 @@
 import { state, mutations } from "@/store/car";
-import { CarYearThreshold } from "@/controller/car-insurance-request";
+import {
+  CarYearThreshold,
+  CarInsuranceAddOn
+} from "@/controller/car-insurance-request";
 
 describe("store/car", () => {
   describe("mutations", () => {
@@ -21,6 +24,12 @@ describe("store/car", () => {
       );
       mutations.setCarYearThreshold(_state, CarYearThreshold.FROM_3_TO_6_YEARS);
       expect(_state.carYearThreshold).toBe(CarYearThreshold.FROM_3_TO_6_YEARS);
+    });
+
+    it("setAddons() updates state.addons", () => {
+      expect(_state.addons).toEqual([]);
+      mutations.setAddons(_state, [CarInsuranceAddOn.OPTION_1]);
+      expect(_state.addons).toEqual([CarInsuranceAddOn.OPTION_1]);
     });
   });
 });
