@@ -37,5 +37,11 @@ describe("store/car", () => {
       mutations.setInsuranceCompany(_state, "PVI");
       expect(_state.insuranceCompany).toBe("PVI");
     });
+
+    it("setInsuranceValue() updates state.insuranceValue", () => {
+      expect(_state.insuranceValue).toBe("");
+      mutations.setInsuranceValue(_state, "PVI");
+      expect(_state.insuranceValue).toBe("PVI");
+    });
   });
 });
