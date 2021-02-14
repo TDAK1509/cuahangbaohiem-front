@@ -31,5 +31,11 @@ describe("store/car", () => {
       mutations.setAddons(_state, [CarInsuranceAddOn.OPTION_1]);
       expect(_state.addons).toEqual([CarInsuranceAddOn.OPTION_1]);
     });
+
+    it("setInsuranceCompany() updates state.insuranceCompany", () => {
+      expect(_state.insuranceCompany).toBe("");
+      mutations.setInsuranceCompany(_state, "PVI");
+      expect(_state.insuranceCompany).toBe("PVI");
+    });
   });
 });
