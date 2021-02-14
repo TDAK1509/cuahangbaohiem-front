@@ -9,7 +9,11 @@ export const state = () => ({
   carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
   addons: [] as CarInsuranceAddOn[],
   insuranceCompany: "",
-  insuranceValue: ""
+  insuranceValue: "",
+  name: "",
+  email: "",
+  phone: "",
+  note: ""
 });
 
 export type CarState = ReturnType<typeof state>;
@@ -33,5 +37,21 @@ export const mutations: MutationTree<CarState> = {
 
   setInsuranceValue(state: CarState, payload: string) {
     state.insuranceValue = payload;
+  },
+
+  setName(state: CarState, payload: string) {
+    state.name = payload;
+  },
+
+  setEmail(state: CarState, payload: string) {
+    state.email = payload;
+  },
+
+  setPhone(state: CarState, payload: string) {
+    state.phone = payload;
+  },
+
+  setNote(state: CarState, payload: string) {
+    state.note = payload;
   }
 };

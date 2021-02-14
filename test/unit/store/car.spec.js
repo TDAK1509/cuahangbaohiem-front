@@ -43,5 +43,29 @@ describe("store/car", () => {
       mutations.setInsuranceValue(_state, "PVI");
       expect(_state.insuranceValue).toBe("PVI");
     });
+
+    it("setName() updates state.name", () => {
+      expect(_state.name).toBe("");
+      mutations.setName(_state, "Nguyen Van A");
+      expect(_state.name).toBe("Nguyen Van A");
+    });
+
+    it("setEmail() updates state.email", () => {
+      expect(_state.email).toBe("");
+      mutations.setEmail(_state, "test@gmail.com");
+      expect(_state.email).toBe("test@gmail.com");
+    });
+
+    it("setPhone() updates state.phone", () => {
+      expect(_state.phone).toBe("");
+      mutations.setPhone(_state, "01234");
+      expect(_state.phone).toBe("01234");
+    });
+
+    it("setNote() updates state.note", () => {
+      expect(_state.note).toBe("");
+      mutations.setNote(_state, "dummy note");
+      expect(_state.note).toBe("dummy note");
+    });
   });
 });
