@@ -11,7 +11,10 @@
 <script lang="ts">
 import Vue from "vue";
 import BaoVietCarInsurance from "@/utils/car-insurance/bao-viet-car-insurance";
-import { CarYearThreshold, CarInsuranceAddOn } from "@/utils/car-insurance/car";
+import {
+  CarYearThreshold,
+  CarInsuranceAddOn
+} from "@/controller/car-insurance-request";
 
 export default Vue.extend({
   name: "ResultBaoViet",

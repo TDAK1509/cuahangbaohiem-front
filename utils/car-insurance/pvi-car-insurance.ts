@@ -1,4 +1,7 @@
-import { CarYearThreshold, CarInsuranceAddOn } from "~/utils/car-insurance/car";
+import {
+  CarYearThreshold,
+  CarInsuranceAddOn
+} from "@/controller/car-insurance-request";
 
 export default class PviCarInsurance {
   private carValue!: number;

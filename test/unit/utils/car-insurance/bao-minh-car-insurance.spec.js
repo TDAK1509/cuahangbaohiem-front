@@ -1,5 +1,8 @@
 import BaoMinhCarInsurance from "~/utils/car-insurance/bao-minh-car-insurance";
-import { CarYearThreshold, CarInsuranceAddOn } from "~/utils/car-insurance/car";
+import {
+  CarYearThreshold,
+  CarInsuranceAddOn
+} from "@/controller/car-insurance-request";
 
 describe("class BaoMinhCarInsurance", () => {
   describe("getCarInsuranceValue()", () => {

@@ -1,5 +1,8 @@
 import MicCarInsurance from "~/utils/car-insurance/mic-car-insurance";
-import { CarYearThreshold, CarInsuranceAddOn } from "~/utils/car-insurance/car";
+import {
+  CarYearThreshold,
+  CarInsuranceAddOn
+} from "@/controller/car-insurance-request";
 
 describe("class MicCarInsurance", () => {
   describe("getCarInsuranceValue()", () => {
