@@ -114,5 +114,13 @@ export const actions: ActionTree<CarState, RootState> = {
 
   setNote({ commit }, note: string) {
     commit("setNote", note);
+  },
+
+  setInsuranceCompany({ commit }, company: string) {
+    commit("setInsuranceCompany", company);
+  },
+
+  setInsuranceValue({ commit }, insuranceValue: string) {
+    commit("setInsuranceValue", insuranceValue);
   }
 };

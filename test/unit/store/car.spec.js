@@ -153,5 +153,22 @@ describe("store/car", () => {
       expect(commit).toHaveBeenCalledTimes(1);
       expect(commit).toHaveBeenCalledWith("setNote", "note");
     });
+
+    it("setInsuranceCompany() commits 'setInsuranceCompany' with passed argument", () => {
+      const commit = jest.fn();
+      actions.setInsuranceCompany({ commit }, "Bao Viet");
+      expect(commit).toHaveBeenCalledTimes(1);
+      expect(commit).toHaveBeenCalledWith("setInsuranceCompany", "Bao Viet");
+    });
+
+    it("setInsuranceValue() commits 'setInsuranceValue' with passed argument", () => {
+      const commit = jest.fn();
+      actions.setInsuranceValue({ commit }, "insurance value");
+      expect(commit).toHaveBeenCalledTimes(1);
+      expect(commit).toHaveBeenCalledWith(
+        "setInsuranceValue",
+        "insurance value"
+      );
+    });
   });
 });
