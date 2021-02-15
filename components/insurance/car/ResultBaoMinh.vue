@@ -44,29 +44,15 @@ export default Vue.extend({
     }
   },
 
-  watch: {
-    carValue(newValue: number) {
-      this.baoMinh.setCarValue(newValue);
-      this.calculateCarInsuranceValue();
-    },
-
-    carYearThreshold(newValue: number) {
-      this.baoMinh.setCarYearThreshold(newValue);
-      this.calculateCarInsuranceValue();
-    },
-
-    addons(newValue: CarInsuranceAddOn[]) {
-      this.baoMinh.setAddons(newValue);
-      this.calculateCarInsuranceValue();
-    }
-  },
-
   mounted() {
     this.calculateCarInsuranceValue();
   },
 
   methods: {
     calculateCarInsuranceValue() {
+      this.baoMinh.setCarValue(this.carValue);
+      this.baoMinh.setCarYearThreshold(this.carYearThreshold);
+      this.baoMinh.setAddons(this.addons);
       this.insuranceValue = this.baoMinh.getCarInsuranceValue();
     }
   }
