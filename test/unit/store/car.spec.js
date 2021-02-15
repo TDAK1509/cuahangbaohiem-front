@@ -125,5 +125,33 @@ describe("store/car", () => {
       expect(commit).toHaveBeenCalledTimes(1);
       expect(commit).toHaveBeenCalledWith("setAddons", [1, 2]);
     });
+
+    it("setName() commits 'setName' with passed argument", () => {
+      const commit = jest.fn();
+      actions.setName({ commit }, "name");
+      expect(commit).toHaveBeenCalledTimes(1);
+      expect(commit).toHaveBeenCalledWith("setName", "name");
+    });
+
+    it("setEmail() commits 'setEmail' with passed argument", () => {
+      const commit = jest.fn();
+      actions.setEmail({ commit }, "email@gmail.com");
+      expect(commit).toHaveBeenCalledTimes(1);
+      expect(commit).toHaveBeenCalledWith("setEmail", "email@gmail.com");
+    });
+
+    it("setPhone() commits 'setPhone' with passed argument", () => {
+      const commit = jest.fn();
+      actions.setPhone({ commit }, "012345");
+      expect(commit).toHaveBeenCalledTimes(1);
+      expect(commit).toHaveBeenCalledWith("setPhone", "012345");
+    });
+
+    it("setNote() commits 'setNote' with passed argument", () => {
+      const commit = jest.fn();
+      actions.setNote({ commit }, "note");
+      expect(commit).toHaveBeenCalledTimes(1);
+      expect(commit).toHaveBeenCalledWith("setNote", "note");
+    });
   });
 });

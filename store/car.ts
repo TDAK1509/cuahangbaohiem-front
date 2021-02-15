@@ -98,5 +98,21 @@ export const actions: ActionTree<CarState, RootState> = {
 
   setAddons({ commit }, addons: CarInsuranceAddOn[]) {
     commit("setAddons", addons);
+  },
+
+  setName({ commit }, name: string) {
+    commit("setName", name);
+  },
+
+  setEmail({ commit }, email: string) {
+    commit("setEmail", email);
+  },
+
+  setPhone({ commit }, phone: string) {
+    commit("setPhone", phone);
+  },
+
+  setNote({ commit }, note: string) {
+    commit("setNote", note);
   }
 };
