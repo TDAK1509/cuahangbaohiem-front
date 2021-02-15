@@ -14,7 +14,7 @@ export interface RawCarInsuranceRequest {
   addons: string[];
   insuranceCompany: string;
   insuranceValue: string;
-  date: string;
+  dateMsec: number;
   isDone: boolean;
 }
 

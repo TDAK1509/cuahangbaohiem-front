@@ -29,7 +29,7 @@ export default class CarInsuranceRequestController {
   public save(requestFromClient: CarInsuranceRequest) {
     const requestToSaveToServer: RawCarInsuranceRequest = {
       ...requestFromClient,
-      date: new Date().toString(),
+      dateMsec: new Date().getTime(),
       isDone: false
     };
 

@@ -275,14 +275,14 @@ describe("Page /san-pham/o-to", () => {
 
       it("form request is saved to firebase", () => {
         cy.visit("/san-pham/o-to/test");
-        cy.contains("Son Tung MTP").should("be.visible");
-        cy.contains("sontung@gmail.com").should("be.visible");
-        cy.contains("111222333").should("be.visible");
-        cy.contains("PVI").should("be.visible");
-        cy.contains("100").should("be.visible");
-        cy.contains("Từ 3 đến 6 năm").should("be.visible");
-        cy.contains("Option 1").should("be.visible");
-        cy.contains("131.000.000 VND").should("be.visible");
+        cy.contains("name: Son Tung MTP").should("be.visible");
+        cy.contains("email: sontung@gmail.com").should("be.visible");
+        cy.contains("phone: 111222333").should("be.visible");
+        cy.contains("insuranceCompany: PVI").should("be.visible");
+        cy.contains("carValue: 100").should("be.visible");
+        cy.contains("carYearThreshold: Từ 3 đến 6 năm").should("be.visible");
+        cy.contains('addons: [ "Option 1" ]').should("be.visible");
+        cy.contains("insuranceValue: 131.000.000 VND").should("be.visible");
       });
     });
   });
