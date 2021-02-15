@@ -89,7 +89,7 @@ describe("store/car", () => {
   });
 
   describe("actions", () => {
-    it("saveRequest saves request information from getters", async () => {
+    it("saveRequest() saves request information from getters", async () => {
       const mockSave = jest.fn();
       expect(_state.controller.save).not.toBe(undefined);
       _state.controller.save = mockSave;
@@ -103,6 +103,13 @@ describe("store/car", () => {
 
       expect(mockSave).toHaveBeenCalledTimes(1);
       expect(mockSave).toHaveBeenCalledWith(insuranceRequest);
+    });
+
+    it("setCarValue() commits 'setCarValue' with passed argument", () => {
+      const commit = jest.fn();
+      actions.setCarValue({ commit }, 69);
+      expect(commit).toHaveBeenCalledTimes(1);
+      expect(commit).toHaveBeenCalledWith("setCarValue", 69);
     });
   });
 });

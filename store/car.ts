@@ -86,5 +86,9 @@ export const actions: ActionTree<CarState, RootState> = {
   async saveRequest({ state, getters }) {
     const request = getters.insuranceRequest;
     await state.controller.save(request);
+  },
+
+  setCarValue({ commit }, carValue: number) {
+    commit("setCarValue", carValue);
   }
 };
