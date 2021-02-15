@@ -75,9 +75,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import CarInsuranceRequestController, {
-  CarInsuranceRequest
-} from "@/controller/car-insurance-request";
 
 export default Vue.extend({
   name: "BuyPopupForm",
@@ -105,6 +102,32 @@ export default Vue.extend({
     };
   },
 
+  watch: {
+    name() {
+      this.$store.dispatch("car/setName", this.name);
+    },
+
+    email() {
+      this.$store.dispatch("car/setEmail", this.email);
+    },
+
+    phone() {
+      this.$store.dispatch("car/setPhone", this.phone);
+    },
+
+    note() {
+      this.$store.dispatch("car/setNote", this.note);
+    },
+
+    insuranceCompany() {
+      this.$store.dispatch("car/setInsuranceCompany", this.insuranceCompany);
+    },
+
+    insuranceValue() {
+      this.$store.dispatch("car/setInsuranceValue", this.insuranceValue);
+    }
+  },
+
   mounted() {
     this.focusOnNameTextField();
   },
@@ -124,16 +147,7 @@ export default Vue.extend({
     },
 
     saveRequestToServer() {
-      const requestController = new CarInsuranceRequestController();
-      const carInsuranceRequest: CarInsuranceRequest = {
-        name: this.name,
-        email: this.email,
-        phone: this.phone,
-        note: this.note,
-        insuranceCompany: this.insuranceCompany,
-        insuranceValue: this.insuranceValue
-      };
-      return requestController.save(carInsuranceRequest);
+      return this.$store.dispatch("car/saveRequest");
     },
 
     alertSuccess() {

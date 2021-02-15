@@ -71,30 +71,10 @@
         class="mt-5 pt-5 tinh-phi__result"
         data-cy="result"
       >
-        <ResultPvi
-          class="mb-5"
-          :car-value="carValue"
-          :car-year-threshold="carYearThreshold"
-          :addons="addons"
-        />
-        <ResultBaoViet
-          class="mb-5"
-          :car-value="carValue"
-          :car-year-threshold="carYearThreshold"
-          :addons="addons"
-        />
-        <ResultBaoMinh
-          class="mb-5"
-          :car-value="carValue"
-          :car-year-threshold="carYearThreshold"
-          :addons="addons"
-        />
-        <ResultMic
-          class="mb-5"
-          :car-value="carValue"
-          :car-year-threshold="carYearThreshold"
-          :addons="addons"
-        />
+        <ResultPvi class="mb-5" />
+        <ResultBaoViet class="mb-5" />
+        <ResultBaoMinh class="mb-5" />
+        <ResultMic class="mb-5" />
       </div>
     </div>
   </section>
@@ -148,10 +128,23 @@ export default Vue.extend({
 
     isFormValid(): boolean {
       return this.carValueIsNumber;
+    }
+  },
+
+  watch: {
+    carValueInput() {
+      const carValue = this.carValueIsNumber
+        ? parseInt(this.carValueInput as string)
+        : 0;
+      this.$store.dispatch("car/setCarValue", carValue);
     },
 
-    carValue(): number {
-      return this.carValueIsNumber ? parseInt(this.carValueInput as string) : 0;
+    carYearThreshold(newValue: CarYearThreshold) {
+      this.$store.dispatch("car/setCarYearThreshold", newValue);
+    },
+
+    addons(newValue: CarInsuranceAddOn[]) {
+      this.$store.dispatch("car/setAddons", newValue);
     }
   },
 

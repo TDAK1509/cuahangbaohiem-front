@@ -19,32 +19,29 @@ import {
 export default Vue.extend({
   name: "ResultBaoMinh",
 
-  props: {
-    carValue: {
-      type: Number,
-      required: true
-    },
-
-    carYearThreshold: {
-      type: Number as () => CarYearThreshold,
-      required: true
-    },
-
-    addons: {
-      type: Array as () => CarInsuranceAddOn[],
-      required: true
-    }
-  },
-
   data() {
     return {
       baoMinh: new BaoMinhCarInsurance(
-        this.carValue,
-        this.carYearThreshold,
-        this.addons
+        0,
+        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
+        []
       ),
       insuranceValue: 0
     };
+  },
+
+  computed: {
+    carValue(): number {
+      return this.$store.state.car.carValue;
+    },
+
+    carYearThreshold(): CarYearThreshold {
+      return this.$store.state.car.carYearThreshold;
+    },
+
+    addons(): CarInsuranceAddOn[] {
+      return this.$store.state.car.addons;
+    }
   },
 
   watch: {
