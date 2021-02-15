@@ -279,10 +279,10 @@ describe("Page /san-pham/o-to", () => {
         cy.contains("sontung@gmail.com").should("be.visible");
         cy.contains("111222333").should("be.visible");
         cy.contains("PVI").should("be.visible");
-        cy.contains("100.000.000 VND").should("be.visible");
+        cy.contains("100").should("be.visible");
         cy.contains("Từ 3 đến 6 năm").should("be.visible");
         cy.contains("Option 1").should("be.visible");
-        cy.contains("121.000.000 VND").should("be.visible");
+        cy.contains("131.000.000 VND").should("be.visible");
       });
     });
   });

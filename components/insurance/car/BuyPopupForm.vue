@@ -107,32 +107,6 @@ export default Vue.extend({
     };
   },
 
-  watch: {
-    name() {
-      this.$store.dispatch("car/setName", this.name);
-    },
-
-    email() {
-      this.$store.dispatch("car/setEmail", this.email);
-    },
-
-    phone() {
-      this.$store.dispatch("car/setPhone", this.phone);
-    },
-
-    note() {
-      this.$store.dispatch("car/setNote", this.note);
-    },
-
-    insuranceCompany() {
-      this.$store.dispatch("car/setInsuranceCompany", this.insuranceCompany);
-    },
-
-    insuranceValue() {
-      this.$store.dispatch("car/setInsuranceValue", this.insuranceValue);
-    }
-  },
-
   mounted() {
     this.focusOnNameTextField();
   },
@@ -153,7 +127,17 @@ export default Vue.extend({
     },
 
     saveRequestToServer() {
+      this.updateRequesInformationInStore();
       return this.$store.dispatch("car/saveRequest");
+    },
+
+    updateRequesInformationInStore() {
+      this.$store.dispatch("car/setName", this.name);
+      this.$store.dispatch("car/setEmail", this.email);
+      this.$store.dispatch("car/setPhone", this.phone);
+      this.$store.dispatch("car/setNote", this.note);
+      this.$store.dispatch("car/setInsuranceCompany", this.insuranceCompany);
+      this.$store.dispatch("car/setInsuranceValue", this.insuranceValue);
     },
 
     alertSuccess() {
