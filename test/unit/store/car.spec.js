@@ -15,7 +15,7 @@ describe("store/car", () => {
     it("insuranceRequest() returns all keys from state but 'controller'", () => {
       const insuranceRequest = getters.insuranceRequest(_state);
       const expected = {
-        carValue: "",
+        carValue: 0,
         carYearThreshold: "Dưới 3 năm",
         addons: [],
         insuranceCompany: "",
@@ -32,9 +32,9 @@ describe("store/car", () => {
 
   describe("mutations", () => {
     it("setCarValue() updates state.carValue", () => {
-      expect(_state.carValue).toBe("");
-      mutations.setCarValue(_state, "1");
-      expect(_state.carValue).toBe("1");
+      expect(_state.carValue).toBe(0);
+      mutations.setCarValue(_state, 1);
+      expect(_state.carValue).toBe(1);
     });
 
     it("setCarYearThreshold() updates state.carYearThreshold", () => {

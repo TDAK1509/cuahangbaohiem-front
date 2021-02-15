@@ -8,7 +8,7 @@ import CarInsuranceRequestController, {
 
 export const state = () => ({
   controller: new CarInsuranceRequestController(),
-  carValue: "",
+  carValue: 0,
   carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
   addons: [] as CarInsuranceAddOn[],
   insuranceCompany: "",
@@ -45,7 +45,7 @@ export const getters: GetterTree<CarState, RootState> = {
 };
 
 export const mutations: MutationTree<CarState> = {
-  setCarValue(state: CarState, payload: string) {
+  setCarValue(state: CarState, payload: number) {
     state.carValue = payload;
   },
 
