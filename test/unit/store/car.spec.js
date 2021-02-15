@@ -90,9 +90,7 @@ describe("store/car", () => {
 
   describe("actions", () => {
     it("saveRequest() saves request information from getters", async () => {
-      const mockSave = jest.fn();
-      expect(_state.controller.save).not.toBe(undefined);
-      _state.controller.save = mockSave;
+      const mockSave = (CarInsuranceRequest.prototype.save = jest.fn());
 
       const insuranceRequest = { key: "value" };
       const getters = {

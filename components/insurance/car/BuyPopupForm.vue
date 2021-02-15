@@ -52,6 +52,10 @@
           </div>
         </div>
 
+        <p v-if="isError" class="has-text-danger">
+          Đã có lỗi xảy ra, vui lòng thử lại sau.
+        </p>
+
         <div class="field mt-4">
           <div class="control">
             <button
@@ -98,7 +102,8 @@ export default Vue.extend({
       phone: "",
       note: "",
       loading: false,
-      isSuccess: false
+      isSuccess: false,
+      isError: false
     };
   },
 
@@ -135,12 +140,14 @@ export default Vue.extend({
   methods: {
     async submit() {
       this.loading = true;
+      this.isError = false;
 
       try {
         await this.saveRequestToServer();
         this.alertSuccess();
       } catch (error) {
-        alert("Đã có lỗi xảy ra, vui lòng thử lại sau.");
+        console.log(error);
+        this.isError = true;
       } finally {
         this.loading = false;
       }

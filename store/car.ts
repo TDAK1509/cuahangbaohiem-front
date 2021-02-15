@@ -6,8 +6,9 @@ import CarInsuranceRequestController, {
   CarInsuranceRequest
 } from "@/controller/car-insurance-request";
 
+const controller = new CarInsuranceRequestController();
+
 export const state = () => ({
-  controller: new CarInsuranceRequestController(),
   carValue: 0,
   carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
   addons: [] as CarInsuranceAddOn[],
@@ -23,12 +24,10 @@ export type CarState = ReturnType<typeof state>;
 
 export const getters: GetterTree<CarState, RootState> = {
   insuranceRequest(state): CarInsuranceRequest {
-    const carYearThreshold = state.controller.getCarYearThresholdLabel(
+    const carYearThreshold = controller.getCarYearThresholdLabel(
       state.carYearThreshold
     );
-    const addons = state.addons.map((addon) =>
-      state.controller.getAddOnLabel(addon)
-    );
+    const addons = state.addons.map((addon) => controller.getAddOnLabel(addon));
 
     return {
       carValue: state.carValue,
@@ -83,9 +82,9 @@ export const mutations: MutationTree<CarState> = {
 };
 
 export const actions: ActionTree<CarState, RootState> = {
-  async saveRequest({ state, getters }) {
+  async saveRequest({ getters }) {
     const request = getters.insuranceRequest;
-    await state.controller.save(request);
+    await controller.save(request);
   },
 
   setCarValue({ commit }, carValue: number) {
