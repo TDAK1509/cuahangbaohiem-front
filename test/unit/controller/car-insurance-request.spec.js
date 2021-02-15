@@ -27,7 +27,7 @@ describe("CarInsuranceRequestController", () => {
 
       const expectedObject = {
         ...requestObject,
-        date: new Date().toString(),
+        dateMsec: new Date().getTime(),
         isDone: false
       };
       expect(mock).toBeCalledTimes(1);
