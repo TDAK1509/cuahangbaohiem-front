@@ -111,5 +111,12 @@ describe("store/car", () => {
       expect(commit).toHaveBeenCalledTimes(1);
       expect(commit).toHaveBeenCalledWith("setCarValue", 69);
     });
+
+    it("setCarYearThreshold() commits 'setCarYearThreshold' with passed argument", () => {
+      const commit = jest.fn();
+      actions.setCarYearThreshold({ commit }, 1);
+      expect(commit).toHaveBeenCalledTimes(1);
+      expect(commit).toHaveBeenCalledWith("setCarYearThreshold", 1);
+    });
   });
 });

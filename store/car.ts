@@ -90,5 +90,9 @@ export const actions: ActionTree<CarState, RootState> = {
 
   setCarValue({ commit }, carValue: number) {
     commit("setCarValue", carValue);
+  },
+
+  setCarYearThreshold({ commit }, threshold: CarYearThreshold) {
+    commit("setCarYearThreshold", threshold);
   }
 };
