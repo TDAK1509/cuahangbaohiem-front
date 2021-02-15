@@ -3,7 +3,7 @@ describe("Page /san-pham/o-to", () => {
     cy.visit("/san-pham/o-to");
   });
 
-  describe.skip("tab bar", () => {
+  describe("tab bar", () => {
     it("should have 5 correct tabs", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").should("be.visible");
       cy.contains("QUYỀN LỢI").should("be.visible");
@@ -44,7 +44,7 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe.skip("rendering", () => {
+  describe("rendering", () => {
     it("should render enough inputs", () => {
       cy.get("[data-cy=car-value]").should("be.visible");
       cy.get("[data-cy=car-year-threshold]").should("be.visible");
@@ -68,7 +68,7 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe.skip("on click calculate button", () => {
+  describe("on click calculate button", () => {
     describe("form error handling", () => {
       it("if car value is empty, shows HTML5 required validation", () => {
         getCarValueField().should(assertFailedHtml5FormValidation);
@@ -171,7 +171,7 @@ describe("Page /san-pham/o-to", () => {
         getResultBuyButton().first().click();
       });
 
-      describe.skip("rendering", () => {
+      describe("rendering", () => {
         it("shows popup with inputs name, email, phone, note, CANCEL button and BUY button", () => {
           getPopup().should("be.visible");
           getVisiblePopup().should("have.length", 1);
@@ -185,7 +185,7 @@ describe("Page /san-pham/o-to", () => {
         });
       });
 
-      describe.skip("form error handling", () => {
+      describe("form error handling", () => {
         it("if name is empty, shows HTML5 required validation", () => {
           getPopupName().should(assertFailedHtml5FormValidation);
         });
@@ -217,7 +217,7 @@ describe("Page /san-pham/o-to", () => {
         });
       });
 
-      describe.skip("closing popup", () => {
+      describe("closing popup", () => {
         it("on click CLOSE button", () => {
           getVisiblePopup().should("be.visible");
           getPopupCancelButton().click();
@@ -231,7 +231,7 @@ describe("Page /san-pham/o-to", () => {
         });
       });
 
-      describe.skip("submitting form successfully", () => {
+      describe("submitting form successfully", () => {
         it("shows success message and clear inputs", () => {
           getPopupName().type("Michael Jackson");
           getPopupEmail().type("test@gmail.com");
