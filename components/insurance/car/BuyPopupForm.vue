@@ -146,7 +146,6 @@ export default Vue.extend({
         await this.saveRequestToServer();
         this.alertSuccess();
       } catch (error) {
-        console.log(error);
         this.isError = true;
       } finally {
         this.loading = false;
