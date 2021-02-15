@@ -94,5 +94,9 @@ export const actions: ActionTree<CarState, RootState> = {
 
   setCarYearThreshold({ commit }, threshold: CarYearThreshold) {
     commit("setCarYearThreshold", threshold);
+  },
+
+  setAddons({ commit }, addons: CarInsuranceAddOn[]) {
+    commit("setAddons", addons);
   }
 };
