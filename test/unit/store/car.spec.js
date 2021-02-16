@@ -12,7 +12,7 @@ describe("store/car", () => {
   });
 
   describe("getters", () => {
-    it("insuranceRequest() returns all keys from state but 'controller'", () => {
+    it("insuranceRequest() returns all keys from CarInsuranceRequest", () => {
       const insuranceRequest = getters.insuranceRequest(_state);
       const expected = {
         carValue: 0,
@@ -25,8 +25,25 @@ describe("store/car", () => {
         phone: "",
         note: ""
       };
-      expect(insuranceRequest).toMatchObject(expected);
-      expect(insuranceRequest.controller).toBe(undefined);
+      expect(insuranceRequest).toEqual(expected);
+    });
+
+    it("insuranceRequest() returns carValue and insuranceValue in million unit", () => {
+      _state.carValue = 1;
+      _state.insuranceValue = 1;
+      const insuranceRequest = getters.insuranceRequest(_state);
+      const expected = {
+        carValue: 1000000,
+        carYearThreshold: "Dưới 3 năm",
+        addons: [],
+        insuranceCompany: "",
+        insuranceValue: 1000000,
+        name: "",
+        email: "",
+        phone: "",
+        note: ""
+      };
+      expect(insuranceRequest).toEqual(expected);
     });
   });
 
