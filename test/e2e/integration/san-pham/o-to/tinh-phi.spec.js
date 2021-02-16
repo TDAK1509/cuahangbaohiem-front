@@ -248,7 +248,10 @@ describe("Page /san-pham/o-to", () => {
           cy.contains("test@gmail.com").should("be.visible");
           cy.contains("1234567").should("be.visible");
           cy.contains("PVI").should("be.visible");
-          cy.contains("120.000.000").should("be.visible");
+          cy.contains("carValue: 100000000").should("be.visible");
+          cy.contains("carYearThreshold: Dưới 3 năm").should("be.visible");
+          cy.contains("addons: []").should("be.visible");
+          cy.contains("120000000").should("be.visible");
         });
       });
     });
@@ -279,10 +282,10 @@ describe("Page /san-pham/o-to", () => {
         cy.contains("email: sontung@gmail.com").should("be.visible");
         cy.contains("phone: 111222333").should("be.visible");
         cy.contains("insuranceCompany: PVI").should("be.visible");
-        cy.contains("carValue: 100").should("be.visible");
+        cy.contains("carValue: 100000000").should("be.visible");
         cy.contains("carYearThreshold: Từ 3 đến 6 năm").should("be.visible");
         cy.contains('addons: [ "Option 1" ]').should("be.visible");
-        cy.contains("insuranceValue: 131.000.000 VND").should("be.visible");
+        cy.contains("insuranceValue: 131000000").should("be.visible");
       });
     });
   });
