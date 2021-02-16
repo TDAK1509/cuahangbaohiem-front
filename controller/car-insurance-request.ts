@@ -11,7 +11,7 @@ export interface CarInsuranceRequest {
   carYearThreshold: string;
   addons: string[];
   insuranceCompany: string;
-  insuranceValue: string;
+  insuranceValue: number;
 }
 
 export enum CarYearThreshold {

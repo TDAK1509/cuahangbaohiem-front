@@ -90,7 +90,7 @@ export default Vue.extend({
     },
 
     insuranceValue: {
-      type: String,
+      type: Number,
       required: true
     }
   },

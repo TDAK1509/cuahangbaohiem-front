@@ -13,7 +13,7 @@ export const state = () => ({
   carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
   addons: [] as CarInsuranceAddOn[],
   insuranceCompany: "",
-  insuranceValue: "",
+  insuranceValue: 0,
   name: "",
   email: "",
   phone: "",
@@ -30,11 +30,11 @@ export const getters: GetterTree<CarState, RootState> = {
     const addons = state.addons.map((addon) => controller.getAddOnLabel(addon));
 
     return {
-      carValue: state.carValue,
+      carValue: toMillion(state.carValue),
       carYearThreshold,
       addons,
       insuranceCompany: state.insuranceCompany,
-      insuranceValue: state.insuranceValue,
+      insuranceValue: toMillion(state.insuranceValue),
       name: state.name,
       email: state.email,
       phone: state.phone,
@@ -60,7 +60,7 @@ export const mutations: MutationTree<CarState> = {
     state.insuranceCompany = payload;
   },
 
-  setInsuranceValue(state: CarState, payload: string) {
+  setInsuranceValue(state: CarState, payload: number) {
     state.insuranceValue = payload;
   },
 
@@ -123,3 +123,7 @@ export const actions: ActionTree<CarState, RootState> = {
     commit("setInsuranceValue", insuranceValue);
   }
 };
+
+function toMillion(n: number): number {
+  return n * 1000000;
+}

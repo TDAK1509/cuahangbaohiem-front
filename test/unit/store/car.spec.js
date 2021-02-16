@@ -19,7 +19,7 @@ describe("store/car", () => {
         carYearThreshold: "Dưới 3 năm",
         addons: [],
         insuranceCompany: "",
-        insuranceValue: "",
+        insuranceValue: 0,
         name: "",
         email: "",
         phone: "",
@@ -58,9 +58,9 @@ describe("store/car", () => {
     });
 
     it("setInsuranceValue() updates state.insuranceValue", () => {
-      expect(_state.insuranceValue).toBe("");
-      mutations.setInsuranceValue(_state, "PVI");
-      expect(_state.insuranceValue).toBe("PVI");
+      expect(_state.insuranceValue).toBe(0);
+      mutations.setInsuranceValue(_state, 1);
+      expect(_state.insuranceValue).toBe(1);
     });
 
     it("setName() updates state.name", () => {

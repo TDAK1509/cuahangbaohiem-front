@@ -38,7 +38,7 @@
       v-if="showPopup"
       v-model="showPopup"
       :insurance-company="companyName"
-      :insurance-value="insuranceValue | millionDongs"
+      :insurance-value="insuranceValue"
     />
   </div>
 </template>

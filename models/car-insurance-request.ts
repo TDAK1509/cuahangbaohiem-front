@@ -13,7 +13,7 @@ export interface RawCarInsuranceRequest {
   carYearThreshold: string;
   addons: string[];
   insuranceCompany: string;
-  insuranceValue: string;
+  insuranceValue: number;
   dateMsec: number;
   isDone: boolean;
 }

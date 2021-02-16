@@ -39,14 +39,12 @@ export default Vue.extend({
 
     insuranceCompany: {
       type: String,
-      required: false,
-      default: ""
+      required: true
     },
 
     insuranceValue: {
-      type: String,
-      required: false,
-      default: ""
+      type: Number,
+      required: true
     }
   },
 
