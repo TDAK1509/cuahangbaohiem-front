@@ -82,10 +82,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {
+import CarInsuranceRequestController, {
   CarYearThreshold,
   CarInsuranceAddOn
 } from "@/controller/car-insurance-request";
+
+const controller = new CarInsuranceRequestController();
 
 export default Vue.extend({
   name: "TinhPhiOto",
@@ -97,19 +99,31 @@ export default Vue.extend({
       showResult: false,
       carYearRadios: [
         {
-          text: "Dưới 3 năm",
+          text: controller.getCarYearThresholdLabel(
+            CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
+          ),
           value: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
         },
-        { text: "Từ 3 đến 6 năm", value: CarYearThreshold.FROM_3_TO_6_YEARS },
-        { text: "Từ 6 đến 10 năm", value: CarYearThreshold.OVER_6_YEARS }
+        {
+          text: controller.getCarYearThresholdLabel(
+            CarYearThreshold.FROM_3_TO_6_YEARS
+          ),
+          value: CarYearThreshold.FROM_3_TO_6_YEARS
+        },
+        {
+          text: controller.getCarYearThresholdLabel(
+            CarYearThreshold.OVER_6_YEARS
+          ),
+          value: CarYearThreshold.OVER_6_YEARS
+        }
       ],
       insuranceAddOns: [
         {
-          text: "Option 1",
+          text: controller.getAddOnLabel(CarInsuranceAddOn.OPTION_1),
           value: CarInsuranceAddOn.OPTION_1
         },
         {
-          text: "Option 2",
+          text: controller.getAddOnLabel(CarInsuranceAddOn.OPTION_2),
           value: CarInsuranceAddOn.OPTION_2
         }
       ]
