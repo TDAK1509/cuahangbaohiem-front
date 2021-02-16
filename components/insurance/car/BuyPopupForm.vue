@@ -52,6 +52,10 @@
           </div>
         </div>
 
+        <p v-if="isError" class="has-text-danger">
+          Đã có lỗi xảy ra, vui lòng thử lại sau.
+        </p>
+
         <div class="field mt-4">
           <div class="control">
             <button
@@ -75,9 +79,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import CarInsuranceRequestController, {
-  CarInsuranceRequest
-} from "@/controller/car-insurance-request";
 
 export default Vue.extend({
   name: "BuyPopupForm",
@@ -89,7 +90,7 @@ export default Vue.extend({
     },
 
     insuranceValue: {
-      type: String,
+      type: Number,
       required: true
     }
   },
@@ -101,7 +102,8 @@ export default Vue.extend({
       phone: "",
       note: "",
       loading: false,
-      isSuccess: false
+      isSuccess: false,
+      isError: false
     };
   },
 
@@ -112,28 +114,30 @@ export default Vue.extend({
   methods: {
     async submit() {
       this.loading = true;
+      this.isError = false;
 
       try {
         await this.saveRequestToServer();
         this.alertSuccess();
       } catch (error) {
-        alert("Đã có lỗi xảy ra, vui lòng thử lại sau.");
+        this.isError = true;
       } finally {
         this.loading = false;
       }
     },
 
     saveRequestToServer() {
-      const requestController = new CarInsuranceRequestController();
-      const carInsuranceRequest: CarInsuranceRequest = {
-        name: this.name,
-        email: this.email,
-        phone: this.phone,
-        note: this.note,
-        insuranceCompany: this.insuranceCompany,
-        insuranceValue: this.insuranceValue
-      };
-      return requestController.save(carInsuranceRequest);
+      this.updateRequesInformationInStore();
+      return this.$store.dispatch("car/saveRequest");
+    },
+
+    updateRequesInformationInStore() {
+      this.$store.dispatch("car/setName", this.name);
+      this.$store.dispatch("car/setEmail", this.email);
+      this.$store.dispatch("car/setPhone", this.phone);
+      this.$store.dispatch("car/setNote", this.note);
+      this.$store.dispatch("car/setInsuranceCompany", this.insuranceCompany);
+      this.$store.dispatch("car/setInsuranceValue", this.insuranceValue);
     },
 
     alertSuccess() {

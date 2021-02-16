@@ -9,125 +9,68 @@
 </template>
 
 <script lang="ts">
-import mixins from "vue-typed-mixins";
-import CarThresholdMixin from "@/mixins/car-threshold";
+import Vue from "vue";
+import PviCarInsurance from "@/utils/car-insurance/pvi-car-insurance";
+import {
+  CarYearThreshold,
+  CarInsuranceAddOn
+} from "@/controller/car-insurance-request";
 
-export default mixins(CarThresholdMixin).extend({
+export default Vue.extend({
   name: "ResultPVI",
-
-  props: {
-    carValue: {
-      type: Number,
-      required: true
-    },
-
-    carYear: {
-      type: Number,
-      required: true
-    }
-  },
 
   data() {
     return {
-      thisYear: new Date().getFullYear()
+      pvi: new PviCarInsurance(
+        0,
+        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
+        []
+      ),
+      insuranceValue: 0
     };
   },
 
   computed: {
-    insuranceValue(): number {
-      return (this.carValue * this.insuranceRate) / 100;
+    carValue(): number {
+      return this.$store.state.car.carValue;
     },
 
-    insuranceRate(): number {
-      if (this.isCarValueInFirstThreshold) {
-        return this.getFirstThresholdInsuranceRate;
-      }
-
-      if (this.isCarValueInSecondThreshold) {
-        return this.getSecondThresholdInsuranceRate;
-      }
-
-      if (this.isCarValueInThirdThreshold) {
-        return this.getThirdThresholdInsuranceRate;
-      }
-
-      return 100;
+    carYearThreshold(): CarYearThreshold {
+      return this.$store.state.car.carYearThreshold;
     },
 
-    isCarValueInFirstThreshold(): boolean {
-      return this.mixinIsCarValueInFirstThreshold(this.carValue);
+    addons(): CarInsuranceAddOn[] {
+      return this.$store.state.car.addons;
+    }
+  },
+
+  watch: {
+    carValue(newValue: number) {
+      this.pvi.setCarValue(newValue);
+      this.calculateCarInsuranceValue();
     },
 
-    isCarValueInSecondThreshold(): boolean {
-      return this.mixinIsCarValueInSecondThreshold(this.carValue);
+    carYearThreshold(newValue: number) {
+      this.pvi.setCarYearThreshold(newValue);
+      this.calculateCarInsuranceValue();
     },
 
-    isCarValueInThirdThreshold(): boolean {
-      return this.mixinIsCarValueInThirdThreshold(this.carValue);
-    },
+    addons(newValue: CarInsuranceAddOn[]) {
+      this.pvi.setAddons(newValue);
+      this.calculateCarInsuranceValue();
+    }
+  },
 
-    getFirstThresholdInsuranceRate(): number {
-      if (this.isCarYearInFirstThreshold) {
-        return 1.7;
-      }
+  mounted() {
+    this.pvi.setCarValue(this.carValue);
+    this.pvi.setCarYearThreshold(this.carYearThreshold);
+    this.pvi.setAddons(this.addons);
+    this.calculateCarInsuranceValue();
+  },
 
-      if (this.isCarYearInSecondThreshold) {
-        return 2.05;
-      }
-
-      if (this.isCarYearGapInThirdThreshold) {
-        return 2.35;
-      }
-
-      return 100;
-    },
-
-    getSecondThresholdInsuranceRate(): number {
-      if (this.isCarYearInFirstThreshold) {
-        return 1.45;
-      }
-
-      if (this.isCarYearInSecondThreshold) {
-        return 1.74;
-      }
-
-      if (this.isCarYearGapInThirdThreshold) {
-        return 2;
-      }
-
-      return 100;
-    },
-
-    getThirdThresholdInsuranceRate(): number {
-      if (this.isCarYearInFirstThreshold) {
-        return 1.28;
-      }
-
-      if (this.isCarYearInSecondThreshold) {
-        return 1.54;
-      }
-
-      if (this.isCarYearGapInThirdThreshold) {
-        return 1.76;
-      }
-
-      return 100;
-    },
-
-    isCarYearInFirstThreshold(): boolean {
-      return this.mixinIsCarYearInFirstThreshold(this.carYearGap);
-    },
-
-    isCarYearInSecondThreshold(): boolean {
-      return this.mixinIsCarYearInSecondThreshold(this.carYearGap);
-    },
-
-    isCarYearGapInThirdThreshold(): boolean {
-      return this.mixinIsCarYearInThirdThreshold(this.carYearGap);
-    },
-
-    carYearGap(): number {
-      return this.thisYear - this.carYear;
+  methods: {
+    calculateCarInsuranceValue() {
+      this.insuranceValue = this.pvi.getCarInsuranceValue();
     }
   }
 });

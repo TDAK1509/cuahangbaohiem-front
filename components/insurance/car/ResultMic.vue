@@ -9,126 +9,76 @@
 </template>
 
 <script lang="ts">
-import mixins from "vue-typed-mixins";
-import CarThresholdMixin from "@/mixins/car-threshold";
+import Vue from "vue";
+import MicCarInsurance from "@/utils/car-insurance/mic-car-insurance";
+import {
+  CarYearThreshold,
+  CarInsuranceAddOn
+} from "@/controller/car-insurance-request";
 
-export default mixins(CarThresholdMixin).extend({
-  name: "ResultMIC",
-
-  props: {
-    carValue: {
-      type: Number,
-      required: true
-    },
-
-    carYear: {
-      type: Number,
-      required: true
-    }
-  },
+export default Vue.extend({
+  name: "ResultMic",
 
   data() {
     return {
-      thisYear: new Date().getFullYear()
+      mic: new MicCarInsurance(
+        0,
+        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
+        []
+      ),
+      insuranceValue: 0
     };
   },
 
   computed: {
-    insuranceValue(): number {
-      return (this.carValue * this.insuranceRate) / 100;
+    carValue(): number {
+      return this.$store.state.car.carValue;
     },
 
-    insuranceRate(): number {
-      if (this.isCarValueInFirstThreshold) {
-        return this.getFirstThresholdInsuranceRate;
-      }
-
-      if (this.isCarValueInSecondThreshold) {
-        return this.getSecondThresholdInsuranceRate;
-      }
-
-      if (this.isCarValueInThirdThreshold) {
-        return this.getThirdThresholdInsuranceRate;
-      }
-
-      return 100;
+    carYearThreshold(): CarYearThreshold {
+      return this.$store.state.car.carYearThreshold;
     },
 
-    isCarValueInFirstThreshold(): boolean {
-      return this.mixinIsCarValueInFirstThreshold(this.carValue);
+    addons(): CarInsuranceAddOn[] {
+      return this.$store.state.car.addons;
+    }
+  },
+
+  watch: {
+    carValue(newValue: number) {
+      this.mic.setCarValue(newValue);
+      this.calculateCarInsuranceValue();
     },
 
-    isCarValueInSecondThreshold(): boolean {
-      return this.mixinIsCarValueInSecondThreshold(this.carValue);
+    carYearThreshold(newValue: number) {
+      this.mic.setCarYearThreshold(newValue);
+      this.calculateCarInsuranceValue();
     },
 
-    isCarValueInThirdThreshold(): boolean {
-      return this.mixinIsCarValueInThirdThreshold(this.carValue);
-    },
+    addons(newValue: CarInsuranceAddOn[]) {
+      this.mic.setAddons(newValue);
+      this.calculateCarInsuranceValue();
+    }
+  },
 
-    getFirstThresholdInsuranceRate(): number {
-      if (this.isCarYearInFirstThreshold) {
-        return 1.23;
-      }
+  mounted() {
+    this.mic.setCarValue(this.carValue);
+    this.mic.setCarYearThreshold(this.carYearThreshold);
+    this.mic.setAddons(this.addons);
+    this.calculateCarInsuranceValue();
+  },
 
-      if (this.isCarYearInSecondThreshold) {
-        return 1.3;
-      }
-
-      if (this.isCarYearGapInThirdThreshold) {
-        return 1.38;
-      }
-
-      return 100;
-    },
-
-    getSecondThresholdInsuranceRate(): number {
-      if (this.isCarYearInFirstThreshold) {
-        return 1.23;
-      }
-
-      if (this.isCarYearInSecondThreshold) {
-        return 1.3;
-      }
-
-      if (this.isCarYearGapInThirdThreshold) {
-        return 1.38;
-      }
-
-      return 100;
-    },
-
-    getThirdThresholdInsuranceRate(): number {
-      if (this.isCarYearInFirstThreshold) {
-        return 1.23;
-      }
-
-      if (this.isCarYearInSecondThreshold) {
-        return 1.3;
-      }
-
-      if (this.isCarYearGapInThirdThreshold) {
-        return 1.38;
-      }
-
-      return 100;
-    },
-
-    isCarYearInFirstThreshold(): boolean {
-      return this.mixinIsCarYearInFirstThreshold(this.carYearGap);
-    },
-
-    isCarYearInSecondThreshold(): boolean {
-      return this.mixinIsCarYearInSecondThreshold(this.carYearGap);
-    },
-
-    isCarYearGapInThirdThreshold(): boolean {
-      return this.mixinIsCarYearInThirdThreshold(this.carYearGap);
-    },
-
-    carYearGap(): number {
-      return this.thisYear - this.carYear;
+  methods: {
+    calculateCarInsuranceValue() {
+      this.insuranceValue = this.mic.getCarInsuranceValue();
     }
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.result-mic__img {
+  width: auto;
+  height: 80px;
+}
+</style>

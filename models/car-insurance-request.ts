@@ -9,9 +9,12 @@ export interface RawCarInsuranceRequest {
   email: string;
   phone: string;
   note?: string;
+  carValue: number;
+  carYearThreshold: string;
+  addons: string[];
   insuranceCompany: string;
-  insuranceValue: string;
-  date: string;
+  insuranceValue: number;
+  dateMsec: number;
   isDone: boolean;
 }
 

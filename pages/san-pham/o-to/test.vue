@@ -1,10 +1,8 @@
 <template>
   <div>
-    <p>{{ firstCarInsuranceRequest.name }}</p>
-    <p>{{ firstCarInsuranceRequest.email }}</p>
-    <p>{{ firstCarInsuranceRequest.phone }}</p>
-    <p>{{ firstCarInsuranceRequest.insuranceCompany }}</p>
-    <p>{{ firstCarInsuranceRequest.insuranceValue }}</p>
+    <p v-for="(value, key) in firstCarInsuranceRequest" :key="key">
+      {{ key }}: {{ value }}
+    </p>
   </div>
 </template>
 
@@ -18,6 +16,7 @@ const FIREBASE_CAR_INSURANCE_COLLECTION = "car_insurance_request";
 async function getCarInsuranceRequests() {
   const querySnapshot = await db
     .collection(FIREBASE_CAR_INSURANCE_COLLECTION)
+    .orderBy("dateMsec")
     .get();
 
   if (querySnapshot.docs.length === 0) {

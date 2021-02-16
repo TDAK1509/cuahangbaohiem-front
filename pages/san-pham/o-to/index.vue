@@ -17,7 +17,7 @@
 
       <form @submit.prevent="calculate">
         <TextField
-          v-model="carValueInput"
+          v-model="carValue"
           data-cy="car-value"
           label="Giá trị xe (triệu đồng)"
           placeholder="800"
@@ -26,17 +26,35 @@
           title="Vui lòng điền một con số."
         />
 
-        <TextField
-          v-model="carYearInput"
-          data-cy="car-year"
-          label="Năm sản xuất"
-          placeholder="2015"
-          required
-          pattern="[0-9]*"
-          minlength="4"
-          maxlength="4"
-          title="Năm sản xuất không hợp lệ."
-        />
+        <div class="field">
+          <label class="label">Năm sản xuất</label>
+          <div class="control" data-cy="car-year-threshold">
+            <p v-for="{ text, value } in carYearRadios" :key="value">
+              <label class="radio">
+                <input
+                  v-model="carYearThreshold"
+                  :value="value"
+                  type="radio"
+                  name="car_year"
+                />
+                {{ text }}
+              </label>
+            </p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Tùy chọn bổ sung</label>
+
+          <div class="control" data-cy="addons">
+            <p v-for="{ text, value } in insuranceAddOns" :key="value">
+              <label class="checkbox">
+                <input v-model="addons" type="checkbox" :value="value" />
+                {{ text }}
+              </label>
+            </p>
+          </div>
+        </div>
 
         <div class="field mt-5">
           <div class="control">
@@ -48,15 +66,15 @@
       </form>
 
       <div
-        v-if="showResult && isFormValid"
+        v-if="showResult"
         ref="result"
         class="mt-5 pt-5 tinh-phi__result"
         data-cy="result"
       >
-        <ResultPvi class="mb-5" :car-value="carValue" :car-year="carYear" />
-        <ResultBaoViet class="mb-5" :car-value="carValue" :car-year="carYear" />
-        <ResultBaoMinh class="mb-5" :car-value="carValue" :car-year="carYear" />
-        <ResultMic class="mb-5" :car-value="carValue" :car-year="carYear" />
+        <ResultPvi class="mb-5" />
+        <ResultBaoViet class="mb-5" />
+        <ResultBaoMinh class="mb-5" />
+        <ResultMic class="mb-5" />
       </div>
     </div>
   </section>
@@ -64,6 +82,12 @@
 
 <script lang="ts">
 import Vue from "vue";
+import CarInsuranceRequestController, {
+  CarYearThreshold,
+  CarInsuranceAddOn
+} from "@/controller/car-insurance-request";
+
+const controller = new CarInsuranceRequestController();
 
 export default Vue.extend({
   name: "TinhPhiOto",
@@ -73,34 +97,67 @@ export default Vue.extend({
   data() {
     return {
       showResult: false,
-      carValueInput: null as string | null,
-      carYearInput: null as string | null
+      carYearRadios: [
+        {
+          text: controller.getCarYearThresholdLabel(
+            CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
+          ),
+          value: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
+        },
+        {
+          text: controller.getCarYearThresholdLabel(
+            CarYearThreshold.FROM_3_TO_6_YEARS
+          ),
+          value: CarYearThreshold.FROM_3_TO_6_YEARS
+        },
+        {
+          text: controller.getCarYearThresholdLabel(
+            CarYearThreshold.OVER_6_YEARS
+          ),
+          value: CarYearThreshold.OVER_6_YEARS
+        }
+      ],
+      insuranceAddOns: [
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.OPTION_1),
+          value: CarInsuranceAddOn.OPTION_1
+        },
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.OPTION_2),
+          value: CarInsuranceAddOn.OPTION_2
+        }
+      ]
     };
   },
 
   computed: {
-    carValueIsNumber(): boolean {
-      if (!this.carValueInput) return false;
-      const carValue = parseInt(this.carValueInput);
-      return Number.isInteger(carValue);
+    carValue: {
+      get(): string {
+        return this.$store.state.car.carValue
+          ? this.$store.state.car.carValue.toString()
+          : "";
+      },
+      set(newValue: string) {
+        this.$store.dispatch("car/setCarValue", parseInt(newValue));
+      }
     },
 
-    carYearIsNumber(): boolean {
-      if (!this.carYearInput) return false;
-      const carYear = parseInt(this.carYearInput);
-      return Number.isInteger(carYear);
+    carYearThreshold: {
+      get(): CarYearThreshold {
+        return this.$store.state.car.carYearThreshold;
+      },
+      set(newValue: CarYearThreshold) {
+        this.$store.dispatch("car/setCarYearThreshold", newValue);
+      }
     },
 
-    isFormValid(): boolean {
-      return this.carValueIsNumber && this.carYearIsNumber;
-    },
-
-    carValue(): number {
-      return this.carValueIsNumber ? parseInt(this.carValueInput as string) : 0;
-    },
-
-    carYear(): number {
-      return this.carYearIsNumber ? parseInt(this.carYearInput as string) : 0;
+    addons: {
+      get(): CarInsuranceAddOn[] {
+        return this.$store.state.car.addons;
+      },
+      set(newValue: CarInsuranceAddOn[]) {
+        this.$store.dispatch("car/setAddons", newValue);
+      }
     }
   },
 

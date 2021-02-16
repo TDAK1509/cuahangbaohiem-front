@@ -9,125 +9,68 @@
 </template>
 
 <script lang="ts">
-import mixins from "vue-typed-mixins";
-import CarThresholdMixin from "@/mixins/car-threshold";
+import Vue from "vue";
+import BaoMinhCarInsurance from "@/utils/car-insurance/bao-minh-car-insurance";
+import {
+  CarYearThreshold,
+  CarInsuranceAddOn
+} from "@/controller/car-insurance-request";
 
-export default mixins(CarThresholdMixin).extend({
+export default Vue.extend({
   name: "ResultBaoMinh",
-
-  props: {
-    carValue: {
-      type: Number,
-      required: true
-    },
-
-    carYear: {
-      type: Number,
-      required: true
-    }
-  },
 
   data() {
     return {
-      thisYear: new Date().getFullYear()
+      baoMinh: new BaoMinhCarInsurance(
+        0,
+        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
+        []
+      ),
+      insuranceValue: 0
     };
   },
 
   computed: {
-    insuranceValue(): number {
-      return (this.carValue * this.insuranceRate) / 100;
+    carValue(): number {
+      return this.$store.state.car.carValue;
     },
 
-    insuranceRate(): number {
-      if (this.isCarValueInFirstThreshold) {
-        return this.getFirstThresholdInsuranceRate;
-      }
-
-      if (this.isCarValueInSecondThreshold) {
-        return this.getSecondThresholdInsuranceRate;
-      }
-
-      if (this.isCarValueInThirdThreshold) {
-        return this.getThirdThresholdInsuranceRate;
-      }
-
-      return 100;
+    carYearThreshold(): CarYearThreshold {
+      return this.$store.state.car.carYearThreshold;
     },
 
-    isCarValueInFirstThreshold(): boolean {
-      return this.mixinIsCarValueInFirstThreshold(this.carValue);
+    addons(): CarInsuranceAddOn[] {
+      return this.$store.state.car.addons;
+    }
+  },
+
+  watch: {
+    carValue(newValue: number) {
+      this.baoMinh.setCarValue(newValue);
+      this.calculateCarInsuranceValue();
     },
 
-    isCarValueInSecondThreshold(): boolean {
-      return this.mixinIsCarValueInSecondThreshold(this.carValue);
+    carYearThreshold(newValue: number) {
+      this.baoMinh.setCarYearThreshold(newValue);
+      this.calculateCarInsuranceValue();
     },
 
-    isCarValueInThirdThreshold(): boolean {
-      return this.mixinIsCarValueInThirdThreshold(this.carValue);
-    },
+    addons(newValue: CarInsuranceAddOn[]) {
+      this.baoMinh.setAddons(newValue);
+      this.calculateCarInsuranceValue();
+    }
+  },
 
-    getFirstThresholdInsuranceRate(): number {
-      if (this.isCarYearInFirstThreshold) {
-        return 1.52;
-      }
+  mounted() {
+    this.baoMinh.setCarValue(this.carValue);
+    this.baoMinh.setCarYearThreshold(this.carYearThreshold);
+    this.baoMinh.setAddons(this.addons);
+    this.calculateCarInsuranceValue();
+  },
 
-      if (this.isCarYearInSecondThreshold) {
-        return 1.774;
-      }
-
-      if (this.isCarYearGapInThirdThreshold) {
-        return 1.906;
-      }
-
-      return 100;
-    },
-
-    getSecondThresholdInsuranceRate(): number {
-      if (this.isCarYearInFirstThreshold) {
-        return 1.443;
-      }
-
-      if (this.isCarYearInSecondThreshold) {
-        return 1.675;
-      }
-
-      if (this.isCarYearGapInThirdThreshold) {
-        return 1.807;
-      }
-
-      return 100;
-    },
-
-    getThirdThresholdInsuranceRate(): number {
-      if (this.isCarYearInFirstThreshold) {
-        return 1.443;
-      }
-
-      if (this.isCarYearInSecondThreshold) {
-        return 1.675;
-      }
-
-      if (this.isCarYearGapInThirdThreshold) {
-        return 1.807;
-      }
-
-      return 100;
-    },
-
-    isCarYearInFirstThreshold(): boolean {
-      return this.mixinIsCarYearInFirstThreshold(this.carYearGap);
-    },
-
-    isCarYearInSecondThreshold(): boolean {
-      return this.mixinIsCarYearInSecondThreshold(this.carYearGap);
-    },
-
-    isCarYearGapInThirdThreshold(): boolean {
-      return this.mixinIsCarYearInThirdThreshold(this.carYearGap);
-    },
-
-    carYearGap(): number {
-      return this.thisYear - this.carYear;
+  methods: {
+    calculateCarInsuranceValue() {
+      this.insuranceValue = this.baoMinh.getCarInsuranceValue();
     }
   }
 });
