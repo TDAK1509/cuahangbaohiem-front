@@ -248,7 +248,7 @@ describe("Page /san-pham/o-to", () => {
           cy.contains("test@gmail.com").should("be.visible");
           cy.contains("1234567").should("be.visible");
           cy.contains("PVI").should("be.visible");
-          cy.contains("120.000.000 VND").should("be.visible");
+          cy.contains("120.000.000").should("be.visible");
         });
       });
     });
