@@ -17,7 +17,7 @@
 
       <form @submit.prevent="calculate">
         <TextField
-          v-model="carValueInput"
+          v-model="carValue"
           data-cy="car-value"
           label="Giá trị xe (triệu đồng)"
           placeholder="800"
@@ -66,7 +66,7 @@
       </form>
 
       <div
-        v-if="showResult && isFormValid"
+        v-if="showResult"
         ref="result"
         class="mt-5 pt-5 tinh-phi__result"
         data-cy="result"
@@ -95,9 +95,6 @@ export default Vue.extend({
   data() {
     return {
       showResult: false,
-      carValueInput: null as string | null,
-      carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
-      addons: [] as CarInsuranceAddOn[],
       carYearRadios: [
         {
           text: "Dưới 3 năm",
@@ -120,31 +117,33 @@ export default Vue.extend({
   },
 
   computed: {
-    carValueIsNumber(): boolean {
-      if (!this.carValueInput) return false;
-      const carValue = parseInt(this.carValueInput);
-      return Number.isInteger(carValue);
+    carValue: {
+      get(): string {
+        return this.$store.state.car.carValue
+          ? this.$store.state.car.carValue.toString()
+          : "";
+      },
+      set(newValue: string) {
+        this.$store.dispatch("car/setCarValue", parseInt(newValue));
+      }
     },
 
-    isFormValid(): boolean {
-      return this.carValueIsNumber;
-    }
-  },
-
-  watch: {
-    carValueInput() {
-      const carValue = this.carValueIsNumber
-        ? parseInt(this.carValueInput as string)
-        : 0;
-      this.$store.dispatch("car/setCarValue", carValue);
+    carYearThreshold: {
+      get(): CarYearThreshold {
+        return this.$store.state.car.carYearThreshold;
+      },
+      set(newValue: CarYearThreshold) {
+        this.$store.dispatch("car/setCarYearThreshold", newValue);
+      }
     },
 
-    carYearThreshold(newValue: CarYearThreshold) {
-      this.$store.dispatch("car/setCarYearThreshold", newValue);
-    },
-
-    addons(newValue: CarInsuranceAddOn[]) {
-      this.$store.dispatch("car/setAddons", newValue);
+    addons: {
+      get(): CarInsuranceAddOn[] {
+        return this.$store.state.car.addons;
+      },
+      set(newValue: CarInsuranceAddOn[]) {
+        this.$store.dispatch("car/setAddons", newValue);
+      }
     }
   },
 
