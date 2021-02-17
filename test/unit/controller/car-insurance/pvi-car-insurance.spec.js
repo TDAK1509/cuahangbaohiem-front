@@ -51,7 +51,7 @@ describe("class PviCarInsurance", () => {
     it("setAddons() is working", () => {
       const carValue = 100;
       const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
-      const addons = [CarInsuranceAddOn.DKBS_006];
+      const addons = [CarInsuranceAddOn.DKBS_007];
       const pviCarInsurance = new PviCarInsurance(
         carValue,
         carYearThreshold,
@@ -87,7 +87,7 @@ describe("class PviCarInsurance", () => {
           expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
         });
 
-        it("if add on 1, returns car value * 1.21", () => {
+        it("if add on DKBS_006, returns car value * 1.5", () => {
           const addons = [CarInsuranceAddOn.DKBS_006];
           const pviCarInsurance = new PviCarInsurance(
             carValue,
@@ -95,7 +95,7 @@ describe("class PviCarInsurance", () => {
             addons
           );
           const carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
-          const expectedCarInsuranceValue = carValue * 1.21;
+          const expectedCarInsuranceValue = carValue * 1.5;
           expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
         });
 
