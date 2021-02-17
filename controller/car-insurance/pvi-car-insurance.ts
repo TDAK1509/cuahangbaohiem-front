@@ -64,7 +64,7 @@ export default class PviCarInsurance {
       return 1.22;
     }
 
-    return 1.2;
+    return 1.5;
   }
 
   private getCarInsuranceRateForFrom3To6Years(): number {
