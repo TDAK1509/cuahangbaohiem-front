@@ -23,7 +23,7 @@ describe("class PviCarInsurance", () => {
         });
 
         it("setCarValue() is working", () => {
-          const carValue = 1000;
+          const carValue = 100;
           const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
           const addons = [];
           const pviCarInsurance = new PviCarInsurance(
@@ -36,7 +36,7 @@ describe("class PviCarInsurance", () => {
           let carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
           expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
 
-          const newCarValue = 100;
+          const newCarValue = 500;
           pviCarInsurance.setCarValue(newCarValue);
           carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
           expectedCarInsuranceValue = newCarValue * 1.5;
