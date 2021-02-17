@@ -21,10 +21,13 @@ export enum CarYearThreshold {
 }
 
 export enum CarInsuranceAddOn {
-  DKBS_003,
-  DKBS_006,
   DKBS_007,
-  DKBS_008
+  DKBS_006,
+  DKBS_006_007,
+  DKBS_006_008,
+  DKBS_006_007_008,
+  DKBS_003_006_007,
+  DKBS_003_006_007_008
 }
 
 export default class CarInsuranceRequestController {
