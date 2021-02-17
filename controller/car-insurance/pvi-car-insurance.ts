@@ -53,7 +53,7 @@ export default class PviCarInsurance {
       this.addons.includes(CarInsuranceAddOn.DKBS_006) &&
       this.addons.includes(CarInsuranceAddOn.DKBS_007)
     ) {
-      return 1.23;
+      return 1.6;
     }
 
     if (this.addons.includes(CarInsuranceAddOn.DKBS_006)) {
