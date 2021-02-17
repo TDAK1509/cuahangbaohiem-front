@@ -144,6 +144,22 @@ describe("class PviCarInsurance", () => {
           const expectedCarInsuranceValue = carValue * 1.7;
           expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
         });
+
+        it("if add on DKBS_006, DKBS_007 and DKBS_003, returns car value * 1.8", () => {
+          const addons = [
+            CarInsuranceAddOn.DKBS_006,
+            CarInsuranceAddOn.DKBS_007,
+            CarInsuranceAddOn.DKBS_003
+          ];
+          const pviCarInsurance = new PviCarInsurance(
+            carValue,
+            carYearThreshold,
+            addons
+          );
+          const carInsuranceValue = pviCarInsurance.getCarInsuranceValue();
+          const expectedCarInsuranceValue = carValue * 1.8;
+          expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
+        });
       });
 
       describe("if 3 < car year threshold <= 6", () => {
