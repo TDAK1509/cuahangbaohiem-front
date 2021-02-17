@@ -50,17 +50,17 @@ export default class BaoMinhCarInsurance {
 
   private getCarInsuranceRateForLessThan3YearsThreshold(): number {
     if (
-      this.addons.includes(CarInsuranceAddOn.OPTION_1) &&
-      this.addons.includes(CarInsuranceAddOn.OPTION_2)
+      this.addons.includes(CarInsuranceAddOn.DKBS_006) &&
+      this.addons.includes(CarInsuranceAddOn.DKBS_007)
     ) {
       return 1.23;
     }
 
-    if (this.addons.includes(CarInsuranceAddOn.OPTION_1)) {
+    if (this.addons.includes(CarInsuranceAddOn.DKBS_006)) {
       return 1.21;
     }
 
-    if (this.addons.includes(CarInsuranceAddOn.OPTION_2)) {
+    if (this.addons.includes(CarInsuranceAddOn.DKBS_007)) {
       return 1.22;
     }
 
@@ -69,17 +69,17 @@ export default class BaoMinhCarInsurance {
 
   private getCarInsuranceRateForFrom3To6Years(): number {
     if (
-      this.addons.includes(CarInsuranceAddOn.OPTION_1) &&
-      this.addons.includes(CarInsuranceAddOn.OPTION_2)
+      this.addons.includes(CarInsuranceAddOn.DKBS_006) &&
+      this.addons.includes(CarInsuranceAddOn.DKBS_007)
     ) {
       return 1.33;
     }
 
-    if (this.addons.includes(CarInsuranceAddOn.OPTION_1)) {
+    if (this.addons.includes(CarInsuranceAddOn.DKBS_006)) {
       return 1.31;
     }
 
-    if (this.addons.includes(CarInsuranceAddOn.OPTION_2)) {
+    if (this.addons.includes(CarInsuranceAddOn.DKBS_007)) {
       return 1.32;
     }
 
@@ -88,17 +88,17 @@ export default class BaoMinhCarInsurance {
 
   private getCarInsuranceRateForOver6Years(): number {
     if (
-      this.addons.includes(CarInsuranceAddOn.OPTION_1) &&
-      this.addons.includes(CarInsuranceAddOn.OPTION_2)
+      this.addons.includes(CarInsuranceAddOn.DKBS_006) &&
+      this.addons.includes(CarInsuranceAddOn.DKBS_007)
     ) {
       return 1.43;
     }
 
-    if (this.addons.includes(CarInsuranceAddOn.OPTION_1)) {
+    if (this.addons.includes(CarInsuranceAddOn.DKBS_006)) {
       return 1.41;
     }
 
-    if (this.addons.includes(CarInsuranceAddOn.OPTION_2)) {
+    if (this.addons.includes(CarInsuranceAddOn.DKBS_007)) {
       return 1.42;
     }
 

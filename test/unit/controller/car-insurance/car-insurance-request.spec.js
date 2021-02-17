@@ -64,13 +64,13 @@ describe("CarInsuranceRequestController", () => {
   describe("getAddOnLabel()", () => {
     it("returns 'Option 1' add on is option 1", () => {
       const controller = new CarInsuranceRequestController();
-      const result = controller.getAddOnLabel(CarInsuranceAddOn.OPTION_1);
+      const result = controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006);
       expect(result).toBe("Option 1");
     });
 
     it("returns 'Option 2' add on is option 2", () => {
       const controller = new CarInsuranceRequestController();
-      const result = controller.getAddOnLabel(CarInsuranceAddOn.OPTION_2);
+      const result = controller.getAddOnLabel(CarInsuranceAddOn.DKBS_007);
       expect(result).toBe("Option 2");
     });
   });

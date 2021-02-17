@@ -119,12 +119,12 @@ export default Vue.extend({
       ],
       insuranceAddOns: [
         {
-          text: controller.getAddOnLabel(CarInsuranceAddOn.OPTION_1),
-          value: CarInsuranceAddOn.OPTION_1
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
+          value: CarInsuranceAddOn.DKBS_006
         },
         {
-          text: controller.getAddOnLabel(CarInsuranceAddOn.OPTION_2),
-          value: CarInsuranceAddOn.OPTION_2
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_007),
+          value: CarInsuranceAddOn.DKBS_007
         }
       ]
     };

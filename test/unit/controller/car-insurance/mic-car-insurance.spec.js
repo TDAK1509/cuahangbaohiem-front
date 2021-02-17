@@ -66,7 +66,7 @@ describe("class MicCarInsurance", () => {
       it("setAddons() is working", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
-        const addons = [CarInsuranceAddOn.OPTION_1];
+        const addons = [CarInsuranceAddOn.DKBS_006];
         const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
@@ -85,7 +85,7 @@ describe("class MicCarInsurance", () => {
       it("if add on 1, returns car value * 1.21", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
-        const addons = [CarInsuranceAddOn.OPTION_1];
+        const addons = [CarInsuranceAddOn.DKBS_006];
         const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
@@ -99,7 +99,7 @@ describe("class MicCarInsurance", () => {
       it("if add on 2, returns car value * 1.22", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
-        const addons = [CarInsuranceAddOn.OPTION_2];
+        const addons = [CarInsuranceAddOn.DKBS_007];
         const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
@@ -113,7 +113,7 @@ describe("class MicCarInsurance", () => {
       it("if add on both 1 & 2, returns car value * 1.23", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
-        const addons = [CarInsuranceAddOn.OPTION_1, CarInsuranceAddOn.OPTION_2];
+        const addons = [CarInsuranceAddOn.DKBS_006, CarInsuranceAddOn.DKBS_007];
         const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
@@ -143,7 +143,7 @@ describe("class MicCarInsurance", () => {
       it("if add on 1, returns car value * 1.31", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
-        const addons = [CarInsuranceAddOn.OPTION_1];
+        const addons = [CarInsuranceAddOn.DKBS_006];
         const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
@@ -157,7 +157,7 @@ describe("class MicCarInsurance", () => {
       it("if add on 2, returns car value * 1.32", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
-        const addons = [CarInsuranceAddOn.OPTION_2];
+        const addons = [CarInsuranceAddOn.DKBS_007];
         const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
@@ -171,7 +171,7 @@ describe("class MicCarInsurance", () => {
       it("if add on both 1 & 2, returns car value * 1.33", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
-        const addons = [CarInsuranceAddOn.OPTION_1, CarInsuranceAddOn.OPTION_2];
+        const addons = [CarInsuranceAddOn.DKBS_006, CarInsuranceAddOn.DKBS_007];
         const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
@@ -201,7 +201,7 @@ describe("class MicCarInsurance", () => {
       it("if add on 1, returns car value * 1.41", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.OVER_6_YEARS;
-        const addons = [CarInsuranceAddOn.OPTION_1];
+        const addons = [CarInsuranceAddOn.DKBS_006];
         const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
@@ -215,7 +215,7 @@ describe("class MicCarInsurance", () => {
       it("if add on 2, returns car value * 1.42", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.OVER_6_YEARS;
-        const addons = [CarInsuranceAddOn.OPTION_2];
+        const addons = [CarInsuranceAddOn.DKBS_007];
         const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,
@@ -229,7 +229,7 @@ describe("class MicCarInsurance", () => {
       it("if add on both 1 & 2, returns car value * 1.43", () => {
         const carValue = 100;
         const carYearThreshold = CarYearThreshold.OVER_6_YEARS;
-        const addons = [CarInsuranceAddOn.OPTION_1, CarInsuranceAddOn.OPTION_2];
+        const addons = [CarInsuranceAddOn.DKBS_006, CarInsuranceAddOn.DKBS_007];
         const micCarInsurance = new MicCarInsurance(
           carValue,
           carYearThreshold,

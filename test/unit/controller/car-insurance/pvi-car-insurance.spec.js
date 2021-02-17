@@ -51,7 +51,7 @@ describe("class PviCarInsurance", () => {
     it("setAddons() is working", () => {
       const carValue = 100;
       const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
-      const addons = [CarInsuranceAddOn.OPTION_1];
+      const addons = [CarInsuranceAddOn.DKBS_006];
       const pviCarInsurance = new PviCarInsurance(
         carValue,
         carYearThreshold,
@@ -88,7 +88,7 @@ describe("class PviCarInsurance", () => {
         });
 
         it("if add on 1, returns car value * 1.21", () => {
-          const addons = [CarInsuranceAddOn.OPTION_1];
+          const addons = [CarInsuranceAddOn.DKBS_006];
           const pviCarInsurance = new PviCarInsurance(
             carValue,
             carYearThreshold,
@@ -100,7 +100,7 @@ describe("class PviCarInsurance", () => {
         });
 
         it("if add on 2, returns car value * 1.22", () => {
-          const addons = [CarInsuranceAddOn.OPTION_2];
+          const addons = [CarInsuranceAddOn.DKBS_007];
           const pviCarInsurance = new PviCarInsurance(
             carValue,
             carYearThreshold,
@@ -114,8 +114,8 @@ describe("class PviCarInsurance", () => {
         it("if add on both 1 & 2, returns car value * 1.23", () => {
           const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
           const addons = [
-            CarInsuranceAddOn.OPTION_1,
-            CarInsuranceAddOn.OPTION_2
+            CarInsuranceAddOn.DKBS_006,
+            CarInsuranceAddOn.DKBS_007
           ];
           const pviCarInsurance = new PviCarInsurance(
             carValue,
@@ -144,7 +144,7 @@ describe("class PviCarInsurance", () => {
         });
 
         it("if add on 1, returns car value * 1.31", () => {
-          const addons = [CarInsuranceAddOn.OPTION_1];
+          const addons = [CarInsuranceAddOn.DKBS_006];
           const pviCarInsurance = new PviCarInsurance(
             carValue,
             carYearThreshold,
@@ -156,7 +156,7 @@ describe("class PviCarInsurance", () => {
         });
 
         it("if add on 2, returns car value * 1.32", () => {
-          const addons = [CarInsuranceAddOn.OPTION_2];
+          const addons = [CarInsuranceAddOn.DKBS_007];
           const pviCarInsurance = new PviCarInsurance(
             carValue,
             carYearThreshold,
@@ -169,8 +169,8 @@ describe("class PviCarInsurance", () => {
 
         it("if add on both 1 & 2, returns car value * 1.33", () => {
           const addons = [
-            CarInsuranceAddOn.OPTION_1,
-            CarInsuranceAddOn.OPTION_2
+            CarInsuranceAddOn.DKBS_006,
+            CarInsuranceAddOn.DKBS_007
           ];
           const pviCarInsurance = new PviCarInsurance(
             carValue,
@@ -199,7 +199,7 @@ describe("class PviCarInsurance", () => {
         });
 
         it("if add on 1, returns car value * 1.41", () => {
-          const addons = [CarInsuranceAddOn.OPTION_1];
+          const addons = [CarInsuranceAddOn.DKBS_006];
           const pviCarInsurance = new PviCarInsurance(
             carValue,
             carYearThreshold,
@@ -211,7 +211,7 @@ describe("class PviCarInsurance", () => {
         });
 
         it("if add on 2, returns car value * 1.42", () => {
-          const addons = [CarInsuranceAddOn.OPTION_2];
+          const addons = [CarInsuranceAddOn.DKBS_007];
           const pviCarInsurance = new PviCarInsurance(
             carValue,
             carYearThreshold,
@@ -224,8 +224,8 @@ describe("class PviCarInsurance", () => {
 
         it("if add on both 1 & 2, returns car value * 1.43", () => {
           const addons = [
-            CarInsuranceAddOn.OPTION_1,
-            CarInsuranceAddOn.OPTION_2
+            CarInsuranceAddOn.DKBS_006,
+            CarInsuranceAddOn.DKBS_007
           ];
           const pviCarInsurance = new PviCarInsurance(
             carValue,
