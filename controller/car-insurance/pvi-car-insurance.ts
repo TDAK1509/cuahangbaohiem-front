@@ -49,22 +49,25 @@ export default class PviCarInsurance {
   }
 
   private getCarInsuranceRateForLessThan3YearsThreshold(): number {
-    if (
-      this.addons.includes(CarInsuranceAddOn.DKBS_006) &&
-      this.addons.includes(CarInsuranceAddOn.DKBS_007)
-    ) {
-      return 1.6;
-    }
+    let baseInsuranceRate = 1.5;
 
     if (this.addons.includes(CarInsuranceAddOn.DKBS_006)) {
-      return 1.5;
+      baseInsuranceRate += 0;
     }
 
     if (this.addons.includes(CarInsuranceAddOn.DKBS_007)) {
-      return 1.22;
+      baseInsuranceRate += 0.1;
     }
 
-    return 1.5;
+    if (this.addons.includes(CarInsuranceAddOn.DKBS_008)) {
+      baseInsuranceRate += 0.1;
+    }
+
+    if (this.addons.includes(CarInsuranceAddOn.DKBS_003)) {
+      baseInsuranceRate += 0.2;
+    }
+
+    return baseInsuranceRate;
   }
 
   private getCarInsuranceRateForFrom3To6Years(): number {
