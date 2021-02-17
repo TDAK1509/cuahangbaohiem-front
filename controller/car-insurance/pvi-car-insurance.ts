@@ -6,16 +6,16 @@ import {
 export default class PviCarInsurance {
   private carValue!: number;
   private carYearThreshold!: CarYearThreshold;
-  private addons!: CarInsuranceAddOn[];
+  private addon!: CarInsuranceAddOn;
 
   constructor(
     carValue: number,
     carYearThreshold: CarYearThreshold,
-    addons: CarInsuranceAddOn[]
+    addon: CarInsuranceAddOn
   ) {
     this.setCarValue(carValue);
     this.setCarYearThreshold(carYearThreshold);
-    this.setAddons(addons);
+    this.setAddon(addon);
   }
 
   public setCarValue(carValue: number) {
@@ -26,8 +26,8 @@ export default class PviCarInsurance {
     this.carYearThreshold = carYearThreshold;
   }
 
-  public setAddons(addons: CarInsuranceAddOn[]) {
-    this.addons = addons;
+  public setAddon(addon: CarInsuranceAddOn) {
+    this.addon = addon;
   }
 
   public getCarInsuranceValue(): number {
@@ -49,63 +49,59 @@ export default class PviCarInsurance {
   }
 
   private getCarInsuranceRateForLessThan3YearsThreshold(): number {
-    // Use big integer to avoid float issue: 0.1 + 0.2 = 0.3000000000000004
-    let baseInsuranceRate = 15; // equal 1.5%
-
-    if (this.addons.includes(CarInsuranceAddOn.DKBS_006)) {
-      baseInsuranceRate += 0;
+    switch (this.addon) {
+      case CarInsuranceAddOn.DKBS_006:
+        return 1.5;
+      case CarInsuranceAddOn.DKBS_006_007:
+        return 1.6;
+      case CarInsuranceAddOn.DKBS_006_008:
+        return 1.6;
+      case CarInsuranceAddOn.DKBS_006_007_008:
+        return 1.7;
+      case CarInsuranceAddOn.DKBS_003_006_007:
+        return 1.8;
+      case CarInsuranceAddOn.DKBS_003_006_007_008:
+        return 1.9;
+      default:
+        return 1.5;
     }
-
-    if (this.addons.includes(CarInsuranceAddOn.DKBS_007)) {
-      baseInsuranceRate += 1;
-    }
-
-    if (this.addons.includes(CarInsuranceAddOn.DKBS_008)) {
-      baseInsuranceRate += 1;
-    }
-
-    if (this.addons.includes(CarInsuranceAddOn.DKBS_003)) {
-      baseInsuranceRate += 2;
-    }
-
-    return baseInsuranceRate / 10;
   }
 
   private getCarInsuranceRateForFrom3To6Years(): number {
-    if (
-      this.addons.includes(CarInsuranceAddOn.DKBS_006) &&
-      this.addons.includes(CarInsuranceAddOn.DKBS_007)
-    ) {
-      return 1.33;
+    switch (this.addon) {
+      case CarInsuranceAddOn.DKBS_006:
+        return 1.5;
+      case CarInsuranceAddOn.DKBS_006_007:
+        return 1.6;
+      case CarInsuranceAddOn.DKBS_006_008:
+        return 1.6;
+      case CarInsuranceAddOn.DKBS_006_007_008:
+        return 1.7;
+      case CarInsuranceAddOn.DKBS_003_006_007:
+        return 1.8;
+      case CarInsuranceAddOn.DKBS_003_006_007_008:
+        return 1.9;
+      default:
+        return 1.5;
     }
-
-    if (this.addons.includes(CarInsuranceAddOn.DKBS_006)) {
-      return 1.31;
-    }
-
-    if (this.addons.includes(CarInsuranceAddOn.DKBS_007)) {
-      return 1.32;
-    }
-
-    return 1.3;
   }
 
   private getCarInsuranceRateForOver6Years(): number {
-    if (
-      this.addons.includes(CarInsuranceAddOn.DKBS_006) &&
-      this.addons.includes(CarInsuranceAddOn.DKBS_007)
-    ) {
-      return 1.43;
+    switch (this.addon) {
+      case CarInsuranceAddOn.DKBS_006:
+        return 1.5;
+      case CarInsuranceAddOn.DKBS_006_007:
+        return 1.6;
+      case CarInsuranceAddOn.DKBS_006_008:
+        return 1.6;
+      case CarInsuranceAddOn.DKBS_006_007_008:
+        return 1.7;
+      case CarInsuranceAddOn.DKBS_003_006_007:
+        return 1.8;
+      case CarInsuranceAddOn.DKBS_003_006_007_008:
+        return 1.9;
+      default:
+        return 1.5;
     }
-
-    if (this.addons.includes(CarInsuranceAddOn.DKBS_006)) {
-      return 1.41;
-    }
-
-    if (this.addons.includes(CarInsuranceAddOn.DKBS_007)) {
-      return 1.42;
-    }
-
-    return 1.4;
   }
 }
