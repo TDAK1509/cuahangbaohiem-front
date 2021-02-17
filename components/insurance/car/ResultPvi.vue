@@ -10,11 +10,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import PviCarInsurance from "@/utils/car-insurance/pvi-car-insurance";
+import PviCarInsurance from "@/controller/car-insurance/pvi-car-insurance";
 import {
   CarYearThreshold,
   CarInsuranceAddOn
-} from "@/controller/car-insurance-request";
+} from "@/controller/car-insurance/car-insurance-request";
 
 export default Vue.extend({
   name: "ResultPVI",

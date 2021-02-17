@@ -10,11 +10,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import MicCarInsurance from "@/utils/car-insurance/mic-car-insurance";
+import MicCarInsurance from "@/controller/car-insurance/mic-car-insurance";
 import {
   CarYearThreshold,
   CarInsuranceAddOn
-} from "@/controller/car-insurance-request";
+} from "@/controller/car-insurance/car-insurance-request";
 
 export default Vue.extend({
   name: "ResultMic",

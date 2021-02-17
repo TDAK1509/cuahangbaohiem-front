@@ -85,7 +85,7 @@ import Vue from "vue";
 import CarInsuranceRequestController, {
   CarYearThreshold,
   CarInsuranceAddOn
-} from "@/controller/car-insurance-request";
+} from "@/controller/car-insurance/car-insurance-request";
 
 const controller = new CarInsuranceRequestController();
 

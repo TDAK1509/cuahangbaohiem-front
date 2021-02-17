@@ -4,7 +4,7 @@ import CarInsuranceRequestController, {
   CarYearThreshold,
   CarInsuranceAddOn,
   CarInsuranceRequest
-} from "@/controller/car-insurance-request";
+} from "~/controller/car-insurance/car-insurance-request";
 
 const controller = new CarInsuranceRequestController();
 

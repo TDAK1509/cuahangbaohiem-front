@@ -1,9 +1,9 @@
 import {
   CarYearThreshold,
   CarInsuranceAddOn
-} from "@/controller/car-insurance-request";
+} from "~/controller/car-insurance/car-insurance-request";
 
-export default class MicCarInsurance {
+export default class BaoVietCarInsurance {
   private carValue!: number;
   private carYearThreshold!: CarYearThreshold;
   private addons!: CarInsuranceAddOn[];

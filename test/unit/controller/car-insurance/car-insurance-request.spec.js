@@ -1,7 +1,7 @@
 import CarInsuranceRequestController, {
   CarYearThreshold,
   CarInsuranceAddOn
-} from "@/controller/car-insurance-request";
+} from "~/controller/car-insurance/car-insurance-request";
 import CarInsuranceRequestModel from "@/models/car-insurance-request";
 import MockDate from "mockdate";
 

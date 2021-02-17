@@ -2,7 +2,7 @@ import { state, mutations, actions, getters } from "@/store/car";
 import CarInsuranceRequest, {
   CarYearThreshold,
   CarInsuranceAddOn
-} from "@/controller/car-insurance-request";
+} from "~/controller/car-insurance/car-insurance-request";
 
 describe("store/car", () => {
   let _state;
