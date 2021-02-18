@@ -245,7 +245,7 @@ describe("class PviCarInsurance", () => {
       });
 
       describe("if 6 < car year threshold <= 10", () => {
-        const carYearThreshold = CarYearThreshold.OVER_6_YEARS;
+        const carYearThreshold = CarYearThreshold.FROM_6_TO_10_YEARS;
 
         it("if no addon, returns car value * 1.8", () => {
           const addon = "";

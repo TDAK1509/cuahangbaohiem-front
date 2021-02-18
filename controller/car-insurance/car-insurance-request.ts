@@ -17,6 +17,10 @@ export interface CarInsuranceRequest {
 export enum CarYearThreshold {
   LESS_THAN_OR_EQUAL_3_YEARS,
   FROM_3_TO_6_YEARS,
+  FROM_6_TO_10_YEARS,
+  FROM_10_TO_15_YEARS,
+  FROM_15_TO_20_YEARS,
+  OVER_20_YEARS,
   OVER_6_YEARS
 }
 

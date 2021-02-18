@@ -41,8 +41,8 @@ export default class PviCarInsurance {
         return this.getCarInsuranceRateForLessThan3YearsThreshold();
       case CarYearThreshold.FROM_3_TO_6_YEARS:
         return this.getCarInsuranceRateForFrom3To6Years();
-      case CarYearThreshold.OVER_6_YEARS:
-        return this.getCarInsuranceRateForOver6Years();
+      case CarYearThreshold.FROM_6_TO_10_YEARS:
+        return this.getCarInsuranceRateForFrom6To10Years();
       default:
         return 0;
     }
@@ -86,7 +86,7 @@ export default class PviCarInsurance {
     }
   }
 
-  private getCarInsuranceRateForOver6Years(): number {
+  private getCarInsuranceRateForFrom6To10Years(): number {
     switch (this.addon) {
       case CarInsuranceAddOn.DKBS_006:
         return 1.95;
