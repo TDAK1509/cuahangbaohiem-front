@@ -54,6 +54,14 @@ export default class PviCarInsurance {
     }
   }
 
+  private isTier1(): boolean {
+    return this.carValue <= 500;
+  }
+
+  private isTier2(): boolean {
+    return this.carValue > 500 && this.carValue < 700;
+  }
+
   private getInsuranceFeeRateForLessThan3YearsThreshold(): number {
     switch (this.addon) {
       case CarInsuranceAddOn.BASIC:
@@ -181,13 +189,5 @@ export default class PviCarInsurance {
     }
 
     return 0;
-  }
-
-  private isTier1(): boolean {
-    return this.carValue <= 500;
-  }
-
-  private isTier2(): boolean {
-    return this.carValue > 500 && this.carValue < 700;
   }
 }
