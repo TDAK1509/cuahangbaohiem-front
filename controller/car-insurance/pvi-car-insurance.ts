@@ -95,15 +95,25 @@ export default class PviCarInsurance {
   private getInsuranceFeeRateForFrom6To10Years(): number {
     switch (this.addon) {
       case CarInsuranceAddOn.BASIC:
-        return 1.8;
+        if (this.isTier1()) return 1.8;
+        if (this.isTier2()) return 1.53;
+        return 0;
       case CarInsuranceAddOn.DKBS_006:
-        return 1.95;
+        if (this.isTier1()) return 1.95;
+        if (this.isTier2()) return 1.66;
+        return 0;
       case CarInsuranceAddOn.DKBS_006_007:
-        return 2.25;
+        if (this.isTier1()) return 2.25;
+        if (this.isTier2()) return 1.91;
+        return 0;
       case CarInsuranceAddOn.DKBS_006_008:
-        return 2.05;
+        if (this.isTier1()) return 2.05;
+        if (this.isTier2()) return 1.74;
+        return 0;
       case CarInsuranceAddOn.DKBS_006_007_008:
-        return 2.35;
+        if (this.isTier1()) return 2.35;
+        if (this.isTier2()) return 2;
+        return 0;
     }
 
     return 0;
