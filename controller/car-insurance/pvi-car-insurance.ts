@@ -130,9 +130,12 @@ export default class PviCarInsurance {
   }
 
   private getInsuranceFeeRateForOver20Years(): number {
-    switch (this.addon) {
-      case CarInsuranceAddOn.BASIC:
+    if (this.addon === CarInsuranceAddOn.BASIC) {
+      if (this.carValue <= 500) {
         return 2.25;
+      }
+
+      return 1.91;
     }
 
     return 0;
