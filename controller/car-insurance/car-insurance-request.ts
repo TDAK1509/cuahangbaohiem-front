@@ -26,6 +26,7 @@ export enum CarYearThreshold {
 
 export enum CarInsuranceAddOn {
   DKBS_007,
+  BASIC,
   DKBS_006,
   DKBS_006_007,
   DKBS_006_008,
