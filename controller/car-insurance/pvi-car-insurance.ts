@@ -70,19 +70,19 @@ export default class PviCarInsurance {
   private getCarInsuranceRateForFrom3To6Years(): number {
     switch (this.addon) {
       case CarInsuranceAddOn.DKBS_006:
-        return 1.5;
+        return 1.75;
       case CarInsuranceAddOn.DKBS_006_007:
-        return 1.6;
+        return 1.95;
       case CarInsuranceAddOn.DKBS_006_008:
-        return 1.6;
+        return 1.85;
       case CarInsuranceAddOn.DKBS_006_007_008:
-        return 1.7;
+        return 2.05;
       case CarInsuranceAddOn.DKBS_003_006_007:
-        return 1.8;
+        return 2.15;
       case CarInsuranceAddOn.DKBS_003_006_007_008:
-        return 1.9;
+        return 2.25;
       default:
-        return 1.5;
+        return 1.65;
     }
   }
 
