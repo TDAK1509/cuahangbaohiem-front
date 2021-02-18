@@ -121,9 +121,9 @@ export default class PviCarInsurance {
   }
 
   private getInsuranceFeeRateForFrom15To20Years(): number {
-    switch (this.addon) {
-      case CarInsuranceAddOn.BASIC:
-        return 2.1;
+    if (this.addon === CarInsuranceAddOn.BASIC) {
+      if (this.isTier1()) return 2.1;
+      if (this.isTier2()) return 1.79;
     }
 
     return 0;
@@ -131,13 +131,18 @@ export default class PviCarInsurance {
 
   private getInsuranceFeeRateForOver20Years(): number {
     if (this.addon === CarInsuranceAddOn.BASIC) {
-      if (this.carValue <= 500) {
-        return 2.25;
-      }
-
-      return 1.91;
+      if (this.isTier1()) return 2.25;
+      if (this.isTier2()) return 1.91;
     }
 
     return 0;
+  }
+
+  private isTier1(): boolean {
+    return this.carValue <= 500;
+  }
+
+  private isTier2(): boolean {
+    return this.carValue > 500 && this.carValue < 700;
   }
 }
