@@ -177,6 +177,7 @@ export default class PviCarInsurance {
     if (this.addon === CarInsuranceAddOn.BASIC) {
       if (this.isTier1()) return 2.1;
       if (this.isTier2()) return 1.79;
+      return 1.58;
     }
 
     return 0;
