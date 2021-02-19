@@ -13,7 +13,7 @@ export const state = () => ({
   carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
   addon: CarInsuranceAddOn.BASIC,
   insuranceCompany: "",
-  insuranceValue: 0,
+  insuranceFee: 0,
   name: "",
   email: "",
   phone: "",
@@ -34,7 +34,7 @@ export const getters: GetterTree<CarState, RootState> = {
       carYearThreshold,
       addon,
       insuranceCompany: state.insuranceCompany,
-      insuranceValue: toMillion(state.insuranceValue),
+      insuranceFee: toMillion(state.insuranceFee),
       name: state.name,
       email: state.email,
       phone: state.phone,
@@ -60,8 +60,8 @@ export const mutations: MutationTree<CarState> = {
     state.insuranceCompany = payload;
   },
 
-  setInsuranceValue(state: CarState, payload: number) {
-    state.insuranceValue = payload;
+  setInsuranceFee(state: CarState, payload: number) {
+    state.insuranceFee = payload;
   },
 
   setName(state: CarState, payload: string) {
@@ -119,8 +119,8 @@ export const actions: ActionTree<CarState, RootState> = {
     commit("setInsuranceCompany", company);
   },
 
-  setInsuranceValue({ commit }, insuranceValue: string) {
-    commit("setInsuranceValue", insuranceValue);
+  setInsuranceFee({ commit }, insuranceFee: string) {
+    commit("setInsuranceFee", insuranceFee);
   }
 };
 

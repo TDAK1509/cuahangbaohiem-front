@@ -11,7 +11,7 @@ export interface CarInsuranceRequest {
   carYearThreshold: string;
   addon: string;
   insuranceCompany: string;
-  insuranceValue: number;
+  insuranceFee: number;
 }
 
 export enum CarYearThreshold {
@@ -63,6 +63,6 @@ export default class CarInsuranceRequestController {
       return "Option 2";
     }
 
-    return "Option 1";
+    return "";
   }
 }
