@@ -1,20 +1,13 @@
-import {
-  CarYearThreshold,
-  CarInsuranceAddOn
-} from "~/controller/car-insurance/car-insurance-request";
+import { CarInsuranceAddOn } from "~/controller/car-insurance/car-insurance-request";
 
 export default class PviCarInsurance {
   private carValue!: number;
-  private carYearThreshold!: CarYearThreshold;
+  private carYear!: number;
   private addon!: CarInsuranceAddOn;
 
-  constructor(
-    carValue: number,
-    carYearThreshold: CarYearThreshold,
-    addon: CarInsuranceAddOn
-  ) {
+  constructor(carValue: number, carYear: number, addon: CarInsuranceAddOn) {
     this.setCarValue(carValue);
-    this.setCarYearThreshold(carYearThreshold);
+    this.setCarYear(carYear);
     this.setAddon(addon);
   }
 
@@ -22,8 +15,8 @@ export default class PviCarInsurance {
     this.carValue = carValue;
   }
 
-  public setCarYearThreshold(carYearThreshold: CarYearThreshold) {
-    this.carYearThreshold = carYearThreshold;
+  public setCarYear(carYear: number) {
+    this.carYear = carYear;
   }
 
   public setAddon(addon: CarInsuranceAddOn) {
@@ -36,22 +29,30 @@ export default class PviCarInsurance {
   }
 
   private getInsuranceFeeRate(): number {
-    switch (this.carYearThreshold) {
-      case CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS:
-        return this.getInsuranceFeeRateForLessThan3YearsThreshold();
-      case CarYearThreshold.FROM_3_TO_6_YEARS:
-        return this.getInsuranceFeeRateForFrom3To6Years();
-      case CarYearThreshold.FROM_6_TO_10_YEARS:
-        return this.getInsuranceFeeRateForFrom6To10Years();
-      case CarYearThreshold.FROM_10_TO_15_YEARS:
-        return this.getInsuranceFeeRateForFrom10To15Years();
-      case CarYearThreshold.FROM_15_TO_20_YEARS:
-        return this.getInsuranceFeeRateForFrom15To20Years();
-      case CarYearThreshold.OVER_20_YEARS:
-        return this.getInsuranceFeeRateForOver20Years();
-      default:
-        return 0;
+    const thisYear = new Date().getFullYear();
+    const yearGap = thisYear - this.carYear;
+
+    if (yearGap <= 3) {
+      return this.getInsuranceFeeRateForLessThan3YearsThreshold();
     }
+
+    if (yearGap > 3 && yearGap <= 6) {
+      return this.getInsuranceFeeRateForFrom3To6Years();
+    }
+
+    if (yearGap > 6 && yearGap <= 10) {
+      return this.getInsuranceFeeRateForFrom6To10Years();
+    }
+
+    if (yearGap > 10 && yearGap <= 15) {
+      return this.getInsuranceFeeRateForFrom10To15Years();
+    }
+
+    if (yearGap > 15 && yearGap <= 20) {
+      return this.getInsuranceFeeRateForFrom15To20Years();
+    }
+
+    return this.getInsuranceFeeRateForOver20Years();
   }
 
   private isTier1(): boolean {
