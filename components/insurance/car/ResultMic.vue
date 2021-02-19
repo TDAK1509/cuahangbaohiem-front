@@ -11,21 +11,14 @@
 <script lang="ts">
 import Vue from "vue";
 import MicCarInsurance from "@/controller/car-insurance/mic-car-insurance";
-import {
-  CarYearThreshold,
-  CarInsuranceAddOn
-} from "@/controller/car-insurance/car-insurance-request";
+import { CarInsuranceAddOn } from "@/controller/car-insurance/car-insurance-request";
 
 export default Vue.extend({
   name: "ResultMic",
 
   data() {
     return {
-      mic: new MicCarInsurance(
-        0,
-        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
-        CarInsuranceAddOn.BASIC
-      ),
+      mic: new MicCarInsurance(0, 0, CarInsuranceAddOn.BASIC),
       insuranceFee: 0
     };
   },
@@ -35,8 +28,8 @@ export default Vue.extend({
       return this.$store.state.car.carValue;
     },
 
-    carYearThreshold(): CarYearThreshold {
-      return this.$store.state.car.carYearThreshold;
+    carYear(): number {
+      return this.$store.state.car.carYear;
     },
 
     addon(): CarInsuranceAddOn {
@@ -50,8 +43,8 @@ export default Vue.extend({
       this.calculateCarInsuranceFee();
     },
 
-    carYearThreshold(newValue: number) {
-      this.mic.setCarYearThreshold(newValue);
+    carYear(newValue: number) {
+      this.mic.setCarYear(newValue);
       this.calculateCarInsuranceFee();
     },
 
@@ -63,7 +56,7 @@ export default Vue.extend({
 
   mounted() {
     this.mic.setCarValue(this.carValue);
-    this.mic.setCarYearThreshold(this.carYearThreshold);
+    this.mic.setCarYear(this.carYear);
     this.mic.setAddon(this.addon);
     this.calculateCarInsuranceFee();
   },

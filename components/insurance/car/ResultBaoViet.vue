@@ -11,21 +11,14 @@
 <script lang="ts">
 import Vue from "vue";
 import BaoVietCarInsurance from "@/controller/car-insurance/bao-viet-car-insurance";
-import {
-  CarYearThreshold,
-  CarInsuranceAddOn
-} from "@/controller/car-insurance/car-insurance-request";
+import { CarInsuranceAddOn } from "@/controller/car-insurance/car-insurance-request";
 
 export default Vue.extend({
   name: "ResultBaoViet",
 
   data() {
     return {
-      baoViet: new BaoVietCarInsurance(
-        0,
-        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
-        CarInsuranceAddOn.BASIC
-      ),
+      baoViet: new BaoVietCarInsurance(0, 0, CarInsuranceAddOn.BASIC),
       insuranceFee: 0
     };
   },
@@ -35,8 +28,8 @@ export default Vue.extend({
       return this.$store.state.car.carValue;
     },
 
-    carYearThreshold(): CarYearThreshold {
-      return this.$store.state.car.carYearThreshold;
+    carYear(): number {
+      return this.$store.state.car.carYear;
     },
 
     addon(): CarInsuranceAddOn {
@@ -50,8 +43,8 @@ export default Vue.extend({
       this.calculateCarInsuranceFee();
     },
 
-    carYearThreshold(newValue: number) {
-      this.baoViet.setCarYearThreshold(newValue);
+    carYear(newValue: number) {
+      this.baoViet.setCarYear(newValue);
       this.calculateCarInsuranceFee();
     },
 
@@ -63,7 +56,7 @@ export default Vue.extend({
 
   mounted() {
     this.baoViet.setCarValue(this.carValue);
-    this.baoViet.setCarYearThreshold(this.carYearThreshold);
+    this.baoViet.setCarYear(this.carYear);
     this.baoViet.setAddon(this.addon);
     this.calculateCarInsuranceFee();
   },

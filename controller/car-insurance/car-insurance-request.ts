@@ -14,16 +14,6 @@ export interface CarInsuranceRequest {
   insuranceFee: number;
 }
 
-export enum CarYearThreshold {
-  LESS_THAN_OR_EQUAL_3_YEARS,
-  FROM_3_TO_6_YEARS,
-  FROM_6_TO_10_YEARS,
-  FROM_10_TO_15_YEARS,
-  FROM_15_TO_20_YEARS,
-  OVER_20_YEARS,
-  OVER_6_YEARS
-}
-
 export enum CarInsuranceAddOn {
   BASIC,
   DKBS_006,
@@ -43,18 +33,6 @@ export default class CarInsuranceRequestController {
     };
 
     return CarInsuranceRequestModel.save(requestToSaveToServer);
-  }
-
-  public getCarYearThresholdLabel(carYearThreshold: CarYearThreshold) {
-    if (carYearThreshold === CarYearThreshold.FROM_3_TO_6_YEARS) {
-      return "Từ 3 đến 6 năm";
-    }
-
-    if (carYearThreshold === CarYearThreshold.OVER_6_YEARS) {
-      return "Từ 6 đến 10 năm";
-    }
-
-    return "Dưới 3 năm";
   }
 
   public getAddOnLabel(addon: CarInsuranceAddOn) {

@@ -1,5 +1,4 @@
 import CarInsuranceRequestController, {
-  CarYearThreshold,
   CarInsuranceAddOn
 } from "~/controller/car-insurance/car-insurance-request";
 import CarInsuranceRequestModel from "@/models/car-insurance-request";
@@ -32,32 +31,6 @@ describe("CarInsuranceRequestController", () => {
       };
       expect(mock).toBeCalledTimes(1);
       expect(mock).toBeCalledWith(expectedObject);
-    });
-  });
-
-  describe("getCarYearThresholdLabel()", () => {
-    it("returns 'Dưới 3 năm' threshold is <= 3 years", () => {
-      const controller = new CarInsuranceRequestController();
-      const result = controller.getCarYearThresholdLabel(
-        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
-      );
-      expect(result).toBe("Dưới 3 năm");
-    });
-
-    it("returns 'Từ 3 đến 6 năm' threshold is 3 < x <= 6 years", () => {
-      const controller = new CarInsuranceRequestController();
-      const result = controller.getCarYearThresholdLabel(
-        CarYearThreshold.FROM_3_TO_6_YEARS
-      );
-      expect(result).toBe("Từ 3 đến 6 năm");
-    });
-
-    it("returns 'Từ 6 đến 10 năm' threshold is 6 < x <= 10 years", () => {
-      const controller = new CarInsuranceRequestController();
-      const result = controller.getCarYearThresholdLabel(
-        CarYearThreshold.OVER_6_YEARS
-      );
-      expect(result).toBe("Từ 6 đến 10 năm");
     });
   });
 
