@@ -5,7 +5,7 @@ import {
 } from "~/controller/car-insurance/car-insurance-request";
 
 describe("class PviCarInsurance", () => {
-  describe.skip("setters", () => {
+  describe("setters", () => {
     it("setCarValue() is working", () => {
       const carValue = 100;
       const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
