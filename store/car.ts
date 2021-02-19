@@ -11,7 +11,7 @@ const controller = new CarInsuranceRequestController();
 export const state = () => ({
   carValue: 0,
   carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
-  addons: [] as CarInsuranceAddOn[],
+  addon: CarInsuranceAddOn.BASIC,
   insuranceCompany: "",
   insuranceValue: 0,
   name: "",
@@ -27,12 +27,12 @@ export const getters: GetterTree<CarState, RootState> = {
     const carYearThreshold = controller.getCarYearThresholdLabel(
       state.carYearThreshold
     );
-    const addons = state.addons.map((addon) => controller.getAddOnLabel(addon));
+    const addon = controller.getAddOnLabel(state.addon);
 
     return {
       carValue: toMillion(state.carValue),
       carYearThreshold,
-      addons,
+      addon,
       insuranceCompany: state.insuranceCompany,
       insuranceValue: toMillion(state.insuranceValue),
       name: state.name,
@@ -52,8 +52,8 @@ export const mutations: MutationTree<CarState> = {
     state.carYearThreshold = payload;
   },
 
-  setAddons(state: CarState, payload: CarInsuranceAddOn[]) {
-    state.addons = payload;
+  setAddon(state: CarState, payload: CarInsuranceAddOn) {
+    state.addon = payload;
   },
 
   setInsuranceCompany(state: CarState, payload: string) {
@@ -95,8 +95,8 @@ export const actions: ActionTree<CarState, RootState> = {
     commit("setCarYearThreshold", threshold);
   },
 
-  setAddons({ commit }, addons: CarInsuranceAddOn[]) {
-    commit("setAddons", addons);
+  setAddon({ commit }, addon: CarInsuranceAddOn[]) {
+    commit("setAddon", addon);
   },
 
   setName({ commit }, name: string) {
