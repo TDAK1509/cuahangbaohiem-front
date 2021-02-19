@@ -1,6 +1,5 @@
 import { state, mutations, actions, getters } from "@/store/car";
 import CarInsuranceRequest, {
-  CarYearThreshold,
   CarInsuranceAddOn
 } from "~/controller/car-insurance/car-insurance-request";
 
@@ -16,7 +15,7 @@ describe("store/car", () => {
       const insuranceRequest = getters.insuranceRequest(_state);
       const expected = {
         carValue: 0,
-        carYearThreshold: "Dưới 3 năm",
+        carYear: 0,
         addon: "",
         insuranceCompany: "",
         insuranceFee: 0,
@@ -34,7 +33,7 @@ describe("store/car", () => {
       const insuranceRequest = getters.insuranceRequest(_state);
       const expected = {
         carValue: 1000000,
-        carYearThreshold: "Dưới 3 năm",
+        carYear: 0,
         addon: "",
         insuranceCompany: "",
         insuranceFee: 1000000,
@@ -54,12 +53,10 @@ describe("store/car", () => {
       expect(_state.carValue).toBe(1);
     });
 
-    it("setCarYearThreshold() updates state.carYearThreshold", () => {
-      expect(_state.carYearThreshold).toBe(
-        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
-      );
-      mutations.setCarYearThreshold(_state, CarYearThreshold.FROM_3_TO_6_YEARS);
-      expect(_state.carYearThreshold).toBe(CarYearThreshold.FROM_3_TO_6_YEARS);
+    it("carYear() updates state.carYear", () => {
+      expect(_state.carYear).toBe(0);
+      mutations.setCarYear(_state, 2020);
+      expect(_state.carYear).toBe(2020);
     });
 
     it("setAddon() updates state.addon", () => {
@@ -127,11 +124,11 @@ describe("store/car", () => {
       expect(commit).toHaveBeenCalledWith("setCarValue", 69);
     });
 
-    it("setCarYearThreshold() commits 'setCarYearThreshold' with passed argument", () => {
+    it("setCarYear() commits 'setCarYear' with passed argument", () => {
       const commit = jest.fn();
-      actions.setCarYearThreshold({ commit }, 1);
+      actions.setCarYear({ commit }, 1990);
       expect(commit).toHaveBeenCalledTimes(1);
-      expect(commit).toHaveBeenCalledWith("setCarYearThreshold", 1);
+      expect(commit).toHaveBeenCalledWith("setCarYear", 1990);
     });
 
     it("setAddon() commits 'setAddon' with passed argument", () => {
