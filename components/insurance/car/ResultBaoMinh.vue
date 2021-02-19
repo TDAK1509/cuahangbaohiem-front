@@ -3,7 +3,7 @@
     <ResultTable
       logo-file-name="logo-bao-minh.png"
       company-name="Bảo Minh"
-      :insurance-value="insuranceFee"
+      :insurance-fee="insuranceFee"
     />
   </div>
 </template>

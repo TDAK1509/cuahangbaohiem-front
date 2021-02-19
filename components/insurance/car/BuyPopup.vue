@@ -4,7 +4,7 @@
     <div class="modal-card" data-cy="buy-popup">
       <header class="modal-card-head has-background-info">
         <p class="modal-card-title has-text-white bold">
-          {{ insuranceCompany }}: {{ insuranceValue }}
+          {{ insuranceCompany }}: {{ insuranceFee }}
         </p>
         <button class="delete" data-cy="popup-cancel-button" @click="close" />
       </header>
@@ -12,7 +12,7 @@
       <section class="modal-card-body">
         <BuyPopupForm
           :insurance-company="insuranceCompany"
-          :insurance-value="insuranceValue"
+          :insurance-fee="insuranceFee"
           @esc="close"
         />
       </section>
@@ -42,7 +42,7 @@ export default Vue.extend({
       required: true
     },
 
-    insuranceValue: {
+    insuranceFee: {
       type: Number,
       required: true
     }

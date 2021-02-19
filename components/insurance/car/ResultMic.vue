@@ -3,7 +3,7 @@
     <ResultTable
       logo-file-name="logo-mic.png"
       company-name="MIC"
-      :insurance-value="insuranceFee"
+      :insurance-fee="insuranceFee"
     />
   </div>
 </template>

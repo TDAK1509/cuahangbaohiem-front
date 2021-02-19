@@ -89,7 +89,7 @@ export default Vue.extend({
       required: true
     },
 
-    insuranceValue: {
+    insuranceFee: {
       type: Number,
       required: true
     }
@@ -137,7 +137,7 @@ export default Vue.extend({
       this.$store.dispatch("car/setPhone", this.phone);
       this.$store.dispatch("car/setNote", this.note);
       this.$store.dispatch("car/setInsuranceCompany", this.insuranceCompany);
-      this.$store.dispatch("car/setInsuranceValue", this.insuranceValue);
+      this.$store.dispatch("car/setInsuranceFee", this.insuranceFee);
     },
 
     alertSuccess() {

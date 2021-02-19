@@ -3,7 +3,7 @@
     <ResultTable
       logo-file-name="logo-pvi.png"
       company-name="PVI"
-      :insurance-value="insuranceFee"
+      :insurance-fee="insuranceFee"
     />
   </div>
 </template>

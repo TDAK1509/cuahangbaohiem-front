@@ -110,10 +110,10 @@ describe("Page /san-pham/o-to", () => {
         getCarYearField().type("2020");
         getCalculateButton().click();
 
-        assertPviInsuranceValue("150.000.000");
-        assertBaoVietInsuranceValue("150.000.000");
-        assertBaoMinhInsuranceValue("150.000.000");
-        assertMicInsuranceValue("150.000.000");
+        assertPviinsuranceFee("150.000.000");
+        assertBaoVietinsuranceFee("150.000.000");
+        assertBaoMinhinsuranceFee("150.000.000");
+        assertMicinsuranceFee("150.000.000");
         assertResultShows4BuyButtons();
       });
 
@@ -123,10 +123,10 @@ describe("Page /san-pham/o-to", () => {
         cy.contains("Option 1").click();
         getCalculateButton().click();
 
-        assertPviInsuranceValue("121.000.000");
-        assertBaoVietInsuranceValue("121.000.000");
-        assertBaoMinhInsuranceValue("121.000.000");
-        assertMicInsuranceValue("121.000.000");
+        assertPviinsuranceFee("121.000.000");
+        assertBaoVietinsuranceFee("121.000.000");
+        assertBaoMinhinsuranceFee("121.000.000");
+        assertMicinsuranceFee("121.000.000");
         assertResultShows4BuyButtons();
       });
 
@@ -136,10 +136,10 @@ describe("Page /san-pham/o-to", () => {
         cy.contains("Option 2").click();
         getCalculateButton().click();
 
-        assertPviInsuranceValue("122.000.000");
-        assertBaoVietInsuranceValue("122.000.000");
-        assertBaoMinhInsuranceValue("122.000.000");
-        assertMicInsuranceValue("122.000.000");
+        assertPviinsuranceFee("122.000.000");
+        assertBaoVietinsuranceFee("122.000.000");
+        assertBaoMinhinsuranceFee("122.000.000");
+        assertMicinsuranceFee("122.000.000");
         assertResultShows4BuyButtons();
       });
 
@@ -150,10 +150,10 @@ describe("Page /san-pham/o-to", () => {
         cy.contains("Option 2").click();
         getCalculateButton().click();
 
-        assertPviInsuranceValue("123.000.000");
-        assertBaoVietInsuranceValue("123.000.000");
-        assertBaoMinhInsuranceValue("123.000.000");
-        assertMicInsuranceValue("123.000.000");
+        assertPviinsuranceFee("123.000.000");
+        assertBaoVietinsuranceFee("123.000.000");
+        assertBaoMinhinsuranceFee("123.000.000");
+        assertMicinsuranceFee("123.000.000");
         assertResultShows4BuyButtons();
       });
 
@@ -163,19 +163,19 @@ describe("Page /san-pham/o-to", () => {
         cy.contains("Option 1").click();
         getCalculateButton().click();
 
-        assertPviInsuranceValue("121.000.000");
-        assertBaoVietInsuranceValue("121.000.000");
-        assertBaoMinhInsuranceValue("121.000.000");
-        assertMicInsuranceValue("121.000.000");
+        assertPviinsuranceFee("121.000.000");
+        assertBaoVietinsuranceFee("121.000.000");
+        assertBaoMinhinsuranceFee("121.000.000");
+        assertMicinsuranceFee("121.000.000");
         assertResultShows4BuyButtons();
 
         cy.contains("Option 1").click();
         cy.contains("Option 2").click();
         getCalculateButton().click();
-        assertPviInsuranceValue("122.000.000");
-        assertBaoVietInsuranceValue("122.000.000");
-        assertBaoMinhInsuranceValue("122.000.000");
-        assertMicInsuranceValue("122.000.000");
+        assertPviinsuranceFee("122.000.000");
+        assertBaoVietinsuranceFee("122.000.000");
+        assertBaoMinhinsuranceFee("122.000.000");
+        assertMicinsuranceFee("122.000.000");
         assertResultShows4BuyButtons();
       });
     });
@@ -269,8 +269,8 @@ describe("Page /san-pham/o-to", () => {
           cy.contains("PVI").should("be.visible");
           cy.contains("carValue: 100000000").should("be.visible");
           cy.contains("carYear: 2020").should("be.visible");
-          cy.contains("addons: []").should("be.visible");
-          cy.contains("120000000").should("be.visible");
+          cy.contains("addon:").should("be.visible");
+          cy.contains("150000000").should("be.visible");
         });
       });
     });
@@ -289,8 +289,7 @@ describe("Page /san-pham/o-to", () => {
 
       function calculateInsuranceWithAddOns() {
         getCarValueField().type("100");
-        cy.contains("Từ 3 đến 6 năm").click();
-        cy.contains("Option 1").click();
+        getCarYearField().type("2020");
         getCalculateButton().click();
         getResultBuyButton().first().click();
       }
@@ -303,8 +302,8 @@ describe("Page /san-pham/o-to", () => {
         cy.contains("insuranceCompany: PVI").should("be.visible");
         cy.contains("carValue: 100000000").should("be.visible");
         cy.contains("carYear: 2020").should("be.visible");
-        cy.contains('addons: [ "Option 1" ]').should("be.visible");
-        cy.contains("insuranceValue: 131000000").should("be.visible");
+        cy.contains("addon:").should("be.visible");
+        cy.contains("insuranceFee: 150000000").should("be.visible");
       });
     });
   });
@@ -362,7 +361,7 @@ function assertResultBlockIsRendered() {
   cy.get("[data-cy=result]").should("be.visible");
 }
 
-function assertPviInsuranceValue(value) {
+function assertPviinsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(0)
     .invoke("text")
@@ -370,7 +369,7 @@ function assertPviInsuranceValue(value) {
     .should("include", value);
 }
 
-function assertBaoVietInsuranceValue(value) {
+function assertBaoVietinsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(1)
     .invoke("text")
@@ -378,7 +377,7 @@ function assertBaoVietInsuranceValue(value) {
     .should("include", value);
 }
 
-function assertBaoMinhInsuranceValue(value) {
+function assertBaoMinhinsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(2)
     .invoke("text")
@@ -386,7 +385,7 @@ function assertBaoMinhInsuranceValue(value) {
     .should("include", value);
 }
 
-function assertMicInsuranceValue(value) {
+function assertMicinsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(3)
     .invoke("text")
