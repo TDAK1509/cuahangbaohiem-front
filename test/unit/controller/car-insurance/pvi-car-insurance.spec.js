@@ -43,19 +43,23 @@ describe("class PviCarInsurance", () => {
       pviCarInsurance.setCarYear(LESS_THAN_3_YEARS);
       const carInsuranceValue2 = pviCarInsurance.getInsuranceFee();
 
+      expect(carInsuranceValue1).not.toBe(0);
+      expect(carInsuranceValue2).not.toBe(0);
       expect(carInsuranceValue1).not.toBe(carInsuranceValue2);
     });
 
     it("setAddon() is working", () => {
       const carValue = 100;
       const carYear = LESS_THAN_3_YEARS;
-      const addon = [CarInsuranceAddOn.DKBS_006_007];
+      const addon = CarInsuranceAddOn.DKBS_006_007;
       const pviCarInsurance = new PviCarInsurance(carValue, carYear, addon);
 
       const carInsuranceValue1 = pviCarInsurance.getInsuranceFee();
       pviCarInsurance.setAddon(CarInsuranceAddOn.DKBS_006);
       const carInsuranceValue2 = pviCarInsurance.getInsuranceFee();
 
+      expect(carInsuranceValue1).not.toBe(0);
+      expect(carInsuranceValue2).not.toBe(0);
       expect(carInsuranceValue1).not.toBe(carInsuranceValue2);
     });
   });
