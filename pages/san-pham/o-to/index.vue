@@ -26,22 +26,17 @@
           title="Vui lòng điền một con số."
         />
 
-        <div class="field">
-          <label class="label">Năm sản xuất</label>
-          <div class="control" data-cy="car-year-threshold">
-            <p v-for="{ text, value } in carYearRadios" :key="value">
-              <label class="radio">
-                <input
-                  v-model="carYearThreshold"
-                  :value="value"
-                  type="radio"
-                  name="car_year"
-                />
-                {{ text }}
-              </label>
-            </p>
-          </div>
-        </div>
+        <TextField
+          v-model="carYear"
+          data-cy="car-year"
+          label="Năm sản xuất"
+          placeholder="2015"
+          required
+          pattern="[0-9]*"
+          minlength="4"
+          maxlength="4"
+          title="Năm sản xuất không hợp lệ."
+        />
 
         <div class="field">
           <label class="label">Tùy chọn bổ sung</label>
@@ -83,7 +78,6 @@
 <script lang="ts">
 import Vue from "vue";
 import CarInsuranceRequestController, {
-  CarYearThreshold,
   CarInsuranceAddOn
 } from "@/controller/car-insurance/car-insurance-request";
 
@@ -97,26 +91,6 @@ export default Vue.extend({
   data() {
     return {
       showResult: false,
-      carYearRadios: [
-        {
-          text: controller.getCarYearThresholdLabel(
-            CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
-          ),
-          value: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
-        },
-        {
-          text: controller.getCarYearThresholdLabel(
-            CarYearThreshold.FROM_3_TO_6_YEARS
-          ),
-          value: CarYearThreshold.FROM_3_TO_6_YEARS
-        },
-        {
-          text: controller.getCarYearThresholdLabel(
-            CarYearThreshold.OVER_6_YEARS
-          ),
-          value: CarYearThreshold.OVER_6_YEARS
-        }
-      ],
       insuranceAddOns: [
         {
           text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
@@ -138,12 +112,14 @@ export default Vue.extend({
       }
     },
 
-    carYearThreshold: {
-      get(): CarYearThreshold {
-        return this.$store.state.car.carYearThreshold;
+    carYear: {
+      get(): string {
+        return this.$store.state.car.carYear
+          ? this.$store.state.car.carYear.toString()
+          : "";
       },
-      set(newValue: CarYearThreshold) {
-        this.$store.dispatch("car/setCarYearThreshold", newValue);
+      set(newValue: string) {
+        this.$store.dispatch("car/setCarYear", parseInt(newValue));
       }
     },
 
