@@ -110,10 +110,10 @@ describe("Page /san-pham/o-to", () => {
         getCarYearField().type("2020");
         getCalculateButton().click();
 
-        assertPviInsuranceValue("960.000.000");
-        assertBaoVietInsuranceValue("960.000.000");
-        assertBaoMinhInsuranceValue("960.000.000");
-        assertMicInsuranceValue("960.000.000");
+        assertPviInsuranceValue("150.000.000");
+        assertBaoVietInsuranceValue("150.000.000");
+        assertBaoMinhInsuranceValue("150.000.000");
+        assertMicInsuranceValue("150.000.000");
         assertResultShows4BuyButtons();
       });
 
