@@ -4,7 +4,7 @@ import {
   CarInsuranceAddOn
 } from "~/controller/car-insurance/car-insurance-request";
 
-describe("class baoMinhCarInsurance", () => {
+describe("class BaoMinhCarInsurance", () => {
   describe("setters", () => {
     it("setCarValue() is working", () => {
       const carValue = 100;
