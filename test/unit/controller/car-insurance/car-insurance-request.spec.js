@@ -68,25 +68,25 @@ describe("CarInsuranceRequestController", () => {
       expect(result).toBe("");
     });
 
-    it("returns '006' add on is DKBS_006", () => {
+    it("returns 'DKBS_006' add on is DKBS_006", () => {
       const controller = new CarInsuranceRequestController();
       const result = controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006);
       expect(result).toBe("DKBS_006");
     });
 
-    it("returns '006' add on is DKBS_006_007", () => {
+    it("returns 'DKBS_006_007' add on is DKBS_006_007", () => {
       const controller = new CarInsuranceRequestController();
       const result = controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007);
       expect(result).toBe("DKBS_006_007");
     });
 
-    it("returns '006' add on is DKBS_006_008", () => {
+    it("returns 'DKBS_006_008' add on is DKBS_006_008", () => {
       const controller = new CarInsuranceRequestController();
       const result = controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_008);
       expect(result).toBe("DKBS_006_008");
     });
 
-    it("returns '006' add on is DKBS_006_007_008", () => {
+    it("returns 'DKBS_006_007_008' add on is DKBS_006_007_008", () => {
       const controller = new CarInsuranceRequestController();
       const result = controller.getAddOnLabel(
         CarInsuranceAddOn.DKBS_006_007_008
@@ -94,7 +94,7 @@ describe("CarInsuranceRequestController", () => {
       expect(result).toBe("DKBS_006_007_008");
     });
 
-    it("returns '006' add on is DKBS_003_006_007", () => {
+    it("returns 'DKBS_003_006_007' add on is DKBS_003_006_007", () => {
       const controller = new CarInsuranceRequestController();
       const result = controller.getAddOnLabel(
         CarInsuranceAddOn.DKBS_003_006_007
