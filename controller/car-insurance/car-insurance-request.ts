@@ -70,6 +70,10 @@ export default class CarInsuranceRequestController {
       return "DKBS_006_008";
     }
 
+    if (addon === CarInsuranceAddOn.DKBS_006_007_008) {
+      return "DKBS_006_007_008";
+    }
+
     return "";
   }
 }

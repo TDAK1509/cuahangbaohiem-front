@@ -85,5 +85,13 @@ describe("CarInsuranceRequestController", () => {
       const result = controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_008);
       expect(result).toBe("DKBS_006_008");
     });
+
+    it("returns '006' add on is DKBS_006_007_008", () => {
+      const controller = new CarInsuranceRequestController();
+      const result = controller.getAddOnLabel(
+        CarInsuranceAddOn.DKBS_006_007_008
+      );
+      expect(result).toBe("DKBS_006_007_008");
+    });
   });
 });
