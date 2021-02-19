@@ -1,18 +1,28 @@
 import BaoMinhCarInsurance from "~/controller/car-insurance/bao-minh-car-insurance";
-import {
-  CarYearThreshold,
-  CarInsuranceAddOn
-} from "~/controller/car-insurance/car-insurance-request";
+import { CarInsuranceAddOn } from "~/controller/car-insurance/car-insurance-request";
+import MockDate from "mockdate";
+
+const THIS_YEAR = 2020;
+const LESS_THAN_3_YEARS = THIS_YEAR - 2;
+const FROM_3_TO_6_YEARS = THIS_YEAR - 4;
+const FROM_6_TO_10_YEARS = THIS_YEAR - 7;
+const FROM_10_TO_15_YEARS = THIS_YEAR - 11;
+const FROM_15_TO_20_YEARS = THIS_YEAR - 16;
+const OVER_20_YEARS = THIS_YEAR - 21;
 
 describe("class BaoMinhCarInsurance", () => {
+  beforeAll(() => {
+    MockDate.set(new Date(THIS_YEAR, 1, 1));
+  });
+
   describe("setters", () => {
     it("setCarValue() is working", () => {
       const carValue = 100;
-      const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
+      const carYear = LESS_THAN_3_YEARS;
       const addon = CarInsuranceAddOn.BASIC;
       const baoMinhCarInsurance = new BaoMinhCarInsurance(
         carValue,
-        carYearThreshold,
+        carYear,
         addon
       );
 
@@ -27,32 +37,32 @@ describe("class BaoMinhCarInsurance", () => {
       expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
     });
 
-    it("setCarYearThreshold() is working", () => {
+    it("setCarYear() is working", () => {
       const carValue = 100;
-      const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
+      const carYear = FROM_3_TO_6_YEARS;
       const addon = CarInsuranceAddOn.BASIC;
       const baoMinhCarInsurance = new BaoMinhCarInsurance(
         carValue,
-        carYearThreshold,
+        carYear,
         addon
       );
 
       const carInsuranceValue1 = baoMinhCarInsurance.getInsuranceFee();
-      baoMinhCarInsurance.setCarYearThreshold(
-        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
-      );
+      baoMinhCarInsurance.setCarYear(LESS_THAN_3_YEARS);
       const carInsuranceValue2 = baoMinhCarInsurance.getInsuranceFee();
 
+      expect(carInsuranceValue1).not.toBe(0);
+      expect(carInsuranceValue2).not.toBe(0);
       expect(carInsuranceValue1).not.toBe(carInsuranceValue2);
     });
 
     it("setAddon() is working", () => {
       const carValue = 100;
-      const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
-      const addon = [CarInsuranceAddOn.DKBS_006_007];
+      const carYear = LESS_THAN_3_YEARS;
+      const addon = CarInsuranceAddOn.DKBS_006_007;
       const baoMinhCarInsurance = new BaoMinhCarInsurance(
         carValue,
-        carYearThreshold,
+        carYear,
         addon
       );
 
@@ -60,6 +70,8 @@ describe("class BaoMinhCarInsurance", () => {
       baoMinhCarInsurance.setAddon(CarInsuranceAddOn.DKBS_006);
       const carInsuranceValue2 = baoMinhCarInsurance.getInsuranceFee();
 
+      expect(carInsuranceValue1).not.toBe(0);
+      expect(carInsuranceValue2).not.toBe(0);
       expect(carInsuranceValue1).not.toBe(carInsuranceValue2);
     });
   });
@@ -69,13 +81,13 @@ describe("class BaoMinhCarInsurance", () => {
       const carValue = 100;
 
       describe("if car year threshold is <= 3 years", () => {
-        const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
+        const carYear = LESS_THAN_3_YEARS;
 
         it("if no addon, returns car value * 1.5", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -87,7 +99,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -99,7 +111,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -111,7 +123,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -123,7 +135,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -135,7 +147,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -147,7 +159,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -157,13 +169,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 3 < car year threshold <= 6", () => {
-        const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
+        const carYear = FROM_3_TO_6_YEARS;
 
         it("if no addon, returns car value * 1.65", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -175,7 +187,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -187,7 +199,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -199,7 +211,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -211,7 +223,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -223,7 +235,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -235,7 +247,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -245,13 +257,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 6 < car year threshold <= 10", () => {
-        const carYearThreshold = CarYearThreshold.FROM_6_TO_10_YEARS;
+        const carYear = FROM_6_TO_10_YEARS;
 
         it("if no addon, returns car value * 1.8", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -263,7 +275,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -275,7 +287,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -287,7 +299,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -299,7 +311,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -311,7 +323,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -323,7 +335,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -333,13 +345,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 10 < car year threshold <= 15", () => {
-        const carYearThreshold = CarYearThreshold.FROM_10_TO_15_YEARS;
+        const carYear = FROM_10_TO_15_YEARS;
 
         it("if no addon, returns car value * 1.95", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -351,7 +363,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -363,7 +375,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -375,7 +387,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -387,7 +399,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -399,7 +411,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -411,7 +423,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -421,13 +433,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 15 < car year threshold <= 20", () => {
-        const carYearThreshold = CarYearThreshold.FROM_15_TO_20_YEARS;
+        const carYear = FROM_15_TO_20_YEARS;
 
         it("if no addon, returns car value * 2.1", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -439,7 +451,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -451,7 +463,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -463,7 +475,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -475,7 +487,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -487,7 +499,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -499,7 +511,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -509,13 +521,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if car year threshold > 20", () => {
-        const carYearThreshold = CarYearThreshold.OVER_20_YEARS;
+        const carYear = OVER_20_YEARS;
 
         it("if no addon, returns car value * 2.25", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -527,7 +539,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -539,7 +551,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -551,7 +563,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -563,7 +575,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -575,7 +587,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -587,7 +599,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -601,13 +613,13 @@ describe("class BaoMinhCarInsurance", () => {
       const carValue = 600;
 
       describe("if car year threshold is <= 3 years", () => {
-        const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
+        const carYear = LESS_THAN_3_YEARS;
 
         it("if no addon, returns car value * 1.28", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -619,7 +631,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -631,7 +643,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -643,7 +655,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -655,7 +667,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -667,7 +679,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -679,7 +691,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -689,13 +701,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 3 < car year threshold <= 6", () => {
-        const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
+        const carYear = FROM_3_TO_6_YEARS;
 
         it("if no addon, returns car value * 1.4", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -707,7 +719,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -719,7 +731,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -731,7 +743,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -743,7 +755,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -755,7 +767,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -767,7 +779,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -777,13 +789,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 6 < car year threshold <= 10", () => {
-        const carYearThreshold = CarYearThreshold.FROM_6_TO_10_YEARS;
+        const carYear = FROM_6_TO_10_YEARS;
 
         it("if no addon, returns car value * 1.53", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -795,7 +807,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -807,7 +819,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -819,7 +831,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -831,7 +843,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -843,7 +855,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -855,7 +867,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -865,13 +877,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 10 < car year threshold <= 15", () => {
-        const carYearThreshold = CarYearThreshold.FROM_10_TO_15_YEARS;
+        const carYear = FROM_10_TO_15_YEARS;
 
         it("if no addon, returns car value * 1.66", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -883,7 +895,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -895,7 +907,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -907,7 +919,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -919,7 +931,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -931,7 +943,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -943,7 +955,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -953,13 +965,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 15 < car year threshold <= 20", () => {
-        const carYearThreshold = CarYearThreshold.FROM_15_TO_20_YEARS;
+        const carYear = FROM_15_TO_20_YEARS;
 
         it("if no addon, returns car value * 1.79", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -971,7 +983,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -983,7 +995,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -995,7 +1007,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1007,7 +1019,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1019,7 +1031,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1031,7 +1043,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1041,13 +1053,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if car year threshold > 20", () => {
-        const carYearThreshold = CarYearThreshold.OVER_20_YEARS;
+        const carYear = OVER_20_YEARS;
 
         it("if no addon, returns car value * 1.91", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1059,7 +1071,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1071,7 +1083,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1083,7 +1095,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1095,7 +1107,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1107,7 +1119,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1119,7 +1131,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1133,13 +1145,13 @@ describe("class BaoMinhCarInsurance", () => {
       const carValue = 800;
 
       describe("if car year threshold is <= 3 years", () => {
-        const carYearThreshold = CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS;
+        const carYear = LESS_THAN_3_YEARS;
 
         it("if no addon, returns car value * 1.13", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1151,7 +1163,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1163,7 +1175,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1175,7 +1187,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1187,7 +1199,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1199,7 +1211,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1211,7 +1223,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1221,13 +1233,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 3 < car year threshold <= 6", () => {
-        const carYearThreshold = CarYearThreshold.FROM_3_TO_6_YEARS;
+        const carYear = FROM_3_TO_6_YEARS;
 
         it("if no addon, returns car value * 1.24", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1239,7 +1251,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1251,7 +1263,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1263,7 +1275,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1275,7 +1287,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1287,7 +1299,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1299,7 +1311,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1309,13 +1321,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 6 < car year threshold <= 10", () => {
-        const carYearThreshold = CarYearThreshold.FROM_6_TO_10_YEARS;
+        const carYear = FROM_6_TO_10_YEARS;
 
         it("if no addon, returns car value * 1.35", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1327,7 +1339,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1339,7 +1351,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1351,7 +1363,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1363,7 +1375,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1375,7 +1387,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1387,7 +1399,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1397,13 +1409,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 10 < car year threshold <= 15", () => {
-        const carYearThreshold = CarYearThreshold.FROM_10_TO_15_YEARS;
+        const carYear = FROM_10_TO_15_YEARS;
 
         it("if no addon, returns car value * 1.46", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1415,7 +1427,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1427,7 +1439,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1439,7 +1451,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1451,7 +1463,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1463,7 +1475,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1475,7 +1487,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1485,13 +1497,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if 15 < car year threshold <= 20", () => {
-        const carYearThreshold = CarYearThreshold.FROM_15_TO_20_YEARS;
+        const carYear = FROM_15_TO_20_YEARS;
 
         it("if no addon, returns car value * 1.58", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1503,7 +1515,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1515,7 +1527,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1527,7 +1539,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1539,7 +1551,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1551,7 +1563,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1563,7 +1575,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1573,13 +1585,13 @@ describe("class BaoMinhCarInsurance", () => {
       });
 
       describe("if car year threshold > 20", () => {
-        const carYearThreshold = CarYearThreshold.OVER_20_YEARS;
+        const carYear = OVER_20_YEARS;
 
         it("if no addon, returns car value * 1.69", () => {
           const addon = CarInsuranceAddOn.BASIC;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1591,7 +1603,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1603,7 +1615,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1615,7 +1627,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1627,7 +1639,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1639,7 +1651,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
@@ -1651,7 +1663,7 @@ describe("class BaoMinhCarInsurance", () => {
           const addon = CarInsuranceAddOn.DKBS_003_006_007_008;
           const baoMinhCarInsurance = new BaoMinhCarInsurance(
             carValue,
-            carYearThreshold,
+            carYear,
             addon
           );
           const carInsuranceValue = baoMinhCarInsurance.getInsuranceFee();
