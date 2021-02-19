@@ -25,7 +25,6 @@ export enum CarYearThreshold {
 }
 
 export enum CarInsuranceAddOn {
-  DKBS_007,
   BASIC,
   DKBS_006,
   DKBS_006_007,
@@ -59,8 +58,8 @@ export default class CarInsuranceRequestController {
   }
 
   public getAddOnLabel(addon: CarInsuranceAddOn) {
-    if (addon === CarInsuranceAddOn.DKBS_007) {
-      return "Option 2";
+    if (addon === CarInsuranceAddOn.DKBS_006) {
+      return "DKBS_006";
     }
 
     return "";
