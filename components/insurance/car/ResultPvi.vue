@@ -3,7 +3,7 @@
     <ResultTable
       logo-file-name="logo-pvi.png"
       company-name="PVI"
-      :insurance-value="insuranceValue"
+      :insurance-value="insuranceFee"
     />
   </div>
 </template>
@@ -24,9 +24,9 @@ export default Vue.extend({
       pvi: new PviCarInsurance(
         0,
         CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
-        []
+        CarInsuranceAddOn.BASIC
       ),
-      insuranceValue: 0
+      insuranceFee: 0
     };
   },
 
@@ -39,38 +39,38 @@ export default Vue.extend({
       return this.$store.state.car.carYearThreshold;
     },
 
-    addons(): CarInsuranceAddOn[] {
-      return this.$store.state.car.addons;
+    addon(): CarInsuranceAddOn {
+      return this.$store.state.car.addon;
     }
   },
 
   watch: {
     carValue(newValue: number) {
       this.pvi.setCarValue(newValue);
-      this.calculateCarInsuranceValue();
+      this.calculateCarInsuranceFee();
     },
 
     carYearThreshold(newValue: number) {
       this.pvi.setCarYearThreshold(newValue);
-      this.calculateCarInsuranceValue();
+      this.calculateCarInsuranceFee();
     },
 
-    addons(newValue: CarInsuranceAddOn[]) {
-      this.pvi.setAddons(newValue);
-      this.calculateCarInsuranceValue();
+    addon(newValue: CarInsuranceAddOn) {
+      this.pvi.setAddon(newValue);
+      this.calculateCarInsuranceFee();
     }
   },
 
   mounted() {
     this.pvi.setCarValue(this.carValue);
     this.pvi.setCarYearThreshold(this.carYearThreshold);
-    this.pvi.setAddons(this.addons);
-    this.calculateCarInsuranceValue();
+    this.pvi.setAddon(this.addon);
+    this.calculateCarInsuranceFee();
   },
 
   methods: {
-    calculateCarInsuranceValue() {
-      this.insuranceValue = this.pvi.getCarInsuranceValue();
+    calculateCarInsuranceFee() {
+      this.insuranceFee = this.pvi.getInsuranceFee();
     }
   }
 });

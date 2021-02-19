@@ -3,7 +3,7 @@
     <ResultTable
       logo-file-name="logo-bao-minh.png"
       company-name="Bảo Minh"
-      :insurance-value="insuranceValue"
+      :insurance-value="insuranceFee"
     />
   </div>
 </template>
@@ -24,9 +24,9 @@ export default Vue.extend({
       baoMinh: new BaoMinhCarInsurance(
         0,
         CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
-        []
+        CarInsuranceAddOn.BASIC
       ),
-      insuranceValue: 0
+      insuranceFee: 0
     };
   },
 
@@ -39,38 +39,38 @@ export default Vue.extend({
       return this.$store.state.car.carYearThreshold;
     },
 
-    addons(): CarInsuranceAddOn[] {
-      return this.$store.state.car.addons;
+    addon(): CarInsuranceAddOn {
+      return this.$store.state.car.addon;
     }
   },
 
   watch: {
     carValue(newValue: number) {
       this.baoMinh.setCarValue(newValue);
-      this.calculateCarInsuranceValue();
+      this.calculateCarInsuranceFee();
     },
 
     carYearThreshold(newValue: number) {
       this.baoMinh.setCarYearThreshold(newValue);
-      this.calculateCarInsuranceValue();
+      this.calculateCarInsuranceFee();
     },
 
-    addons(newValue: CarInsuranceAddOn[]) {
-      this.baoMinh.setAddons(newValue);
-      this.calculateCarInsuranceValue();
+    addon(newValue: CarInsuranceAddOn) {
+      this.baoMinh.setAddon(newValue);
+      this.calculateCarInsuranceFee();
     }
   },
 
   mounted() {
     this.baoMinh.setCarValue(this.carValue);
     this.baoMinh.setCarYearThreshold(this.carYearThreshold);
-    this.baoMinh.setAddons(this.addons);
-    this.calculateCarInsuranceValue();
+    this.baoMinh.setAddon(this.addon);
+    this.calculateCarInsuranceFee();
   },
 
   methods: {
-    calculateCarInsuranceValue() {
-      this.insuranceValue = this.baoMinh.getCarInsuranceValue();
+    calculateCarInsuranceFee() {
+      this.insuranceFee = this.baoMinh.getInsuranceFee();
     }
   }
 });
