@@ -78,63 +78,60 @@ describe("Page /san-pham/o-to", () => {
       const thisYear = new Date().getFullYear();
       const targetYear = thisYear - 21;
       cy.get("@carYear").type(targetYear.toString());
-      cy.get("@addonRadio").eq(0).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(1).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(2).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(3).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(4).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(5).find("input").should("have.attr", "disabled");
+
+      assertAddonRadioDisability(0, true);
+      assertAddonRadioDisability(1, true);
+      assertAddonRadioDisability(2, true);
+      assertAddonRadioDisability(3, true);
+      assertAddonRadioDisability(4, true);
+      assertAddonRadioDisability(5, true);
     });
+
+    function assertAddonRadioDisability(radioIndex, isDisable) {
+      const assertText = isDisable ? "have.attr" : "not.have.attr";
+      cy.get("@addonRadio")
+        .eq(radioIndex)
+        .find("input")
+        .should(assertText, "disabled");
+    }
 
     it("disable all addons if 15 < year gap <= 20", () => {
       const thisYear = new Date().getFullYear();
       const targetYear = thisYear - 16;
       cy.get("@carYear").type(targetYear.toString());
-      cy.get("@addonRadio").eq(0).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(1).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(2).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(3).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(4).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(5).find("input").should("have.attr", "disabled");
+
+      assertAddonRadioDisability(0, true);
+      assertAddonRadioDisability(1, true);
+      assertAddonRadioDisability(2, true);
+      assertAddonRadioDisability(3, true);
+      assertAddonRadioDisability(4, true);
+      assertAddonRadioDisability(5, true);
     });
 
     it("only enable first radio if 10 < year gap <= 15", () => {
       const thisYear = new Date().getFullYear();
       const targetYear = thisYear - 11;
       cy.get("@carYear").type(targetYear.toString());
-      cy.get("@addonRadio")
-        .eq(0)
-        .find("input")
-        .should("not.have.attr", "disabled");
-      cy.get("@addonRadio").eq(1).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(2).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(3).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(4).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(5).find("input").should("have.attr", "disabled");
+
+      assertAddonRadioDisability(0, false);
+      assertAddonRadioDisability(1, true);
+      assertAddonRadioDisability(2, true);
+      assertAddonRadioDisability(3, true);
+      assertAddonRadioDisability(4, true);
+      assertAddonRadioDisability(5, true);
     });
 
     it("disable last 2 radios if 6 < year gap <= 10", () => {
       const thisYear = new Date().getFullYear();
       const targetYear = thisYear - 7;
       cy.get("@carYear").type(targetYear.toString());
-      cy.get("@addonRadio")
-        .eq(0)
-        .find("input")
-        .should("not.have.attr", "disabled");
-      cy.get("@addonRadio")
-        .eq(1)
-        .find("input")
-        .should("not.have.attr", "disabled");
-      cy.get("@addonRadio")
-        .eq(2)
-        .find("input")
-        .should("not.have.attr", "disabled");
-      cy.get("@addonRadio")
-        .eq(3)
-        .find("input")
-        .should("not.have.attr", "disabled");
-      cy.get("@addonRadio").eq(4).find("input").should("have.attr", "disabled");
-      cy.get("@addonRadio").eq(5).find("input").should("have.attr", "disabled");
+
+      assertAddonRadioDisability(0, false);
+      assertAddonRadioDisability(1, false);
+      assertAddonRadioDisability(2, false);
+      assertAddonRadioDisability(3, false);
+      assertAddonRadioDisability(4, true);
+      assertAddonRadioDisability(5, true);
     });
   });
 
