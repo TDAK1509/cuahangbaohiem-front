@@ -1,11 +1,14 @@
 describe("Page /san-pham/o-to", () => {
   beforeEach(() => {
     cy.visit("/san-pham/o-to");
+    initAliases();
+  });
 
+  function initAliases() {
     cy.get("[data-cy=car-value]").as("carValue");
     cy.get("[data-cy=car-year]").as("carYear");
     cy.get("[data-cy=addons]").as("addons");
-  });
+  }
 
   describe.skip("tab bar", () => {
     it("should have 5 correct tabs", () => {
@@ -83,13 +86,13 @@ describe("Page /san-pham/o-to", () => {
     describe.skip("form error handling", () => {
       describe("carValue", () => {
         it("if car value is empty, shows HTML5 required validation", () => {
-          getCarValueField().should(assertFailedHtml5FormValidation);
+          cy.get("@carValue").should(assertFailedHtml5FormValidation);
         });
 
         it("if car value is not a number, shows HTML5 required validation", () => {
           const errorNotANumber = "Vui lòng điền một con số.";
 
-          getCarValueField()
+          cy.get("@carValue")
             .type("not a number")
             .should(($el) => {
               assertFailedHtml5FormValidationWithMessage($el, errorNotANumber);
@@ -99,13 +102,13 @@ describe("Page /san-pham/o-to", () => {
 
       describe("carYear", () => {
         it("if car year is empty, shows HTML5 required validation", () => {
-          getCarYearField().should(assertFailedHtml5FormValidation);
+          cy.get("@carYear").should(assertFailedHtml5FormValidation);
         });
 
         it("if car year is not a number, shows HTML5 required validation", () => {
           const errorInvalidYear = "Năm sản xuất không hợp lệ.";
 
-          getCarYearField()
+          cy.get("@carYear")
             .type("not a number")
             .should(($el) => {
               assertFailedHtml5FormValidationWithMessage($el, errorInvalidYear);
@@ -116,15 +119,15 @@ describe("Page /san-pham/o-to", () => {
 
     describe("form valid handling", () => {
       it("shows result if car value not empty", () => {
-        getCarValueField().type("100");
-        getCarYearField().type("2020");
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
         getCalculateButton().click();
         assertResultBlockIsRendered();
       });
 
       it("results show 4 insurance brands with correct insurance values and 4 BUY buttons", () => {
-        getCarValueField().type("100");
-        getCarYearField().type("2020");
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
         getCalculateButton().click();
 
         assertPviinsuranceFee("150.000.000");
@@ -135,8 +138,8 @@ describe("Page /san-pham/o-to", () => {
       });
 
       it.skip("tick first addon shows results with correct value", () => {
-        getCarValueField().type("100");
-        getCarYearField().type("2020");
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
         cy.contains("Option 1").click();
         getCalculateButton().click();
 
@@ -148,8 +151,8 @@ describe("Page /san-pham/o-to", () => {
       });
 
       it.skip("tick second addon shows results with correct value", () => {
-        getCarValueField().type("100");
-        getCarYearField().type("2020");
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
         cy.contains("Option 2").click();
         getCalculateButton().click();
 
@@ -161,8 +164,8 @@ describe("Page /san-pham/o-to", () => {
       });
 
       it.skip("tick both addons shows results with correct value", () => {
-        getCarValueField().type("100");
-        getCarYearField().type("2020");
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
         cy.contains("Option 1").click();
         cy.contains("Option 2").click();
         getCalculateButton().click();
@@ -175,8 +178,8 @@ describe("Page /san-pham/o-to", () => {
       });
 
       it.skip("reselecting addons works", () => {
-        getCarValueField().type("100");
-        getCarYearField().type("2020");
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
         cy.contains("Option 1").click();
         getCalculateButton().click();
 
@@ -201,8 +204,8 @@ describe("Page /san-pham/o-to", () => {
   describe.skip("On click BUY button", () => {
     describe("without addon", () => {
       beforeEach(() => {
-        getCarValueField().type("100");
-        getCarYearField().type("2020");
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
         getCalculateButton().click();
         getResultBuyButton().first().click();
       });
@@ -305,8 +308,8 @@ describe("Page /san-pham/o-to", () => {
       });
 
       function calculateInsuranceWithAddOns() {
-        getCarValueField().type("100");
-        getCarYearField().type("2020");
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
         getCalculateButton().click();
         getResultBuyButton().first().click();
       }
@@ -325,18 +328,6 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 });
-
-function getCarValueField() {
-  return cy.get("[data-cy=car-value]");
-}
-
-function getCarYearField() {
-  return cy.get("[data-cy=car-year]");
-}
-
-function getAddOns() {
-  return cy.get("[data-cy=addons]");
-}
 
 function getCalculateButton() {
   return cy.get("[data-cy=calculate-button]");
