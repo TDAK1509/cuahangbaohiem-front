@@ -8,6 +8,7 @@ describe("Page /san-pham/o-to", () => {
     cy.get("[data-cy=car-value]").as("carValue");
     cy.get("[data-cy=car-year]").as("carYear");
     cy.get("[data-cy=addons]").as("addons");
+    cy.get("@addons").find(".radio").as("addonRadio");
     cy.get("[data-cy=calculate-button]").as("calculateButton");
   }
 
@@ -64,22 +65,13 @@ describe("Page /san-pham/o-to", () => {
     });
 
     it("addons should have 6 radios", () => {
-      cy.get("@addons").get("input[type=radio]").should("have.length", 6);
-      cy.get("@addons").find(".radio").eq(0).should("contain", "DKBS_006");
-      cy.get("@addons").find(".radio").eq(1).should("contain", "DKBS_006_007");
-      cy.get("@addons").find(".radio").eq(2).should("contain", "DKBS_006_008");
-      cy.get("@addons")
-        .find(".radio")
-        .eq(3)
-        .should("contain", "DKBS_006_007_008");
-      cy.get("@addons")
-        .find(".radio")
-        .eq(4)
-        .should("contain", "DKBS_003_006_007");
-      cy.get("@addons")
-        .find(".radio")
-        .eq(5)
-        .should("contain", "DKBS_003_006_007_008");
+      cy.get("@addonRadio").should("have.length", 6);
+      cy.get("@addonRadio").eq(0).should("contain", "DKBS_006");
+      cy.get("@addonRadio").eq(1).should("contain", "DKBS_006_007");
+      cy.get("@addonRadio").eq(2).should("contain", "DKBS_006_008");
+      cy.get("@addonRadio").eq(3).should("contain", "DKBS_006_007_008");
+      cy.get("@addonRadio").eq(4).should("contain", "DKBS_003_006_007");
+      cy.get("@addonRadio").eq(5).should("contain", "DKBS_003_006_007_008");
     });
   });
 
