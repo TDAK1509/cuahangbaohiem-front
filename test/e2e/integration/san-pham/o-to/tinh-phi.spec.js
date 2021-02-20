@@ -146,6 +146,19 @@ describe("Page /san-pham/o-to", () => {
       assertAddonRadioDisability(4, false);
       assertAddonRadioDisability(5, false);
     });
+
+    it("enable all radios if yearGap <= 3", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 1;
+      cy.get("@carYear").type(targetYear.toString());
+
+      assertAddonRadioDisability(0, false);
+      assertAddonRadioDisability(1, false);
+      assertAddonRadioDisability(2, false);
+      assertAddonRadioDisability(3, false);
+      assertAddonRadioDisability(4, false);
+      assertAddonRadioDisability(5, false);
+    });
   });
 
   describe.skip("on click calculate button", () => {
