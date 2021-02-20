@@ -3,30 +3,23 @@
     <ResultTable
       logo-file-name="logo-mic.png"
       company-name="MIC"
-      :insurance-value="insuranceValue"
+      :insurance-fee="insuranceFee"
     />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import MicCarInsurance from "@/utils/car-insurance/mic-car-insurance";
-import {
-  CarYearThreshold,
-  CarInsuranceAddOn
-} from "@/controller/car-insurance-request";
+import MicCarInsurance from "@/controller/car-insurance/mic-car-insurance";
+import { CarInsuranceAddOn } from "@/controller/car-insurance/car-insurance-request";
 
 export default Vue.extend({
   name: "ResultMic",
 
   data() {
     return {
-      mic: new MicCarInsurance(
-        0,
-        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
-        []
-      ),
-      insuranceValue: 0
+      mic: new MicCarInsurance(0, 0, CarInsuranceAddOn.NONE),
+      insuranceFee: 0
     };
   },
 
@@ -35,42 +28,42 @@ export default Vue.extend({
       return this.$store.state.car.carValue;
     },
 
-    carYearThreshold(): CarYearThreshold {
-      return this.$store.state.car.carYearThreshold;
+    carYear(): number {
+      return this.$store.state.car.carYear;
     },
 
-    addons(): CarInsuranceAddOn[] {
-      return this.$store.state.car.addons;
+    addon(): CarInsuranceAddOn {
+      return this.$store.state.car.addon;
     }
   },
 
   watch: {
     carValue(newValue: number) {
       this.mic.setCarValue(newValue);
-      this.calculateCarInsuranceValue();
+      this.calculateCarInsuranceFee();
     },
 
-    carYearThreshold(newValue: number) {
-      this.mic.setCarYearThreshold(newValue);
-      this.calculateCarInsuranceValue();
+    carYear(newValue: number) {
+      this.mic.setCarYear(newValue);
+      this.calculateCarInsuranceFee();
     },
 
-    addons(newValue: CarInsuranceAddOn[]) {
-      this.mic.setAddons(newValue);
-      this.calculateCarInsuranceValue();
+    addon(newValue: CarInsuranceAddOn) {
+      this.mic.setAddon(newValue);
+      this.calculateCarInsuranceFee();
     }
   },
 
   mounted() {
     this.mic.setCarValue(this.carValue);
-    this.mic.setCarYearThreshold(this.carYearThreshold);
-    this.mic.setAddons(this.addons);
-    this.calculateCarInsuranceValue();
+    this.mic.setCarYear(this.carYear);
+    this.mic.setAddon(this.addon);
+    this.calculateCarInsuranceFee();
   },
 
   methods: {
-    calculateCarInsuranceValue() {
-      this.insuranceValue = this.mic.getCarInsuranceValue();
+    calculateCarInsuranceFee() {
+      this.insuranceFee = this.mic.getInsuranceFee();
     }
   }
 });

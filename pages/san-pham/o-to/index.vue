@@ -26,31 +26,31 @@
           title="Vui lòng điền một con số."
         />
 
-        <div class="field">
-          <label class="label">Năm sản xuất</label>
-          <div class="control" data-cy="car-year-threshold">
-            <p v-for="{ text, value } in carYearRadios" :key="value">
-              <label class="radio">
-                <input
-                  v-model="carYearThreshold"
-                  :value="value"
-                  type="radio"
-                  name="car_year"
-                />
-                {{ text }}
-              </label>
-            </p>
-          </div>
-        </div>
+        <TextField
+          v-model="carYear"
+          data-cy="car-year"
+          label="Năm sản xuất"
+          placeholder="2015"
+          required
+          pattern="[0-9]*"
+          minlength="4"
+          maxlength="4"
+          title="Năm sản xuất không hợp lệ."
+        />
 
         <div class="field">
-          <label class="label">Tùy chọn bổ sung</label>
+          <label class="label"> Tùy chọn bổ sung </label>
 
           <div class="control" data-cy="addons">
-            <p v-for="{ text, value } in insuranceAddOns" :key="value">
-              <label class="checkbox">
-                <input v-model="addons" type="checkbox" :value="value" />
-                {{ text }}
+            <p v-for="item in addonRadios" :key="item.value">
+              <label class="radio" :disabled="item.disabled">
+                <input
+                  v-model="addon"
+                  type="radio"
+                  :value="item.value"
+                  :disabled="item.disabled"
+                />
+                {{ item.text }}
               </label>
             </p>
           </div>
@@ -83,11 +83,17 @@
 <script lang="ts">
 import Vue from "vue";
 import CarInsuranceRequestController, {
-  CarYearThreshold,
   CarInsuranceAddOn
-} from "@/controller/car-insurance-request";
+} from "@/controller/car-insurance/car-insurance-request";
 
 const controller = new CarInsuranceRequestController();
+const THIS_YEAR = new Date().getFullYear();
+
+interface AddOnRadio {
+  text: string;
+  value: CarInsuranceAddOn;
+  disabled: boolean;
+}
 
 export default Vue.extend({
   name: "TinhPhiOto",
@@ -97,36 +103,7 @@ export default Vue.extend({
   data() {
     return {
       showResult: false,
-      carYearRadios: [
-        {
-          text: controller.getCarYearThresholdLabel(
-            CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
-          ),
-          value: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS
-        },
-        {
-          text: controller.getCarYearThresholdLabel(
-            CarYearThreshold.FROM_3_TO_6_YEARS
-          ),
-          value: CarYearThreshold.FROM_3_TO_6_YEARS
-        },
-        {
-          text: controller.getCarYearThresholdLabel(
-            CarYearThreshold.OVER_6_YEARS
-          ),
-          value: CarYearThreshold.OVER_6_YEARS
-        }
-      ],
-      insuranceAddOns: [
-        {
-          text: controller.getAddOnLabel(CarInsuranceAddOn.OPTION_1),
-          value: CarInsuranceAddOn.OPTION_1
-        },
-        {
-          text: controller.getAddOnLabel(CarInsuranceAddOn.OPTION_2),
-          value: CarInsuranceAddOn.OPTION_2
-        }
-      ]
+      addonRadios: controller.getAddOnRadios(1)
     };
   },
 
@@ -142,22 +119,35 @@ export default Vue.extend({
       }
     },
 
-    carYearThreshold: {
-      get(): CarYearThreshold {
-        return this.$store.state.car.carYearThreshold;
+    carYear: {
+      get(): string {
+        return this.$store.state.car.carYear
+          ? this.$store.state.car.carYear.toString()
+          : "";
       },
-      set(newValue: CarYearThreshold) {
-        this.$store.dispatch("car/setCarYearThreshold", newValue);
+      set(newValue: string) {
+        this.$store.dispatch("car/setCarYear", parseInt(newValue));
       }
     },
 
-    addons: {
+    addon: {
       get(): CarInsuranceAddOn[] {
-        return this.$store.state.car.addons;
+        return this.$store.state.car.addon;
       },
-      set(newValue: CarInsuranceAddOn[]) {
-        this.$store.dispatch("car/setAddons", newValue);
+      set(newValue: CarInsuranceAddOn) {
+        this.$store.dispatch("car/setAddon", newValue);
       }
+    },
+
+    yearGap(): number {
+      return THIS_YEAR - parseInt(this.carYear);
+    }
+  },
+
+  watch: {
+    async yearGap() {
+      this.addonRadios = controller.getAddOnRadios(this.yearGap);
+      await this.$nextTick();
     }
   },
 

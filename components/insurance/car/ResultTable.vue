@@ -19,7 +19,7 @@
         </div>
 
         <div class="content">
-          <p>Phí bảo hiểm: {{ insuranceValue | millionDongs }}</p>
+          <p>Phí bảo hiểm: {{ insuranceFee | millionDongs }}</p>
         </div>
 
         <div>
@@ -38,7 +38,7 @@
       v-if="showPopup"
       v-model="showPopup"
       :insurance-company="companyName"
-      :insurance-value="insuranceValue"
+      :insurance-fee="insuranceFee"
     />
   </div>
 </template>
@@ -70,7 +70,7 @@ export default Vue.extend({
       default: ""
     },
 
-    insuranceValue: {
+    insuranceFee: {
       type: Number,
       required: false,
       default: 0

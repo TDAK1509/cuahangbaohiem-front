@@ -3,30 +3,23 @@
     <ResultTable
       logo-file-name="logo-bao-minh.png"
       company-name="Bảo Minh"
-      :insurance-value="insuranceValue"
+      :insurance-fee="insuranceFee"
     />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import BaoMinhCarInsurance from "@/utils/car-insurance/bao-minh-car-insurance";
-import {
-  CarYearThreshold,
-  CarInsuranceAddOn
-} from "@/controller/car-insurance-request";
+import BaoMinhCarInsurance from "@/controller/car-insurance/bao-minh-car-insurance";
+import { CarInsuranceAddOn } from "@/controller/car-insurance/car-insurance-request";
 
 export default Vue.extend({
   name: "ResultBaoMinh",
 
   data() {
     return {
-      baoMinh: new BaoMinhCarInsurance(
-        0,
-        CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
-        []
-      ),
-      insuranceValue: 0
+      baoMinh: new BaoMinhCarInsurance(0, 0, CarInsuranceAddOn.NONE),
+      insuranceFee: 0
     };
   },
 
@@ -35,42 +28,42 @@ export default Vue.extend({
       return this.$store.state.car.carValue;
     },
 
-    carYearThreshold(): CarYearThreshold {
-      return this.$store.state.car.carYearThreshold;
+    carYear(): number {
+      return this.$store.state.car.carYear;
     },
 
-    addons(): CarInsuranceAddOn[] {
-      return this.$store.state.car.addons;
+    addon(): CarInsuranceAddOn {
+      return this.$store.state.car.addon;
     }
   },
 
   watch: {
     carValue(newValue: number) {
       this.baoMinh.setCarValue(newValue);
-      this.calculateCarInsuranceValue();
+      this.calculateCarInsuranceFee();
     },
 
-    carYearThreshold(newValue: number) {
-      this.baoMinh.setCarYearThreshold(newValue);
-      this.calculateCarInsuranceValue();
+    carYear(newValue: number) {
+      this.baoMinh.setCarYear(newValue);
+      this.calculateCarInsuranceFee();
     },
 
-    addons(newValue: CarInsuranceAddOn[]) {
-      this.baoMinh.setAddons(newValue);
-      this.calculateCarInsuranceValue();
+    addon(newValue: CarInsuranceAddOn) {
+      this.baoMinh.setAddon(newValue);
+      this.calculateCarInsuranceFee();
     }
   },
 
   mounted() {
     this.baoMinh.setCarValue(this.carValue);
-    this.baoMinh.setCarYearThreshold(this.carYearThreshold);
-    this.baoMinh.setAddons(this.addons);
-    this.calculateCarInsuranceValue();
+    this.baoMinh.setCarYear(this.carYear);
+    this.baoMinh.setAddon(this.addon);
+    this.calculateCarInsuranceFee();
   },
 
   methods: {
-    calculateCarInsuranceValue() {
-      this.insuranceValue = this.baoMinh.getCarInsuranceValue();
+    calculateCarInsuranceFee() {
+      this.insuranceFee = this.baoMinh.getInsuranceFee();
     }
   }
 });

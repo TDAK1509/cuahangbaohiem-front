@@ -1,7 +1,16 @@
 describe("Page /san-pham/o-to", () => {
   beforeEach(() => {
     cy.visit("/san-pham/o-to");
+    initAliases();
   });
+
+  function initAliases() {
+    cy.get("[data-cy=car-value]").as("carValue");
+    cy.get("[data-cy=car-year]").as("carYear");
+    cy.get("[data-cy=addons]").as("addons");
+    cy.get("@addons").find(".radio").as("addonRadio");
+    cy.get("[data-cy=calculate-button]").as("calculateButton");
+  }
 
   describe("tab bar", () => {
     it("should have 5 correct tabs", () => {
@@ -46,118 +55,204 @@ describe("Page /san-pham/o-to", () => {
 
   describe("rendering", () => {
     it("should render enough inputs", () => {
-      cy.get("[data-cy=car-value]").should("be.visible");
-      cy.get("[data-cy=car-year-threshold]").should("be.visible");
-      cy.get("[data-cy=addons]").should("be.visible");
+      cy.get("@carValue").should("be.visible");
+      cy.get("@carYear").should("be.visible");
+      cy.get("@addons").should("be.visible");
     });
 
     it("should render Calculate button", () => {
-      getCalculateButton().should("be.visible");
+      cy.get("@calculateButton").should("be.visible");
     });
 
-    it("car year threshold should have 3 radios", () => {
-      cy.get("[data-cy=car-year-threshold]")
-        .get("input[type=radio]")
-        .should("have.length", 3);
+    it("addons should have 7 radios", () => {
+      cy.get("@addonRadio").should("have.length", 7);
+      cy.get("@addonRadio").eq(0).should("contain", "Không");
+      cy.get("@addonRadio").eq(1).should("contain", "DKBS_006");
+      cy.get("@addonRadio").eq(2).should("contain", "DKBS_006_007");
+      cy.get("@addonRadio").eq(3).should("contain", "DKBS_006_008");
+      cy.get("@addonRadio").eq(4).should("contain", "DKBS_006_007_008");
+      cy.get("@addonRadio").eq(5).should("contain", "DKBS_003_006_007");
+      cy.get("@addonRadio").eq(6).should("contain", "DKBS_003_006_007_008");
     });
 
-    it("addons should have 2 checkboxes", () => {
-      cy.get("[data-cy=addons]")
-        .get("input[type=checkbox]")
-        .should("have.length", 2);
+    it("disable all addons if year gap > 20", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 21;
+      cy.get("@carYear").type(targetYear.toString());
+
+      assertAddonRadioDisability(0, false);
+      assertAddonRadioDisability(1, true);
+      assertAddonRadioDisability(2, true);
+      assertAddonRadioDisability(3, true);
+      assertAddonRadioDisability(4, true);
+      assertAddonRadioDisability(5, true);
+      assertAddonRadioDisability(6, true);
+    });
+
+    function assertAddonRadioDisability(radioIndex, isDisable) {
+      const assertText = isDisable ? "have.attr" : "not.have.attr";
+      cy.get("@addonRadio")
+        .eq(radioIndex)
+        .find("input")
+        .should(assertText, "disabled");
+    }
+
+    it("disable all addons if 15 < year gap <= 20", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 16;
+      cy.get("@carYear").type(targetYear.toString());
+
+      assertAddonRadioDisability(0, false);
+      assertAddonRadioDisability(1, true);
+      assertAddonRadioDisability(2, true);
+      assertAddonRadioDisability(3, true);
+      assertAddonRadioDisability(4, true);
+      assertAddonRadioDisability(5, true);
+      assertAddonRadioDisability(6, true);
+    });
+
+    it("only enable first radio if 10 < year gap <= 15", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 11;
+      cy.get("@carYear").type(targetYear.toString());
+
+      assertAddonRadioDisability(0, false);
+      assertAddonRadioDisability(1, false);
+      assertAddonRadioDisability(2, true);
+      assertAddonRadioDisability(3, true);
+      assertAddonRadioDisability(4, true);
+      assertAddonRadioDisability(5, true);
+    });
+
+    it("disable last 2 radios if 6 < year gap <= 10", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 7;
+      cy.get("@carYear").type(targetYear.toString());
+
+      assertAddonRadioDisability(0, false);
+      assertAddonRadioDisability(1, false);
+      assertAddonRadioDisability(2, false);
+      assertAddonRadioDisability(3, false);
+      assertAddonRadioDisability(4, false);
+      assertAddonRadioDisability(5, true);
+      assertAddonRadioDisability(6, true);
+    });
+
+    it("enable all radios if 3 < year gap <= 6", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 4;
+      cy.get("@carYear").type(targetYear.toString());
+
+      assertAddonRadioDisability(0, false);
+      assertAddonRadioDisability(1, false);
+      assertAddonRadioDisability(2, false);
+      assertAddonRadioDisability(3, false);
+      assertAddonRadioDisability(4, false);
+      assertAddonRadioDisability(5, false);
+      assertAddonRadioDisability(6, false);
+    });
+
+    it("enable all radios if yearGap <= 3", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 1;
+      cy.get("@carYear").type(targetYear.toString());
+
+      assertAddonRadioDisability(0, false);
+      assertAddonRadioDisability(1, false);
+      assertAddonRadioDisability(2, false);
+      assertAddonRadioDisability(3, false);
+      assertAddonRadioDisability(4, false);
+      assertAddonRadioDisability(5, false);
+      assertAddonRadioDisability(6, false);
     });
   });
 
   describe("on click calculate button", () => {
     describe("form error handling", () => {
-      it("if car value is empty, shows HTML5 required validation", () => {
-        getCarValueField().should(assertFailedHtml5FormValidation);
+      describe("carValue", () => {
+        it("if car value is empty, show HTML5 required validation", () => {
+          cy.get("@carValue").should(assertFailedHtml5FormValidation);
+        });
+
+        it("if car value is not a number, shows HTML5 required validation", () => {
+          const errorNotANumber = "Vui lòng điền một con số.";
+
+          cy.get("@carValue")
+            .type("not a number")
+            .should(($el) => {
+              assertFailedHtml5FormValidationWithMessage($el, errorNotANumber);
+            });
+        });
       });
 
-      it("if car value is not a number, shows HTML5 required validation", () => {
-        const errorNotANumber = "Vui lòng điền một con số.";
+      describe("carYear", () => {
+        it("if car year is empty, shows HTML5 required validation", () => {
+          cy.get("@carYear").should(assertFailedHtml5FormValidation);
+        });
 
-        getCarValueField()
-          .type("not a number")
-          .should(($el) => {
-            assertFailedHtml5FormValidationWithMessage($el, errorNotANumber);
-          });
+        it("if car year is not a number, shows HTML5 required validation", () => {
+          const errorInvalidYear = "Năm sản xuất không hợp lệ.";
+
+          cy.get("@carYear")
+            .type("not a number")
+            .should(($el) => {
+              assertFailedHtml5FormValidationWithMessage($el, errorInvalidYear);
+            });
+        });
       });
     });
 
     describe("form valid handling", () => {
       it("shows result if car value not empty", () => {
-        getCarValueField().type("800");
-        getCalculateButton().click();
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
+        cy.get("@calculateButton").click();
         assertResultBlockIsRendered();
       });
 
       it("results show 4 insurance brands with correct insurance values and 4 BUY buttons", () => {
-        getCarValueField().type("800");
-        getCalculateButton().click();
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
+        cy.get("@calculateButton").click();
 
-        assertPviInsuranceValue("960.000.000");
-        assertBaoVietInsuranceValue("960.000.000");
-        assertBaoMinhInsuranceValue("960.000.000");
-        assertMicInsuranceValue("960.000.000");
+        assertPviInsuranceFee("150.000.000");
+        assertBaoVietInsuranceFee("150.000.000");
+        assertBaoMinhInsuranceFee("150.000.000");
+        assertMicInsuranceFee("150.000.000");
         assertResultShows4BuyButtons();
       });
 
-      it("tick first addon shows results with correct value", () => {
-        getCarValueField().type("100");
-        cy.contains("Option 1").click();
-        getCalculateButton().click();
+      it("tick DKBS_006_007 addon shows results with correct value", () => {
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
+        cy.get("@addonRadio").eq(2).click();
+        cy.get("@calculateButton").click();
 
-        assertPviInsuranceValue("121.000.000");
-        assertBaoVietInsuranceValue("121.000.000");
-        assertBaoMinhInsuranceValue("121.000.000");
-        assertMicInsuranceValue("121.000.000");
-        assertResultShows4BuyButtons();
-      });
-
-      it("tick second addon shows results with correct value", () => {
-        getCarValueField().type("100");
-        cy.contains("Option 2").click();
-        getCalculateButton().click();
-
-        assertPviInsuranceValue("122.000.000");
-        assertBaoVietInsuranceValue("122.000.000");
-        assertBaoMinhInsuranceValue("122.000.000");
-        assertMicInsuranceValue("122.000.000");
-        assertResultShows4BuyButtons();
-      });
-
-      it("tick both addons shows results with correct value", () => {
-        getCarValueField().type("100");
-        cy.contains("Option 1").click();
-        cy.contains("Option 2").click();
-        getCalculateButton().click();
-
-        assertPviInsuranceValue("123.000.000");
-        assertBaoVietInsuranceValue("123.000.000");
-        assertBaoMinhInsuranceValue("123.000.000");
-        assertMicInsuranceValue("123.000.000");
+        assertPviInsuranceFee("160.000.000");
+        assertBaoVietInsuranceFee("160.000.000");
+        assertBaoMinhInsuranceFee("160.000.000");
+        assertMicInsuranceFee("160.000.000");
         assertResultShows4BuyButtons();
       });
 
       it("reselecting addons works", () => {
-        getCarValueField().type("100");
-        cy.contains("Option 1").click();
-        getCalculateButton().click();
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
+        cy.get("@addonRadio").eq(2).click();
+        cy.get("@calculateButton").click();
 
-        assertPviInsuranceValue("121.000.000");
-        assertBaoVietInsuranceValue("121.000.000");
-        assertBaoMinhInsuranceValue("121.000.000");
-        assertMicInsuranceValue("121.000.000");
+        assertPviInsuranceFee("160.000.000");
+        assertBaoVietInsuranceFee("160.000.000");
+        assertBaoMinhInsuranceFee("160.000.000");
+        assertMicInsuranceFee("160.000.000");
         assertResultShows4BuyButtons();
 
-        cy.contains("Option 1").click();
-        cy.contains("Option 2").click();
-        getCalculateButton().click();
-        assertPviInsuranceValue("122.000.000");
-        assertBaoVietInsuranceValue("122.000.000");
-        assertBaoMinhInsuranceValue("122.000.000");
-        assertMicInsuranceValue("122.000.000");
+        cy.get("@addonRadio").eq(0).click();
+        cy.get("@calculateButton").click();
+        assertPviInsuranceFee("150.000.000");
+        assertBaoVietInsuranceFee("150.000.000");
+        assertBaoMinhInsuranceFee("150.000.000");
+        assertMicInsuranceFee("150.000.000");
         assertResultShows4BuyButtons();
       });
     });
@@ -166,8 +261,9 @@ describe("Page /san-pham/o-to", () => {
   describe("On click BUY button", () => {
     describe("without addon", () => {
       beforeEach(() => {
-        getCarValueField().type("100");
-        getCalculateButton().click();
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
+        cy.get("@calculateButton").click();
         getResultBuyButton().first().click();
       });
 
@@ -249,9 +345,9 @@ describe("Page /san-pham/o-to", () => {
           cy.contains("1234567").should("be.visible");
           cy.contains("PVI").should("be.visible");
           cy.contains("carValue: 100000000").should("be.visible");
-          cy.contains("carYearThreshold: Dưới 3 năm").should("be.visible");
-          cy.contains("addons: []").should("be.visible");
-          cy.contains("120000000").should("be.visible");
+          cy.contains("carYear: 2020").should("be.visible");
+          cy.contains("addon:").should("be.visible");
+          cy.contains("150000000").should("be.visible");
         });
       });
     });
@@ -269,10 +365,9 @@ describe("Page /san-pham/o-to", () => {
       });
 
       function calculateInsuranceWithAddOns() {
-        getCarValueField().type("100");
-        cy.contains("Từ 3 đến 6 năm").click();
-        cy.contains("Option 1").click();
-        getCalculateButton().click();
+        cy.get("@carValue").type("100");
+        cy.get("@carYear").type("2020");
+        cy.get("@calculateButton").click();
         getResultBuyButton().first().click();
       }
 
@@ -283,21 +378,13 @@ describe("Page /san-pham/o-to", () => {
         cy.contains("phone: 111222333").should("be.visible");
         cy.contains("insuranceCompany: PVI").should("be.visible");
         cy.contains("carValue: 100000000").should("be.visible");
-        cy.contains("carYearThreshold: Từ 3 đến 6 năm").should("be.visible");
-        cy.contains('addons: [ "Option 1" ]').should("be.visible");
-        cy.contains("insuranceValue: 131000000").should("be.visible");
+        cy.contains("carYear: 2020").should("be.visible");
+        cy.contains("addon:").should("be.visible");
+        cy.contains("insuranceFee: 150000000").should("be.visible");
       });
     });
   });
 });
-
-function getCarValueField() {
-  return cy.get("[data-cy=car-value]");
-}
-
-function getCalculateButton() {
-  return cy.get("[data-cy=calculate-button]");
-}
 
 function getResultBuyButton() {
   return cy.get("[data-cy=buy-button]");
@@ -339,7 +426,7 @@ function assertResultBlockIsRendered() {
   cy.get("[data-cy=result]").should("be.visible");
 }
 
-function assertPviInsuranceValue(value) {
+function assertPviInsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(0)
     .invoke("text")
@@ -347,7 +434,7 @@ function assertPviInsuranceValue(value) {
     .should("include", value);
 }
 
-function assertBaoVietInsuranceValue(value) {
+function assertBaoVietInsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(1)
     .invoke("text")
@@ -355,7 +442,7 @@ function assertBaoVietInsuranceValue(value) {
     .should("include", value);
 }
 
-function assertBaoMinhInsuranceValue(value) {
+function assertBaoMinhInsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(2)
     .invoke("text")
@@ -363,7 +450,7 @@ function assertBaoMinhInsuranceValue(value) {
     .should("include", value);
 }
 
-function assertMicInsuranceValue(value) {
+function assertMicInsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(3)
     .invoke("text")

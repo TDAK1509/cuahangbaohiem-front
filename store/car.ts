@@ -1,19 +1,18 @@
 import { MutationTree, ActionTree, GetterTree } from "vuex";
 import { RootState } from "@/store";
 import CarInsuranceRequestController, {
-  CarYearThreshold,
   CarInsuranceAddOn,
   CarInsuranceRequest
-} from "@/controller/car-insurance-request";
+} from "~/controller/car-insurance/car-insurance-request";
 
 const controller = new CarInsuranceRequestController();
 
 export const state = () => ({
   carValue: 0,
-  carYearThreshold: CarYearThreshold.LESS_THAN_OR_EQUAL_3_YEARS,
-  addons: [] as CarInsuranceAddOn[],
+  carYear: 0,
+  addon: CarInsuranceAddOn.NONE,
   insuranceCompany: "",
-  insuranceValue: 0,
+  insuranceFee: 0,
   name: "",
   email: "",
   phone: "",
@@ -24,17 +23,14 @@ export type CarState = ReturnType<typeof state>;
 
 export const getters: GetterTree<CarState, RootState> = {
   insuranceRequest(state): CarInsuranceRequest {
-    const carYearThreshold = controller.getCarYearThresholdLabel(
-      state.carYearThreshold
-    );
-    const addons = state.addons.map((addon) => controller.getAddOnLabel(addon));
+    const addon = controller.getAddOnLabel(state.addon);
 
     return {
       carValue: toMillion(state.carValue),
-      carYearThreshold,
-      addons,
+      carYear: state.carYear,
+      addon,
       insuranceCompany: state.insuranceCompany,
-      insuranceValue: toMillion(state.insuranceValue),
+      insuranceFee: toMillion(state.insuranceFee),
       name: state.name,
       email: state.email,
       phone: state.phone,
@@ -48,20 +44,20 @@ export const mutations: MutationTree<CarState> = {
     state.carValue = payload;
   },
 
-  setCarYearThreshold(state: CarState, payload: CarYearThreshold) {
-    state.carYearThreshold = payload;
+  setCarYear(state: CarState, payload: number) {
+    state.carYear = payload;
   },
 
-  setAddons(state: CarState, payload: CarInsuranceAddOn[]) {
-    state.addons = payload;
+  setAddon(state: CarState, payload: CarInsuranceAddOn) {
+    state.addon = payload;
   },
 
   setInsuranceCompany(state: CarState, payload: string) {
     state.insuranceCompany = payload;
   },
 
-  setInsuranceValue(state: CarState, payload: number) {
-    state.insuranceValue = payload;
+  setInsuranceFee(state: CarState, payload: number) {
+    state.insuranceFee = payload;
   },
 
   setName(state: CarState, payload: string) {
@@ -91,12 +87,12 @@ export const actions: ActionTree<CarState, RootState> = {
     commit("setCarValue", carValue);
   },
 
-  setCarYearThreshold({ commit }, threshold: CarYearThreshold) {
-    commit("setCarYearThreshold", threshold);
+  setCarYear({ commit }, carYear: number) {
+    commit("setCarYear", carYear);
   },
 
-  setAddons({ commit }, addons: CarInsuranceAddOn[]) {
-    commit("setAddons", addons);
+  setAddon({ commit }, addon: CarInsuranceAddOn[]) {
+    commit("setAddon", addon);
   },
 
   setName({ commit }, name: string) {
@@ -119,8 +115,8 @@ export const actions: ActionTree<CarState, RootState> = {
     commit("setInsuranceCompany", company);
   },
 
-  setInsuranceValue({ commit }, insuranceValue: string) {
-    commit("setInsuranceValue", insuranceValue);
+  setInsuranceFee({ commit }, insuranceFee: string) {
+    commit("setInsuranceFee", insuranceFee);
   }
 };
 
