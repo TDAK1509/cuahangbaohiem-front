@@ -133,12 +133,25 @@ describe("Page /san-pham/o-to", () => {
       assertAddonRadioDisability(4, true);
       assertAddonRadioDisability(5, true);
     });
+
+    it("enable all radios if 3 < year gap <= 6", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 4;
+      cy.get("@carYear").type(targetYear.toString());
+
+      assertAddonRadioDisability(0, false);
+      assertAddonRadioDisability(1, false);
+      assertAddonRadioDisability(2, false);
+      assertAddonRadioDisability(3, false);
+      assertAddonRadioDisability(4, false);
+      assertAddonRadioDisability(5, false);
+    });
   });
 
   describe.skip("on click calculate button", () => {
     describe.skip("form error handling", () => {
       describe("carValue", () => {
-        it("if car value is empty, shows HTML5 required validation", () => {
+        it("if car value is empty, show HTML5 required validation", () => {
           cy.get("@carValue").should(assertFailedHtml5FormValidation);
         });
 
