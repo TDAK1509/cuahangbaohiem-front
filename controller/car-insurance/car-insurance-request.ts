@@ -40,7 +40,7 @@ export default class CarInsuranceRequestController {
       {
         text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
         value: CarInsuranceAddOn.DKBS_006,
-        disabled: false
+        disabled: yearGap > 15
       },
       {
         text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007),

@@ -35,14 +35,14 @@ describe("CarInsuranceRequestController", () => {
   });
 
   describe("getAddOnRadios()", () => {
-    it("returns basic addon radios if yearGap < 3", () => {
+    it("no radios are disabled if yearGap < 3", () => {
       const expectedAddons = getBasicAddOnRadios();
       const controller = new CarInsuranceRequestController();
       const addons = controller.getAddOnRadios(3);
       expect(addons).toEqual(expectedAddons);
     });
 
-    it("returns basic addon radios if 3 < yearGap <= 6", () => {
+    it("no radios are disabled if 3 < yearGap <= 6", () => {
       const expectedAddons = getBasicAddOnRadios();
       const controller = new CarInsuranceRequestController();
       const addons = controller.getAddOnRadios(4);
@@ -69,6 +69,17 @@ describe("CarInsuranceRequestController", () => {
 
       const controller = new CarInsuranceRequestController();
       const addons = controller.getAddOnRadios(11);
+      expect(addons).toEqual(expectedAddons);
+    });
+
+    it("disable all addons if 15 < yearGap <= 20", () => {
+      const expectedAddons = getBasicAddOnRadios();
+      expectedAddons.forEach((addon) => {
+        addon.disabled = true;
+      });
+
+      const controller = new CarInsuranceRequestController();
+      const addons = controller.getAddOnRadios(16);
       expect(addons).toEqual(expectedAddons);
     });
   });
