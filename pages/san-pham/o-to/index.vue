@@ -39,10 +39,10 @@
         />
 
         <div class="field">
-          <label class="label">Tùy chọn bổ sung</label>
+          <label class="label"> Tùy chọn bổ sung </label>
 
           <div class="control" data-cy="addons">
-            <p v-for="item in addons" :key="item.value">
+            <p v-for="item in addonRadios" :key="item.value">
               <label class="radio" :disabled="item.disabled">
                 <input
                   v-model="addon"
@@ -103,7 +103,7 @@ export default Vue.extend({
   data() {
     return {
       showResult: false,
-      addons: controller.getAddOnRadios(1)
+      addonRadios: controller.getAddOnRadios(1)
     };
   },
 
@@ -132,7 +132,7 @@ export default Vue.extend({
 
     addon: {
       get(): CarInsuranceAddOn[] {
-        return this.$store.state.car.addons;
+        return this.$store.state.car.addon;
       },
       set(newValue: CarInsuranceAddOn) {
         this.$store.dispatch("car/setAddon", newValue);
@@ -146,7 +146,7 @@ export default Vue.extend({
 
   watch: {
     async yearGap() {
-      this.addons = controller.getAddOnRadios(this.yearGap);
+      this.addonRadios = controller.getAddOnRadios(this.yearGap);
       await this.$nextTick();
     }
   },
