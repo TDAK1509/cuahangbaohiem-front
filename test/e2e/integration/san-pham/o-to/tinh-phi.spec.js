@@ -73,6 +73,18 @@ describe("Page /san-pham/o-to", () => {
       cy.get("@addonRadio").eq(4).should("contain", "DKBS_003_006_007");
       cy.get("@addonRadio").eq(5).should("contain", "DKBS_003_006_007_008");
     });
+
+    it("disable all addons if year gap > 20", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 21;
+      cy.get("@carYear").type(targetYear.toString());
+      cy.get("@addonRadio").eq(0).find("input:disabled").should("be.visible");
+      cy.get("@addonRadio").eq(1).find("input:disabled").should("be.visible");
+      cy.get("@addonRadio").eq(2).find("input:disabled").should("be.visible");
+      cy.get("@addonRadio").eq(3).find("input:disabled").should("be.visible");
+      cy.get("@addonRadio").eq(4).find("input:disabled").should("be.visible");
+      cy.get("@addonRadio").eq(5).find("input:disabled").should("be.visible");
+    });
   });
 
   describe.skip("on click calculate button", () => {

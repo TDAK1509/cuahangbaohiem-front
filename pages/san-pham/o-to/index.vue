@@ -43,8 +43,8 @@
 
           <div class="control" data-cy="addons">
             <p v-for="{ text, value } in insuranceAddOns" :key="value">
-              <label class="radio">
-                <input v-model="addon" type="radio" :value="value" />
+              <label class="radio" disabled>
+                <input v-model="addon" type="radio" :value="value" disabled />
                 {{ text }}
               </label>
             </p>
