@@ -78,24 +78,39 @@ describe("Page /san-pham/o-to", () => {
       const thisYear = new Date().getFullYear();
       const targetYear = thisYear - 21;
       cy.get("@carYear").type(targetYear.toString());
-      cy.get("@addonRadio").eq(0).find("input:disabled").should("be.visible");
-      cy.get("@addonRadio").eq(1).find("input:disabled").should("be.visible");
-      cy.get("@addonRadio").eq(2).find("input:disabled").should("be.visible");
-      cy.get("@addonRadio").eq(3).find("input:disabled").should("be.visible");
-      cy.get("@addonRadio").eq(4).find("input:disabled").should("be.visible");
-      cy.get("@addonRadio").eq(5).find("input:disabled").should("be.visible");
+      cy.get("@addonRadio").eq(0).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(1).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(2).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(3).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(4).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(5).find("input").should("have.attr", "disabled");
     });
 
     it("disable all addons if 15 < year gap <= 20", () => {
       const thisYear = new Date().getFullYear();
       const targetYear = thisYear - 16;
       cy.get("@carYear").type(targetYear.toString());
-      cy.get("@addonRadio").eq(0).find("input:disabled").should("be.visible");
-      cy.get("@addonRadio").eq(1).find("input:disabled").should("be.visible");
-      cy.get("@addonRadio").eq(2).find("input:disabled").should("be.visible");
-      cy.get("@addonRadio").eq(3).find("input:disabled").should("be.visible");
-      cy.get("@addonRadio").eq(4).find("input:disabled").should("be.visible");
-      cy.get("@addonRadio").eq(5).find("input:disabled").should("be.visible");
+      cy.get("@addonRadio").eq(0).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(1).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(2).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(3).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(4).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(5).find("input").should("have.attr", "disabled");
+    });
+
+    it("only enable DKBS_006 if 10 < year gap <= 15", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 11;
+      cy.get("@carYear").type(targetYear.toString());
+      cy.get("@addonRadio")
+        .eq(0)
+        .find("input")
+        .should("not.have.attr", "disabled");
+      cy.get("@addonRadio").eq(1).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(2).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(3).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(4).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(5).find("input").should("have.attr", "disabled");
     });
   });
 

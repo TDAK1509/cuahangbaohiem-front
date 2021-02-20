@@ -42,10 +42,15 @@
           <label class="label">Tùy chọn bổ sung</label>
 
           <div class="control" data-cy="addons">
-            <p v-for="{ text, value } in insuranceAddOns" :key="value">
-              <label class="radio" disabled>
-                <input v-model="addon" type="radio" :value="value" disabled />
-                {{ text }}
+            <p v-for="item in addons" :key="item.value">
+              <label class="radio" :disabled="item.disabled">
+                <input
+                  v-model="addon"
+                  type="radio"
+                  :value="item.value"
+                  :disabled="item.disabled"
+                />
+                {{ item.text }}
               </label>
             </p>
           </div>
@@ -82,6 +87,13 @@ import CarInsuranceRequestController, {
 } from "@/controller/car-insurance/car-insurance-request";
 
 const controller = new CarInsuranceRequestController();
+const THIS_YEAR = new Date().getFullYear();
+
+interface AddOnRadio {
+  text: string;
+  value: CarInsuranceAddOn;
+  disabled: boolean;
+}
 
 export default Vue.extend({
   name: "TinhPhiOto",
@@ -91,34 +103,7 @@ export default Vue.extend({
   data() {
     return {
       showResult: false,
-      insuranceAddOns: [
-        {
-          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
-          value: CarInsuranceAddOn.DKBS_006
-        },
-        {
-          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007),
-          value: CarInsuranceAddOn.DKBS_006_007
-        },
-        {
-          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_008),
-          value: CarInsuranceAddOn.DKBS_006_008
-        },
-        {
-          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007_008),
-          value: CarInsuranceAddOn.DKBS_006_007_008
-        },
-        {
-          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007),
-          value: CarInsuranceAddOn.DKBS_003_006_007
-        },
-        {
-          text: controller.getAddOnLabel(
-            CarInsuranceAddOn.DKBS_003_006_007_008
-          ),
-          value: CarInsuranceAddOn.DKBS_003_006_007_008
-        }
-      ]
+      addons: controller.getAddOnRadios(1)
     };
   },
 
@@ -152,6 +137,17 @@ export default Vue.extend({
       set(newValue: CarInsuranceAddOn) {
         this.$store.dispatch("car/setAddon", newValue);
       }
+    },
+
+    yearGap(): number {
+      return THIS_YEAR - parseInt(this.carYear);
+    }
+  },
+
+  watch: {
+    async yearGap() {
+      this.addons = controller.getAddOnRadios(this.yearGap);
+      await this.$nextTick();
     }
   },
 
