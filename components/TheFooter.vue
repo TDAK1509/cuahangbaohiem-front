@@ -2,13 +2,8 @@
   <footer class="footer has-background-dark has-text-white">
     <div class="columns">
       <FooterFirstColumn />
-
-      <div class="column">
-        <h4 class="is-size-5">COLUMN 2</h4>
-      </div>
-      <div class="column">
-        <h4 class="is-size-5">COLUMN 3</h4>
-      </div>
+      <FooterSecondColumn />
+      <FooterThirdColumn />
     </div>
   </footer>
 </template>
