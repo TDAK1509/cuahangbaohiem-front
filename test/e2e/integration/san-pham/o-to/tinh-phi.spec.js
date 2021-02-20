@@ -98,7 +98,7 @@ describe("Page /san-pham/o-to", () => {
       cy.get("@addonRadio").eq(5).find("input").should("have.attr", "disabled");
     });
 
-    it("only enable DKBS_006 if 10 < year gap <= 15", () => {
+    it("only enable first radio if 10 < year gap <= 15", () => {
       const thisYear = new Date().getFullYear();
       const targetYear = thisYear - 11;
       cy.get("@carYear").type(targetYear.toString());
@@ -109,6 +109,30 @@ describe("Page /san-pham/o-to", () => {
       cy.get("@addonRadio").eq(1).find("input").should("have.attr", "disabled");
       cy.get("@addonRadio").eq(2).find("input").should("have.attr", "disabled");
       cy.get("@addonRadio").eq(3).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(4).find("input").should("have.attr", "disabled");
+      cy.get("@addonRadio").eq(5).find("input").should("have.attr", "disabled");
+    });
+
+    it("disable last 2 radios if 6 < year gap <= 10", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 7;
+      cy.get("@carYear").type(targetYear.toString());
+      cy.get("@addonRadio")
+        .eq(0)
+        .find("input")
+        .should("not.have.attr", "disabled");
+      cy.get("@addonRadio")
+        .eq(1)
+        .find("input")
+        .should("not.have.attr", "disabled");
+      cy.get("@addonRadio")
+        .eq(2)
+        .find("input")
+        .should("not.have.attr", "disabled");
+      cy.get("@addonRadio")
+        .eq(3)
+        .find("input")
+        .should("not.have.attr", "disabled");
       cy.get("@addonRadio").eq(4).find("input").should("have.attr", "disabled");
       cy.get("@addonRadio").eq(5).find("input").should("have.attr", "disabled");
     });
