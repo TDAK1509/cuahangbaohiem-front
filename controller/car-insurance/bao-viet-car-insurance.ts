@@ -65,7 +65,7 @@ export default class BaoVietCarInsurance {
 
   private getInsuranceFeeRateForLessThan3YearsThreshold(): number {
     switch (this.addon) {
-      case CarInsuranceAddOn.BASIC:
+      case CarInsuranceAddOn.NONE:
         if (this.isTier1()) return 1.5;
         if (this.isTier2()) return 1.28;
         return 1.13;
@@ -100,7 +100,7 @@ export default class BaoVietCarInsurance {
 
   private getInsuranceFeeRateForFrom3To6Years(): number {
     switch (this.addon) {
-      case CarInsuranceAddOn.BASIC:
+      case CarInsuranceAddOn.NONE:
         if (this.isTier1()) return 1.65;
         if (this.isTier2()) return 1.4;
         return 1.24;
@@ -135,7 +135,7 @@ export default class BaoVietCarInsurance {
 
   private getInsuranceFeeRateForFrom6To10Years(): number {
     switch (this.addon) {
-      case CarInsuranceAddOn.BASIC:
+      case CarInsuranceAddOn.NONE:
         if (this.isTier1()) return 1.8;
         if (this.isTier2()) return 1.53;
         return 1.35;
@@ -161,7 +161,7 @@ export default class BaoVietCarInsurance {
   }
 
   private getInsuranceFeeRateForFrom10To15Years(): number {
-    if (this.addon === CarInsuranceAddOn.BASIC) {
+    if (this.addon === CarInsuranceAddOn.NONE) {
       if (this.isTier1()) return 1.95;
       if (this.isTier2()) return 1.66;
       return 1.46;
@@ -177,7 +177,7 @@ export default class BaoVietCarInsurance {
   }
 
   private getInsuranceFeeRateForFrom15To20Years(): number {
-    if (this.addon === CarInsuranceAddOn.BASIC) {
+    if (this.addon === CarInsuranceAddOn.NONE) {
       if (this.isTier1()) return 2.1;
       if (this.isTier2()) return 1.79;
       return 1.58;
@@ -187,7 +187,7 @@ export default class BaoVietCarInsurance {
   }
 
   private getInsuranceFeeRateForOver20Years(): number {
-    if (this.addon === CarInsuranceAddOn.BASIC) {
+    if (this.addon === CarInsuranceAddOn.NONE) {
       if (this.isTier1()) return 2.25;
       if (this.isTier2()) return 1.91;
       return 1.69;

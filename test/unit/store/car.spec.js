@@ -60,7 +60,7 @@ describe("store/car", () => {
     });
 
     it("setAddon() updates state.addon", () => {
-      expect(_state.addon).toEqual(CarInsuranceAddOn.BASIC);
+      expect(_state.addon).toEqual(CarInsuranceAddOn.NONE);
       mutations.setAddon(_state, CarInsuranceAddOn.DKBS_006);
       expect(_state.addon).toEqual(CarInsuranceAddOn.DKBS_006);
     });

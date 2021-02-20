@@ -19,7 +19,7 @@ describe("class MicCarInsurance", () => {
     it("setCarValue() is working", () => {
       const carValue = 100;
       const carYear = LESS_THAN_3_YEARS;
-      const addon = CarInsuranceAddOn.BASIC;
+      const addon = CarInsuranceAddOn.NONE;
       const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
 
       let expectedCarInsuranceValue = carValue * 1.5;
@@ -36,7 +36,7 @@ describe("class MicCarInsurance", () => {
     it("setCarYear() is working", () => {
       const carValue = 100;
       const carYear = FROM_3_TO_6_YEARS;
-      const addon = CarInsuranceAddOn.BASIC;
+      const addon = CarInsuranceAddOn.NONE;
       const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
 
       const carInsuranceValue1 = micCarInsurance.getInsuranceFee();
@@ -72,7 +72,7 @@ describe("class MicCarInsurance", () => {
         const carYear = LESS_THAN_3_YEARS;
 
         it("if no addon, returns car value * 1.5", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.5;
@@ -132,7 +132,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_3_TO_6_YEARS;
 
         it("if no addon, returns car value * 1.65", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.65;
@@ -192,7 +192,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_6_TO_10_YEARS;
 
         it("if no addon, returns car value * 1.8", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.8;
@@ -252,7 +252,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_10_TO_15_YEARS;
 
         it("if no addon, returns car value * 1.95", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.95;
@@ -312,7 +312,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_15_TO_20_YEARS;
 
         it("if no addon, returns car value * 2.1", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 2.1;
@@ -372,7 +372,7 @@ describe("class MicCarInsurance", () => {
         const carYear = OVER_20_YEARS;
 
         it("if no addon, returns car value * 2.25", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 2.25;
@@ -436,7 +436,7 @@ describe("class MicCarInsurance", () => {
         const carYear = LESS_THAN_3_YEARS;
 
         it("if no addon, returns car value * 1.28", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.28;
@@ -496,7 +496,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_3_TO_6_YEARS;
 
         it("if no addon, returns car value * 1.4", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.4;
@@ -556,7 +556,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_6_TO_10_YEARS;
 
         it("if no addon, returns car value * 1.53", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.53;
@@ -616,7 +616,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_10_TO_15_YEARS;
 
         it("if no addon, returns car value * 1.66", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.66;
@@ -676,7 +676,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_15_TO_20_YEARS;
 
         it("if no addon, returns car value * 1.79", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.79;
@@ -736,7 +736,7 @@ describe("class MicCarInsurance", () => {
         const carYear = OVER_20_YEARS;
 
         it("if no addon, returns car value * 1.91", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.91;
@@ -800,7 +800,7 @@ describe("class MicCarInsurance", () => {
         const carYear = LESS_THAN_3_YEARS;
 
         it("if no addon, returns car value * 1.13", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.13;
@@ -860,7 +860,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_3_TO_6_YEARS;
 
         it("if no addon, returns car value * 1.24", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.24;
@@ -920,7 +920,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_6_TO_10_YEARS;
 
         it("if no addon, returns car value * 1.35", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.35;
@@ -980,7 +980,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_10_TO_15_YEARS;
 
         it("if no addon, returns car value * 1.46", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.46;
@@ -1040,7 +1040,7 @@ describe("class MicCarInsurance", () => {
         const carYear = FROM_15_TO_20_YEARS;
 
         it("if no addon, returns car value * 1.58", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.58;
@@ -1100,7 +1100,7 @@ describe("class MicCarInsurance", () => {
         const carYear = OVER_20_YEARS;
 
         it("if no addon, returns car value * 1.69", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const micCarInsurance = new MicCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = micCarInsurance.getInsuranceFee();
           const expectedCarInsuranceValue = carValue * 1.69;

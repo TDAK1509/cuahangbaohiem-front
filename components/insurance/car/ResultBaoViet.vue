@@ -18,7 +18,7 @@ export default Vue.extend({
 
   data() {
     return {
-      baoViet: new BaoVietCarInsurance(0, 0, CarInsuranceAddOn.BASIC),
+      baoViet: new BaoVietCarInsurance(0, 0, CarInsuranceAddOn.NONE),
       insuranceFee: 0
     };
   },

@@ -18,7 +18,7 @@ export default Vue.extend({
 
   data() {
     return {
-      pvi: new PviCarInsurance(0, 0, CarInsuranceAddOn.BASIC),
+      pvi: new PviCarInsurance(0, 0, CarInsuranceAddOn.NONE),
       insuranceFee: 0
     };
   },

@@ -36,21 +36,21 @@ describe("CarInsuranceRequestController", () => {
 
   describe("getAddOnRadios()", () => {
     it("enable all radios if yearGap < 3", () => {
-      const expectedAddons = getBasicAddOnRadios();
+      const expectedAddons = getDefaultAddOnRadios();
       const controller = new CarInsuranceRequestController();
       const addons = controller.getAddOnRadios(3);
       expect(addons).toEqual(expectedAddons);
     });
 
     it("enable all radios if 3 < yearGap <= 6", () => {
-      const expectedAddons = getBasicAddOnRadios();
+      const expectedAddons = getDefaultAddOnRadios();
       const controller = new CarInsuranceRequestController();
       const addons = controller.getAddOnRadios(4);
       expect(addons).toEqual(expectedAddons);
     });
 
     it("disable the last 2 radios if 6 < yearGap <= 10", () => {
-      const expectedAddons = getBasicAddOnRadios();
+      const expectedAddons = getDefaultAddOnRadios();
       expectedAddons[expectedAddons.length - 1].disabled = true;
       expectedAddons[expectedAddons.length - 2].disabled = true;
 
@@ -59,11 +59,11 @@ describe("CarInsuranceRequestController", () => {
       expect(addons).toEqual(expectedAddons);
     });
 
-    it("only enable BASIC & DKBS_006 if 10 < yearGap <= 15", () => {
-      const expectedAddons = getBasicAddOnRadios();
+    it("only enable NONE & DKBS_006 if 10 < yearGap <= 15", () => {
+      const expectedAddons = getDefaultAddOnRadios();
       expectedAddons.forEach((addon) => {
         if (
-          addon.value !== CarInsuranceAddOn.BASIC &&
+          addon.value !== CarInsuranceAddOn.NONE &&
           addon.value !== CarInsuranceAddOn.DKBS_006
         ) {
           addon.disabled = true;
@@ -75,10 +75,10 @@ describe("CarInsuranceRequestController", () => {
       expect(addons).toEqual(expectedAddons);
     });
 
-    it("only enable BASIC addon if 15 < yearGap <= 20", () => {
-      const expectedAddons = getBasicAddOnRadios();
+    it("only enable NONE addon if 15 < yearGap <= 20", () => {
+      const expectedAddons = getDefaultAddOnRadios();
       expectedAddons.forEach((addon) => {
-        if (addon.value !== CarInsuranceAddOn.BASIC) {
+        if (addon.value !== CarInsuranceAddOn.NONE) {
           addon.disabled = true;
         }
       });
@@ -88,10 +88,10 @@ describe("CarInsuranceRequestController", () => {
       expect(addons).toEqual(expectedAddons);
     });
 
-    it("only enable BASIC addon if yearGap > 20", () => {
-      const expectedAddons = getBasicAddOnRadios();
+    it("only enable NONE addon if yearGap > 20", () => {
+      const expectedAddons = getDefaultAddOnRadios();
       expectedAddons.forEach((addon) => {
-        if (addon.value !== CarInsuranceAddOn.BASIC) {
+        if (addon.value !== CarInsuranceAddOn.NONE) {
           addon.disabled = true;
         }
       });
@@ -103,9 +103,9 @@ describe("CarInsuranceRequestController", () => {
   });
 
   describe("getAddOnLabel()", () => {
-    it("returns '' add on is BASIC", () => {
+    it("returns '' add on is NONE", () => {
       const controller = new CarInsuranceRequestController();
-      const result = controller.getAddOnLabel(CarInsuranceAddOn.BASIC);
+      const result = controller.getAddOnLabel(CarInsuranceAddOn.NONE);
       expect(result).toBe("");
     });
 
@@ -153,13 +153,13 @@ describe("CarInsuranceRequestController", () => {
   });
 });
 
-function getBasicAddOnRadios() {
+function getDefaultAddOnRadios() {
   const controller = new CarInsuranceRequestController();
 
   return [
     {
       text: "Không",
-      value: CarInsuranceAddOn.BASIC,
+      value: CarInsuranceAddOn.NONE,
       disabled: false
     },
     {

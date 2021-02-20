@@ -19,7 +19,7 @@ describe("class BaoVietCarInsurance", () => {
     it("setCarValue() is working", () => {
       const carValue = 100;
       const carYear = LESS_THAN_3_YEARS;
-      const addon = CarInsuranceAddOn.BASIC;
+      const addon = CarInsuranceAddOn.NONE;
       const baoVietCarInsurance = new BaoVietCarInsurance(
         carValue,
         carYear,
@@ -40,7 +40,7 @@ describe("class BaoVietCarInsurance", () => {
     it("setCarYear() is working", () => {
       const carValue = 100;
       const carYear = FROM_3_TO_6_YEARS;
-      const addon = CarInsuranceAddOn.BASIC;
+      const addon = CarInsuranceAddOn.NONE;
       const baoVietCarInsurance = new BaoVietCarInsurance(
         carValue,
         carYear,
@@ -84,7 +84,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = LESS_THAN_3_YEARS;
 
         it("if no addon, returns car value * 1.5", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -172,7 +172,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_3_TO_6_YEARS;
 
         it("if no addon, returns car value * 1.65", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -260,7 +260,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_6_TO_10_YEARS;
 
         it("if no addon, returns car value * 1.8", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -348,7 +348,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_10_TO_15_YEARS;
 
         it("if no addon, returns car value * 1.95", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -436,7 +436,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_15_TO_20_YEARS;
 
         it("if no addon, returns car value * 2.1", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -524,7 +524,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = OVER_20_YEARS;
 
         it("if no addon, returns car value * 2.25", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -616,7 +616,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = LESS_THAN_3_YEARS;
 
         it("if no addon, returns car value * 1.28", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -704,7 +704,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_3_TO_6_YEARS;
 
         it("if no addon, returns car value * 1.4", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -792,7 +792,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_6_TO_10_YEARS;
 
         it("if no addon, returns car value * 1.53", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -880,7 +880,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_10_TO_15_YEARS;
 
         it("if no addon, returns car value * 1.66", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -968,7 +968,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_15_TO_20_YEARS;
 
         it("if no addon, returns car value * 1.79", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -1056,7 +1056,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = OVER_20_YEARS;
 
         it("if no addon, returns car value * 1.91", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -1148,7 +1148,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = LESS_THAN_3_YEARS;
 
         it("if no addon, returns car value * 1.13", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -1236,7 +1236,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_3_TO_6_YEARS;
 
         it("if no addon, returns car value * 1.24", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -1324,7 +1324,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_6_TO_10_YEARS;
 
         it("if no addon, returns car value * 1.35", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -1412,7 +1412,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_10_TO_15_YEARS;
 
         it("if no addon, returns car value * 1.46", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -1500,7 +1500,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = FROM_15_TO_20_YEARS;
 
         it("if no addon, returns car value * 1.58", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,
@@ -1588,7 +1588,7 @@ describe("class BaoVietCarInsurance", () => {
         const carYear = OVER_20_YEARS;
 
         it("if no addon, returns car value * 1.69", () => {
-          const addon = CarInsuranceAddOn.BASIC;
+          const addon = CarInsuranceAddOn.NONE;
           const baoVietCarInsurance = new BaoVietCarInsurance(
             carValue,
             carYear,

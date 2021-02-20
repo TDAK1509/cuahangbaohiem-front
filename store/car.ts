@@ -10,7 +10,7 @@ const controller = new CarInsuranceRequestController();
 export const state = () => ({
   carValue: 0,
   carYear: 0,
-  addon: CarInsuranceAddOn.BASIC,
+  addon: CarInsuranceAddOn.NONE,
   insuranceCompany: "",
   insuranceFee: 0,
   name: "",

@@ -15,7 +15,7 @@ export interface CarInsuranceRequest {
 }
 
 export enum CarInsuranceAddOn {
-  BASIC,
+  NONE,
   DKBS_006,
   DKBS_006_007,
   DKBS_006_008,
@@ -39,7 +39,7 @@ export default class CarInsuranceRequestController {
     return [
       {
         text: "Không",
-        value: CarInsuranceAddOn.BASIC,
+        value: CarInsuranceAddOn.NONE,
         disabled: false
       },
       {

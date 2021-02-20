@@ -18,7 +18,7 @@ export default Vue.extend({
 
   data() {
     return {
-      mic: new MicCarInsurance(0, 0, CarInsuranceAddOn.BASIC),
+      mic: new MicCarInsurance(0, 0, CarInsuranceAddOn.NONE),
       insuranceFee: 0
     };
   },
