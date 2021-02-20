@@ -34,6 +34,15 @@ describe("CarInsuranceRequestController", () => {
     });
   });
 
+  describe("getAddOnRadios()", () => {
+    it("returns basic addon radios if yearGap < 3", () => {
+      const basicAddons = getBasicAddOnRadios();
+      const controller = new CarInsuranceRequestController();
+      const addons = controller.getAddOnRadios(3);
+      expect(basicAddons).toEqual(addons);
+    });
+  });
+
   describe("getAddOnLabel()", () => {
     it("returns '' add on is BASIC", () => {
       const controller = new CarInsuranceRequestController();
@@ -84,3 +93,40 @@ describe("CarInsuranceRequestController", () => {
     });
   });
 });
+
+function getBasicAddOnRadios() {
+  const controller = new CarInsuranceRequestController();
+
+  return [
+    {
+      text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
+      value: CarInsuranceAddOn.DKBS_006,
+      disabled: false
+    },
+    {
+      text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007),
+      value: CarInsuranceAddOn.DKBS_006_007,
+      disabled: false
+    },
+    {
+      text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_008),
+      value: CarInsuranceAddOn.DKBS_006_008,
+      disabled: false
+    },
+    {
+      text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007_008),
+      value: CarInsuranceAddOn.DKBS_006_007_008,
+      disabled: false
+    },
+    {
+      text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007),
+      value: CarInsuranceAddOn.DKBS_003_006_007,
+      disabled: false
+    },
+    {
+      text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007_008),
+      value: CarInsuranceAddOn.DKBS_003_006_007_008,
+      disabled: false
+    }
+  ];
+}

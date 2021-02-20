@@ -35,6 +35,41 @@ export default class CarInsuranceRequestController {
     return CarInsuranceRequestModel.save(requestToSaveToServer);
   }
 
+  public getAddOnRadios(yearGap: number) {
+    return [
+      {
+        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
+        value: CarInsuranceAddOn.DKBS_006,
+        disabled: false
+      },
+      {
+        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007),
+        value: CarInsuranceAddOn.DKBS_006_007,
+        disabled: false
+      },
+      {
+        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006_008),
+        value: CarInsuranceAddOn.DKBS_006_008,
+        disabled: false
+      },
+      {
+        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007_008),
+        value: CarInsuranceAddOn.DKBS_006_007_008,
+        disabled: false
+      },
+      {
+        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007),
+        value: CarInsuranceAddOn.DKBS_003_006_007,
+        disabled: false
+      },
+      {
+        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007_008),
+        value: CarInsuranceAddOn.DKBS_003_006_007_008,
+        disabled: false
+      }
+    ];
+  }
+
   public getAddOnLabel(addon: CarInsuranceAddOn) {
     if (addon === CarInsuranceAddOn.DKBS_006) {
       return "DKBS_006";
