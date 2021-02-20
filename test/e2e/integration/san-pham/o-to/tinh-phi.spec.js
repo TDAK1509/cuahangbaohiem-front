@@ -8,6 +8,7 @@ describe("Page /san-pham/o-to", () => {
     cy.get("[data-cy=car-value]").as("carValue");
     cy.get("[data-cy=car-year]").as("carYear");
     cy.get("[data-cy=addons]").as("addons");
+    cy.get("[data-cy=calculate-button]").as("calculateButton");
   }
 
   describe.skip("tab bar", () => {
@@ -59,7 +60,7 @@ describe("Page /san-pham/o-to", () => {
     });
 
     it("should render Calculate button", () => {
-      getCalculateButton().should("be.visible");
+      cy.get("@calculateButton").should("be.visible");
     });
 
     it("addons should have 6 radios", () => {
@@ -121,14 +122,14 @@ describe("Page /san-pham/o-to", () => {
       it("shows result if car value not empty", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
-        getCalculateButton().click();
+        cy.get("@calculateButton").click();
         assertResultBlockIsRendered();
       });
 
       it("results show 4 insurance brands with correct insurance values and 4 BUY buttons", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
-        getCalculateButton().click();
+        cy.get("@calculateButton").click();
 
         assertPviinsuranceFee("150.000.000");
         assertBaoVietinsuranceFee("150.000.000");
@@ -141,7 +142,7 @@ describe("Page /san-pham/o-to", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
         cy.contains("Option 1").click();
-        getCalculateButton().click();
+        cy.get("@calculateButton").click();
 
         assertPviinsuranceFee("121.000.000");
         assertBaoVietinsuranceFee("121.000.000");
@@ -154,7 +155,7 @@ describe("Page /san-pham/o-to", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
         cy.contains("Option 2").click();
-        getCalculateButton().click();
+        cy.get("@calculateButton").click();
 
         assertPviinsuranceFee("122.000.000");
         assertBaoVietinsuranceFee("122.000.000");
@@ -168,7 +169,7 @@ describe("Page /san-pham/o-to", () => {
         cy.get("@carYear").type("2020");
         cy.contains("Option 1").click();
         cy.contains("Option 2").click();
-        getCalculateButton().click();
+        cy.get("@calculateButton").click();
 
         assertPviinsuranceFee("123.000.000");
         assertBaoVietinsuranceFee("123.000.000");
@@ -181,7 +182,7 @@ describe("Page /san-pham/o-to", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
         cy.contains("Option 1").click();
-        getCalculateButton().click();
+        cy.get("@calculateButton").click();
 
         assertPviinsuranceFee("121.000.000");
         assertBaoVietinsuranceFee("121.000.000");
@@ -191,7 +192,7 @@ describe("Page /san-pham/o-to", () => {
 
         cy.contains("Option 1").click();
         cy.contains("Option 2").click();
-        getCalculateButton().click();
+        cy.get("@calculateButton").click();
         assertPviinsuranceFee("122.000.000");
         assertBaoVietinsuranceFee("122.000.000");
         assertBaoMinhinsuranceFee("122.000.000");
@@ -206,7 +207,7 @@ describe("Page /san-pham/o-to", () => {
       beforeEach(() => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
-        getCalculateButton().click();
+        cy.get("@calculateButton").click();
         getResultBuyButton().first().click();
       });
 
@@ -310,7 +311,7 @@ describe("Page /san-pham/o-to", () => {
       function calculateInsuranceWithAddOns() {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
-        getCalculateButton().click();
+        cy.get("@calculateButton").click();
         getResultBuyButton().first().click();
       }
 
@@ -328,10 +329,6 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 });
-
-function getCalculateButton() {
-  return cy.get("[data-cy=calculate-button]");
-}
 
 function getResultBuyButton() {
   return cy.get("[data-cy=buy-button]");
