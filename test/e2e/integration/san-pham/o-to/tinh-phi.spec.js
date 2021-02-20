@@ -12,7 +12,7 @@ describe("Page /san-pham/o-to", () => {
     cy.get("[data-cy=calculate-button]").as("calculateButton");
   }
 
-  describe.skip("tab bar", () => {
+  describe("tab bar", () => {
     it("should have 5 correct tabs", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").should("be.visible");
       cy.contains("QUYỀN LỢI").should("be.visible");
@@ -167,8 +167,8 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe.skip("on click calculate button", () => {
-    describe.skip("form error handling", () => {
+  describe("on click calculate button", () => {
+    describe("form error handling", () => {
       describe("carValue", () => {
         it("if car value is empty, show HTML5 required validation", () => {
           cy.get("@carValue").should(assertFailedHtml5FormValidation);
@@ -215,78 +215,50 @@ describe("Page /san-pham/o-to", () => {
         cy.get("@carYear").type("2020");
         cy.get("@calculateButton").click();
 
-        assertPviinsuranceFee("150.000.000");
-        assertBaoVietinsuranceFee("150.000.000");
-        assertBaoMinhinsuranceFee("150.000.000");
-        assertMicinsuranceFee("150.000.000");
+        assertPviInsuranceFee("150.000.000");
+        assertBaoVietInsuranceFee("150.000.000");
+        assertBaoMinhInsuranceFee("150.000.000");
+        assertMicInsuranceFee("150.000.000");
         assertResultShows4BuyButtons();
       });
 
-      it.skip("tick first addon shows results with correct value", () => {
+      it("tick DKBS_006_007 addon shows results with correct value", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
-        cy.contains("Option 1").click();
+        cy.get("@addonRadio").eq(2).click();
         cy.get("@calculateButton").click();
 
-        assertPviinsuranceFee("121.000.000");
-        assertBaoVietinsuranceFee("121.000.000");
-        assertBaoMinhinsuranceFee("121.000.000");
-        assertMicinsuranceFee("121.000.000");
+        assertPviInsuranceFee("160.000.000");
+        assertBaoVietInsuranceFee("160.000.000");
+        assertBaoMinhInsuranceFee("160.000.000");
+        assertMicInsuranceFee("160.000.000");
         assertResultShows4BuyButtons();
       });
 
-      it.skip("tick second addon shows results with correct value", () => {
+      it("reselecting addons works", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
-        cy.contains("Option 2").click();
+        cy.get("@addonRadio").eq(2).click();
         cy.get("@calculateButton").click();
 
-        assertPviinsuranceFee("122.000.000");
-        assertBaoVietinsuranceFee("122.000.000");
-        assertBaoMinhinsuranceFee("122.000.000");
-        assertMicinsuranceFee("122.000.000");
-        assertResultShows4BuyButtons();
-      });
-
-      it.skip("tick both addons shows results with correct value", () => {
-        cy.get("@carValue").type("100");
-        cy.get("@carYear").type("2020");
-        cy.contains("Option 1").click();
-        cy.contains("Option 2").click();
-        cy.get("@calculateButton").click();
-
-        assertPviinsuranceFee("123.000.000");
-        assertBaoVietinsuranceFee("123.000.000");
-        assertBaoMinhinsuranceFee("123.000.000");
-        assertMicinsuranceFee("123.000.000");
-        assertResultShows4BuyButtons();
-      });
-
-      it.skip("reselecting addons works", () => {
-        cy.get("@carValue").type("100");
-        cy.get("@carYear").type("2020");
-        cy.contains("Option 1").click();
-        cy.get("@calculateButton").click();
-
-        assertPviinsuranceFee("121.000.000");
-        assertBaoVietinsuranceFee("121.000.000");
-        assertBaoMinhinsuranceFee("121.000.000");
-        assertMicinsuranceFee("121.000.000");
+        assertPviInsuranceFee("160.000.000");
+        assertBaoVietInsuranceFee("160.000.000");
+        assertBaoMinhInsuranceFee("160.000.000");
+        assertMicInsuranceFee("160.000.000");
         assertResultShows4BuyButtons();
 
-        cy.contains("Option 1").click();
-        cy.contains("Option 2").click();
+        cy.get("@addonRadio").eq(0).click();
         cy.get("@calculateButton").click();
-        assertPviinsuranceFee("122.000.000");
-        assertBaoVietinsuranceFee("122.000.000");
-        assertBaoMinhinsuranceFee("122.000.000");
-        assertMicinsuranceFee("122.000.000");
+        assertPviInsuranceFee("150.000.000");
+        assertBaoVietInsuranceFee("150.000.000");
+        assertBaoMinhInsuranceFee("150.000.000");
+        assertMicInsuranceFee("150.000.000");
         assertResultShows4BuyButtons();
       });
     });
   });
 
-  describe.skip("On click BUY button", () => {
+  describe("On click BUY button", () => {
     describe("without addon", () => {
       beforeEach(() => {
         cy.get("@carValue").type("100");
@@ -454,7 +426,7 @@ function assertResultBlockIsRendered() {
   cy.get("[data-cy=result]").should("be.visible");
 }
 
-function assertPviinsuranceFee(value) {
+function assertPviInsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(0)
     .invoke("text")
@@ -462,7 +434,7 @@ function assertPviinsuranceFee(value) {
     .should("include", value);
 }
 
-function assertBaoVietinsuranceFee(value) {
+function assertBaoVietInsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(1)
     .invoke("text")
@@ -470,7 +442,7 @@ function assertBaoVietinsuranceFee(value) {
     .should("include", value);
 }
 
-function assertBaoMinhinsuranceFee(value) {
+function assertBaoMinhInsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(2)
     .invoke("text")
@@ -478,7 +450,7 @@ function assertBaoMinhinsuranceFee(value) {
     .should("include", value);
 }
 
-function assertMicinsuranceFee(value) {
+function assertMicInsuranceFee(value) {
   cy.get("[data-cy=insurance-result]")
     .eq(3)
     .invoke("text")
