@@ -82,6 +82,17 @@ describe("CarInsuranceRequestController", () => {
       const addons = controller.getAddOnRadios(16);
       expect(addons).toEqual(expectedAddons);
     });
+
+    it("disable all addons if yearGap > 20", () => {
+      const expectedAddons = getBasicAddOnRadios();
+      expectedAddons.forEach((addon) => {
+        addon.disabled = true;
+      });
+
+      const controller = new CarInsuranceRequestController();
+      const addons = controller.getAddOnRadios(21);
+      expect(addons).toEqual(expectedAddons);
+    });
   });
 
   describe("getAddOnLabel()", () => {
