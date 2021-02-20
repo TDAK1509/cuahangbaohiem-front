@@ -41,6 +41,13 @@ describe("CarInsuranceRequestController", () => {
       const addons = controller.getAddOnRadios(3);
       expect(basicAddons).toEqual(addons);
     });
+
+    it("returns basic addon radios if 3 < yearGap <= 6", () => {
+      const basicAddons = getBasicAddOnRadios();
+      const controller = new CarInsuranceRequestController();
+      const addons = controller.getAddOnRadios(4);
+      expect(basicAddons).toEqual(addons);
+    });
   });
 
   describe("getAddOnLabel()", () => {
