@@ -64,14 +64,15 @@ describe("Page /san-pham/o-to", () => {
       cy.get("@calculateButton").should("be.visible");
     });
 
-    it("addons should have 6 radios", () => {
-      cy.get("@addonRadio").should("have.length", 6);
-      cy.get("@addonRadio").eq(0).should("contain", "DKBS_006");
-      cy.get("@addonRadio").eq(1).should("contain", "DKBS_006_007");
-      cy.get("@addonRadio").eq(2).should("contain", "DKBS_006_008");
-      cy.get("@addonRadio").eq(3).should("contain", "DKBS_006_007_008");
-      cy.get("@addonRadio").eq(4).should("contain", "DKBS_003_006_007");
-      cy.get("@addonRadio").eq(5).should("contain", "DKBS_003_006_007_008");
+    it("addons should have 7 radios", () => {
+      cy.get("@addonRadio").should("have.length", 7);
+      cy.get("@addonRadio").eq(0).should("contain", "Không");
+      cy.get("@addonRadio").eq(1).should("contain", "DKBS_006");
+      cy.get("@addonRadio").eq(2).should("contain", "DKBS_006_007");
+      cy.get("@addonRadio").eq(3).should("contain", "DKBS_006_008");
+      cy.get("@addonRadio").eq(4).should("contain", "DKBS_006_007_008");
+      cy.get("@addonRadio").eq(5).should("contain", "DKBS_003_006_007");
+      cy.get("@addonRadio").eq(6).should("contain", "DKBS_003_006_007_008");
     });
 
     it("disable all addons if year gap > 20", () => {
@@ -79,12 +80,13 @@ describe("Page /san-pham/o-to", () => {
       const targetYear = thisYear - 21;
       cy.get("@carYear").type(targetYear.toString());
 
-      assertAddonRadioDisability(0, true);
+      assertAddonRadioDisability(0, false);
       assertAddonRadioDisability(1, true);
       assertAddonRadioDisability(2, true);
       assertAddonRadioDisability(3, true);
       assertAddonRadioDisability(4, true);
       assertAddonRadioDisability(5, true);
+      assertAddonRadioDisability(6, true);
     });
 
     function assertAddonRadioDisability(radioIndex, isDisable) {
@@ -100,12 +102,13 @@ describe("Page /san-pham/o-to", () => {
       const targetYear = thisYear - 16;
       cy.get("@carYear").type(targetYear.toString());
 
-      assertAddonRadioDisability(0, true);
+      assertAddonRadioDisability(0, false);
       assertAddonRadioDisability(1, true);
       assertAddonRadioDisability(2, true);
       assertAddonRadioDisability(3, true);
       assertAddonRadioDisability(4, true);
       assertAddonRadioDisability(5, true);
+      assertAddonRadioDisability(6, true);
     });
 
     it("only enable first radio if 10 < year gap <= 15", () => {
@@ -114,7 +117,7 @@ describe("Page /san-pham/o-to", () => {
       cy.get("@carYear").type(targetYear.toString());
 
       assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, true);
+      assertAddonRadioDisability(1, false);
       assertAddonRadioDisability(2, true);
       assertAddonRadioDisability(3, true);
       assertAddonRadioDisability(4, true);
@@ -130,8 +133,9 @@ describe("Page /san-pham/o-to", () => {
       assertAddonRadioDisability(1, false);
       assertAddonRadioDisability(2, false);
       assertAddonRadioDisability(3, false);
-      assertAddonRadioDisability(4, true);
+      assertAddonRadioDisability(4, false);
       assertAddonRadioDisability(5, true);
+      assertAddonRadioDisability(6, true);
     });
 
     it("enable all radios if 3 < year gap <= 6", () => {
@@ -145,6 +149,7 @@ describe("Page /san-pham/o-to", () => {
       assertAddonRadioDisability(3, false);
       assertAddonRadioDisability(4, false);
       assertAddonRadioDisability(5, false);
+      assertAddonRadioDisability(6, false);
     });
 
     it("enable all radios if yearGap <= 3", () => {
@@ -158,6 +163,7 @@ describe("Page /san-pham/o-to", () => {
       assertAddonRadioDisability(3, false);
       assertAddonRadioDisability(4, false);
       assertAddonRadioDisability(5, false);
+      assertAddonRadioDisability(6, false);
     });
   });
 

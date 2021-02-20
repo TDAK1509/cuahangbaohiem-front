@@ -38,6 +38,11 @@ export default class CarInsuranceRequestController {
   public getAddOnRadios(yearGap: number) {
     return [
       {
+        text: "Không",
+        value: CarInsuranceAddOn.BASIC,
+        disabled: false
+      },
+      {
         text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
         value: CarInsuranceAddOn.DKBS_006,
         disabled: yearGap > 15
