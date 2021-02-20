@@ -8,12 +8,8 @@ jest.mock("@/models/car-insurance-request");
 
 describe("CarInsuranceRequestController", () => {
   describe("save()", () => {
-    beforeEach(() => {
+    beforeAll(() => {
       MockDate.set(new Date(2020, 1, 1));
-    });
-
-    afterEach(() => {
-      MockDate.reset();
     });
 
     it("calls CarInsuranceRequestMode.save with correct argument", () => {
