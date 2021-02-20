@@ -1,6 +1,10 @@
 describe("Page /san-pham/o-to", () => {
   beforeEach(() => {
     cy.visit("/san-pham/o-to");
+
+    cy.get("[data-cy=car-value]").as("carValue");
+    cy.get("[data-cy=car-year]").as("carYear");
+    cy.get("[data-cy=addons]").as("addons");
   });
 
   describe.skip("tab bar", () => {
@@ -44,25 +48,38 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe.skip("rendering", () => {
+  describe("rendering", () => {
     it("should render enough inputs", () => {
-      cy.get("[data-cy=car-value]").should("be.visible");
-      getCarYearField().should("be.visible");
-      cy.get("[data-cy=addons]").should("be.visible");
+      cy.get("@carValue").should("be.visible");
+      cy.get("@carYear").should("be.visible");
+      cy.get("@addons").should("be.visible");
     });
 
     it("should render Calculate button", () => {
       getCalculateButton().should("be.visible");
     });
 
-    it("addons should have 1 checkboxes", () => {
-      cy.get("[data-cy=addons]")
-        .get("input[type=checkbox]")
-        .should("have.length", 1);
+    it("addons should have 6 radios", () => {
+      cy.get("@addons").get("input[type=radio]").should("have.length", 6);
+      cy.get("@addons").find(".radio").eq(0).should("contain", "DKBS_006");
+      cy.get("@addons").find(".radio").eq(1).should("contain", "DKBS_006_007");
+      cy.get("@addons").find(".radio").eq(2).should("contain", "DKBS_006_008");
+      cy.get("@addons")
+        .find(".radio")
+        .eq(3)
+        .should("contain", "DKBS_006_007_008");
+      cy.get("@addons")
+        .find(".radio")
+        .eq(4)
+        .should("contain", "DKBS_003_006_007");
+      cy.get("@addons")
+        .find(".radio")
+        .eq(5)
+        .should("contain", "DKBS_003_006_007_008");
     });
   });
 
-  describe("on click calculate button", () => {
+  describe.skip("on click calculate button", () => {
     describe.skip("form error handling", () => {
       describe("carValue", () => {
         it("if car value is empty, shows HTML5 required validation", () => {
@@ -181,7 +198,7 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe("On click BUY button", () => {
+  describe.skip("On click BUY button", () => {
     describe("without addon", () => {
       beforeEach(() => {
         getCarValueField().type("100");
@@ -315,6 +332,10 @@ function getCarValueField() {
 
 function getCarYearField() {
   return cy.get("[data-cy=car-year]");
+}
+
+function getAddOns() {
+  return cy.get("[data-cy=addons]");
 }
 
 function getCalculateButton() {

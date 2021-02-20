@@ -43,8 +43,8 @@
 
           <div class="control" data-cy="addons">
             <p v-for="{ text, value } in insuranceAddOns" :key="value">
-              <label class="checkbox">
-                <input v-model="addons" type="checkbox" :value="value" />
+              <label class="radio">
+                <input v-model="addon" type="radio" :value="value" />
                 {{ text }}
               </label>
             </p>
@@ -95,6 +95,28 @@ export default Vue.extend({
         {
           text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
           value: CarInsuranceAddOn.DKBS_006
+        },
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007),
+          value: CarInsuranceAddOn.DKBS_006_007
+        },
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_008),
+          value: CarInsuranceAddOn.DKBS_006_008
+        },
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007_008),
+          value: CarInsuranceAddOn.DKBS_006_007_008
+        },
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007),
+          value: CarInsuranceAddOn.DKBS_003_006_007
+        },
+        {
+          text: controller.getAddOnLabel(
+            CarInsuranceAddOn.DKBS_003_006_007_008
+          ),
+          value: CarInsuranceAddOn.DKBS_003_006_007_008
         }
       ]
     };
@@ -123,12 +145,12 @@ export default Vue.extend({
       }
     },
 
-    addons: {
+    addon: {
       get(): CarInsuranceAddOn[] {
         return this.$store.state.car.addons;
       },
-      set(newValue: CarInsuranceAddOn[]) {
-        this.$store.dispatch("car/setAddons", newValue);
+      set(newValue: CarInsuranceAddOn) {
+        this.$store.dispatch("car/setAddon", newValue);
       }
     }
   },
