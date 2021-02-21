@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TheFooter.vue matches snapshot 1`] = `
+<footer
+  class="footer has-background-dark has-text-white"
+>
+  <div
+    class="columns"
+  >
+    <footerfirstcolumn />
+     
+    <footersecondcolumn />
+     
+    <footerthirdcolumn />
+  </div>
+</footer>
+`;
