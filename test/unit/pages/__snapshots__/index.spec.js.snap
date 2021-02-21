@@ -2,7 +2,7 @@
 
 exports[`pages/index.vue matches snapshot 1`] = `
 <div
-  class="container"
+  class="home container"
 >
   <slider
     animation="fade"
