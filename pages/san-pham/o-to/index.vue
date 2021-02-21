@@ -131,6 +131,12 @@ export default Vue.extend({
       }
     },
 
+    isAddonValid(): boolean {
+      return (
+        this.addonRadios.findIndex((addon) => this.addon === addon.value) > -1
+      );
+    },
+
     yearGap(): number {
       return THIS_YEAR - parseInt(this.carYear);
     },
@@ -144,6 +150,12 @@ export default Vue.extend({
     async yearGap() {
       this.addonRadios = controller.getAddOnRadios(this.yearGap);
       await this.$nextTick();
+    },
+
+    isAddonValid() {
+      if (!this.isAddonValid) {
+        this.addon = CarInsuranceAddOn.NONE;
+      }
     }
   },
 

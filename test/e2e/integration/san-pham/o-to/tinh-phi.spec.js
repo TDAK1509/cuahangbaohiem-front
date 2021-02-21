@@ -395,7 +395,7 @@ describe("Page /san-pham/o-to", () => {
           cy.contains("carValue: 100000000").should("be.visible");
           cy.contains(`carYear: ${yearNotHavingAddons}`).should("be.visible");
           cy.contains("addon:").should("be.visible");
-          cy.contains("insuranceFee: 1500000").should("be.visible");
+          cy.contains("insuranceFee: 2250000").should("be.visible");
         });
       });
     });
