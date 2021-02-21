@@ -10,7 +10,7 @@ describe("Page /san-pham/o-to", () => {
     cy.get("[data-cy=calculate-button]").as("calculateButton");
   }
 
-  describe.skip("tab bar", () => {
+  describe("tab bar", () => {
     it("should have 5 correct tabs", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").should("be.visible");
       cy.contains("QUYỀN LỢI").should("be.visible");
@@ -51,7 +51,7 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe.skip("rendering", () => {
+  describe("rendering", () => {
     it("shows input car value and year, calculate button, NOT show addons", () => {
       cy.get("@carValue").should("be.visible");
       cy.get("@carYear").should("be.visible");
@@ -140,7 +140,7 @@ describe("Page /san-pham/o-to", () => {
   });
 
   describe("on click calculate button", () => {
-    describe.skip("form error handling", () => {
+    describe("form error handling", () => {
       describe("carValue", () => {
         it("if car value is empty, show HTML5 required validation", () => {
           cy.get("@carValue").should(assertFailedHtml5FormValidation);
@@ -174,7 +174,7 @@ describe("Page /san-pham/o-to", () => {
       });
     });
 
-    describe.skip("form valid handling", () => {
+    describe("form valid handling", () => {
       it("shows result if car value not empty", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
@@ -231,7 +231,7 @@ describe("Page /san-pham/o-to", () => {
   });
 
   describe("On click BUY button", () => {
-    describe.skip("without addon", () => {
+    describe("without addon", () => {
       beforeEach(() => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
