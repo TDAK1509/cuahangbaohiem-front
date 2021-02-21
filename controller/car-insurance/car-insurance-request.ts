@@ -24,6 +24,11 @@ export enum CarInsuranceAddOn {
   DKBS_003_006_007_008
 }
 
+export interface AddOnRadio {
+  text: string;
+  value: CarInsuranceAddOn;
+}
+
 export default class CarInsuranceRequestController {
   public save(requestFromClient: CarInsuranceRequest) {
     const requestToSaveToServer: RawCarInsuranceRequest = {
@@ -35,42 +40,55 @@ export default class CarInsuranceRequestController {
     return CarInsuranceRequestModel.save(requestToSaveToServer);
   }
 
-  public getAddOnRadios(yearGap: number) {
+  public getAddOnRadios(yearGap: number | null = null): AddOnRadio[] {
+    if (yearGap === null || yearGap > 15) {
+      return [];
+    }
+
+    const radios = this.getAllAddonRadios();
+
+    if (yearGap > 6 && yearGap <= 10) {
+      radios.pop();
+      radios.pop();
+      return radios;
+    }
+
+    if (yearGap > 10 && yearGap <= 15) {
+      return [radios[0], radios[1]];
+    }
+
+    return radios;
+  }
+
+  private getAllAddonRadios(): AddOnRadio[] {
     return [
       {
         text: "Không",
-        value: CarInsuranceAddOn.NONE,
-        disabled: false
+        value: CarInsuranceAddOn.NONE
       },
       {
         text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
-        value: CarInsuranceAddOn.DKBS_006,
-        disabled: yearGap > 15
+        value: CarInsuranceAddOn.DKBS_006
       },
       {
         text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007),
-        value: CarInsuranceAddOn.DKBS_006_007,
-        disabled: yearGap > 10
+        value: CarInsuranceAddOn.DKBS_006_007
       },
       {
         text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006_008),
-        value: CarInsuranceAddOn.DKBS_006_008,
-        disabled: yearGap > 10
+        value: CarInsuranceAddOn.DKBS_006_008
       },
       {
         text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007_008),
-        value: CarInsuranceAddOn.DKBS_006_007_008,
-        disabled: yearGap > 10
+        value: CarInsuranceAddOn.DKBS_006_007_008
       },
       {
         text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007),
-        value: CarInsuranceAddOn.DKBS_003_006_007,
-        disabled: yearGap > 6
+        value: CarInsuranceAddOn.DKBS_003_006_007
       },
       {
         text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007_008),
-        value: CarInsuranceAddOn.DKBS_003_006_007_008,
-        disabled: yearGap > 6
+        value: CarInsuranceAddOn.DKBS_003_006_007_008
       }
     ];
   }
