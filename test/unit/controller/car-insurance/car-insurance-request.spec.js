@@ -31,70 +31,81 @@ describe("CarInsuranceRequestController", () => {
   });
 
   describe("getAddOnRadios()", () => {
-    it("enable all radios if yearGap < 3", () => {
-      const expectedAddons = getDefaultAddOnRadios();
+    it("returns empty array if yearGap is null", () => {
       const controller = new CarInsuranceRequestController();
-      const addons = controller.getAddOnRadios(3);
+      const addons = controller.getAddOnRadios(null);
+      expect(addons).toEqual([]);
+    });
+
+    it("returns all options if yearGap <= 3", () => {
+      const controller = new CarInsuranceRequestController();
+      const addons = controller.getAddOnRadios(2);
+      const expectedAddons = getAllAddOnRadios();
       expect(addons).toEqual(expectedAddons);
     });
 
-    it("enable all radios if 3 < yearGap <= 6", () => {
-      const expectedAddons = getDefaultAddOnRadios();
+    it("returns all options if 3 < yearGap <= 6", () => {
       const controller = new CarInsuranceRequestController();
       const addons = controller.getAddOnRadios(4);
+      const expectedAddons = getAllAddOnRadios();
       expect(addons).toEqual(expectedAddons);
     });
 
-    it("disable the last 2 radios if 6 < yearGap <= 10", () => {
-      const expectedAddons = getDefaultAddOnRadios();
-      expectedAddons[expectedAddons.length - 1].disabled = true;
-      expectedAddons[expectedAddons.length - 2].disabled = true;
+    it("returns all options if 3 < yearGap <= 6", () => {
+      const controller = new CarInsuranceRequestController();
+      const addons = controller.getAddOnRadios(4);
+      const expectedAddons = getAllAddOnRadios();
+      expect(addons).toEqual(expectedAddons);
+    });
 
+    it("only returns NONE and DKBS_6 options if 6 < yearGap <= 10", () => {
       const controller = new CarInsuranceRequestController();
       const addons = controller.getAddOnRadios(7);
+      const expectedAddons = [
+        {
+          text: "Không",
+          value: CarInsuranceAddOn.NONE
+        },
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
+          value: CarInsuranceAddOn.DKBS_006
+        },
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007),
+          value: CarInsuranceAddOn.DKBS_006_007
+        },
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_008),
+          value: CarInsuranceAddOn.DKBS_006_008
+        },
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007_008),
+          value: CarInsuranceAddOn.DKBS_006_007_008
+        }
+      ];
       expect(addons).toEqual(expectedAddons);
     });
 
-    it("only enable NONE & DKBS_006 if 10 < yearGap <= 15", () => {
-      const expectedAddons = getDefaultAddOnRadios();
-      expectedAddons.forEach((addon) => {
-        if (
-          addon.value !== CarInsuranceAddOn.NONE &&
-          addon.value !== CarInsuranceAddOn.DKBS_006
-        ) {
-          addon.disabled = true;
-        }
-      });
-
+    it("only returns NONE and DKBS_6 options if 10 < yearGap <= 15", () => {
       const controller = new CarInsuranceRequestController();
       const addons = controller.getAddOnRadios(11);
+      const expectedAddons = [
+        {
+          text: "Không",
+          value: CarInsuranceAddOn.NONE
+        },
+        {
+          text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
+          value: CarInsuranceAddOn.DKBS_006
+        }
+      ];
       expect(addons).toEqual(expectedAddons);
     });
 
-    it("only enable NONE addon if 15 < yearGap <= 20", () => {
-      const expectedAddons = getDefaultAddOnRadios();
-      expectedAddons.forEach((addon) => {
-        if (addon.value !== CarInsuranceAddOn.NONE) {
-          addon.disabled = true;
-        }
-      });
-
+    it("returns empty array if yearGap > 15", () => {
       const controller = new CarInsuranceRequestController();
       const addons = controller.getAddOnRadios(16);
-      expect(addons).toEqual(expectedAddons);
-    });
-
-    it("only enable NONE addon if yearGap > 20", () => {
-      const expectedAddons = getDefaultAddOnRadios();
-      expectedAddons.forEach((addon) => {
-        if (addon.value !== CarInsuranceAddOn.NONE) {
-          addon.disabled = true;
-        }
-      });
-
-      const controller = new CarInsuranceRequestController();
-      const addons = controller.getAddOnRadios(21);
-      expect(addons).toEqual(expectedAddons);
+      expect(addons).toEqual([]);
     });
   });
 
@@ -149,44 +160,37 @@ describe("CarInsuranceRequestController", () => {
   });
 });
 
-function getDefaultAddOnRadios() {
+function getAllAddOnRadios() {
   const controller = new CarInsuranceRequestController();
 
   return [
     {
       text: "Không",
-      value: CarInsuranceAddOn.NONE,
-      disabled: false
+      value: CarInsuranceAddOn.NONE
     },
     {
       text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
-      value: CarInsuranceAddOn.DKBS_006,
-      disabled: false
+      value: CarInsuranceAddOn.DKBS_006
     },
     {
       text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007),
-      value: CarInsuranceAddOn.DKBS_006_007,
-      disabled: false
+      value: CarInsuranceAddOn.DKBS_006_007
     },
     {
       text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_008),
-      value: CarInsuranceAddOn.DKBS_006_008,
-      disabled: false
+      value: CarInsuranceAddOn.DKBS_006_008
     },
     {
       text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007_008),
-      value: CarInsuranceAddOn.DKBS_006_007_008,
-      disabled: false
+      value: CarInsuranceAddOn.DKBS_006_007_008
     },
     {
       text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007),
-      value: CarInsuranceAddOn.DKBS_003_006_007,
-      disabled: false
+      value: CarInsuranceAddOn.DKBS_003_006_007
     },
     {
       text: controller.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007_008),
-      value: CarInsuranceAddOn.DKBS_003_006_007_008,
-      disabled: false
+      value: CarInsuranceAddOn.DKBS_003_006_007_008
     }
   ];
 }

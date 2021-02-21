@@ -39,21 +39,18 @@
         />
 
         <div class="field">
-          <label class="label"> Tùy chọn bổ sung </label>
+          <label class="label">Điều kiện bổ sung</label>
 
-          <div class="control" data-cy="addons">
+          <div v-if="hasRadios" class="control" data-cy="addons">
             <p v-for="item in addonRadios" :key="item.value">
-              <label class="radio" :disabled="item.disabled">
-                <input
-                  v-model="addon"
-                  type="radio"
-                  :value="item.value"
-                  :disabled="item.disabled"
-                />
+              <label class="radio">
+                <input v-model="addon" type="radio" :value="item.value" />
                 {{ item.text }}
               </label>
             </p>
           </div>
+
+          <p v-else>Tình trạng xe của bạn không có hỗ trợ điều kiện bổ sung.</p>
         </div>
 
         <div class="field mt-5">
@@ -83,17 +80,12 @@
 <script lang="ts">
 import Vue from "vue";
 import CarInsuranceRequestController, {
-  CarInsuranceAddOn
+  CarInsuranceAddOn,
+  AddOnRadio
 } from "@/controller/car-insurance/car-insurance-request";
 
 const controller = new CarInsuranceRequestController();
 const THIS_YEAR = new Date().getFullYear();
-
-interface AddOnRadio {
-  text: string;
-  value: CarInsuranceAddOn;
-  disabled: boolean;
-}
 
 export default Vue.extend({
   name: "TinhPhiOto",
@@ -103,7 +95,7 @@ export default Vue.extend({
   data() {
     return {
       showResult: false,
-      addonRadios: controller.getAddOnRadios(1)
+      addonRadios: [] as AddOnRadio[]
     };
   },
 
@@ -139,8 +131,18 @@ export default Vue.extend({
       }
     },
 
+    isAddonValid(): boolean {
+      return (
+        this.addonRadios.findIndex((addon) => this.addon === addon.value) > -1
+      );
+    },
+
     yearGap(): number {
       return THIS_YEAR - parseInt(this.carYear);
+    },
+
+    hasRadios(): boolean {
+      return this.addonRadios.length > 0;
     }
   },
 
@@ -148,6 +150,12 @@ export default Vue.extend({
     async yearGap() {
       this.addonRadios = controller.getAddOnRadios(this.yearGap);
       await this.$nextTick();
+    },
+
+    isAddonValid() {
+      if (!this.isAddonValid) {
+        this.addon = CarInsuranceAddOn.NONE;
+      }
     }
   },
 

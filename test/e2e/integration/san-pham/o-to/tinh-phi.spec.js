@@ -7,8 +7,6 @@ describe("Page /san-pham/o-to", () => {
   function initAliases() {
     cy.get("[data-cy=car-value]").as("carValue");
     cy.get("[data-cy=car-year]").as("carYear");
-    cy.get("[data-cy=addons]").as("addons");
-    cy.get("@addons").find(".radio").as("addonRadio");
     cy.get("[data-cy=calculate-button]").as("calculateButton");
   }
 
@@ -54,116 +52,90 @@ describe("Page /san-pham/o-to", () => {
   });
 
   describe("rendering", () => {
-    it("should render enough inputs", () => {
+    it("shows input car value and year, calculate button, NOT show addons", () => {
       cy.get("@carValue").should("be.visible");
       cy.get("@carYear").should("be.visible");
-      cy.get("@addons").should("be.visible");
-    });
-
-    it("should render Calculate button", () => {
+      cy.contains("Điều kiện bổ sung").should("be.visible");
+      assertNoAddOnMessageIsRendered();
       cy.get("@calculateButton").should("be.visible");
     });
 
-    it("addons should have 7 radios", () => {
-      cy.get("@addonRadio").should("have.length", 7);
-      cy.get("@addonRadio").eq(0).should("contain", "Không");
-      cy.get("@addonRadio").eq(1).should("contain", "DKBS_006");
-      cy.get("@addonRadio").eq(2).should("contain", "DKBS_006_007");
-      cy.get("@addonRadio").eq(3).should("contain", "DKBS_006_008");
-      cy.get("@addonRadio").eq(4).should("contain", "DKBS_006_007_008");
-      cy.get("@addonRadio").eq(5).should("contain", "DKBS_003_006_007");
-      cy.get("@addonRadio").eq(6).should("contain", "DKBS_003_006_007_008");
-    });
-
-    it("disable all addons if year gap > 20", () => {
-      const thisYear = new Date().getFullYear();
-      const targetYear = thisYear - 21;
-      cy.get("@carYear").type(targetYear.toString());
-
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, true);
-      assertAddonRadioDisability(2, true);
-      assertAddonRadioDisability(3, true);
-      assertAddonRadioDisability(4, true);
-      assertAddonRadioDisability(5, true);
-      assertAddonRadioDisability(6, true);
-    });
-
-    function assertAddonRadioDisability(radioIndex, isDisable) {
-      const assertText = isDisable ? "have.attr" : "not.have.attr";
-      cy.get("@addonRadio")
-        .eq(radioIndex)
-        .find("input")
-        .should(assertText, "disabled");
+    function assertNoAddOnMessageIsRendered() {
+      getAddOns().should("not.exist");
+      cy.contains(
+        "Tình trạng xe của bạn không có hỗ trợ điều kiện bổ sung"
+      ).should("be.visible");
     }
 
-    it("disable all addons if 15 < year gap <= 20", () => {
-      const thisYear = new Date().getFullYear();
-      const targetYear = thisYear - 16;
-      cy.get("@carYear").type(targetYear.toString());
-
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, true);
-      assertAddonRadioDisability(2, true);
-      assertAddonRadioDisability(3, true);
-      assertAddonRadioDisability(4, true);
-      assertAddonRadioDisability(5, true);
-      assertAddonRadioDisability(6, true);
-    });
-
-    it("only enable first radio if 10 < year gap <= 15", () => {
-      const thisYear = new Date().getFullYear();
-      const targetYear = thisYear - 11;
-      cy.get("@carYear").type(targetYear.toString());
-
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, false);
-      assertAddonRadioDisability(2, true);
-      assertAddonRadioDisability(3, true);
-      assertAddonRadioDisability(4, true);
-      assertAddonRadioDisability(5, true);
-    });
-
-    it("disable last 2 radios if 6 < year gap <= 10", () => {
-      const thisYear = new Date().getFullYear();
-      const targetYear = thisYear - 7;
-      cy.get("@carYear").type(targetYear.toString());
-
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, false);
-      assertAddonRadioDisability(2, false);
-      assertAddonRadioDisability(3, false);
-      assertAddonRadioDisability(4, false);
-      assertAddonRadioDisability(5, true);
-      assertAddonRadioDisability(6, true);
-    });
-
-    it("enable all radios if 3 < year gap <= 6", () => {
+    it("show all radios if 3 < year gap <= 6", () => {
       const thisYear = new Date().getFullYear();
       const targetYear = thisYear - 4;
       cy.get("@carYear").type(targetYear.toString());
+      getAddOns().should("be.visible");
 
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, false);
-      assertAddonRadioDisability(2, false);
-      assertAddonRadioDisability(3, false);
-      assertAddonRadioDisability(4, false);
-      assertAddonRadioDisability(5, false);
-      assertAddonRadioDisability(6, false);
+      getAddOnRadios().should("have.length", 7);
+      getAddOnRadios().eq(0).should("contain", "Không");
+      getAddOnRadios().eq(1).should("contain", "DKBS_006");
+      getAddOnRadios().eq(2).should("contain", "DKBS_006_007");
+      getAddOnRadios().eq(3).should("contain", "DKBS_006_008");
+      getAddOnRadios().eq(4).should("contain", "DKBS_006_007_008");
+      getAddOnRadios().eq(5).should("contain", "DKBS_003_006_007");
+      getAddOnRadios().eq(6).should("contain", "DKBS_003_006_007_008");
     });
 
-    it("enable all radios if yearGap <= 3", () => {
+    it("shows all radios if yearGap <= 3", () => {
       const thisYear = new Date().getFullYear();
       const targetYear = thisYear - 1;
       cy.get("@carYear").type(targetYear.toString());
+      getAddOns().should("be.visible");
 
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, false);
-      assertAddonRadioDisability(2, false);
-      assertAddonRadioDisability(3, false);
-      assertAddonRadioDisability(4, false);
-      assertAddonRadioDisability(5, false);
-      assertAddonRadioDisability(6, false);
+      getAddOnRadios().should("have.length", 7);
+      getAddOnRadios().eq(0).should("contain", "Không");
+      getAddOnRadios().eq(1).should("contain", "DKBS_006");
+      getAddOnRadios().eq(2).should("contain", "DKBS_006_007");
+      getAddOnRadios().eq(3).should("contain", "DKBS_006_008");
+      getAddOnRadios().eq(4).should("contain", "DKBS_006_007_008");
+      getAddOnRadios().eq(5).should("contain", "DKBS_003_006_007");
+      getAddOnRadios().eq(6).should("contain", "DKBS_003_006_007_008");
+    });
+
+    it("shows no-addon message if year gap > 20", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 21;
+      cy.get("@carYear").type(targetYear.toString());
+      assertNoAddOnMessageIsRendered();
+    });
+
+    it("shows no-addon message if 15 < year gap <= 20", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 16;
+      cy.get("@carYear").type(targetYear.toString());
+      assertNoAddOnMessageIsRendered();
+    });
+
+    it("only shows NONE and DKBS_6 radios if 10 < year gap <= 15", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 11;
+      cy.get("@carYear").type(targetYear.toString());
+      getAddOns().should("be.visible");
+
+      getAddOnRadios().should("have.length", 2);
+      getAddOnRadios().eq(0).should("contain", "Không");
+      getAddOnRadios().eq(1).should("contain", "DKBS_006");
+    });
+
+    it("shows 5 radios if 6 < year gap <= 10", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 7;
+      cy.get("@carYear").type(targetYear.toString());
+      getAddOns().should("be.visible");
+
+      getAddOnRadios().should("have.length", 5);
+      getAddOnRadios().eq(0).should("contain", "Không");
+      getAddOnRadios().eq(1).should("contain", "DKBS_006");
+      getAddOnRadios().eq(2).should("contain", "DKBS_006_007");
+      getAddOnRadios().eq(3).should("contain", "DKBS_006_008");
+      getAddOnRadios().eq(4).should("contain", "DKBS_006_007_008");
     });
   });
 
@@ -225,7 +197,7 @@ describe("Page /san-pham/o-to", () => {
       it("tick DKBS_006_007 addon shows results with correct value", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
-        cy.get("@addonRadio").eq(2).click();
+        getAddOnRadios().eq(2).click();
         cy.get("@calculateButton").click();
 
         assertPviInsuranceFee("1.600.000");
@@ -238,7 +210,7 @@ describe("Page /san-pham/o-to", () => {
       it("reselecting addons works", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
-        cy.get("@addonRadio").eq(2).click();
+        getAddOnRadios().eq(2).click();
         cy.get("@calculateButton").click();
 
         assertPviInsuranceFee("1.600.000");
@@ -247,7 +219,7 @@ describe("Page /san-pham/o-to", () => {
         assertMicInsuranceFee("160.000.000");
         assertResultShows4BuyButtons();
 
-        cy.get("@addonRadio").eq(0).click();
+        getAddOnRadios().eq(0).click();
         cy.get("@calculateButton").click();
         assertPviInsuranceFee("1.500.000");
         assertBaoVietInsuranceFee("150.000.000");
@@ -352,39 +324,91 @@ describe("Page /san-pham/o-to", () => {
       });
     });
 
-    describe("form succeeds with addon", () => {
-      it("shows success message and clear inputs", () => {
-        calculateInsuranceWithAddOns();
-        getPopupName().type("Son Tung MTP");
-        getPopupEmail().type("sontung@gmail.com");
-        getPopupPhone().type("111222333");
-        getPopupBuyButton().click();
-        cy.contains(
-          "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
-        ).should("be.visible");
+    describe("with addon", () => {
+      const thisYear = new Date().getFullYear();
+
+      describe("without changing car year", () => {
+        const targetYear = thisYear - 1;
+
+        it("shows success message and clear inputs", () => {
+          calculateInsuranceFeeWithAddOns();
+          getPopupName().type("Son Tung MTP");
+          getPopupEmail().type("sontung@gmail.com");
+          getPopupPhone().type("111222333");
+          getPopupBuyButton().click();
+          cy.contains(
+            "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
+          ).should("be.visible");
+        });
+
+        function calculateInsuranceFeeWithAddOns() {
+          cy.get("@carValue").type("100");
+          cy.get("@carYear").type(targetYear.toString());
+          cy.get("@calculateButton").click();
+          getResultBuyButton().first().click();
+        }
+
+        it("form request is saved to firebase", () => {
+          cy.visit("/san-pham/o-to/test");
+          cy.contains("name: Son Tung MTP").should("be.visible");
+          cy.contains("email: sontung@gmail.com").should("be.visible");
+          cy.contains("phone: 111222333").should("be.visible");
+          cy.contains("insuranceCompany: PVI").should("be.visible");
+          cy.contains("carValue: 100000000").should("be.visible");
+          cy.contains(`carYear: ${targetYear}`).should("be.visible");
+          cy.contains("addon:").should("be.visible");
+          cy.contains("insuranceFee: 1500000").should("be.visible");
+        });
       });
 
-      function calculateInsuranceWithAddOns() {
-        cy.get("@carValue").type("100");
-        cy.get("@carYear").type("2020");
-        cy.get("@calculateButton").click();
-        getResultBuyButton().first().click();
-      }
+      describe("select addon and change car year", () => {
+        const yearHavingAddons = thisYear - 1;
+        const yearNotHavingAddons = thisYear - 30;
 
-      it("form request is saved to firebase", () => {
-        cy.visit("/san-pham/o-to/test");
-        cy.contains("name: Son Tung MTP").should("be.visible");
-        cy.contains("email: sontung@gmail.com").should("be.visible");
-        cy.contains("phone: 111222333").should("be.visible");
-        cy.contains("insuranceCompany: PVI").should("be.visible");
-        cy.contains("carValue: 100000000").should("be.visible");
-        cy.contains("carYear: 2020").should("be.visible");
-        cy.contains("addon:").should("be.visible");
-        cy.contains("insuranceFee: 1500000").should("be.visible");
+        it("select addons, then change car year, final result does not save addon", () => {
+          cy.get("@carValue").type("100");
+          selectAddonAndChangeCarYearToMakeItDisappear();
+          cy.get("@calculateButton").click();
+          getResultBuyButton().first().click();
+
+          getPopupName().type("Son Tung MTP");
+          getPopupEmail().type("sontung@gmail.com");
+          getPopupPhone().type("111222333");
+          getPopupBuyButton().click();
+          cy.contains(
+            "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
+          ).should("be.visible");
+        });
+
+        function selectAddonAndChangeCarYearToMakeItDisappear() {
+          cy.get("@carYear").type(yearHavingAddons.toString());
+          getAddOnRadios().eq(4).click();
+          cy.get("@carYear").clear().type(yearNotHavingAddons.toString());
+        }
+
+        it("form request is saved to firebase", () => {
+          cy.visit("/san-pham/o-to/test");
+          cy.contains("name: Son Tung MTP").should("be.visible");
+          cy.contains("email: sontung@gmail.com").should("be.visible");
+          cy.contains("phone: 111222333").should("be.visible");
+          cy.contains("insuranceCompany: PVI").should("be.visible");
+          cy.contains("carValue: 100000000").should("be.visible");
+          cy.contains(`carYear: ${yearNotHavingAddons}`).should("be.visible");
+          cy.contains("addon:").should("be.visible");
+          cy.contains("insuranceFee: 2250000").should("be.visible");
+        });
       });
     });
   });
 });
+
+function getAddOns() {
+  return cy.get("[data-cy=addons]");
+}
+
+function getAddOnRadios() {
+  return getAddOns().find(".radio");
+}
 
 function getResultBuyButton() {
   return cy.get("[data-cy=buy-button]");
