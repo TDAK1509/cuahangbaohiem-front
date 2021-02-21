@@ -1,7 +1,9 @@
 <template>
   <footer class="footer has-background-dark has-text-white">
-    <div class="is-flex">
-      <p>v1.0</p>
+    <div class="columns">
+      <FooterFirstColumn />
+      <FooterSecondColumn />
+      <FooterThirdColumn />
     </div>
   </footer>
 </template>
@@ -13,7 +15,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.footer__link:hover {
-  color: white;
+.footer__image {
+  height: 40px;
+  width: auto;
 }
 </style>

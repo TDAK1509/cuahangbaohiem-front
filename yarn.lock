@@ -13717,6 +13717,11 @@ vue-client-only@^2.0.0:
   resolved "https://registry.yarnpkg.com/vue-client-only/-/vue-client-only-2.0.0.tgz#ddad8d675ee02c761a14229f0e440e219de1da1c"
   integrity sha512-arhk1wtWAfLsJyxGMoEYhoBowM87/i6HLSG2LH/03Yog6i2d9JEN1peMP0Ceis+/n9DxdenGYZZTxbPPJyHciA==
 
+vue-easy-slider@^5.3.4:
+  version "5.3.4"
+  resolved "https://registry.yarnpkg.com/vue-easy-slider/-/vue-easy-slider-5.3.4.tgz#2707f76f8521c516e2b3915607c319c7f6e772b4"
+  integrity sha512-PCdc4A2nwK7eH4vZdK4HqZBd8hfEMGN1HsxzNRIaDGDL4xLW3zgN+7a+SBkQbe4mN9Uuf/K9yw2qDDRqYUZgtw==
+
 vue-eslint-parser@^7.0.0:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-7.1.1.tgz#c43c1c715ff50778b9a7e9a4e16921185f3425d3"

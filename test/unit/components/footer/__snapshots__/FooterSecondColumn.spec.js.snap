@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FooterSecondColumn.vue matches snapshot 1`] = `
+<div
+  class="column"
+>
+  <h4
+    class="has-text-weight-bold is-uppercase"
+  >
+    Các trang khác
+  </h4>
+   
+  <ul
+    class="is-size-7 mt-2"
+  >
+    <li
+      class="mt-1"
+    >
+      <nuxt-link
+        class="footer-second-column__link"
+        to="/gioi-thieu"
+      >
+        Giới thiệu
+      </nuxt-link>
+    </li>
+    <li
+      class="mt-1"
+    >
+      <nuxt-link
+        class="footer-second-column__link"
+        to="/san-pham"
+      >
+        Sản phẩm
+      </nuxt-link>
+    </li>
+    <li
+      class="mt-1 footer-second-column__list-item--is-child ml-4"
+    >
+      <nuxt-link
+        class="footer-second-column__link"
+        to="/san-pham/o-to"
+      >
+        Ô tô
+      </nuxt-link>
+    </li>
+    <li
+      class="mt-1 footer-second-column__list-item--is-child ml-4"
+    >
+      <nuxt-link
+        class="footer-second-column__link"
+        to="/san-pham/tai-nan"
+      >
+        Tai nạn 24/24
+      </nuxt-link>
+    </li>
+    <li
+      class="mt-1 footer-second-column__list-item--is-child ml-4"
+    >
+      <nuxt-link
+        class="footer-second-column__link"
+        to="/san-pham/nha-tu-nhan"
+      >
+        Nhà tư nhân
+      </nuxt-link>
+    </li>
+    <li
+      class="mt-1 footer-second-column__list-item--is-child ml-4"
+    >
+      <nuxt-link
+        class="footer-second-column__link"
+        to="/san-pham/xe-may"
+      >
+        Xe máy
+      </nuxt-link>
+    </li>
+  </ul>
+</div>
+`;
