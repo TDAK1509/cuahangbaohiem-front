@@ -1,14 +1,11 @@
 <template>
   <div class="column">
-    <h4 class="has-text-weight-bold is-uppercase">Các trang khác</h4>
+    <h4 class="has-text-weight-bold is-uppercase">Sản phâm</h4>
     <ul class="is-size-7 mt-2">
       <li
         v-for="(nav, index) in navs"
         :key="index"
-        class="mt-1"
-        :class="{
-          'footer-second-column__list-item--is-child ml-4': nav.isChild
-        }"
+        class="footer-second-column__list-item mt-1 ml-4"
       >
         <nuxt-link class="footer-second-column__link" :to="nav.to">{{
           nav.text
@@ -26,34 +23,20 @@ export default {
     return {
       navs: [
         {
-          text: "Giới thiệu",
-          to: "/gioi-thieu",
-          isChild: false
-        },
-        {
-          text: "Sản phẩm",
-          to: "/san-pham",
-          isChild: false
-        },
-        {
           text: "Ô tô",
-          to: "/san-pham/o-to",
-          isChild: true
+          to: "/san-pham/o-to"
         },
         {
           text: "Tai nạn 24/24",
-          to: "/san-pham/tai-nan",
-          isChild: true
+          to: "/san-pham/tai-nan"
         },
         {
           text: "Nhà tư nhân",
-          to: "/san-pham/nha-tu-nhan",
-          isChild: true
+          to: "/san-pham/nha-tu-nhan"
         },
         {
           text: "Xe máy",
-          to: "/san-pham/xe-may",
-          isChild: true
+          to: "/san-pham/xe-may"
         }
       ]
     };
@@ -71,8 +54,6 @@ export default {
 }
 
 .footer-second-column__list-item {
-  &--is-child {
-    list-style-type: disc;
-  }
+  list-style-type: disc;
 }
 </style>
