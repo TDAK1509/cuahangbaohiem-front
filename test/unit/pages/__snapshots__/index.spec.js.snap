@@ -4,71 +4,54 @@ exports[`pages/index.vue matches snapshot 1`] = `
 <div
   class="container"
 >
-  <section
-    class="section"
+  <slider
+    animation="fade"
   >
-    <div
-      class="container"
-    >
-      <h4
-        class="title has-text-centered home__title"
+    <slider-item>
+      <p
+        style="line-height: 280px; font-size: 5rem; text-align: center;"
       >
         
-        Các Sản Phẩm Bảo Hiểm
+        Page1
       
-      </h4>
-       
-      <homeroundedbuttoncontainer>
-        <homeroundedbutton
-          icon-class="fas fa-car fa-3x"
-          icon-color-class="has-text-info"
-          label="Bảo hiểm ô tô"
-          to="/san-pham/o-to"
-        />
-        <homeroundedbutton
-          icon-class="fas fa-car-crash fa-3x"
-          icon-color-class="has-text-danger"
-          label="Bảo hiểm tai nạn 24/24"
-          to="/san-pham/tai-nan"
-        />
-        <homeroundedbutton
-          icon-class="fas fa-file-medical fa-3x"
-          icon-color-class="has-text-success"
-          label="Bảo hiểm sức khỏe cá nhân"
-          to="/san-pham/suc-khoe-ca-nhan"
-        />
-        <homeroundedbutton
-          icon-class="fas fa-disease fa-3x"
-          icon-color-class="has-text-warning"
-          label="Bảo hiểm bệnh ung thư"
-          to="/san-pham/ung-thu"
-        />
-        <homeroundedbutton
-          icon-class="fas fa-house-damage fa-3x"
-          icon-color-class="has-text-info"
-          label="Bảo hiểm nhà tư nhân"
-          to="/san-pham/nha-tu-nhan"
-        />
-        <homeroundedbutton
-          icon-class="fas fa-motorcycle fa-3x"
-          icon-color-class="has-text-danger"
-          label="Bảo hiểm xe máy"
-          to="/san-pham/xe-may"
-        />
-        <homeroundedbutton
-          icon-class="fas fa-plane-departure fa-3x"
-          icon-color-class="has-text-success"
-          label="Bảo hiểm du lịch quốc tế"
-          to="/san-pham/du-lich-quoc-te"
-        />
-        <homeroundedbutton
-          icon-class="fas fa-male fa-3x"
-          icon-color-class="has-text-warning"
-          label="Bảo hiểm nhân thọ"
-          to="/san-pham/nhan-tho"
-        />
-      </homeroundedbuttoncontainer>
-    </div>
-  </section>
+      </p>
+    </slider-item>
+    <slider-item>
+      <p
+        style="line-height: 280px; font-size: 5rem; text-align: center;"
+      >
+        
+        Page2
+      
+      </p>
+    </slider-item>
+    <slider-item>
+      <p
+        style="line-height: 280px; font-size: 5rem; text-align: center;"
+      >
+        
+        Page3
+      
+      </p>
+    </slider-item>
+    <slider-item>
+      <p
+        style="line-height: 280px; font-size: 5rem; text-align: center;"
+      >
+        
+        Page4
+      
+      </p>
+    </slider-item>
+    <slider-item>
+      <p
+        style="line-height: 280px; font-size: 5rem; text-align: center;"
+      >
+        
+        Page5
+      
+      </p>
+    </slider-item>
+  </slider>
 </div>
 `;
