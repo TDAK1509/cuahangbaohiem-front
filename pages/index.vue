@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="home container">
     <slider animation="fade">
       <slider-item v-for="i in 5" :key="i">
         <p style="line-height: 280px; font-size: 5rem; text-align: center">
@@ -23,3 +23,9 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.home {
+  z-index: 0;
+}
+</style>
