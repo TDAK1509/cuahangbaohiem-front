@@ -10,7 +10,7 @@ describe("Page /san-pham/o-to", () => {
     cy.get("[data-cy=calculate-button]").as("calculateButton");
   }
 
-  describe.skip("tab bar", () => {
+  describe("tab bar", () => {
     it("should have 5 correct tabs", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").should("be.visible");
       cy.contains("QUYỀN LỢI").should("be.visible");
@@ -65,14 +65,6 @@ describe("Page /san-pham/o-to", () => {
       cy.contains(
         "Tình trạng xe của bạn không có hỗ trợ điều kiện bổ sung"
       ).should("be.visible");
-    }
-
-    function getAddOns() {
-      return cy.get("[data-cy=addons]");
-    }
-
-    function getAddOnRadios() {
-      return getAddOns().find(".radio");
     }
 
     it("show all radios if 3 < year gap <= 6", () => {
@@ -147,7 +139,7 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe.skip("on click calculate button", () => {
+  describe("on click calculate button", () => {
     describe("form error handling", () => {
       describe("carValue", () => {
         it("if car value is empty, show HTML5 required validation", () => {
@@ -365,6 +357,14 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 });
+
+function getAddOns() {
+  return cy.get("[data-cy=addons]");
+}
+
+function getAddOnRadios() {
+  return getAddOns().find(".radio");
+}
 
 function getResultBuyButton() {
   return cy.get("[data-cy=buy-button]");
