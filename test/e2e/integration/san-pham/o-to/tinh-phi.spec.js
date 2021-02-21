@@ -10,7 +10,7 @@ describe("Page /san-pham/o-to", () => {
     cy.get("[data-cy=calculate-button]").as("calculateButton");
   }
 
-  describe("tab bar", () => {
+  describe.skip("tab bar", () => {
     it("should have 5 correct tabs", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").should("be.visible");
       cy.contains("QUYỀN LỢI").should("be.visible");
@@ -51,7 +51,7 @@ describe("Page /san-pham/o-to", () => {
     });
   });
 
-  describe("rendering", () => {
+  describe.skip("rendering", () => {
     it("shows input car value and year, calculate button, NOT show addons", () => {
       cy.get("@carValue").should("be.visible");
       cy.get("@carYear").should("be.visible");
@@ -140,7 +140,7 @@ describe("Page /san-pham/o-to", () => {
   });
 
   describe("on click calculate button", () => {
-    describe("form error handling", () => {
+    describe.skip("form error handling", () => {
       describe("carValue", () => {
         it("if car value is empty, show HTML5 required validation", () => {
           cy.get("@carValue").should(assertFailedHtml5FormValidation);
@@ -174,7 +174,7 @@ describe("Page /san-pham/o-to", () => {
       });
     });
 
-    describe("form valid handling", () => {
+    describe.skip("form valid handling", () => {
       it("shows result if car value not empty", () => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
@@ -231,7 +231,7 @@ describe("Page /san-pham/o-to", () => {
   });
 
   describe("On click BUY button", () => {
-    describe("without addon", () => {
+    describe.skip("without addon", () => {
       beforeEach(() => {
         cy.get("@carValue").type("100");
         cy.get("@carYear").type("2020");
@@ -324,35 +324,79 @@ describe("Page /san-pham/o-to", () => {
       });
     });
 
-    describe("form succeeds with addon", () => {
-      it("shows success message and clear inputs", () => {
-        calculateInsuranceWithAddOns();
-        getPopupName().type("Son Tung MTP");
-        getPopupEmail().type("sontung@gmail.com");
-        getPopupPhone().type("111222333");
-        getPopupBuyButton().click();
-        cy.contains(
-          "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
-        ).should("be.visible");
+    describe("with addon", () => {
+      const thisYear = new Date().getFullYear();
+
+      describe("without changing car year", () => {
+        const targetYear = thisYear - 1;
+
+        it("shows success message and clear inputs", () => {
+          calculateInsuranceFeeWithAddOns();
+          getPopupName().type("Son Tung MTP");
+          getPopupEmail().type("sontung@gmail.com");
+          getPopupPhone().type("111222333");
+          getPopupBuyButton().click();
+          cy.contains(
+            "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
+          ).should("be.visible");
+        });
+
+        function calculateInsuranceFeeWithAddOns() {
+          cy.get("@carValue").type("100");
+          cy.get("@carYear").type(targetYear.toString());
+          cy.get("@calculateButton").click();
+          getResultBuyButton().first().click();
+        }
+
+        it("form request is saved to firebase", () => {
+          cy.visit("/san-pham/o-to/test");
+          cy.contains("name: Son Tung MTP").should("be.visible");
+          cy.contains("email: sontung@gmail.com").should("be.visible");
+          cy.contains("phone: 111222333").should("be.visible");
+          cy.contains("insuranceCompany: PVI").should("be.visible");
+          cy.contains("carValue: 100000000").should("be.visible");
+          cy.contains(`carYear: ${targetYear}`).should("be.visible");
+          cy.contains("addon:").should("be.visible");
+          cy.contains("insuranceFee: 1500000").should("be.visible");
+        });
       });
 
-      function calculateInsuranceWithAddOns() {
-        cy.get("@carValue").type("100");
-        cy.get("@carYear").type("2020");
-        cy.get("@calculateButton").click();
-        getResultBuyButton().first().click();
-      }
+      describe("select addon and change car year", () => {
+        const yearHavingAddons = thisYear - 1;
+        const yearNotHavingAddons = thisYear - 30;
 
-      it("form request is saved to firebase", () => {
-        cy.visit("/san-pham/o-to/test");
-        cy.contains("name: Son Tung MTP").should("be.visible");
-        cy.contains("email: sontung@gmail.com").should("be.visible");
-        cy.contains("phone: 111222333").should("be.visible");
-        cy.contains("insuranceCompany: PVI").should("be.visible");
-        cy.contains("carValue: 100000000").should("be.visible");
-        cy.contains("carYear: 2020").should("be.visible");
-        cy.contains("addon:").should("be.visible");
-        cy.contains("insuranceFee: 1500000").should("be.visible");
+        it("select addons, then change car year, final result does not save addon", () => {
+          cy.get("@carValue").type("100");
+          selectAddonAndChangeCarYearToMakeItDisappear();
+          cy.get("@calculateButton").click();
+          getResultBuyButton().first().click();
+
+          getPopupName().type("Son Tung MTP");
+          getPopupEmail().type("sontung@gmail.com");
+          getPopupPhone().type("111222333");
+          getPopupBuyButton().click();
+          cy.contains(
+            "Cám ơn bạn đã lựa chọn dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
+          ).should("be.visible");
+        });
+
+        function selectAddonAndChangeCarYearToMakeItDisappear() {
+          cy.get("@carYear").type(yearHavingAddons.toString());
+          getAddOnRadios().eq(4).click();
+          cy.get("@carYear").clear().type(yearNotHavingAddons.toString());
+        }
+
+        it("form request is saved to firebase", () => {
+          cy.visit("/san-pham/o-to/test");
+          cy.contains("name: Son Tung MTP").should("be.visible");
+          cy.contains("email: sontung@gmail.com").should("be.visible");
+          cy.contains("phone: 111222333").should("be.visible");
+          cy.contains("insuranceCompany: PVI").should("be.visible");
+          cy.contains("carValue: 100000000").should("be.visible");
+          cy.contains(`carYear: ${yearNotHavingAddons}`).should("be.visible");
+          cy.contains("addon:").should("be.visible");
+          cy.contains("insuranceFee: 1500000").should("be.visible");
+        });
       });
     });
   });
