@@ -215,7 +215,7 @@ describe("Page /san-pham/o-to", () => {
         cy.get("@carYear").type("2020");
         cy.get("@calculateButton").click();
 
-        assertPviInsuranceFee("150.000.000");
+        assertPviInsuranceFee("1.500.000");
         assertBaoVietInsuranceFee("150.000.000");
         assertBaoMinhInsuranceFee("150.000.000");
         assertMicInsuranceFee("150.000.000");
@@ -228,7 +228,7 @@ describe("Page /san-pham/o-to", () => {
         cy.get("@addonRadio").eq(2).click();
         cy.get("@calculateButton").click();
 
-        assertPviInsuranceFee("160.000.000");
+        assertPviInsuranceFee("1.600.000");
         assertBaoVietInsuranceFee("160.000.000");
         assertBaoMinhInsuranceFee("160.000.000");
         assertMicInsuranceFee("160.000.000");
@@ -241,7 +241,7 @@ describe("Page /san-pham/o-to", () => {
         cy.get("@addonRadio").eq(2).click();
         cy.get("@calculateButton").click();
 
-        assertPviInsuranceFee("160.000.000");
+        assertPviInsuranceFee("1.600.000");
         assertBaoVietInsuranceFee("160.000.000");
         assertBaoMinhInsuranceFee("160.000.000");
         assertMicInsuranceFee("160.000.000");
@@ -249,7 +249,7 @@ describe("Page /san-pham/o-to", () => {
 
         cy.get("@addonRadio").eq(0).click();
         cy.get("@calculateButton").click();
-        assertPviInsuranceFee("150.000.000");
+        assertPviInsuranceFee("1.500.000");
         assertBaoVietInsuranceFee("150.000.000");
         assertBaoMinhInsuranceFee("150.000.000");
         assertMicInsuranceFee("150.000.000");
@@ -347,7 +347,7 @@ describe("Page /san-pham/o-to", () => {
           cy.contains("carValue: 100000000").should("be.visible");
           cy.contains("carYear: 2020").should("be.visible");
           cy.contains("addon:").should("be.visible");
-          cy.contains("150000000").should("be.visible");
+          cy.contains("1500000").should("be.visible");
         });
       });
     });
@@ -380,7 +380,7 @@ describe("Page /san-pham/o-to", () => {
         cy.contains("carValue: 100000000").should("be.visible");
         cy.contains("carYear: 2020").should("be.visible");
         cy.contains("addon:").should("be.visible");
-        cy.contains("insuranceFee: 150000000").should("be.visible");
+        cy.contains("insuranceFee: 1500000").should("be.visible");
       });
     });
   });

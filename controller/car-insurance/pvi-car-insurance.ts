@@ -25,7 +25,7 @@ export default class PviCarInsurance {
 
   public getInsuranceFee(): number {
     const insuranceRate = this.getInsuranceFeeRate();
-    return this.carValue * insuranceRate;
+    return (this.carValue * insuranceRate) / 100;
   }
 
   private getInsuranceFeeRate(): number {
