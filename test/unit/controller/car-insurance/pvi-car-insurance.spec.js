@@ -22,14 +22,14 @@ describe("class PviCarInsurance", () => {
       const addon = CarInsuranceAddOn.NONE;
       const pviCarInsurance = new PviCarInsurance(carValue, carYear, addon);
 
-      let expectedCarInsuranceValue = carValue * 1.5;
+      let expectedCarInsuranceValue = (carValue * 1.5) / 100;
       let carInsuranceValue = pviCarInsurance.getInsuranceFee();
       expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
 
       const newCarValue = 500;
       pviCarInsurance.setCarValue(newCarValue);
       carInsuranceValue = pviCarInsurance.getInsuranceFee();
-      expectedCarInsuranceValue = newCarValue * 1.5;
+      expectedCarInsuranceValue = (newCarValue * 1.5) / 100;
       expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
     });
 
@@ -987,11 +987,11 @@ describe("class PviCarInsurance", () => {
           expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
         });
 
-        it("if add on DKBS_006, returns car value * 1.61", () => {
+        it("if add on DKBS_006, returns car value * 1.61%", () => {
           const addon = CarInsuranceAddOn.DKBS_006;
           const pviCarInsurance = new PviCarInsurance(carValue, carYear, addon);
           const carInsuranceValue = pviCarInsurance.getInsuranceFee();
-          const expectedCarInsuranceValue = carValue * 1.61;
+          const expectedCarInsuranceValue = (carValue * 1.61) / 100;
           expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
         });
 
