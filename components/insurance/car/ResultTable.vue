@@ -45,17 +45,12 @@
 
 <script lang="ts">
 import Vue from "vue";
+import mixinMoneyFilter from "@/utils/mixins/money-filters";
+
 export default Vue.extend({
   name: "ResultTable",
 
-  filters: {
-    millionDongs(value: number): string {
-      return (value * 1000000).toLocaleString("it-IT", {
-        style: "currency",
-        currency: "VND"
-      });
-    }
-  },
+  mixins: [mixinMoneyFilter],
 
   props: {
     logoFileName: {

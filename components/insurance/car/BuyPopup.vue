@@ -4,7 +4,7 @@
     <div class="modal-card" data-cy="buy-popup">
       <header class="modal-card-head has-background-info">
         <p class="modal-card-title has-text-white bold">
-          {{ insuranceCompany }}: {{ insuranceFee }}
+          {{ insuranceCompany }}: {{ insuranceFee | millionDongs }}
         </p>
         <button class="delete" data-cy="popup-cancel-button" @click="close" />
       </header>
@@ -22,9 +22,12 @@
 
 <script lang="ts">
 import Vue from "vue";
+import mixinMoneyFilter from "@/utils/mixins/money-filters";
 
 export default Vue.extend({
   name: "BuyPopup",
+
+  mixins: [mixinMoneyFilter],
 
   model: {
     prop: "show",
