@@ -12,7 +12,7 @@ describe("Page /san-pham/o-to", () => {
     cy.get("[data-cy=calculate-button]").as("calculateButton");
   }
 
-  describe("tab bar", () => {
+  describe.skip("tab bar", () => {
     it("should have 5 correct tabs", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").should("be.visible");
       cy.contains("QUYỀN LỢI").should("be.visible");
@@ -54,17 +54,19 @@ describe("Page /san-pham/o-to", () => {
   });
 
   describe("rendering", () => {
-    it("should render enough inputs", () => {
+    it("shows input car value and year, calculate button, NOT show addons", () => {
       cy.get("@carValue").should("be.visible");
       cy.get("@carYear").should("be.visible");
-      cy.get("@addons").should("be.visible");
-    });
-
-    it("should render Calculate button", () => {
+      cy.get("@addons").should("not.exist");
       cy.get("@calculateButton").should("be.visible");
     });
 
-    it("addons should have 7 radios", () => {
+    it("show all radios if 3 < year gap <= 6", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 4;
+      cy.get("@carYear").type(targetYear.toString());
+      cy.get("@addons").should("be.visible");
+
       cy.get("@addonRadio").should("have.length", 7);
       cy.get("@addonRadio").eq(0).should("contain", "Không");
       cy.get("@addonRadio").eq(1).should("contain", "DKBS_006");
@@ -75,99 +77,71 @@ describe("Page /san-pham/o-to", () => {
       cy.get("@addonRadio").eq(6).should("contain", "DKBS_003_006_007_008");
     });
 
-    it("disable all addons if year gap > 20", () => {
-      const thisYear = new Date().getFullYear();
-      const targetYear = thisYear - 21;
-      cy.get("@carYear").type(targetYear.toString());
-
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, true);
-      assertAddonRadioDisability(2, true);
-      assertAddonRadioDisability(3, true);
-      assertAddonRadioDisability(4, true);
-      assertAddonRadioDisability(5, true);
-      assertAddonRadioDisability(6, true);
-    });
-
-    function assertAddonRadioDisability(radioIndex, isDisable) {
-      const assertText = isDisable ? "have.attr" : "not.have.attr";
-      cy.get("@addonRadio")
-        .eq(radioIndex)
-        .find("input")
-        .should(assertText, "disabled");
-    }
-
-    it("disable all addons if 15 < year gap <= 20", () => {
-      const thisYear = new Date().getFullYear();
-      const targetYear = thisYear - 16;
-      cy.get("@carYear").type(targetYear.toString());
-
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, true);
-      assertAddonRadioDisability(2, true);
-      assertAddonRadioDisability(3, true);
-      assertAddonRadioDisability(4, true);
-      assertAddonRadioDisability(5, true);
-      assertAddonRadioDisability(6, true);
-    });
-
-    it("only enable first radio if 10 < year gap <= 15", () => {
-      const thisYear = new Date().getFullYear();
-      const targetYear = thisYear - 11;
-      cy.get("@carYear").type(targetYear.toString());
-
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, false);
-      assertAddonRadioDisability(2, true);
-      assertAddonRadioDisability(3, true);
-      assertAddonRadioDisability(4, true);
-      assertAddonRadioDisability(5, true);
-    });
-
-    it("disable last 2 radios if 6 < year gap <= 10", () => {
-      const thisYear = new Date().getFullYear();
-      const targetYear = thisYear - 7;
-      cy.get("@carYear").type(targetYear.toString());
-
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, false);
-      assertAddonRadioDisability(2, false);
-      assertAddonRadioDisability(3, false);
-      assertAddonRadioDisability(4, false);
-      assertAddonRadioDisability(5, true);
-      assertAddonRadioDisability(6, true);
-    });
-
-    it("enable all radios if 3 < year gap <= 6", () => {
-      const thisYear = new Date().getFullYear();
-      const targetYear = thisYear - 4;
-      cy.get("@carYear").type(targetYear.toString());
-
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, false);
-      assertAddonRadioDisability(2, false);
-      assertAddonRadioDisability(3, false);
-      assertAddonRadioDisability(4, false);
-      assertAddonRadioDisability(5, false);
-      assertAddonRadioDisability(6, false);
-    });
-
     it("enable all radios if yearGap <= 3", () => {
       const thisYear = new Date().getFullYear();
       const targetYear = thisYear - 1;
       cy.get("@carYear").type(targetYear.toString());
+      cy.get("@addons").should("be.visible");
 
-      assertAddonRadioDisability(0, false);
-      assertAddonRadioDisability(1, false);
-      assertAddonRadioDisability(2, false);
-      assertAddonRadioDisability(3, false);
-      assertAddonRadioDisability(4, false);
-      assertAddonRadioDisability(5, false);
-      assertAddonRadioDisability(6, false);
+      cy.get("@addonRadio").should("have.length", 7);
+      cy.get("@addonRadio").eq(0).should("contain", "Không");
+      cy.get("@addonRadio").eq(1).should("contain", "DKBS_006");
+      cy.get("@addonRadio").eq(2).should("contain", "DKBS_006_007");
+      cy.get("@addonRadio").eq(3).should("contain", "DKBS_006_008");
+      cy.get("@addonRadio").eq(4).should("contain", "DKBS_006_007_008");
+      cy.get("@addonRadio").eq(5).should("contain", "DKBS_003_006_007");
+      cy.get("@addonRadio").eq(6).should("contain", "DKBS_003_006_007_008");
+    });
+
+    it("shows no-addon message if year gap > 20", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 21;
+      cy.get("@carYear").type(targetYear.toString());
+      cy.get("@addons").should("be.visible");
+      cy.get("@addonRadio").should("not.exist");
+      cy.contains("Không có hỗ trợ bổ sung cho điều kiện xe của bạn").should(
+        "be.visible"
+      );
+    });
+
+    it("shows no-addon message if 15 < year gap <= 20", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 16;
+      cy.get("@carYear").type(targetYear.toString());
+      cy.get("@addons").should("be.visible");
+      cy.get("@addonRadio").should("not.exist");
+      cy.contains("Không có hỗ trợ bổ sung cho điều kiện xe của bạn").should(
+        "be.visible"
+      );
+    });
+
+    it("only shows NONE and DKBS_6 radios if 10 < year gap <= 15", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 11;
+      cy.get("@carYear").type(targetYear.toString());
+      cy.get("@addons").should("be.visible");
+
+      cy.get("@addonRadio").should("have.length", 2);
+      cy.get("@addonRadio").eq(0).should("contain", "Không");
+      cy.get("@addonRadio").eq(1).should("contain", "DKBS_006");
+    });
+
+    it("shows 5 radios if 6 < year gap <= 10", () => {
+      const thisYear = new Date().getFullYear();
+      const targetYear = thisYear - 7;
+      cy.get("@carYear").type(targetYear.toString());
+      cy.get("@addons").should("be.visible");
+
+      cy.get("@addonRadio").should("have.length", 5);
+      cy.get("@addonRadio").eq(0).should("contain", "Không");
+      cy.get("@addonRadio").eq(1).should("contain", "DKBS_006");
+      cy.get("@addonRadio").eq(2).should("contain", "DKBS_006_007");
+      cy.get("@addonRadio").eq(3).should("contain", "DKBS_006_008");
+      cy.get("@addonRadio").eq(4).should("contain", "DKBS_006_007_008");
     });
   });
 
-  describe("on click calculate button", () => {
+  describe.skip("on click calculate button", () => {
     describe("form error handling", () => {
       describe("carValue", () => {
         it("if car value is empty, show HTML5 required validation", () => {
