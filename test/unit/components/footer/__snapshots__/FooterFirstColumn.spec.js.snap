@@ -5,7 +5,7 @@ exports[`FooterFirstColumn.vue matches snapshot 1`] = `
   class="column"
 >
   <figure
-    class="image"
+    class="image is-hidden-mobile mb-4"
   >
     <img
       class="image footer-first-column__image"
@@ -14,7 +14,7 @@ exports[`FooterFirstColumn.vue matches snapshot 1`] = `
   </figure>
    
   <ul
-    class="footer-first-column__list is-size-7 ml-4 mt-4"
+    class="footer-first-column__list is-size-7 ml-4"
   >
     <li
       class="mt-1"
