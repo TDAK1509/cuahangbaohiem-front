@@ -1,13 +1,13 @@
 <template>
   <div class="column">
-    <figure class="image">
+    <figure class="image is-hidden-mobile mb-4">
       <img
         class="image footer-first-column__image"
         src="~assets/images/logo.png"
       />
     </figure>
 
-    <ul class="footer-first-column__list is-size-7 ml-4 mt-4">
+    <ul class="footer-first-column__list is-size-7 ml-4">
       <li class="mt-1">Công ty cổ phần Cửa Hàng Bảo Hiểm</li>
       <li class="mt-1">
         Số 69, đường Lê Lai, phường Lê Lợi,<br />Thành phố Hồ Chí Minh

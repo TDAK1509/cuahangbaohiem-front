@@ -6,7 +6,7 @@ exports[`pages/index.vue matches snapshot 1`] = `
 >
   <slider
     animation="fade"
-    height="70vh"
+    height="75vh"
   >
     <slider-item>
       <figure>

@@ -2,7 +2,7 @@
 
 exports[`FooterSecondColumn.vue matches snapshot 1`] = `
 <div
-  class="column"
+  class="column is-hidden-mobile"
 >
   <h4
     class="has-text-weight-bold is-uppercase"
