@@ -6,51 +6,24 @@ exports[`pages/index.vue matches snapshot 1`] = `
 >
   <slider
     animation="fade"
+    height="70vh"
   >
     <slider-item>
-      <p
-        style="line-height: 280px; font-size: 5rem; text-align: center;"
-      >
-        
-        Page1
-      
-      </p>
+      <figure>
+        <img
+          class="home__img"
+          src="~/assets/images/slide-1.png"
+        />
+      </figure>
     </slider-item>
+     
     <slider-item>
-      <p
-        style="line-height: 280px; font-size: 5rem; text-align: center;"
-      >
-        
-        Page2
-      
-      </p>
-    </slider-item>
-    <slider-item>
-      <p
-        style="line-height: 280px; font-size: 5rem; text-align: center;"
-      >
-        
-        Page3
-      
-      </p>
-    </slider-item>
-    <slider-item>
-      <p
-        style="line-height: 280px; font-size: 5rem; text-align: center;"
-      >
-        
-        Page4
-      
-      </p>
-    </slider-item>
-    <slider-item>
-      <p
-        style="line-height: 280px; font-size: 5rem; text-align: center;"
-      >
-        
-        Page5
-      
-      </p>
+      <figure>
+        <img
+          class="home__img"
+          src="~/assets/images/slide-2.png"
+        />
+      </figure>
     </slider-item>
   </slider>
 </div>
