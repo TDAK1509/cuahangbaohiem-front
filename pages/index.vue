@@ -1,6 +1,6 @@
 <template>
   <div class="home container">
-    <slider animation="fade" height="70vh">
+    <slider animation="fade" height="75vh">
       <slider-item>
         <figure>
           <img class="home__img" src="~/assets/images/slide-1.png" />
