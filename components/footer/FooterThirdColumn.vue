@@ -1,5 +1,5 @@
 <template>
-  <div class="column">
+  <div class="column is-hidden-mobile">
     <h4 class="has-text-weight-bold is-uppercase mb-2">Các kênh khác</h4>
 
     <a
