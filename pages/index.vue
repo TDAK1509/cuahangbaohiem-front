@@ -1,10 +1,16 @@
 <template>
   <div class="home container">
-    <slider animation="fade">
-      <slider-item v-for="i in 5" :key="i">
-        <p style="line-height: 280px; font-size: 5rem; text-align: center">
-          Page{{ i }}
-        </p>
+    <slider animation="fade" height="70vh">
+      <slider-item>
+        <figure>
+          <img class="home__img" src="~/assets/images/slide-1.png" />
+        </figure>
+      </slider-item>
+
+      <slider-item>
+        <figure>
+          <img class="home__img" src="~/assets/images/slide-2.png" />
+        </figure>
       </slider-item>
     </slider>
   </div>
@@ -27,5 +33,11 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .home {
   z-index: 0;
+}
+
+.home__img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 </style>
