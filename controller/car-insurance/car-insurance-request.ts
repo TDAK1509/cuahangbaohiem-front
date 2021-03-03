@@ -9,7 +9,7 @@ export interface CarInsuranceRequest {
   note?: string;
   carValue: number;
   carYear: number;
-  addon: string;
+  addons: string[];
   insuranceCompany: string;
   insuranceFee: number;
 }
