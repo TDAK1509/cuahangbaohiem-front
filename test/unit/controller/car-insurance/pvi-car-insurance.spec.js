@@ -119,6 +119,21 @@ describe("class PviCarInsurance", () => {
           const expectedCarInsuranceValue = (carValue * (1.5 + 0.1)) / 100;
           expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
         });
+
+        it("if add on both DKBS_003 & DKBS_008, insurance fee is 1.5 + 0.2 + 0.1", () => {
+          const addons = [
+            CarInsuranceAddOn.DKBS_003,
+            CarInsuranceAddOn.DKBS_008
+          ];
+          const pviCarInsurance = new PviCarInsurance(
+            carValue,
+            carYear,
+            addons
+          );
+          const carInsuranceValue = pviCarInsurance.getInsuranceFee();
+          const expectedCarInsuranceValue = (carValue * (1.5 + 0.3)) / 100;
+          expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
+        });
       });
     });
   });
