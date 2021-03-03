@@ -41,16 +41,14 @@
         <div class="field">
           <label class="label">Điều kiện bổ sung</label>
 
-          <div v-if="hasRadios" class="control" data-cy="addons">
-            <p v-for="item in addonRadios" :key="item.value">
-              <label class="radio">
-                <input v-model="addon" type="radio" :value="item.value" />
+          <div class="control" data-cy="addons">
+            <p v-for="item in addonCheckboxes" :key="item.value">
+              <label class="checkbox">
+                <input v-model="addons" type="checkbox" :value="item.value" />
                 {{ item.text }}
               </label>
             </p>
           </div>
-
-          <p v-else>Tình trạng xe của bạn không có hỗ trợ điều kiện bổ sung.</p>
         </div>
 
         <div class="field mt-5">
@@ -80,12 +78,10 @@
 <script lang="ts">
 import Vue from "vue";
 import CarInsuranceRequestController, {
-  CarInsuranceAddOn,
-  AddOnRadio
+  CarInsuranceAddOn
 } from "@/controller/car-insurance/car-insurance-request";
 
 const controller = new CarInsuranceRequestController();
-const THIS_YEAR = new Date().getFullYear();
 
 export default Vue.extend({
   name: "TinhPhiOto",
@@ -95,7 +91,7 @@ export default Vue.extend({
   data() {
     return {
       showResult: false,
-      addonRadios: [] as AddOnRadio[]
+      addonCheckboxes: controller.getAddOnCheckboxes()
     };
   },
 
@@ -122,39 +118,12 @@ export default Vue.extend({
       }
     },
 
-    addon: {
+    addons: {
       get(): CarInsuranceAddOn[] {
-        return this.$store.state.car.addon;
+        return this.$store.state.car.addons;
       },
-      set(newValue: CarInsuranceAddOn) {
-        this.$store.dispatch("car/setAddon", newValue);
-      }
-    },
-
-    isAddonValid(): boolean {
-      return (
-        this.addonRadios.findIndex((addon) => this.addon === addon.value) > -1
-      );
-    },
-
-    yearGap(): number {
-      return THIS_YEAR - parseInt(this.carYear);
-    },
-
-    hasRadios(): boolean {
-      return this.addonRadios.length > 0;
-    }
-  },
-
-  watch: {
-    async yearGap() {
-      this.addonRadios = controller.getAddOnRadios(this.yearGap);
-      await this.$nextTick();
-    },
-
-    isAddonValid() {
-      if (!this.isAddonValid) {
-        this.addon = CarInsuranceAddOn.NONE;
+      set(newValue: CarInsuranceAddOn[]) {
+        this.$store.dispatch("car/setAddons", newValue);
       }
     }
   },

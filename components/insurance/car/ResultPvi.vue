@@ -18,7 +18,7 @@ export default Vue.extend({
 
   data() {
     return {
-      pvi: new PviCarInsurance(0, 0, CarInsuranceAddOn.NONE),
+      pvi: new PviCarInsurance(0, 0),
       insuranceFee: 0
     };
   },
@@ -32,8 +32,8 @@ export default Vue.extend({
       return this.$store.state.car.carYear;
     },
 
-    addon(): CarInsuranceAddOn {
-      return this.$store.state.car.addon;
+    addons(): CarInsuranceAddOn[] {
+      return this.$store.state.car.addons;
     }
   },
 
@@ -48,8 +48,8 @@ export default Vue.extend({
       this.calculateCarInsuranceFee();
     },
 
-    addon(newValue: CarInsuranceAddOn) {
-      this.pvi.setAddon(newValue);
+    addons(newValue: CarInsuranceAddOn[]) {
+      this.pvi.setAddons(newValue);
       this.calculateCarInsuranceFee();
     }
   },
@@ -57,7 +57,7 @@ export default Vue.extend({
   mounted() {
     this.pvi.setCarValue(this.carValue);
     this.pvi.setCarYear(this.carYear);
-    this.pvi.setAddon(this.addon);
+    this.pvi.setAddons(this.addons);
     this.calculateCarInsuranceFee();
   },
 

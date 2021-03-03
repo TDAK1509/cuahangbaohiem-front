@@ -9,22 +9,19 @@ export interface CarInsuranceRequest {
   note?: string;
   carValue: number;
   carYear: number;
-  addon: string;
+  addons: string[];
   insuranceCompany: string;
   insuranceFee: number;
 }
 
 export enum CarInsuranceAddOn {
-  NONE,
+  DKBS_003,
   DKBS_006,
-  DKBS_006_007,
-  DKBS_006_008,
-  DKBS_006_007_008,
-  DKBS_003_006_007,
-  DKBS_003_006_007_008
+  DKBS_007,
+  DKBS_008
 }
 
-export interface AddOnRadio {
+export interface AddOnCheckbox {
   text: string;
   value: CarInsuranceAddOn;
 }
@@ -40,82 +37,42 @@ export default class CarInsuranceRequestController {
     return CarInsuranceRequestModel.save(requestToSaveToServer);
   }
 
-  public getAddOnRadios(yearGap: number | null = null): AddOnRadio[] {
-    if (yearGap === null || yearGap > 15) {
-      return [];
-    }
-
-    const radios = this.getAllAddonRadios();
-
-    if (yearGap > 6 && yearGap <= 10) {
-      radios.pop();
-      radios.pop();
-      return radios;
-    }
-
-    if (yearGap > 10 && yearGap <= 15) {
-      return [radios[0], radios[1]];
-    }
-
-    return radios;
-  }
-
-  private getAllAddonRadios(): AddOnRadio[] {
+  public getAddOnCheckboxes(): AddOnCheckbox[] {
     return [
       {
-        text: "Không",
-        value: CarInsuranceAddOn.NONE
+        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_003),
+        value: CarInsuranceAddOn.DKBS_003
       },
       {
         text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006),
         value: CarInsuranceAddOn.DKBS_006
       },
       {
-        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007),
-        value: CarInsuranceAddOn.DKBS_006_007
+        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_007),
+        value: CarInsuranceAddOn.DKBS_007
       },
       {
-        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006_008),
-        value: CarInsuranceAddOn.DKBS_006_008
-      },
-      {
-        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_006_007_008),
-        value: CarInsuranceAddOn.DKBS_006_007_008
-      },
-      {
-        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007),
-        value: CarInsuranceAddOn.DKBS_003_006_007
-      },
-      {
-        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_003_006_007_008),
-        value: CarInsuranceAddOn.DKBS_003_006_007_008
+        text: this.getAddOnLabel(CarInsuranceAddOn.DKBS_008),
+        value: CarInsuranceAddOn.DKBS_008
       }
     ];
   }
 
   public getAddOnLabel(addon: CarInsuranceAddOn) {
+    if (addon === CarInsuranceAddOn.DKBS_003) {
+      return "DKBS_003";
+    }
+
     if (addon === CarInsuranceAddOn.DKBS_006) {
       return "DKBS_006";
     }
 
-    if (addon === CarInsuranceAddOn.DKBS_006_007) {
-      return "DKBS_006_007";
+    if (addon === CarInsuranceAddOn.DKBS_007) {
+      return "DKBS_007";
     }
 
-    if (addon === CarInsuranceAddOn.DKBS_006_008) {
-      return "DKBS_006_008";
-    }
-
-    if (addon === CarInsuranceAddOn.DKBS_006_007_008) {
-      return "DKBS_006_007_008";
-    }
-
-    if (addon === CarInsuranceAddOn.DKBS_003_006_007) {
-      return "DKBS_003_006_007";
-    }
-
-    if (addon === CarInsuranceAddOn.DKBS_003_006_007_008) {
-      return "DKBS_003_006_007_008";
+    if (addon === CarInsuranceAddOn.DKBS_008) {
+      return "DKBS_008";
     }
 
     return "";

@@ -10,7 +10,7 @@ const controller = new CarInsuranceRequestController();
 export const state = () => ({
   carValue: 0,
   carYear: 0,
-  addon: CarInsuranceAddOn.NONE,
+  addons: [] as CarInsuranceAddOn[],
   insuranceCompany: "",
   insuranceFee: 0,
   name: "",
@@ -23,12 +23,12 @@ export type CarState = ReturnType<typeof state>;
 
 export const getters: GetterTree<CarState, RootState> = {
   insuranceRequest(state): CarInsuranceRequest {
-    const addon = controller.getAddOnLabel(state.addon);
+    const addons = state.addons.map((addon) => controller.getAddOnLabel(addon));
 
     return {
       carValue: toMillion(state.carValue),
       carYear: state.carYear,
-      addon,
+      addons,
       insuranceCompany: state.insuranceCompany,
       insuranceFee: toMillion(state.insuranceFee),
       name: state.name,
@@ -48,8 +48,8 @@ export const mutations: MutationTree<CarState> = {
     state.carYear = payload;
   },
 
-  setAddon(state: CarState, payload: CarInsuranceAddOn) {
-    state.addon = payload;
+  setAddons(state: CarState, payload: CarInsuranceAddOn[]) {
+    state.addons = payload;
   },
 
   setInsuranceCompany(state: CarState, payload: string) {
@@ -91,8 +91,8 @@ export const actions: ActionTree<CarState, RootState> = {
     commit("setCarYear", carYear);
   },
 
-  setAddon({ commit }, addon: CarInsuranceAddOn[]) {
-    commit("setAddon", addon);
+  setAddons({ commit }, addons: CarInsuranceAddOn[]) {
+    commit("setAddons", addons);
   },
 
   setName({ commit }, name: string) {

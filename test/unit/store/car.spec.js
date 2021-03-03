@@ -16,7 +16,7 @@ describe("store/car", () => {
       const expected = {
         carValue: 0,
         carYear: 0,
-        addon: "",
+        addons: [],
         insuranceCompany: "",
         insuranceFee: 0,
         name: "",
@@ -34,7 +34,7 @@ describe("store/car", () => {
       const expected = {
         carValue: 1000000,
         carYear: 0,
-        addon: "",
+        addons: [],
         insuranceCompany: "",
         insuranceFee: 1000000,
         name: "",
@@ -59,10 +59,10 @@ describe("store/car", () => {
       expect(_state.carYear).toBe(2020);
     });
 
-    it("setAddon() updates state.addon", () => {
-      expect(_state.addon).toEqual(CarInsuranceAddOn.NONE);
-      mutations.setAddon(_state, CarInsuranceAddOn.DKBS_006);
-      expect(_state.addon).toEqual(CarInsuranceAddOn.DKBS_006);
+    it("setAddons() updates state.addon", () => {
+      expect(_state.addons).toEqual([]);
+      mutations.setAddons(_state, [CarInsuranceAddOn.DKBS_006]);
+      expect(_state.addons).toEqual([CarInsuranceAddOn.DKBS_006]);
     });
 
     it("setInsuranceCompany() updates state.insuranceCompany", () => {
@@ -131,11 +131,11 @@ describe("store/car", () => {
       expect(commit).toHaveBeenCalledWith("setCarYear", 1990);
     });
 
-    it("setAddon() commits 'setAddon' with passed argument", () => {
+    it("setAddons() commits 'setAddons' with passed argument", () => {
       const commit = jest.fn();
-      actions.setAddon({ commit }, [1, 2]);
+      actions.setAddons({ commit }, [1, 2]);
       expect(commit).toHaveBeenCalledTimes(1);
-      expect(commit).toHaveBeenCalledWith("setAddon", [1, 2]);
+      expect(commit).toHaveBeenCalledWith("setAddons", [1, 2]);
     });
 
     it("setName() commits 'setName' with passed argument", () => {
