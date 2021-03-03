@@ -60,19 +60,19 @@ export default class CarInsuranceRequestController {
 
   public getAddOnLabel(addon: CarInsuranceAddOn) {
     if (addon === CarInsuranceAddOn.DKBS_003) {
-      return "DKBS_003";
+      return "ĐKBS 003/XCG-PVI : Bảo hiểm mất cắp bộ phận";
     }
 
     if (addon === CarInsuranceAddOn.DKBS_006) {
-      return "DKBS_006";
+      return "ĐKBS 006/XCG-PVI: Không khấu hao phụ tùng, vật tư thay mới";
     }
 
     if (addon === CarInsuranceAddOn.DKBS_007) {
-      return "DKBS_007";
+      return "ĐKBS 007/XCG-PVI : Bảo hiểm lựa chọn cơ sở sửa chữa";
     }
 
     if (addon === CarInsuranceAddOn.DKBS_008) {
-      return "DKBS_008";
+      return "ĐKBS 008/XCG-PVI : Bảo thiệt hại động cơ xe do bị thủy kích";
     }
 
     return "";
