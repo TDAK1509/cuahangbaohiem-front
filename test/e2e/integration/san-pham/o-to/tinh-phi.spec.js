@@ -61,10 +61,27 @@ describe("Page /san-pham/o-to", () => {
       cy.contains("Điều kiện bổ sung").should("be.visible");
       cy.get("@addons").should("be.visible");
       cy.get("@addon").should("have.length", 4);
-      cy.get("@addon").eq(0).should("contain", "DKBS_003");
-      cy.get("@addon").eq(1).should("contain", "DKBS_006");
-      cy.get("@addon").eq(2).should("contain", "DKBS_007");
-      cy.get("@addon").eq(3).should("contain", "DKBS_008");
+      cy.get("@addon")
+        .eq(0)
+        .should("contain", "ĐKBS 003/XCG-PVI : Bảo hiểm mất cắp bộ phận");
+      cy.get("@addon")
+        .eq(1)
+        .should(
+          "contain",
+          "ĐKBS 006/XCG-PVI: Không khấu hao phụ tùng, vật tư thay mới"
+        );
+      cy.get("@addon")
+        .eq(2)
+        .should(
+          "contain",
+          "ĐKBS 007/XCG-PVI : Bảo hiểm lựa chọn cơ sở sửa chữa"
+        );
+      cy.get("@addon")
+        .eq(3)
+        .should(
+          "contain",
+          "ĐKBS 008/XCG-PVI : Bảo thiệt hại động cơ xe do bị thủy kích"
+        );
 
       cy.get("@calculateButton").should("be.visible");
     });
