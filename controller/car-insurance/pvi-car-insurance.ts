@@ -34,6 +34,10 @@ export default class PviCarInsurance {
       insuranceRate -= 0.15;
     }
 
+    if (this.carValue >= 700) {
+      insuranceRate -= 0.25;
+    }
+
     return (this.carValue * insuranceRate) / 100;
   }
 

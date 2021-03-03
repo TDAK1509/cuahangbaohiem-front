@@ -286,7 +286,7 @@ describe("class PviCarInsurance", () => {
     });
 
     describe("500 < carValue < 700", () => {
-      it("returns insurance fee of carValue <= 500 with 15% off", () => {
+      it("returns insurance fee with rate same to carValue <= 500 with 15% off", () => {
         const carValue = 600;
         const pviCarInsurance = new PviCarInsurance(
           carValue,
@@ -294,6 +294,19 @@ describe("class PviCarInsurance", () => {
         );
         const insuranceFee = pviCarInsurance.getInsuranceFee();
         const expectedInsuranceFee = (carValue * (1.5 - 0.15)) / 100;
+        expect(insuranceFee).toBe(expectedInsuranceFee);
+      });
+    });
+
+    describe("carValue >= 700", () => {
+      it("returns insurance fee with rate same to carValue <= 500 with 25% off", () => {
+        const carValue = 700;
+        const pviCarInsurance = new PviCarInsurance(
+          carValue,
+          LESS_THAN_3_YEARS
+        );
+        const insuranceFee = pviCarInsurance.getInsuranceFee();
+        const expectedInsuranceFee = (carValue * (1.5 - 0.25)) / 100;
         expect(insuranceFee).toBe(expectedInsuranceFee);
       });
     });
