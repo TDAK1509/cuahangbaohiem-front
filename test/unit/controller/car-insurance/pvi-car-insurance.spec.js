@@ -84,13 +84,17 @@ describe("class PviCarInsurance", () => {
           expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
         });
 
-        // it("if add on DKBS_006, insurance fee is 1.5 + 0", () => {
-        //   const addons = [CarInsuranceAddOn.DKBS_006];
-        //   const pviCarInsurance = new PviCarInsurance(carValue, carYear, addons);
-        //   const carInsuranceValue = pviCarInsurance.getInsuranceFee();
-        //   const expectedCarInsuranceValue = (carValue * 1.5) / 100;
-        //   expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
-        // });
+        it("if add on DKBS_006, insurance fee is 1.5 + 0", () => {
+          const addons = [CarInsuranceAddOn.DKBS_006];
+          const pviCarInsurance = new PviCarInsurance(
+            carValue,
+            carYear,
+            addons
+          );
+          const carInsuranceValue = pviCarInsurance.getInsuranceFee();
+          const expectedCarInsuranceValue = (carValue * 1.5) / 100;
+          expect(carInsuranceValue).toBe(expectedCarInsuranceValue);
+        });
       });
     });
   });
