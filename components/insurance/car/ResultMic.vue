@@ -18,7 +18,7 @@ export default Vue.extend({
 
   data() {
     return {
-      mic: new MicCarInsurance(0, 0, CarInsuranceAddOn.NONE),
+      mic: new MicCarInsurance(0, 0),
       insuranceFee: 0
     };
   },
@@ -32,8 +32,8 @@ export default Vue.extend({
       return this.$store.state.car.carYear;
     },
 
-    addon(): CarInsuranceAddOn {
-      return this.$store.state.car.addon;
+    addons(): CarInsuranceAddOn[] {
+      return this.$store.state.car.addons;
     }
   },
 
@@ -48,8 +48,8 @@ export default Vue.extend({
       this.calculateCarInsuranceFee();
     },
 
-    addon(newValue: CarInsuranceAddOn) {
-      this.mic.setAddon(newValue);
+    addons(newValue: CarInsuranceAddOn[]) {
+      this.mic.setAddons(newValue);
       this.calculateCarInsuranceFee();
     }
   },
@@ -57,7 +57,7 @@ export default Vue.extend({
   mounted() {
     this.mic.setCarValue(this.carValue);
     this.mic.setCarYear(this.carYear);
-    this.mic.setAddon(this.addon);
+    this.mic.setAddons(this.addons);
     this.calculateCarInsuranceFee();
   },
 

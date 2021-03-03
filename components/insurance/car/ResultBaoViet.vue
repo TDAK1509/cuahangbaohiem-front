@@ -18,7 +18,7 @@ export default Vue.extend({
 
   data() {
     return {
-      baoViet: new BaoVietCarInsurance(0, 0, CarInsuranceAddOn.NONE),
+      baoViet: new BaoVietCarInsurance(0, 0),
       insuranceFee: 0
     };
   },
@@ -32,8 +32,8 @@ export default Vue.extend({
       return this.$store.state.car.carYear;
     },
 
-    addon(): CarInsuranceAddOn {
-      return this.$store.state.car.addon;
+    addons(): CarInsuranceAddOn[] {
+      return this.$store.state.car.addons;
     }
   },
 
@@ -48,8 +48,8 @@ export default Vue.extend({
       this.calculateCarInsuranceFee();
     },
 
-    addon(newValue: CarInsuranceAddOn) {
-      this.baoViet.setAddon(newValue);
+    addons(newValue: CarInsuranceAddOn[]) {
+      this.baoViet.setAddons(newValue);
       this.calculateCarInsuranceFee();
     }
   },
@@ -57,7 +57,7 @@ export default Vue.extend({
   mounted() {
     this.baoViet.setCarValue(this.carValue);
     this.baoViet.setCarYear(this.carYear);
-    this.baoViet.setAddon(this.addon);
+    this.baoViet.setAddons(this.addons);
     this.calculateCarInsuranceFee();
   },
 
