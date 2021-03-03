@@ -41,7 +41,7 @@
         <div class="field">
           <label class="label">Điều kiện bổ sung</label>
 
-          <div v-if="hasRadios" class="control" data-cy="addons">
+          <div class="control" data-cy="addons">
             <p v-for="item in addonCheckboxes" :key="item.value">
               <label class="checkbox">
                 <input v-model="addons" type="checkbox" :value="item.value" />
@@ -49,8 +49,6 @@
               </label>
             </p>
           </div>
-
-          <p v-else>Tình trạng xe của bạn không có hỗ trợ điều kiện bổ sung.</p>
         </div>
 
         <div class="field mt-5">
