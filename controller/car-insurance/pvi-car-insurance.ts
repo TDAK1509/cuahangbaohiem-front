@@ -50,6 +50,10 @@ export default class PviCarInsurance {
       insuranceRate += 0.2;
     }
 
+    if (this.addons.includes(CarInsuranceAddOn.DKBS_007)) {
+      insuranceRate += 0.1;
+    }
+
     return insuranceRate;
   }
 }
