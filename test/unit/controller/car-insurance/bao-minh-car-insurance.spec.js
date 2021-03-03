@@ -297,12 +297,16 @@ describe("class BaoMinhCarInsurance", () => {
     describe("500 < carValue < 700", () => {
       it("returns insurance fee with rate same to carValue <= 500 with 15% off", () => {
         const carValue = 600;
+        const carYear = LESS_THAN_3_YEARS;
+        const addons = [CarInsuranceAddOn.DKBS_003];
         const baoMinhCarInsurance = new BaoMinhCarInsurance(
           carValue,
-          LESS_THAN_3_YEARS
+          carYear,
+          addons
         );
+
         const insuranceFee = baoMinhCarInsurance.getInsuranceFee();
-        const expectedInsuranceFee = (carValue * (1.5 - 0.15)) / 100;
+        const expectedInsuranceFee = (carValue * ((1.5 + 0.2) * 0.85)) / 100;
         expect(insuranceFee).toBe(expectedInsuranceFee);
       });
     });
@@ -310,12 +314,15 @@ describe("class BaoMinhCarInsurance", () => {
     describe("carValue >= 700", () => {
       it("returns insurance fee with rate same to carValue <= 500 with 25% off", () => {
         const carValue = 700;
+        const carYear = LESS_THAN_3_YEARS;
+        const addons = [CarInsuranceAddOn.DKBS_003];
         const baoMinhCarInsurance = new BaoMinhCarInsurance(
           carValue,
-          LESS_THAN_3_YEARS
+          carYear,
+          addons
         );
         const insuranceFee = baoMinhCarInsurance.getInsuranceFee();
-        const expectedInsuranceFee = (carValue * (1.5 - 0.25)) / 100;
+        const expectedInsuranceFee = (carValue * ((1.5 + 0.2) * 0.75)) / 100;
         expect(insuranceFee).toBe(expectedInsuranceFee);
       });
     });

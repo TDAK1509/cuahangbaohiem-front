@@ -31,11 +31,11 @@ export default class BaoVietCarInsurance {
     let insuranceRate = this.getInsuranceFeeRate();
 
     if (this.carValue > 500 && this.carValue < 700) {
-      insuranceRate -= 0.15;
+      insuranceRate = insuranceRate * 0.85;
     }
 
     if (this.carValue >= 700) {
-      insuranceRate -= 0.25;
+      insuranceRate = insuranceRate * 0.75;
     }
 
     return (this.carValue * insuranceRate) / 100;

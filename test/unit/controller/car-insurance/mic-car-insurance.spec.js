@@ -288,12 +288,12 @@ describe("class MicCarInsurance", () => {
     describe("500 < carValue < 700", () => {
       it("returns insurance fee with rate same to carValue <= 500 with 15% off", () => {
         const carValue = 600;
-        const micCarInsurance = new MicCarInsurance(
-          carValue,
-          LESS_THAN_3_YEARS
-        );
+        const carYear = LESS_THAN_3_YEARS;
+        const addons = [CarInsuranceAddOn.DKBS_003];
+        const micCarInsurance = new MicCarInsurance(carValue, carYear, addons);
+
         const insuranceFee = micCarInsurance.getInsuranceFee();
-        const expectedInsuranceFee = (carValue * (1.5 - 0.15)) / 100;
+        const expectedInsuranceFee = (carValue * ((1.5 + 0.2) * 0.85)) / 100;
         expect(insuranceFee).toBe(expectedInsuranceFee);
       });
     });
@@ -301,12 +301,11 @@ describe("class MicCarInsurance", () => {
     describe("carValue >= 700", () => {
       it("returns insurance fee with rate same to carValue <= 500 with 25% off", () => {
         const carValue = 700;
-        const micCarInsurance = new MicCarInsurance(
-          carValue,
-          LESS_THAN_3_YEARS
-        );
+        const carYear = LESS_THAN_3_YEARS;
+        const addons = [CarInsuranceAddOn.DKBS_003];
+        const micCarInsurance = new MicCarInsurance(carValue, carYear, addons);
         const insuranceFee = micCarInsurance.getInsuranceFee();
-        const expectedInsuranceFee = (carValue * (1.5 - 0.25)) / 100;
+        const expectedInsuranceFee = (carValue * ((1.5 + 0.2) * 0.75)) / 100;
         expect(insuranceFee).toBe(expectedInsuranceFee);
       });
     });
