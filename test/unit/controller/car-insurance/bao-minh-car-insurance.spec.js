@@ -306,7 +306,9 @@ describe("class BaoMinhCarInsurance", () => {
         );
 
         const insuranceFee = baoMinhCarInsurance.getInsuranceFee();
-        const expectedInsuranceFee = (carValue * ((1.5 + 0.2) * 0.85)) / 100;
+        const expectedInsuranceRate =
+          Math.round((1.5 + 0.2) * 0.85 * 100) / 100;
+        const expectedInsuranceFee = (carValue * expectedInsuranceRate) / 100;
         expect(insuranceFee).toBe(expectedInsuranceFee);
       });
     });
@@ -322,7 +324,9 @@ describe("class BaoMinhCarInsurance", () => {
           addons
         );
         const insuranceFee = baoMinhCarInsurance.getInsuranceFee();
-        const expectedInsuranceFee = (carValue * ((1.5 + 0.2) * 0.75)) / 100;
+        const expectedInsuranceRate =
+          Math.round((1.5 + 0.2) * 0.75 * 100) / 100;
+        const expectedInsuranceFee = (carValue * expectedInsuranceRate) / 100;
         expect(insuranceFee).toBe(expectedInsuranceFee);
       });
     });

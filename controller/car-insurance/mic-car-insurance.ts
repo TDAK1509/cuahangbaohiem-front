@@ -38,6 +38,8 @@ export default class MicCarInsurance {
       insuranceRate = insuranceRate * 0.75;
     }
 
+    insuranceRate = Math.round(insuranceRate * 100) / 100;
+
     return (this.carValue * insuranceRate) / 100;
   }
 
