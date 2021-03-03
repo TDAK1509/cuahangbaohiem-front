@@ -44,6 +44,12 @@ export default class PviCarInsurance {
   }
 
   private getInsuranceFeeRateForLessThan3YearsThreshold(): number {
-    return 1.5;
+    let insuranceRate = 1.5;
+
+    if (this.addons.includes(CarInsuranceAddOn.DKBS_003)) {
+      insuranceRate += 0.2;
+    }
+
+    return insuranceRate;
   }
 }
