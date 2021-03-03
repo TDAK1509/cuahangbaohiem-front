@@ -120,7 +120,7 @@ export default Vue.extend({
 
     addons: {
       get(): CarInsuranceAddOn[] {
-        return this.$store.state.car.addon;
+        return this.$store.state.car.addons;
       },
       set(newValue: CarInsuranceAddOn[]) {
         this.$store.dispatch("car/setAddons", newValue);
