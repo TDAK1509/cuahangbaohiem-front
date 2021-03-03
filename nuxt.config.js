@@ -1,6 +1,10 @@
 export default {
   target: "static",
 
+  static: {
+    prefix: false
+  },
+
   head: {
     title: "Cửa hàng bảo hiểm | Sản phẩm",
     meta: [
