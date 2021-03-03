@@ -12,21 +12,21 @@ describe("class PviCarInsurance", () => {
     MockDate.set(new Date(THIS_YEAR, 1, 1));
   });
 
-  describe.skip("setters", () => {
+  describe("setters", () => {
     it("setCarValue() is working", () => {
       const carValue = 100;
       const carYear = LESS_THAN_3_YEARS;
       const pviCarInsurance = new PviCarInsurance(carValue, carYear);
 
-      let expectedCarInsuranceValue = (carValue * 1.5) / 100;
-      let carInsuranceValue = pviCarInsurance.getInsuranceFee();
-      expect(insuranceFee).toBe(expectedCarInsuranceValue);
+      let expectedInsuranceFee = (carValue * 1.5) / 100;
+      let insuranceFee = pviCarInsurance.getInsuranceFee();
+      expect(insuranceFee).toBe(expectedInsuranceFee);
 
       const newCarValue = 500;
       pviCarInsurance.setCarValue(newCarValue);
-      carInsuranceValue = pviCarInsurance.getInsuranceFee();
-      expectedCarInsuranceValue = (newCarValue * 1.5) / 100;
-      expect(insuranceFee).toBe(expectedCarInsuranceValue);
+      insuranceFee = pviCarInsurance.getInsuranceFee();
+      expectedInsuranceFee = (newCarValue * 1.5) / 100;
+      expect(insuranceFee).toBe(expectedInsuranceFee);
     });
 
     it("setCarYear() is working", () => {
@@ -38,9 +38,9 @@ describe("class PviCarInsurance", () => {
       pviCarInsurance.setCarYear(LESS_THAN_3_YEARS);
       const insuranceFee2 = pviCarInsurance.getInsuranceFee();
 
-      expect(carInsuranceValue1).not.toBe(0);
-      expect(carInsuranceValue2).not.toBe(0);
-      expect(carInsuranceValue1).not.toBe(carInsuranceValue2);
+      expect(insuranceFee1).not.toBe(0);
+      expect(insuranceFee2).not.toBe(0);
+      expect(insuranceFee1).not.toBe(insuranceFee2);
     });
 
     it("setAddons() is working", () => {
@@ -52,9 +52,9 @@ describe("class PviCarInsurance", () => {
       pviCarInsurance.setAddons([CarInsuranceAddOn.DKBS_003]);
       const insuranceFee2 = pviCarInsurance.getInsuranceFee();
 
-      expect(carInsuranceValue1).not.toBe(0);
-      expect(carInsuranceValue2).not.toBe(0);
-      expect(carInsuranceValue1).not.toBe(carInsuranceValue2);
+      expect(insuranceFee1).not.toBe(0);
+      expect(insuranceFee2).not.toBe(0);
+      expect(insuranceFee1).not.toBe(insuranceFee2);
     });
   });
 
