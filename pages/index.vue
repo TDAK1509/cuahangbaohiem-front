@@ -1,18 +1,14 @@
 <template>
   <div class="home container">
-    <slider animation="fade" height="75vh">
-      <slider-item>
-        <figure>
-          <img class="home__img" src="~/assets/images/slide-1.png" />
-        </figure>
-      </slider-item>
+    <agile>
+      <figure class="home__slide">
+        <img class="home__img" src="~/assets/images/slide-1.png" />
+      </figure>
 
-      <slider-item>
-        <figure>
-          <img class="home__img" src="~/assets/images/slide-2.png" />
-        </figure>
-      </slider-item>
-    </slider>
+      <figure class="home__slide">
+        <img class="home__img" src="~/assets/images/slide-2.png" />
+      </figure>
+    </agile>
   </div>
 </template>
 
@@ -21,6 +17,18 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "Home",
+
+  data() {
+    return {
+      sliderHeight: 0
+    };
+  },
+
+  mounted() {
+    const headerHeight = 75;
+    const footerHeight = 138;
+    this.sliderHeight = window.innerHeight - headerHeight - footerHeight;
+  },
 
   head() {
     return {
@@ -35,9 +43,16 @@ export default Vue.extend({
   z-index: 0;
 }
 
-.home__img {
+.home__slide {
   width: 100%;
-  height: auto;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background: none;
+}
+
+.home__img {
+  height: 100%;
   object-fit: cover;
 }
 </style>
