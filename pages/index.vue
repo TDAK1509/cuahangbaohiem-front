@@ -39,6 +39,12 @@ export default Vue.extend({
 
   mounted() {
     this.$nextTick().then(() => {
+      this.setSlideHeight();
+    });
+  },
+
+  methods: {
+    setSlideHeight() {
       const headerHeight = document.querySelector("header.header")!
         .clientHeight;
       const footerHeight = document.querySelector("footer.the-footer")!
@@ -46,7 +52,7 @@ export default Vue.extend({
       const slideHeight = window.innerHeight - headerHeight - footerHeight;
       this.$refs.slide1.style.height = slideHeight + "px";
       this.$refs.slide2.style.height = slideHeight + "px";
-    });
+    }
   },
 
   head() {
@@ -65,7 +71,7 @@ export default Vue.extend({
 }
 
 .home__slide {
-  height: 300px;
+  height: 0;
 }
 
 .home__img {
