@@ -24,6 +24,10 @@ export default class PviMotorbikeInsurance {
       return 121000;
     }
 
+    if (this.year === 3) {
+      return 181500;
+    }
+
     return 0;
   }
 }
