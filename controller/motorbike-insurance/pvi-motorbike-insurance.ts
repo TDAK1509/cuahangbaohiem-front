@@ -15,7 +15,15 @@ export default class PviMotorbikeInsurance {
     this.motorbike = motorbike;
   }
 
-  public getInsuranceFee() {
-    return 60500;
+  public getInsuranceFee(): number {
+    if (this.year === 1) {
+      return 60500;
+    }
+
+    if (this.year === 2) {
+      return 121000;
+    }
+
+    return 0;
   }
 }

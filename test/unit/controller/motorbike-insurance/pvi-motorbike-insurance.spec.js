@@ -14,6 +14,14 @@ describe("PviMotorbikeInsurance class", () => {
         const insuranceFee = pvi.getInsuranceFee();
         expect(insuranceFee).toBe(60500);
       });
+
+      it("given 2 year, returns 121000", () => {
+        const pvi = new PviMotorbikeInsurance();
+        pvi.setYear(2);
+        pvi.setMotorbike(motorbike);
+        const insuranceFee = pvi.getInsuranceFee();
+        expect(insuranceFee).toBe(121000);
+      });
     });
   });
 });
