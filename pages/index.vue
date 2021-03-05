@@ -3,10 +3,14 @@
     <client-only>
       <vue-carousel v-bind="carouselOptions">
         <vue-carousel-slide>
-          <img class="home__img" src="~/assets/images/slide-1.png" />
+          <figure ref="slide1" class="home__slide">
+            <img class="home__img" src="~/assets/images/slide-1.png" />
+          </figure>
         </vue-carousel-slide>
         <vue-carousel-slide>
-          <img class="home__img" src="~/assets/images/slide-2.png" />
+          <figure ref="slide2" class="home__slide">
+            <img class="home__img" src="~/assets/images/slide-2.png" />
+          </figure>
         </vue-carousel-slide>
       </vue-carousel>
     </client-only>
@@ -19,6 +23,8 @@ import Vue from "vue";
 export default Vue.extend({
   name: "Home",
 
+  layout: "home",
+
   data() {
     return {
       carouselOptions: {
@@ -29,6 +35,14 @@ export default Vue.extend({
         paginationEnabled: false
       }
     };
+  },
+
+  mounted() {
+    this.$nextTick().then(() => {
+      const slideHeight = window.innerHeight - 70 - 170;
+      this.$refs.slide1.style.height = slideHeight + "px";
+      this.$refs.slide2.style.height = slideHeight + "px";
+    });
   },
 
   head() {
@@ -46,15 +60,12 @@ export default Vue.extend({
   z-index: 0;
 }
 
-// .home__slide {
-//   width: 500px;
-//   height: 666px;
-//   display: flex;
-//   justify-content: center;
-// }
+.home__slide {
+  height: 300px;
+}
 
-// .home__img {
-//   height: 100%;
-//   object-fit: cover;
-// }
+.home__img {
+  height: 100%;
+  object-fit: scale-down;
+}
 </style>
