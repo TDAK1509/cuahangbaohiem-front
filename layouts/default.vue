@@ -1,7 +1,11 @@
 <template>
-  <div>
+  <div id="default-layout">
     <TheHeader />
-    <Nuxt />
+
+    <main>
+      <Nuxt />
+    </main>
+
     <TheFooter />
   </div>
 </template>
@@ -29,5 +33,18 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html,
+body,
+#__nuxt,
+#__layout {
+  height: 100%;
+}
+
+#default-layout {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer has-background-dark has-text-white">
+  <footer class="the-footer footer has-background-dark has-text-white">
     <div class="columns">
       <FooterFirstColumn />
       <FooterSecondColumn />
@@ -15,8 +15,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.footer__image {
-  height: 40px;
-  width: auto;
+.the-footer {
+  margin-top: auto;
 }
 </style>
