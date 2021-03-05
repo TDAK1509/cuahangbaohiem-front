@@ -45,11 +45,14 @@ export default Vue.extend({
 
   methods: {
     setSlideHeight() {
-      const headerHeight = document.querySelector("header.header")!
-        .clientHeight;
-      const footerHeight = document.querySelector("footer.the-footer")!
-        .clientHeight;
+      const header = document.querySelector("header.header");
+      const headerHeight = header ? header.clientHeight : 0;
+
+      const footer = document.querySelector("footer.the-footer");
+      const footerHeight = footer ? footer.clientHeight : 0;
+
       const slideHeight = window.innerHeight - headerHeight - footerHeight;
+
       this.$refs.slide1.style.height = slideHeight + "px";
       this.$refs.slide2.style.height = slideHeight + "px";
     }
