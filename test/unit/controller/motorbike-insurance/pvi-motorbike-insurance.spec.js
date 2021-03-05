@@ -1,6 +1,5 @@
-import PviMotorbikeInsurance, {
-  Motorbike
-} from "~/controller/motorbike-insurance/pvi-motorbike-insurance";
+import PviMotorbikeInsurance from "~/controller/motorbike-insurance/pvi-motorbike-insurance";
+import { Motorbike } from "@/controller/motorbike-insurance/motorbike-insurance";
 
 describe("PviMotorbikeInsurance class", () => {
   describe("Motorbike <= 50cc", () => {

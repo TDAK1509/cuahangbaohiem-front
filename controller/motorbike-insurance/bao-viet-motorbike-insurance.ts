@@ -1,6 +1,6 @@
 import { Motorbike } from "./motorbike-insurance";
 
-export default class PviMotorbikeInsurance {
+export default class BaoVietMotorbikeInsurance {
   private year = 0;
   private motorbike = Motorbike.UP_TO_50_CC;
   private hasAddon = false;
