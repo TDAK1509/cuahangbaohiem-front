@@ -39,7 +39,11 @@ export default Vue.extend({
 
   mounted() {
     this.$nextTick().then(() => {
-      const slideHeight = window.innerHeight - 70 - 170;
+      const headerHeight = document.querySelector("header.header")!
+        .clientHeight;
+      const footerHeight = document.querySelector("footer.the-footer")!
+        .clientHeight;
+      const slideHeight = window.innerHeight - headerHeight - footerHeight;
       this.$refs.slide1.style.height = slideHeight + "px";
       this.$refs.slide2.style.height = slideHeight + "px";
     });
