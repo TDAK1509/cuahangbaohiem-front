@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div id="calculator-layout">
     <TheHeader />
-    <InsuranceTabBar :insurance-type="insuranceType" />
-    <Nuxt />
+
+    <main>
+      <InsuranceTabBar :insurance-type="insuranceType" />
+      <Nuxt />
+    </main>
+
     <TheFooter />
   </div>
 </template>
@@ -45,5 +49,18 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html,
+body,
+#__nuxt,
+#__layout {
+  height: 100%;
+}
+
+#calculator-layout {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

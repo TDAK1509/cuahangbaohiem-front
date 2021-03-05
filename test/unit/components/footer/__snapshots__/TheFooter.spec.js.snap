@@ -2,7 +2,7 @@
 
 exports[`TheFooter.vue matches snapshot 1`] = `
 <footer
-  class="footer has-background-dark has-text-white"
+  class="the-footer footer has-background-dark has-text-white"
 >
   <div
     class="columns"

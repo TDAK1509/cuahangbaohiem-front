@@ -1,8 +1,8 @@
 <template>
-  <div id="default-layout">
+  <div id="home-layout">
     <TheHeader />
 
-    <main>
+    <main id="home-layout__main">
       <Nuxt />
     </main>
 
@@ -39,12 +39,19 @@ html,
 body,
 #__nuxt,
 #__layout {
-  height: 100%;
+  max-height: 100%;
 }
 
-#default-layout {
+#home-layout {
   min-height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+#home-layout__main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 </style>

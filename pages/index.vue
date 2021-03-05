@@ -1,14 +1,19 @@
 <template>
   <div class="home container">
-    <agile :nav-buttons="false" autoplay>
-      <figure class="home__slide">
-        <img class="home__img" src="~/assets/images/slide-1.png" />
-      </figure>
-
-      <figure class="home__slide">
-        <img class="home__img" src="~/assets/images/slide-2.png" />
-      </figure>
-    </agile>
+    <client-only>
+      <vue-carousel v-bind="carouselOptions">
+        <vue-carousel-slide>
+          <figure ref="slide1" class="home__slide">
+            <img class="home__img" src="~/assets/images/slide-1.png" />
+          </figure>
+        </vue-carousel-slide>
+        <vue-carousel-slide>
+          <figure ref="slide2" class="home__slide">
+            <img class="home__img" src="~/assets/images/slide-2.png" />
+          </figure>
+        </vue-carousel-slide>
+      </vue-carousel>
+    </client-only>
   </div>
 </template>
 
@@ -18,16 +23,39 @@ import Vue from "vue";
 export default Vue.extend({
   name: "Home",
 
+  layout: "home",
+
   data() {
     return {
-      sliderHeight: 0
+      carouselOptions: {
+        perPage: 1,
+        autoplay: true,
+        centerMode: true,
+        loop: true,
+        paginationEnabled: false
+      }
     };
   },
 
   mounted() {
-    const headerHeight = 75;
-    const footerHeight = 138;
-    this.sliderHeight = window.innerHeight - headerHeight - footerHeight;
+    this.$nextTick().then(() => {
+      this.setSlideHeight();
+    });
+  },
+
+  methods: {
+    setSlideHeight() {
+      const header = document.querySelector("header.header");
+      const headerHeight = header ? header.clientHeight : 0;
+
+      const footer = document.querySelector("footer.the-footer");
+      const footerHeight = footer ? footer.clientHeight : 0;
+
+      const slideHeight = window.innerHeight - headerHeight - footerHeight;
+
+      this.$refs.slide1.style.height = slideHeight + "px";
+      this.$refs.slide2.style.height = slideHeight + "px";
+    }
   },
 
   head() {
@@ -46,35 +74,11 @@ export default Vue.extend({
 }
 
 .home__slide {
-  width: 500px;
-  height: 666px;
-  display: flex;
-  justify-content: center;
+  height: 0;
 }
 
 .home__img {
   height: 100%;
-  object-fit: cover;
-}
-
-@media only screen and (max-width: 1200px) {
-  .home__slide {
-    width: 580px;
-    height: 773px;
-  }
-}
-
-@media only screen and (max-width: $mobile) {
-  .home__slide {
-    width: 300px;
-    height: 400px;
-  }
-}
-
-@media only screen and (max-width: 374px) {
-  .home__slide {
-    width: 250px;
-    height: 333px;
-  }
+  object-fit: scale-down;
 }
 </style>
