@@ -39,13 +39,15 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/_breakpoints";
+
 .home {
   z-index: 0;
 }
 
 .home__slide {
-  width: 300px;
-  height: 400px;
+  width: 500px;
+  height: 666px;
   display: flex;
   justify-content: center;
 }
@@ -53,5 +55,26 @@ export default Vue.extend({
 .home__img {
   height: 100%;
   object-fit: cover;
+}
+
+@media only screen and (max-width: 1200px) {
+  .home__slide {
+    width: 580px;
+    height: 773px;
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .home__slide {
+    width: 300px;
+    height: 400px;
+  }
+}
+
+@media only screen and (max-width: 374px) {
+  .home__slide {
+    width: 250px;
+    height: 333px;
+  }
 }
 </style>
