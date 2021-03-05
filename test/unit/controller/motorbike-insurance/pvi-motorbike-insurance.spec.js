@@ -61,4 +61,63 @@ describe("PviMotorbikeInsurance class", () => {
       });
     });
   });
+
+  describe("Motorbike > 50cc", () => {
+    const motorbike = Motorbike.ABOVE_50CC;
+
+    describe("without addon", () => {
+      it("given 1 year, returns 66000", () => {
+        const pvi = new PviMotorbikeInsurance();
+        pvi.setYear(1);
+        pvi.setMotorbike(motorbike);
+        const insuranceFee = pvi.getInsuranceFee();
+        expect(insuranceFee).toBe(66000);
+      });
+
+      it("given 2 year, returns 132000", () => {
+        const pvi = new PviMotorbikeInsurance();
+        pvi.setYear(2);
+        pvi.setMotorbike(motorbike);
+        const insuranceFee = pvi.getInsuranceFee();
+        expect(insuranceFee).toBe(132000);
+      });
+
+      it("given 3 year, returns 198000", () => {
+        const pvi = new PviMotorbikeInsurance();
+        pvi.setYear(3);
+        pvi.setMotorbike(motorbike);
+        const insuranceFee = pvi.getInsuranceFee();
+        expect(insuranceFee).toBe(198000);
+      });
+    });
+
+    describe("with addon", () => {
+      it("given 1 year, returns 86000", () => {
+        const pvi = new PviMotorbikeInsurance();
+        pvi.setYear(1);
+        pvi.setMotorbike(motorbike);
+        pvi.setHasAddon(true);
+        const insuranceFee = pvi.getInsuranceFee();
+        expect(insuranceFee).toBe(86000);
+      });
+
+      it("given 2 year, returns 172000", () => {
+        const pvi = new PviMotorbikeInsurance();
+        pvi.setYear(2);
+        pvi.setMotorbike(motorbike);
+        pvi.setHasAddon(true);
+        const insuranceFee = pvi.getInsuranceFee();
+        expect(insuranceFee).toBe(172000);
+      });
+
+      it("given 3 year, returns 258000", () => {
+        const pvi = new PviMotorbikeInsurance();
+        pvi.setYear(3);
+        pvi.setMotorbike(motorbike);
+        pvi.setHasAddon(true);
+        const insuranceFee = pvi.getInsuranceFee();
+        expect(insuranceFee).toBe(258000);
+      });
+    });
+  });
 });
