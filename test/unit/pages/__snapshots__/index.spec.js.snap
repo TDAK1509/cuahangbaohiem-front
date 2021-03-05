@@ -4,26 +4,35 @@ exports[`pages/index.vue matches snapshot 1`] = `
 <div
   class="home container"
 >
-  <agile
-    autoplay="autoplay"
-  >
-    <figure
-      class="home__slide"
+  <client-only>
+    <vue-carousel
+      autoplay="true"
+      centermode="true"
+      loop="true"
+      perpage="1"
     >
-      <img
-        class="home__img"
-        src="~/assets/images/slide-1.png"
-      />
-    </figure>
-     
-    <figure
-      class="home__slide"
-    >
-      <img
-        class="home__img"
-        src="~/assets/images/slide-2.png"
-      />
-    </figure>
-  </agile>
+      <vue-carousel-slide>
+        <figure
+          class="home__slide"
+        >
+          <img
+            class="home__img"
+            src="~/assets/images/slide-1.png"
+          />
+        </figure>
+      </vue-carousel-slide>
+       
+      <vue-carousel-slide>
+        <figure
+          class="home__slide"
+        >
+          <img
+            class="home__img"
+            src="~/assets/images/slide-2.png"
+          />
+        </figure>
+      </vue-carousel-slide>
+    </vue-carousel>
+  </client-only>
 </div>
 `;
