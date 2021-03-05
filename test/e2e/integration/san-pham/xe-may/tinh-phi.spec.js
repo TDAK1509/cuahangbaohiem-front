@@ -3,7 +3,7 @@ describe("Page /san-pham/xe-may", () => {
     cy.visit("/san-pham/xe-may");
   });
 
-  describe("tab bar", () => {
+  describe.skip("tab bar", () => {
     it("should have 5 correct tabs", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").should("be.visible");
       cy.contains("QUYỀN LỢI").should("be.visible");
@@ -41,6 +41,20 @@ describe("Page /san-pham/xe-may", () => {
     it("clicks TÍNH PHÍ & ĐẶT MUA to /san-pham/xe-may", () => {
       cy.contains("TÍNH PHÍ & ĐẶT MUA").click();
       cy.url().should("match", /\/san-pham\/xe-may\/?$/);
+    });
+  });
+
+  describe("form handling", () => {
+    beforeEach(() => {
+      cy.get("[data-cy=motorbike-input]").as("motorbikeRadio");
+      cy.get("[data-cy=next-button]").as("nextButton");
+    });
+
+    describe("error handling", () => {
+      it("field motorbike type is required", () => {
+        cy.get("@nextButton").click();
+        cy.assertFailedHtml5FormValidation("@motorbikeRadio");
+      });
     });
   });
 });

@@ -23,3 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("assertFailedHtml5FormValidation", (selector) => {
+  cy.get(selector).should(($el) => {
+    expect($el.get(0).checkValidity()).to.equal(false);
+  });
+});
