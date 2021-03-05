@@ -22,6 +22,7 @@ export default class PviMotorbikeInsurance {
 
   public getInsuranceFee(): number {
     let insuranceFee = 0;
+    const addOnFee = 20000;
 
     if (this.year === 1) {
       insuranceFee = 60500;
@@ -32,7 +33,7 @@ export default class PviMotorbikeInsurance {
     }
 
     if (this.hasAddOn) {
-      insuranceFee += 20000;
+      insuranceFee += addOnFee * this.year;
     }
 
     return insuranceFee;
