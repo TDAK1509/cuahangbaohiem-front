@@ -34,7 +34,7 @@ export default {
   plugins: [
     { src: "~/plugins/vue-fb-customer-chat.js", ssr: false },
     { src: "~/plugins/vue-carousel-3d.js", ssr: false },
-    { src: "~/plugins/vue-easy-slider.js", ssr: false }
+    { src: "~/plugins/vue-agile.js", ssr: false }
   ],
 
   components: true,
