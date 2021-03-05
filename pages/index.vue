@@ -1,6 +1,6 @@
 <template>
   <div class="home container">
-    <agile>
+    <agile :nav-buttons="false" autoplay>
       <figure class="home__slide">
         <img class="home__img" src="~/assets/images/slide-1.png" />
       </figure>
