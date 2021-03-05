@@ -6,6 +6,7 @@ export enum Motorbike {
 export default class PviMotorbikeInsurance {
   private year = 0;
   private motorbike = Motorbike.UP_TO_50_CC;
+  private hasAddOn = false;
 
   public setYear(year: number) {
     this.year = year;
@@ -15,19 +16,25 @@ export default class PviMotorbikeInsurance {
     this.motorbike = motorbike;
   }
 
+  public setHasAddon(hasAddon: boolean) {
+    this.hasAddOn = hasAddon;
+  }
+
   public getInsuranceFee(): number {
+    let insuranceFee = 0;
+
     if (this.year === 1) {
-      return 60500;
+      insuranceFee = 60500;
+    } else if (this.year === 2) {
+      insuranceFee = 121000;
+    } else if (this.year === 3) {
+      insuranceFee = 181500;
     }
 
-    if (this.year === 2) {
-      return 121000;
+    if (this.hasAddOn) {
+      insuranceFee += 20000;
     }
 
-    if (this.year === 3) {
-      return 181500;
-    }
-
-    return 0;
+    return insuranceFee;
   }
 }
