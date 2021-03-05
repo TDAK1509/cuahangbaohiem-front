@@ -44,11 +44,10 @@ export default Vue.extend({
 }
 
 .home__slide {
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: 400px;
   display: flex;
   justify-content: center;
-  background: none;
 }
 
 .home__img {
