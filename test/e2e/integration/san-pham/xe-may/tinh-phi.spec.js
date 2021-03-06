@@ -82,6 +82,16 @@ describe("Page /san-pham/xe-may", () => {
           "Tên của bạn có số hoặc kí tự lạ."
         );
       });
+
+      it("check license plate format", () => {
+        cy.get(MOTORBIKE_OWNER_SELECTOR).type("Nguyen Van A");
+        cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).type("abc123");
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+        cy.assertFailedHtml5FormValidation(
+          MOTORBIKE_LICENSE_PLATE_SELECTOR,
+          "Điền biển số xe theo mẫu: 55Z5-1234 hoặc 66Z6-123456."
+        );
+      });
     });
   });
 });

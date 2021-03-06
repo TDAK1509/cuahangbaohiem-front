@@ -5,7 +5,7 @@
       <TextField
         data-cy="owner-input"
         required
-        pattern="[a-zA-Z]+"
+        pattern="[a-zA-Z\s]+"
         title="Tên của bạn có số hoặc kí tự lạ."
       />
       <TextField data-cy="license-plate-input" required />
