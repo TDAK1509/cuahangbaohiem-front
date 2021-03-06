@@ -6,39 +6,8 @@
 <template>
   <section class="section">
     <div class="container">
-      <form @submit.prevent="submit">
-        <div class="field">
-          <label class="label">Loại xe</label>
-
-          <div class="control">
-            <p>
-              <label class="radio">
-                <input
-                  data-cy="motorbike-radio"
-                  name="haha"
-                  type="radio"
-                  required
-                />
-                &lt; 50cc
-              </label>
-            </p>
-
-            <p>
-              <label class="radio">
-                <input
-                  data-cy="motorbike-radio"
-                  name="haha"
-                  type="radio"
-                  required
-                />
-                &gt; 50cc
-              </label>
-            </p>
-          </div>
-        </div>
-
-        <button data-cy="next-button">NEXT</button>
-      </form>
+      <FormStep1 v-if="currentStep === 1" @submit="submitStep1" />
+      <FormStep2 v-else-if="currentStep === 2" @submit="submitStep2" />
     </div>
   </section>
 </template>
@@ -47,11 +16,23 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "TinhPhiTaiNan",
+  name: "TinhPhiXeMay",
+
   layout: "calculator",
+
+  data() {
+    return {
+      currentStep: 1
+    };
+  },
+
   methods: {
-    submit() {
-      //
+    submitStep1() {
+      this.currentStep = 2;
+    },
+
+    submitStep2() {
+      this.currentStep = 3;
     }
   }
 });

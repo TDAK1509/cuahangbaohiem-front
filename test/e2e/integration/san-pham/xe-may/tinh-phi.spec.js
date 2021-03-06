@@ -59,7 +59,7 @@ describe("Page /san-pham/xe-may", () => {
       it("chooses > 50cc, clicking next go to next page", () => {
         cy.get("@motorbikeRadio").eq(1).click();
         cy.get("@nextButton").click();
-        cy.contains("BƯỚC 2").should("be.visible");
+        cy.contains("BƯỚC 2: THÔNG TIN XE").should("be.visible");
       });
     });
   });
