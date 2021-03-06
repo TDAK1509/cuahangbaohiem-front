@@ -3,6 +3,13 @@ const MOTORBIKE_RADIO_SELECTOR = "[data-cy=motorbike-radio]";
 const MOTORBIKE_OWNER_SELECTOR = "[data-cy=owner-input]";
 const MOTORBIKE_LICENSE_PLATE_SELECTOR = "[data-cy=license-plate-input]";
 const MOTORBIKE_FRAME_NUMBER_SELECTOR = "[data-cy=frame-number-input]";
+const BUYER_NAME = "[data-cy=buyer-name-input]";
+const BUYER_ADDRESS = "[data-cy=buyer-address-input]";
+const BUYER_CITY = "[data-cy=buyer-city-input]";
+const BUYER_DISTRICT = "[data-cy=buyer-district-input]";
+const BUYER_WARD = "[data-cy=buyer-ward-input]";
+const BUYER_PHONE = "[data-cy=buyer-phone-input]";
+const BUYER_EMAIL = "[data-cy=buyer-email-input]";
 
 describe("Page /san-pham/xe-may", () => {
   beforeEach(() => {
@@ -116,6 +123,23 @@ describe("Page /san-pham/xe-may", () => {
         cy.contains("BƯỚC 3:").should("be.visible");
       });
     });
+
+    describe("step 3", () => {
+      beforeEach(() => {
+        goToStep3();
+      });
+
+      it("all fields are required", () => {
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+        cy.assertFailedHtml5FormValidation(BUYER_NAME);
+        cy.assertFailedHtml5FormValidation(BUYER_ADDRESS);
+        cy.assertFailedHtml5FormValidation(BUYER_CITY);
+        cy.assertFailedHtml5FormValidation(BUYER_DISTRICT);
+        cy.assertFailedHtml5FormValidation(BUYER_WARD);
+        cy.assertFailedHtml5FormValidation(BUYER_PHONE);
+        cy.assertFailedHtml5FormValidation(BUYER_EMAIL);
+      });
+    });
   });
 });
 
@@ -123,4 +147,13 @@ function goToStep2() {
   cy.get(MOTORBIKE_RADIO_SELECTOR).eq(1).click();
   cy.get(NEXT_BUTTON_SELECTOR).click();
   cy.contains("BƯỚC 2:").should("be.visible");
+}
+
+function goToStep3() {
+  goToStep2();
+
+  cy.get(MOTORBIKE_OWNER_SELECTOR).type("Nguyen Van A");
+  cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).type("55Z5-1111");
+  cy.get(NEXT_BUTTON_SELECTOR).click();
+  cy.contains("BƯỚC 3:").should("be.visible");
 }
