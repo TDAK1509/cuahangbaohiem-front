@@ -40,7 +40,7 @@
         title="Định dạng số điện thoại không đúng."
       />
 
-      <TextField data-cy="buyer-email-input" required />
+      <TextField data-cy="buyer-email-input" required type="email" />
 
       <button data-cy="next-button">NEXT</button>
     </form>

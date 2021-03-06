@@ -166,6 +166,12 @@ describe("Page /san-pham/xe-may", () => {
           "Định dạng số điện thoại không đúng."
         );
       });
+
+      it("email field format", () => {
+        cy.get(BUYER_EMAIL).type("01234a5");
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+        cy.assertFailedHtml5FormValidation(BUYER_EMAIL);
+      });
     });
   });
 });
