@@ -32,7 +32,13 @@
         </select>
       </div>
 
-      <TextField data-cy="buyer-phone-input" required />
+      <TextField
+        data-cy="buyer-phone-input"
+        required
+        type="tel"
+        pattern="[0][0-9]+"
+        title="Định dạng số điện thoại không đúng."
+      />
 
       <TextField data-cy="buyer-email-input" required />
 
