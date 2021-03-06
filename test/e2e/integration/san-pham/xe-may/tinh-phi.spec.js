@@ -157,6 +157,15 @@ describe("Page /san-pham/xe-may", () => {
           "Định dạng số điện thoại không đúng."
         );
       });
+
+      it("phone number should only contain numbers", () => {
+        cy.get(BUYER_PHONE).type("01234a5");
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+        cy.assertFailedHtml5FormValidation(
+          BUYER_PHONE,
+          "Định dạng số điện thoại không đúng."
+        );
+      });
     });
   });
 });
