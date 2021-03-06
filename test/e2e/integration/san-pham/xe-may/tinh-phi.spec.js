@@ -139,6 +139,15 @@ describe("Page /san-pham/xe-may", () => {
         cy.assertFailedHtml5FormValidation(BUYER_PHONE);
         cy.assertFailedHtml5FormValidation(BUYER_EMAIL);
       });
+
+      it("only accept words for name field", () => {
+        cy.get(BUYER_NAME).type("abc123");
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+        cy.assertFailedHtml5FormValidation(
+          BUYER_NAME,
+          "Tên của bạn có số hoặc kí tự lạ."
+        );
+      });
     });
   });
 });
