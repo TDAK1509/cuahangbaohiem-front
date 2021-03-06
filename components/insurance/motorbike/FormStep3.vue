@@ -11,26 +11,7 @@
 
       <TextField data-cy="buyer-address-input" required />
 
-      <div class="select">
-        <select data-cy="buyer-city-input" required>
-          <option value="">Select dropdown</option>
-          <option>With options</option>
-        </select>
-      </div>
-
-      <div class="select">
-        <select data-cy="buyer-district-input" required>
-          <option value="">Select dropdown</option>
-          <option>With options</option>
-        </select>
-      </div>
-
-      <div class="select">
-        <select data-cy="buyer-ward-input" required>
-          <option value="">Select dropdown</option>
-          <option>With options</option>
-        </select>
-      </div>
+      <CityDistrictWard />
 
       <TextField
         data-cy="buyer-phone-input"

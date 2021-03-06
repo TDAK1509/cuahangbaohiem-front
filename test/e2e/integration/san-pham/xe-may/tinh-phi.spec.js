@@ -58,7 +58,7 @@ describe("Page /san-pham/xe-may", () => {
   });
 
   describe("form handling", () => {
-    describe("step 1", () => {
+    describe.skip("step 1", () => {
       it("field motorbike type is required", () => {
         cy.get(NEXT_BUTTON_SELECTOR).click();
         cy.assertFailedHtml5FormValidation(MOTORBIKE_RADIO_SELECTOR);
@@ -71,7 +71,7 @@ describe("Page /san-pham/xe-may", () => {
       });
     });
 
-    describe("step 2", () => {
+    describe.skip("step 2", () => {
       beforeEach(() => {
         goToStep2();
       });
