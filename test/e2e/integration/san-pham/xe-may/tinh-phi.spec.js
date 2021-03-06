@@ -70,23 +70,17 @@ describe("Page /san-pham/xe-may", () => {
       });
 
       it("default shows 'Biển kiểm soát:', clicking 'Số khung' shows 'Số khung:'", () => {
-        cy.contains("Biển kiểm soát:").should("be.visible");
         cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).should("be.visible");
-        cy.contains("Số khung:").should("not.exist");
         cy.get(MOTORBIKE_FRAME_NUMBER_SELECTOR).should("not.exist");
 
         cy.contains("Số khung").click();
 
-        cy.contains("Biển kiểm soát:").should("not.exist");
         cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).should("not.exist");
-        cy.contains("Số khung:").should("be.visible");
         cy.get(MOTORBIKE_FRAME_NUMBER_SELECTOR).should("be.visible");
 
         cy.contains("Biển kiểm soát").click();
 
-        cy.contains("Biển kiểm soát:").should("be.visible");
         cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).should("be.visible");
-        cy.contains("Số khung:").should("not.exist");
         cy.get(MOTORBIKE_FRAME_NUMBER_SELECTOR).should("not.exist");
       });
 
