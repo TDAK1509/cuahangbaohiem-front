@@ -59,7 +59,7 @@ describe("Page /san-pham/xe-may", () => {
       it("chooses > 50cc, clicking next go to next page", () => {
         cy.get(MOTORBIKE_RADIO_SELECTOR).eq(1).click();
         cy.get(NEXT_BUTTON_SELECTOR).click();
-        cy.contains("BƯỚC 2: THÔNG TIN XE").should("be.visible");
+        cy.contains("BƯỚC 2:").should("be.visible");
       });
     });
 
@@ -92,6 +92,13 @@ describe("Page /san-pham/xe-may", () => {
           "Điền biển số xe theo mẫu: 55Z5-1234 hoặc 66Z6-123456."
         );
       });
+
+      it("if form valids, clicking next go to step 3", () => {
+        cy.get(MOTORBIKE_OWNER_SELECTOR).type("Nguyen Van A");
+        cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).type("55Z5-1111");
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+        cy.contains("BƯỚC 3:").should("be.visible");
+      });
     });
   });
 });
@@ -99,5 +106,5 @@ describe("Page /san-pham/xe-may", () => {
 function goToStep2() {
   cy.get(MOTORBIKE_RADIO_SELECTOR).eq(1).click();
   cy.get(NEXT_BUTTON_SELECTOR).click();
-  cy.contains("BƯỚC 2: THÔNG TIN XE").should("be.visible");
+  cy.contains("BƯỚC 2:").should("be.visible");
 }
