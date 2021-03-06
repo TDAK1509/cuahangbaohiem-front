@@ -2,6 +2,7 @@ const NEXT_BUTTON_SELECTOR = "[data-cy=next-button]";
 const MOTORBIKE_RADIO_SELECTOR = "[data-cy=motorbike-radio]";
 const MOTORBIKE_OWNER_SELECTOR = "[data-cy=owner-input]";
 const MOTORBIKE_LICENSE_PLATE_SELECTOR = "[data-cy=license-plate-input]";
+const MOTORBIKE_FRAME_NUMBER_SELECTOR = "[data-cy=frame-number-input]";
 
 describe("Page /san-pham/xe-may", () => {
   beforeEach(() => {
@@ -70,17 +71,23 @@ describe("Page /san-pham/xe-may", () => {
 
       it("default shows 'Biển kiểm soát:', clicking 'Số khung' shows 'Số khung:'", () => {
         cy.contains("Biển kiểm soát:").should("be.visible");
+        cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).should("be.visible");
         cy.contains("Số khung:").should("not.exist");
+        cy.get(MOTORBIKE_FRAME_NUMBER_SELECTOR).should("not.exist");
 
         cy.contains("Số khung").click();
 
         cy.contains("Biển kiểm soát:").should("not.exist");
+        cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).should("not.exist");
         cy.contains("Số khung:").should("be.visible");
+        cy.get(MOTORBIKE_FRAME_NUMBER_SELECTOR).should("be.visible");
 
         cy.contains("Biển kiểm soát").click();
 
         cy.contains("Biển kiểm soát:").should("be.visible");
+        cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).should("be.visible");
         cy.contains("Số khung:").should("not.exist");
+        cy.get(MOTORBIKE_FRAME_NUMBER_SELECTOR).should("not.exist");
       });
 
       it("field motorbike owner and license plate are required", () => {
