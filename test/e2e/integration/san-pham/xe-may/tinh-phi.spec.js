@@ -109,7 +109,7 @@ describe("Page /san-pham/xe-may", () => {
         );
       });
 
-      it.skip("if form valids, clicking next go to step 3", () => {
+      it("if form valids, clicking next go to step 3", () => {
         cy.get(MOTORBIKE_OWNER_SELECTOR).type("Nguyen Van A");
         cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).type("55Z5-1111");
         cy.get(NEXT_BUTTON_SELECTOR).click();

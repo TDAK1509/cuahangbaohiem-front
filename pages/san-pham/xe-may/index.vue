@@ -8,6 +8,7 @@
     <div class="container">
       <FormStep1 v-if="currentStep === 1" @submit="submitStep1" />
       <FormStep2 v-else-if="currentStep === 2" @submit="submitStep2" />
+      <FormStep3 v-else-if="currentStep === 3" @submit="submitStep3" />
     </div>
   </section>
 </template>
@@ -33,6 +34,10 @@ export default Vue.extend({
 
     submitStep2() {
       this.currentStep = 3;
+    },
+
+    submitStep3() {
+      this.currentStep = 4;
     }
   }
 });
