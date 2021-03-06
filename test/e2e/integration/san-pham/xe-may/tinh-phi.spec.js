@@ -1,3 +1,8 @@
+const NEXT_BUTTON_SELECTOR = "[data-cy=next-button]";
+const MOTORBIKE_RADIO_SELECTOR = "[data-cy=motorbike-radio]";
+const MOTORBIKE_OWNER_SELECTOR = "[data-cy=owner-input]";
+const MOTORBIKE_LICENSE_PLATE_SELECTOR = "[data-cy=license-plate-input]";
+
 describe("Page /san-pham/xe-may", () => {
   beforeEach(() => {
     cy.visit("/san-pham/xe-may");
@@ -47,23 +52,33 @@ describe("Page /san-pham/xe-may", () => {
   describe("form handling", () => {
     describe("step 1", () => {
       it("field motorbike type is required", () => {
-        getNextButton().click();
-        cy.assertFailedHtml5FormValidation("[data-cy=motorbike-radio]");
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+        cy.assertFailedHtml5FormValidation(MOTORBIKE_RADIO_SELECTOR);
       });
 
       it("chooses > 50cc, clicking next go to next page", () => {
-        getMotorbikeRadios().eq(1).click();
-        getNextButton().click();
+        cy.get(MOTORBIKE_RADIO_SELECTOR).eq(1).click();
+        cy.get(NEXT_BUTTON_SELECTOR).click();
         cy.contains("BƯỚC 2: THÔNG TIN XE").should("be.visible");
+      });
+    });
+
+    describe("step 2", () => {
+      beforeEach(() => {
+        goToStep2();
+      });
+
+      it("field motorbike owner and license plate are required", () => {
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+        cy.assertFailedHtml5FormValidation(MOTORBIKE_OWNER_SELECTOR);
+        cy.assertFailedHtml5FormValidation(MOTORBIKE_LICENSE_PLATE_SELECTOR);
       });
     });
   });
 });
 
-function getNextButton() {
-  return cy.get("[data-cy=next-button]");
-}
-
-function getMotorbikeRadios() {
-  return cy.get("[data-cy=motorbike-radio]");
+function goToStep2() {
+  cy.get(MOTORBIKE_RADIO_SELECTOR).eq(1).click();
+  cy.get(NEXT_BUTTON_SELECTOR).click();
+  cy.contains("BƯỚC 2: THÔNG TIN XE").should("be.visible");
 }
