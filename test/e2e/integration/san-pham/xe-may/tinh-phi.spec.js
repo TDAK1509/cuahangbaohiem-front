@@ -172,12 +172,6 @@ describe("Page /san-pham/xe-may", () => {
         cy.get(NEXT_BUTTON_SELECTOR).click();
         cy.assertFailedHtml5FormValidation(BUYER_EMAIL);
       });
-
-      it("can select correct combo of city, district, ward", () => {
-        cy.get(BUYER_CITY).select("TP Hồ Chí Minh");
-        cy.get(BUYER_DISTRICT).select("Quận 7");
-        cy.get(BUYER_WARD).select("Phường Tân Quy");
-      });
     });
   });
 });

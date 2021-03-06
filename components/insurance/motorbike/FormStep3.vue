@@ -10,8 +10,9 @@
       />
 
       <TextField data-cy="buyer-address-input" required />
-
-      <CityDistrictWard />
+      <TextField data-cy="buyer-city-input" required />
+      <TextField data-cy="buyer-district-input" required />
+      <TextField data-cy="buyer-ward-input" required />
 
       <TextField
         data-cy="buyer-phone-input"
