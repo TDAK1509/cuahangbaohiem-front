@@ -2,7 +2,12 @@
   <div>
     <h3>BƯỚC 2: THÔNG TIN XE</h3>
     <form @submit.prevent="submit">
-      <TextField data-cy="owner-input" required />
+      <TextField
+        data-cy="owner-input"
+        required
+        pattern="[a-zA-Z]+"
+        title="Tên của bạn có số hoặc kí tự lạ."
+      />
       <TextField data-cy="license-plate-input" required />
 
       <button data-cy="next-button">NEXT</button>

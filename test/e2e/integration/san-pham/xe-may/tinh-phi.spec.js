@@ -73,6 +73,15 @@ describe("Page /san-pham/xe-may", () => {
         cy.assertFailedHtml5FormValidation(MOTORBIKE_OWNER_SELECTOR);
         cy.assertFailedHtml5FormValidation(MOTORBIKE_LICENSE_PLATE_SELECTOR);
       });
+
+      it("only accept words for bike owner field", () => {
+        cy.get(MOTORBIKE_OWNER_SELECTOR).type("abc123");
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+        cy.assertFailedHtml5FormValidation(
+          MOTORBIKE_OWNER_SELECTOR,
+          "Tên của bạn có số hoặc kí tự lạ."
+        );
+      });
     });
   });
 });
