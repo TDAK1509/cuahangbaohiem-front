@@ -1,19 +1,40 @@
 <template>
   <div>
-    <h3>BƯỚC 3: THÔNG TIN XE</h3>
+    <h3>BƯỚC 3: THÔNG TIN NGƯỜI MUA</h3>
     <form @submit.prevent="submit">
       <TextField
-        data-cy="owner-input"
+        data-cy="buyer-name-input"
         required
         pattern="[a-zA-Z\s]+"
         title="Tên của bạn có số hoặc kí tự lạ."
       />
-      <TextField
-        data-cy="license-plate-input"
-        required
-        pattern="[0-9]{2}[A-Z][0-9]-[0-9]{4,5}"
-        title="Điền biển số xe theo mẫu: 55Z5-1234 hoặc 66Z6-123456."
-      />
+
+      <TextField data-cy="buyer-address-input" required />
+
+      <div class="select">
+        <select data-cy="buyer-city-input" required>
+          <option value="">Select dropdown</option>
+          <option>With options</option>
+        </select>
+      </div>
+
+      <div class="select">
+        <select data-cy="buyer-district-input" required>
+          <option value="">Select dropdown</option>
+          <option>With options</option>
+        </select>
+      </div>
+
+      <div class="select">
+        <select data-cy="buyer-ward-input" required>
+          <option value="">Select dropdown</option>
+          <option>With options</option>
+        </select>
+      </div>
+
+      <TextField data-cy="buyer-phone-input" required />
+
+      <TextField data-cy="buyer-email-input" required />
 
       <button data-cy="next-button">NEXT</button>
     </form>
