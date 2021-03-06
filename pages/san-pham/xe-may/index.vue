@@ -14,7 +14,7 @@
             <p>
               <label class="radio">
                 <input
-                  data-cy="motorbike-input"
+                  data-cy="motorbike-radio"
                   name="haha"
                   type="radio"
                   required
@@ -26,7 +26,7 @@
             <p>
               <label class="radio">
                 <input
-                  data-cy="motorbike-input"
+                  data-cy="motorbike-radio"
                   name="haha"
                   type="radio"
                   required

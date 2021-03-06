@@ -46,7 +46,7 @@ describe("Page /san-pham/xe-may", () => {
 
   describe("form handling", () => {
     beforeEach(() => {
-      cy.get("[data-cy=motorbike-input]").as("motorbikeRadio");
+      cy.get("[data-cy=motorbike-radio]").as("motorbikeRadio");
       cy.get("[data-cy=next-button]").as("nextButton");
     });
 
@@ -54,6 +54,12 @@ describe("Page /san-pham/xe-may", () => {
       it("field motorbike type is required", () => {
         cy.get("@nextButton").click();
         cy.assertFailedHtml5FormValidation("@motorbikeRadio");
+      });
+
+      it("chooses > 50cc, clicking next go to next page", () => {
+        cy.get("@motorbikeRadio").eq(1).click();
+        cy.get("@nextButton").click();
+        cy.contains("BƯỚC 2").should("be.visible");
       });
     });
   });
