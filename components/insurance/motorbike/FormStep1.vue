@@ -53,7 +53,9 @@
         <p>
           <label class="radio">
             <input
-              data-cy="motorbike-radio"
+              v-model="motorbikeType"
+              :value="motorbikeTypeValue.UP_TO_50_CC"
+              data-cy="motorbike-type-radio"
               name="motorbikeType"
               type="radio"
               required
@@ -65,7 +67,9 @@
         <p>
           <label class="radio">
             <input
-              data-cy="motorbike-radio"
+              v-model="motorbikeType"
+              :value="motorbikeTypeValue.ABOVE_50_CC"
+              data-cy="motorbike-type-radio"
               name="motorbikeType"
               type="radio"
               required
@@ -82,7 +86,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Motorbike } from "@/controller/motorbike-insurance/motorbike-insurance";
+import { MotorbikeType } from "@/controller/motorbike-insurance/motorbike-insurance";
 import moment from "moment";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
@@ -98,21 +102,30 @@ export default Vue.extend({
     return {
       dateFormat: "DD-MM-YYYY",
       insuranceYear: 1,
-      insuranceStartDate: new Date()
+      insuranceStartDate: new Date(),
+      motorbikeType: null as null | MotorbikeType,
+      motorbikeTypeValue: MotorbikeType
     };
   },
 
   computed: {
     insuranceEndDate(): string {
       return moment(this.insuranceStartDate)
-        .add(1, "year")
+        .add(this.insuranceYear, "year")
         .format(this.dateFormat);
     }
   },
 
   methods: {
     submit() {
-      this.$emit("submit");
+      const step1FormValues = {
+        insuranceStartDate: moment(this.insuranceStartDate).format(
+          this.dateFormat
+        ),
+        insuranceEndDate: this.insuranceEndDate,
+        motorbikeType: this.motorbikeType
+      };
+      this.$emit("submit", step1FormValues);
     }
   }
 });

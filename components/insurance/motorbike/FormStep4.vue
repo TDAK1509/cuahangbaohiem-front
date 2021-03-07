@@ -10,14 +10,14 @@
 
       <section>
         <h4>2. THÔNG TIN VỀ XE THAM GIA BẢO HIỂM</h4>
-        <p>Loại xe: {{ motorbike }}</p>
+        <p>Loại xe: {{ motorbikeType }}</p>
         <p>Biển số: {{ licensePlate }}</p>
         <p>Số khung: {{ frameNumber }}</p>
       </section>
 
       <section>
         <h4>3. THỜI HẠN BẢO HIỂM</h4>
-        <p>Từ ngày {{ insuranceDateStart }} đến ngày {{ insuranceDateEnd }}</p>
+        <p>Từ ngày {{ insuranceStartDate }} đến ngày {{ insuranceEndDate }}</p>
       </section>
 
       <section>
@@ -73,7 +73,7 @@ export default {
       type: String,
       default: ""
     },
-    motorbike: {
+    motorbikeType: {
       type: String,
       default: ""
     },
@@ -85,11 +85,11 @@ export default {
       type: String,
       default: ""
     },
-    insuranceDateStart: {
+    insuranceStartDate: {
       type: String,
       default: ""
     },
-    insuranceDateEnd: {
+    insuranceEndDate: {
       type: String,
       default: ""
     },

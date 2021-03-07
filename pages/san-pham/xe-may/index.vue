@@ -20,6 +20,16 @@
 
 <script lang="ts">
 import Vue from "vue";
+import {
+  MotorbikeType,
+  getMotorbikeTypeLabel
+} from "@/controller/motorbike-insurance/motorbike-insurance";
+
+interface Step1FormValues {
+  insuranceStartDate: string;
+  insuranceEndDate: string;
+  motorbikeType: MotorbikeType;
+}
 
 export default Vue.extend({
   name: "TinhPhiXeMay",
@@ -30,11 +40,11 @@ export default Vue.extend({
     return {
       currentStep: 1,
       motorbikeOwner: "",
-      motorbike: "",
+      motorbikeType: "",
       licensePlate: "",
       frameNumber: "",
-      insuranceDateStart: "",
-      insuranceDateEnd: "",
+      insuranceStartDate: "",
+      insuranceEndDate: "",
       insuranceFee: "",
       buyerName: "",
       buyerAddress: "",
@@ -50,11 +60,11 @@ export default Vue.extend({
     step4Props(): { [key: string]: string } {
       return {
         motorbikeOwner: this.motorbikeOwner,
-        motorbike: this.motorbike,
+        motorbikeType: this.motorbikeType,
         licensePlate: this.licensePlate,
         frameNumber: this.frameNumber,
-        insuranceDateStart: this.insuranceDateStart,
-        insuranceDateEnd: this.insuranceDateEnd,
+        insuranceStartDate: this.insuranceStartDate,
+        insuranceEndDate: this.insuranceEndDate,
         insuranceFee: this.insuranceFee,
         buyerName: this.buyerName,
         buyerAddress: this.buyerAddress,
@@ -68,7 +78,11 @@ export default Vue.extend({
   },
 
   methods: {
-    submitStep1() {
+    submitStep1(values: Step1FormValues) {
+      console.dir(values);
+      this.insuranceStartDate = values.insuranceStartDate;
+      this.insuranceEndDate = values.insuranceEndDate;
+      this.motorbikeType = getMotorbikeTypeLabel(values.motorbikeType);
       this.currentStep = 2;
     },
 

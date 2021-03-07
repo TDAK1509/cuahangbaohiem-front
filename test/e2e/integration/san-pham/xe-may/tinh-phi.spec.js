@@ -4,7 +4,7 @@ const NEXT_BUTTON_SELECTOR = "[data-cy=next-button]";
 const INSURANCE_YEAR_RADIO = "[data-cy=insurance-year-radio]";
 const INSURANCE_START_DATE = "[data-cy=insurance-start-date]";
 const INSURANCE_END_DATE = "[data-cy=insurance-end-date]";
-const MOTORBIKE_RADIO_SELECTOR = "[data-cy=motorbike-radio]";
+const MOTORBIKE_TYPE_RADIO_SELECTOR = "[data-cy=motorbike-type-radio]";
 const MOTORBIKE_OWNER_SELECTOR = "[data-cy=owner-input]";
 const MOTORBIKE_LICENSE_PLATE_SELECTOR = "[data-cy=license-plate-input]";
 const MOTORBIKE_FRAME_NUMBER_SELECTOR = "[data-cy=frame-number-input]";
@@ -76,11 +76,11 @@ describe("Page /san-pham/xe-may", () => {
     describe("step 1", () => {
       it("field motorbike type is required", () => {
         cy.get(NEXT_BUTTON_SELECTOR).click();
-        cy.assertFailedHtml5FormValidation(MOTORBIKE_RADIO_SELECTOR);
+        cy.assertFailedHtml5FormValidation(MOTORBIKE_TYPE_RADIO_SELECTOR);
       });
 
       it("chooses > 50cc, clicking next go to next page", () => {
-        cy.get(MOTORBIKE_RADIO_SELECTOR).eq(1).click();
+        cy.get(MOTORBIKE_TYPE_RADIO_SELECTOR).eq(1).click();
         cy.get(NEXT_BUTTON_SELECTOR).click();
         cy.contains("BƯỚC 2:").should("be.visible");
       });
@@ -251,7 +251,7 @@ describe("Page /san-pham/xe-may", () => {
 });
 
 function goToStep2() {
-  cy.get(MOTORBIKE_RADIO_SELECTOR).eq(1).click();
+  cy.get(MOTORBIKE_TYPE_RADIO_SELECTOR).eq(1).click();
   cy.get(NEXT_BUTTON_SELECTOR).click();
   cy.contains("BƯỚC 2:").should("be.visible");
 }
