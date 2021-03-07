@@ -115,8 +115,8 @@ describe("Page /san-pham/xe-may", () => {
         cy.get(INSURANCE_START_DATE).find("input").should("have.value", today);
         cy.get(INSURANCE_END_DATE).should("have.value", nextYear);
 
-        cy.get(INSURANCE_START_DATE).click();
-        cy.get("td.cell.active ~ td").first().click();
+        selectTomorrowForInsuranceStartDate();
+
         const tomorrow = moment(new Date()).add(1, "day");
         const nextYearTomorrow = moment(new Date(tomorrow))
           .add(1, "year")
@@ -124,6 +124,11 @@ describe("Page /san-pham/xe-may", () => {
 
         cy.get(INSURANCE_END_DATE).should("have.value", nextYearTomorrow);
       });
+
+      function selectTomorrowForInsuranceStartDate() {
+        cy.get(INSURANCE_START_DATE).click();
+        cy.get("td.cell.active ~ td").first().click();
+      }
     });
 
     describe.skip("step 2", () => {
