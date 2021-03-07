@@ -11,6 +11,16 @@ const BUYER_WARD = "[data-cy=buyer-ward-input]";
 const BUYER_PHONE = "[data-cy=buyer-phone-input]";
 const BUYER_EMAIL = "[data-cy=buyer-email-input]";
 
+const CORRECT_BIKE_OWNER = "Nguyen Van A";
+const CORRECT_BIKE_LICENSE_PLATE = "55Z5-1111";
+const CORRECT_BUYER_NAME = "Buyer name";
+const CORRECT_BUYER_ADDRESS = "Buyer address";
+const CORRECT_BUYER_CITY = "Buyer city";
+const CORRECT_BUYER_DISTRICT = "Buyer district";
+const CORRECT_BUYER_WARD = "Buyer ward";
+const CORRECT_BUYER_PHONE = "0912345678";
+const CORRECT_BUYER_EMAIL = "test@gmail.com";
+
 describe("Page /san-pham/xe-may", () => {
   beforeEach(() => {
     cy.visit("/san-pham/xe-may");
@@ -172,6 +182,18 @@ describe("Page /san-pham/xe-may", () => {
         cy.get(NEXT_BUTTON_SELECTOR).click();
         cy.assertFailedHtml5FormValidation(BUYER_EMAIL);
       });
+
+      it("input all fields, clicking NEXT go to step 4", () => {
+        cy.get(BUYER_NAME).type(CORRECT_BUYER_NAME);
+        cy.get(BUYER_ADDRESS).type(CORRECT_BUYER_ADDRESS);
+        cy.get(BUYER_CITY).type(CORRECT_BUYER_CITY);
+        cy.get(BUYER_DISTRICT).type(CORRECT_BUYER_DISTRICT);
+        cy.get(BUYER_WARD).type(CORRECT_BUYER_WARD);
+        cy.get(BUYER_PHONE).type(CORRECT_BUYER_PHONE);
+        cy.get(BUYER_EMAIL).type(CORRECT_BUYER_EMAIL);
+
+        assertStep4RenderingCorrectly();
+      });
     });
   });
 });
@@ -185,8 +207,22 @@ function goToStep2() {
 function goToStep3() {
   goToStep2();
 
-  cy.get(MOTORBIKE_OWNER_SELECTOR).type("Nguyen Van A");
-  cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).type("55Z5-1111");
+  cy.get(MOTORBIKE_OWNER_SELECTOR).type(CORRECT_BIKE_OWNER);
+  cy.get(MOTORBIKE_LICENSE_PLATE_SELECTOR).type(CORRECT_BIKE_LICENSE_PLATE);
   cy.get(NEXT_BUTTON_SELECTOR).click();
   cy.contains("BƯỚC 3:").should("be.visible");
+}
+
+function assertStep4RenderingCorrectly() {
+  cy.contains("BƯỚC 4: TÓM TẮT ĐƠN HÀNG").should("be.visible");
+  cy.contains("1. THÔNG TIN CHỦ XE").should("be.visible");
+  cy.contains("2. THÔNG TIN VỀ XE THAM GIA BẢO HIỂM").should("be.visible");
+  cy.contains("3. THỜI HẠN BẢO HIỂM").should("be.visible");
+  cy.contains("4. MỨC TRÁCH NHIỆM VÀ PHÍ BẢO HIỂM").should("be.visible");
+  cy.contains("5. THÔNG TIN GIAO NHẬN GIẤY CHỨNG NHẬN BẢO HIỂM").should(
+    "be.visible"
+  );
+  cy.contains(
+    `Tôi/chúng tôi xác nhận rằng các thông tin nêu trên là đầy đủ và xác thực theo sự hiểu biết cao nhất của tôi/chúng tôi và đồng ý rằng các kê khai yêu cầu bảo hiểm là cơ sở của hợp đồng bảo hiểm và chấp nhận các điều kiện bảo hiểm quy định tại hợp đồng bảo hiểm.`
+  ).should("be.visible");
 }
