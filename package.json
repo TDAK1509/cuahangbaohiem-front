@@ -26,7 +26,8 @@
     "nuxt": "^2.14.6",
     "vue-carousel": "^0.18.0",
     "vue-carousel-3d": "^1.0.1",
-    "vue-fb-customer-chat": "^0.2.0"
+    "vue-fb-customer-chat": "^0.2.0",
+    "vue2-datepicker": "^3.9.0"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.6",
@@ -37,6 +38,7 @@
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/router-extras": "^1.1.1",
     "@types/lodash": "^4.14.165",
+    "@types/moment": "^2.13.0",
     "@vue/test-utils": "^1.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",

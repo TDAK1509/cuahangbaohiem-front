@@ -2191,6 +2191,13 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.3.tgz#c893b73721db73699943bfc3653b1deb7faa4a3a"
   integrity sha512-Jus9s4CDbqwocc5pOAnh8ShfrnMcPHuJYzVcSUU7lrh8Ni5HuIqX3oilL86p3dlTrk0LzHRCgA/GQ7uNCw6l2Q==
 
+"@types/moment@^2.13.0":
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
+  integrity sha1-YE69GJvDvDShVIaJQE5hoqSqyJY=
+  dependencies:
+    moment "*"
+
 "@types/node-sass@^4.11.1":
   version "4.11.1"
   resolved "https://registry.yarnpkg.com/@types/node-sass/-/node-sass-4.11.1.tgz#bda27c5181cbf7c090c3058e119633dfb2b6504c"
@@ -4967,6 +4974,11 @@ date-fns@^1.27.2:
   version "1.30.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
+
+date-format-parse@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/date-format-parse/-/date-format-parse-0.2.6.tgz#7ed42817efb6ec39532169eada9670ae3c627aa7"
+  integrity sha512-sdxnYAWmLopeb+6Hmw+vo3or4OCJOnh4+YoJ9p+Id3o2EnNP0INpTqx7wr8UregfMpgaSZAH473R/ytiaB3gVg==
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -9606,7 +9618,7 @@ mockdate@^3.0.2:
   resolved "https://registry.yarnpkg.com/mockdate/-/mockdate-3.0.2.tgz#a5a7bb5820da617747af424d7a4dcb22c6c03d79"
   integrity sha512-ldfYSUW1ocqSHGTK6rrODUiqAFPGAg0xaHqYJ5tvj1hQyFsjuHpuWgWFTZWwDVlzougN/s2/mhDr8r5nY5xDpA==
 
-moment@^2.27.0, moment@^2.29.1:
+moment@*, moment@^2.27.0, moment@^2.29.1:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
@@ -13857,6 +13869,13 @@ vue-typed-mixins@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/vue-typed-mixins/-/vue-typed-mixins-0.2.0.tgz#d369c186a392780bbbe9f1b28a4cdcf62bec9053"
   integrity sha512-0OxuinandPWv3nm5k/reYkuKtX3jjPZ40Sy9roJz0ih8PUzmI7zSRiXFEJ62LsyRegw9Tqy+qMkajk7ipKP8Vg==
+
+vue2-datepicker@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/vue2-datepicker/-/vue2-datepicker-3.9.0.tgz#239a251960bcff22d2a14b7e5fe0b1038cad9473"
+  integrity sha512-nRqIZx5Ks0TDHFyzyHYIlfmuszEsEvRhwJ6HGuGGHQpjOfrIgkJ9B0pnEEJaVS3LKX6IWCVQMUq0H7I2UKmHqA==
+  dependencies:
+    date-format-parse "^0.2.6"
 
 vue@^2.5.17, vue@^2.6.11, vue@^2.6.12:
   version "2.6.12"
