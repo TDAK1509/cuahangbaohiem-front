@@ -192,6 +192,8 @@ describe("Page /san-pham/xe-may", () => {
         cy.get(BUYER_PHONE).type(CORRECT_BUYER_PHONE);
         cy.get(BUYER_EMAIL).type(CORRECT_BUYER_EMAIL);
 
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+
         assertStep4RenderingCorrectly();
       });
     });
