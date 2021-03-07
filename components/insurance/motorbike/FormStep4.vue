@@ -3,11 +3,47 @@
     <h3>BƯỚC 4: TÓM TẮT ĐƠN HÀNG</h3>
 
     <form @submit.prevent="submit">
-      <h4>1. THÔNG TIN CHỦ XE</h4>
-      <h4>2. THÔNG TIN VỀ XE THAM GIA BẢO HIỂM</h4>
-      <h4>3. THỜI HẠN BẢO HIỂM</h4>
-      <h4>4. MỨC TRÁCH NHIỆM VÀ PHÍ BẢO HIỂM</h4>
-      <h4>5. THÔNG TIN GIAO NHẬN GIẤY CHỨNG NHẬN BẢO HIỂM</h4>
+      <section>
+        <h4>1. THÔNG TIN CHỦ XE</h4>
+        <p>Tên chủ xe: {{ motorbikeOwner }}</p>
+      </section>
+
+      <section>
+        <h4>2. THÔNG TIN VỀ XE THAM GIA BẢO HIỂM</h4>
+        <p>Loại xe: {{ motorbike }}</p>
+        <p>Biển số: {{ licensePlate }}</p>
+        <p>Số khung: {{ frameNumber }}</p>
+      </section>
+
+      <section>
+        <h4>3. THỜI HẠN BẢO HIỂM</h4>
+        <p>Từ ngày {{ insuranceDateStart }} đến ngày {{ insuranceDateEnd }}</p>
+      </section>
+
+      <section>
+        <h4>4. MỨC TRÁCH NHIỆM VÀ PHÍ BẢO HIỂM</h4>
+        <table>
+          <tr>
+            <td>{{ insuranceFee }}</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h4>5. THÔNG TIN GIAO NHẬN GIẤY CHỨNG NHẬN BẢO HIỂM</h4>
+        <p>Họ và tên người nhận: {{ buyerName }}</p>
+        <p>
+          Địa chỉ người nhận: {{ buyerAddress }}, {{ buyerWard }},
+          {{ buyerDistrict }}, {{ buyerCity }}
+        </p>
+        <p>Số điện thoại liên hệ: {{ buyerPhone }}</p>
+        <p>Địa chỉ email: {{ buyerEmail }}</p>
+        <p>
+          Hình thức giao nhận: Ngay sau khi Quý khách thanh toán phí bảo hiểm
+          thành công, Bảo Việt sẽ gửi bản mềm Giấy chứng nhận bảo hiểm tới địa
+          chỉ email Quý khách đăng ký.
+        </p>
+      </section>
 
       <div class="field">
         <div class="control">
@@ -31,6 +67,65 @@ export default {
   name: "MotorbikeFormStep4",
 
   inheritAttrs: false,
+
+  props: {
+    motorbikeOwner: {
+      type: String,
+      default: ""
+    },
+    motorbike: {
+      type: String,
+      default: ""
+    },
+    licensePlate: {
+      type: String,
+      default: ""
+    },
+    frameNumber: {
+      type: String,
+      default: ""
+    },
+    insuranceDateStart: {
+      type: String,
+      default: ""
+    },
+    insuranceDateEnd: {
+      type: String,
+      default: ""
+    },
+    insuranceFee: {
+      type: String,
+      default: ""
+    },
+    buyerName: {
+      type: String,
+      default: ""
+    },
+    buyerAddress: {
+      type: String,
+      default: ""
+    },
+    buyerCity: {
+      type: String,
+      default: ""
+    },
+    buyerDistrict: {
+      type: String,
+      default: ""
+    },
+    buyerWard: {
+      type: String,
+      default: ""
+    },
+    buyerPhone: {
+      type: String,
+      default: ""
+    },
+    buyerEmail: {
+      type: String,
+      default: ""
+    }
+  },
 
   methods: {
     submit() {
