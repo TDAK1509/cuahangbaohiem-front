@@ -224,7 +224,5 @@ function assertStep4RenderingCorrectly() {
   cy.contains("5. THÔNG TIN GIAO NHẬN GIẤY CHỨNG NHẬN BẢO HIỂM").should(
     "be.visible"
   );
-  cy.contains(
-    `Tôi/chúng tôi xác nhận rằng các thông tin nêu trên là đầy đủ và xác thực theo sự hiểu biết cao nhất của tôi/chúng tôi và đồng ý rằng các kê khai yêu cầu bảo hiểm là cơ sở của hợp đồng bảo hiểm và chấp nhận các điều kiện bảo hiểm quy định tại hợp đồng bảo hiểm.`
-  ).should("be.visible");
+  cy.get("[data-cy=step-4-agree-checkbox]").should("be.visible");
 }
