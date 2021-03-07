@@ -1,16 +1,16 @@
-import { Motorbike } from "./motorbike-insurance";
+import { MotorbikeType } from "./motorbike-insurance";
 
 export default class BaoVietMotorbikeInsurance {
   private year = 0;
-  private motorbike = Motorbike.UP_TO_50_CC;
+  private motorbikeType = MotorbikeType.UP_TO_50_CC;
   private hasAddon = false;
 
   public setYear(year: number) {
     this.year = year;
   }
 
-  public setMotorbike(motorbike: Motorbike) {
-    this.motorbike = motorbike;
+  public setMotorbike(motorbikeType: MotorbikeType) {
+    this.motorbikeType = motorbikeType;
   }
 
   public setHasAddon(hasAddon: boolean) {
@@ -27,7 +27,7 @@ export default class BaoVietMotorbikeInsurance {
   }
 
   private getOneYearInsuranceFee(): number {
-    if (this.motorbike === Motorbike.ABOVE_50CC) {
+    if (this.motorbikeType === MotorbikeType.ABOVE_50_CC) {
       return 66000;
     }
     return 60500;

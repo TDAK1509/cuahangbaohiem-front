@@ -1,9 +1,9 @@
 import BaoVietMotorbikeInsurance from "~/controller/motorbike-insurance/bao-viet-motorbike-insurance";
-import { Motorbike } from "@/controller/motorbike-insurance/motorbike-insurance";
+import { MotorbikeType } from "@/controller/motorbike-insurance/motorbike-insurance";
 
 describe("BaoVietMotorbikeInsurance class", () => {
   describe("Motorbike <= 50cc", () => {
-    const motorbike = Motorbike.UP_TO_50_CC;
+    const motorbike = MotorbikeType.UP_TO_50_CC;
 
     describe("without addon", () => {
       it("given 1 year, returns 60500", () => {
@@ -62,7 +62,7 @@ describe("BaoVietMotorbikeInsurance class", () => {
   });
 
   describe("Motorbike > 50cc", () => {
-    const motorbike = Motorbike.ABOVE_50CC;
+    const motorbike = MotorbikeType.ABOVE_50_CC;
 
     describe("without addon", () => {
       it("given 1 year, returns 66000", () => {
