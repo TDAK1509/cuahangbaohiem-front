@@ -1,4 +1,5 @@
 const NEXT_BUTTON_SELECTOR = "[data-cy=next-button]";
+const INSURANCE_YEAR_RADIO = "[data-cy=insurance-year-radio]";
 const MOTORBIKE_RADIO_SELECTOR = "[data-cy=motorbike-radio]";
 const MOTORBIKE_OWNER_SELECTOR = "[data-cy=owner-input]";
 const MOTORBIKE_LICENSE_PLATE_SELECTOR = "[data-cy=license-plate-input]";
@@ -68,7 +69,7 @@ describe("Page /san-pham/xe-may", () => {
   });
 
   describe("form handling", () => {
-    describe.skip("step 1", () => {
+    describe("step 1", () => {
       it("field motorbike type is required", () => {
         cy.get(NEXT_BUTTON_SELECTOR).click();
         cy.assertFailedHtml5FormValidation(MOTORBIKE_RADIO_SELECTOR);
@@ -78,6 +79,22 @@ describe("Page /san-pham/xe-may", () => {
         cy.get(MOTORBIKE_RADIO_SELECTOR).eq(1).click();
         cy.get(NEXT_BUTTON_SELECTOR).click();
         cy.contains("BƯỚC 2:").should("be.visible");
+      });
+
+      it("render field years of insurance with 3 values 1 year, 2 years, 3 years, preselected value 1 year", () => {
+        cy.get(INSURANCE_YEAR_RADIO).should("have.length", 3);
+        cy.get(INSURANCE_YEAR_RADIO)
+          .eq(0)
+          .should("have.text", "1 năm")
+          .should("be.checked");
+        cy.get(INSURANCE_YEAR_RADIO)
+          .eq(1)
+          .should("have.text", "2 năm")
+          .should("not.be.checked");
+        cy.get(INSURANCE_YEAR_RADIO)
+          .eq(2)
+          .should("have.text", "3 năm")
+          .should("not.be.checked");
       });
     });
 
