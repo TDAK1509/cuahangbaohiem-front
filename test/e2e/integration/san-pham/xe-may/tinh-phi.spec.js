@@ -115,8 +115,14 @@ describe("Page /san-pham/xe-may", () => {
         cy.get(INSURANCE_START_DATE).find("input").should("have.value", today);
         cy.get(INSURANCE_END_DATE).should("have.value", nextYear);
 
-        // cy.get(INSURANCE_START_DATE).find("input").clear().type("01-01-2030");
-        // cy.get(INSURANCE_END_DATE).should("have.value", "01-01-2031");
+        cy.get(INSURANCE_START_DATE).click();
+        cy.get("td.cell.active ~ td").first().click();
+        const tomorrow = moment(new Date()).add(1, "day");
+        const nextYearTomorrow = moment(new Date(tomorrow))
+          .add(1, "year")
+          .format(dateFormat);
+
+        cy.get(INSURANCE_END_DATE).should("have.value", nextYearTomorrow);
       });
     });
 
