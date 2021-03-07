@@ -224,5 +224,25 @@ function assertStep4RenderingCorrectly() {
   cy.contains("5. THÔNG TIN GIAO NHẬN GIẤY CHỨNG NHẬN BẢO HIỂM").should(
     "be.visible"
   );
+
+  cy.contains(`Tên chủ xe: ${CORRECT_BIKE_OWNER}`).should("be.visible");
+  cy.contains(`Loại xe: Xe Mô tô 2 bánh dung tích trên 50cc`).should(
+    "be.visible"
+  );
+  cy.contains(`Biển số: ${CORRECT_BIKE_LICENSE_PLATE}`).should("be.visible");
+
+  cy.contains(`Biển số: ${CORRECT_BIKE_LICENSE_PLATE}`).should("be.visible");
+  cy.contains(`Từ ngày 15-01-2030 đến ngày 15-01-2031`).should("be.visible");
+
+  cy.contains("66,000 VND").should("be.visible");
+
+  cy.contains(`Họ và tên người nhận: ${BUYER_NAME}`).should("be.visible");
+  cy.contains(
+    `Địa chỉ người nhận: ${BUYER_ADDRESS}, ${BUYER_WARD}, ${BUYER_DISTRICT}, ${BUYER_CITY}`
+  ).should("be.visible");
+  cy.contains(`Số điện thoại liên hệ: ${BUYER_PHONE}`).should("be.visible");
+  cy.contains(`Địa chỉ email: ${BUYER_EMAIL}`).should("be.visible");
+  cy.contains(`Hình thức giao nhận:`).should("be.visible");
+
   cy.get("[data-cy=step-4-agree-checkbox]").should("be.visible");
 }
