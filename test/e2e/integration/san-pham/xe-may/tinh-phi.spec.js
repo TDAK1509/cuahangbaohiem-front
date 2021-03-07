@@ -83,17 +83,23 @@ describe("Page /san-pham/xe-may", () => {
 
       it("render field years of insurance with 3 values 1 year, 2 years, 3 years, preselected value 1 year", () => {
         cy.get(INSURANCE_YEAR_RADIO).should("have.length", 3);
+
         cy.get(INSURANCE_YEAR_RADIO)
           .eq(0)
-          .should("have.text", "1 năm")
+          .should("contain", "1 năm")
+          .find("input")
           .should("be.checked");
+
         cy.get(INSURANCE_YEAR_RADIO)
           .eq(1)
-          .should("have.text", "2 năm")
+          .should("contain", "2 năm")
+          .find("input")
           .should("not.be.checked");
+
         cy.get(INSURANCE_YEAR_RADIO)
           .eq(2)
-          .should("have.text", "3 năm")
+          .should("contain", "3 năm")
+          .find("input")
           .should("not.be.checked");
       });
     });

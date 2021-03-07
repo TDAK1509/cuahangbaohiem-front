@@ -4,11 +4,41 @@
       <label class="label">Loại xe</label>
 
       <div class="control">
+        <label class="radio" data-cy="insurance-year-radio">
+          <input
+            v-model="insuranceYear"
+            type="radio"
+            name="insurance_year"
+            :value="1"
+          />
+          1 năm
+        </label>
+        <label class="radio" data-cy="insurance-year-radio">
+          <input
+            v-model="insuranceYear"
+            type="radio"
+            name="insurance_year"
+            :value="2"
+          />
+          2 năm
+        </label>
+        <label class="radio" data-cy="insurance-year-radio">
+          <input
+            v-model="insuranceYear"
+            type="radio"
+            name="insurance_year"
+            :value="3"
+          />
+          3 năm
+        </label>
+      </div>
+
+      <div class="control">
         <p>
           <label class="radio">
             <input
               data-cy="motorbike-radio"
-              name="haha"
+              name="motorbikeType"
               type="radio"
               required
             />
@@ -20,7 +50,7 @@
           <label class="radio">
             <input
               data-cy="motorbike-radio"
-              name="haha"
+              name="motorbikeType"
               type="radio"
               required
             />
@@ -34,16 +64,25 @@
   </form>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+import { Motorbike } from "@/controller/motorbike-insurance/motorbike-insurance";
+
+export default Vue.extend({
   name: "MotorbikeFormStep1",
 
   inheritAttrs: false,
+
+  data() {
+    return {
+      insuranceYear: 1
+    };
+  },
 
   methods: {
     submit() {
       this.$emit("submit");
     }
   }
-};
+});
 </script>
