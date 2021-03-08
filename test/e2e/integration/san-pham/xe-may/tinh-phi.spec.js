@@ -341,5 +341,5 @@ function assertStep4RenderingCorrectly() {
   cy.contains(`Địa chỉ email: ${CORRECT_BUYER_EMAIL}`).should("be.visible");
   cy.contains(`Hình thức giao nhận:`).should("be.visible");
 
-  cy.get("[data-cy=step-4-agree-checkbox]").should("be.visible");
+  cy.get(AGREEMENT_CHECKBOX).should("be.visible");
 }

@@ -49,7 +49,11 @@
       <div class="field">
         <div class="control">
           <label class="checkbox">
-            <input type="checkbox" data-cy="step-4-agree-checkbox" />
+            <input
+              v-model="isAgreed"
+              type="checkbox"
+              data-cy="agreement-checkbox"
+            />
             Tôi/chúng tôi xác nhận rằng các thông tin nêu trên là đầy đủ và xác
             thực theo sự hiểu biết cao nhất của tôi/chúng tôi và đồng ý rằng các
             kê khai yêu cầu bảo hiểm là cơ sở của hợp đồng bảo hiểm và chấp nhận
@@ -57,6 +61,10 @@
           </label>
         </div>
       </div>
+
+      <p v-if="shouldShowError">
+        Quý khách vui lòng chọn cam kết trước khi thực hiện đặt hàng
+      </p>
 
       <button data-cy="next-button">NEXT</button>
     </form>
@@ -132,8 +140,22 @@ export default {
     }
   },
 
+  data() {
+    return {
+      isAgreed: false,
+      shouldShowError: false
+    };
+  },
+
   methods: {
     submit() {
+      this.shouldShowError = false;
+
+      if (!this.isAgreed) {
+        this.shouldShowError = true;
+        return;
+      }
+
       this.$emit("submit");
     }
   }

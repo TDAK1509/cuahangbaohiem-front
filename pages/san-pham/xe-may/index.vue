@@ -127,7 +127,7 @@ export default Vue.extend({
     },
 
     submitStep4() {
-      //
+      this.$router.push("xe-may/thanh-toan");
     }
   }
 });
