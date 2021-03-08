@@ -282,7 +282,13 @@ function assertStep4RenderingCorrectly() {
   cy.contains(`Biển số: ${CORRECT_BIKE_LICENSE_PLATE}`).should("be.visible");
 
   cy.contains(`Biển số: ${CORRECT_BIKE_LICENSE_PLATE}`).should("be.visible");
-  cy.contains(`Từ ngày 15-01-2030 đến ngày 15-01-2031`).should("be.visible");
+
+  const today = new Date();
+  const todayString = moment(today).format("DD-MM-YYYY");
+  const nextYearDateString = moment(today).add(1, "year").format("DD-MM-YYYY");
+  cy.contains(`Từ ngày ${todayString} đến ngày ${nextYearDateString}`).should(
+    "be.visible"
+  );
 
   cy.contains("66,000 VND").should("be.visible");
 
