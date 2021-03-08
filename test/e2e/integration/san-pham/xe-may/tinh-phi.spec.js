@@ -318,12 +318,16 @@ function assertStep4RenderingCorrectly() {
 
   cy.contains("66.000").should("be.visible");
 
-  cy.contains(`Họ và tên người nhận: ${BUYER_NAME}`).should("be.visible");
+  cy.contains(`Họ và tên người nhận: ${CORRECT_BUYER_NAME}`).should(
+    "be.visible"
+  );
   cy.contains(
-    `Địa chỉ người nhận: ${BUYER_ADDRESS}, ${BUYER_WARD}, ${BUYER_DISTRICT}, ${BUYER_CITY}`
+    `Địa chỉ người nhận: ${CORRECT_BUYER_ADDRESS}, ${CORRECT_BUYER_WARD}, ${CORRECT_BUYER_DISTRICT}, ${CORRECT_BUYER_CITY}`
   ).should("be.visible");
-  cy.contains(`Số điện thoại liên hệ: ${BUYER_PHONE}`).should("be.visible");
-  cy.contains(`Địa chỉ email: ${BUYER_EMAIL}`).should("be.visible");
+  cy.contains(`Số điện thoại liên hệ: ${CORRECT_BUYER_PHONE}`).should(
+    "be.visible"
+  );
+  cy.contains(`Địa chỉ email: ${CORRECT_BUYER_EMAIL}`).should("be.visible");
   cy.contains(`Hình thức giao nhận:`).should("be.visible");
 
   cy.get("[data-cy=step-4-agree-checkbox]").should("be.visible");

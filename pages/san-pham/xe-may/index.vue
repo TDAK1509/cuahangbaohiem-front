@@ -43,6 +43,16 @@ interface Step2FormValues {
   frameNumber: string;
 }
 
+interface Step3FormValues {
+  buyerName: string;
+  buyerAddress: string;
+  buyerCity: string;
+  buyerDistrict: string;
+  buyerWard: string;
+  buyerPhone: string;
+  buyerEmail: string;
+}
+
 export default Vue.extend({
   name: "TinhPhiXeMay",
 
@@ -105,7 +115,14 @@ export default Vue.extend({
       this.currentStep = 3;
     },
 
-    submitStep3() {
+    submitStep3(values: Step3FormValues) {
+      this.buyerName = values.buyerName;
+      this.buyerAddress = values.buyerAddress;
+      this.buyerCity = values.buyerCity;
+      this.buyerDistrict = values.buyerDistrict;
+      this.buyerWard = values.buyerWard;
+      this.buyerPhone = values.buyerPhone;
+      this.buyerEmail = values.buyerEmail;
       this.currentStep = 4;
     },
 
