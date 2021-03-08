@@ -24,7 +24,8 @@
         <h4>4. MỨC TRÁCH NHIỆM VÀ PHÍ BẢO HIỂM</h4>
         <table>
           <tr>
-            <td>{{ insuranceFee }}</td>
+            <td>Pvi: {{ insuranceFee.pvi | toVnd }}</td>
+            <td>Bao Viet: {{ insuranceFee.baoViet | toVnd }}</td>
           </tr>
         </table>
       </section>
@@ -63,8 +64,12 @@
 </template>
 
 <script>
+import mixinMoneyFilter from "@/utils/mixins/money-filters";
+
 export default {
   name: "MotorbikeFormStep4",
+
+  mixins: [mixinMoneyFilter],
 
   inheritAttrs: false,
 
@@ -94,8 +99,8 @@ export default {
       default: ""
     },
     insuranceFee: {
-      type: String,
-      default: ""
+      type: Object,
+      default: () => {}
     },
     buyerName: {
       type: String,
