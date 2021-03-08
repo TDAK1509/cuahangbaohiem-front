@@ -16,6 +16,7 @@ const BUYER_DISTRICT = "[data-cy=buyer-district-input]";
 const BUYER_WARD = "[data-cy=buyer-ward-input]";
 const BUYER_PHONE = "[data-cy=buyer-phone-input]";
 const BUYER_EMAIL = "[data-cy=buyer-email-input]";
+const AGREEMENT_CHECKBOX = "[data-cy=agreement-checkbox]";
 
 const CORRECT_BIKE_OWNER = "Nguyen Van A";
 const CORRECT_BIKE_LICENSE_PLATE = "55Z5-1111";
@@ -259,7 +260,7 @@ describe("Page /san-pham/xe-may", () => {
         cy.assertFailedHtml5FormValidation(BUYER_EMAIL);
       });
 
-      it("input all fields, clicking NEXT go to step 4", () => {
+      it("input all fields, clicking NEXT go to step 4, clicking next without check agree shows error, checking agree clicking next go to step checkout", () => {
         cy.get(BUYER_NAME).type(CORRECT_BUYER_NAME);
         cy.get(BUYER_ADDRESS).type(CORRECT_BUYER_ADDRESS);
         cy.get(BUYER_CITY).type(CORRECT_BUYER_CITY);
@@ -271,6 +272,16 @@ describe("Page /san-pham/xe-may", () => {
         cy.get(NEXT_BUTTON_SELECTOR).click();
 
         assertStep4RenderingCorrectly();
+
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+        cy.contains(
+          "Quý khách vui lòng chọn cam kết trước khi thực hiện đặt hàng"
+        ).should("be.visible");
+
+        cy.get(AGREEMENT_CHECKBOX).check();
+        cy.get(NEXT_BUTTON_SELECTOR).click();
+
+        cy.url().should("contain", "/xe-may/thanh-toan");
       });
     });
   });
