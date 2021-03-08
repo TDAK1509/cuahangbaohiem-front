@@ -21,7 +21,8 @@
 <script lang="ts">
 import Vue from "vue";
 import MotorbikeInsuranceController, {
-  MotorbikeType
+  MotorbikeType,
+  InsuranceFee
 } from "@/controller/motorbike-insurance/motorbike-insurance";
 
 const controller = new MotorbikeInsuranceController();
@@ -31,11 +32,6 @@ interface Step1FormValues {
   insuranceEndDate: string;
   motorbikeType: MotorbikeType;
   insuranceFee: InsuranceFee;
-}
-
-interface InsuranceFee {
-  pvi: number;
-  baoViet: number;
 }
 
 interface Step2FormValues {
