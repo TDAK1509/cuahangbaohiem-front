@@ -5,6 +5,7 @@ const INSURANCE_YEAR_RADIO = "[data-cy=insurance-year-radio]";
 const INSURANCE_START_DATE = "[data-cy=insurance-start-date]";
 const INSURANCE_END_DATE = "[data-cy=insurance-end-date]";
 const MOTORBIKE_TYPE_RADIO_SELECTOR = "[data-cy=motorbike-type-radio]";
+const INSURANCE_ADD_ON_CHECKBOX = "[data-cy=insurance-add-on-checkbox]";
 const MOTORBIKE_OWNER_SELECTOR = "[data-cy=owner-input]";
 const MOTORBIKE_LICENSE_PLATE_SELECTOR = "[data-cy=license-plate-input]";
 const MOTORBIKE_FRAME_NUMBER_SELECTOR = "[data-cy=frame-number-input]";
@@ -95,6 +96,20 @@ describe("Page /san-pham/xe-may", () => {
       function getBaoViet() {
         return cy.get("[data-cy=bao-viet]");
       }
+
+      it("selecting addon updates insurance fee", () => {
+        cy.get(MOTORBIKE_TYPE_RADIO_SELECTOR).eq(1).click();
+        getPvi().should("contain", "66.000");
+        getBaoViet().should("contain", "66.000");
+
+        cy.get(INSURANCE_ADD_ON_CHECKBOX).check();
+        getPvi().should("contain", "86.000");
+        getBaoViet().should("contain", "86.000");
+
+        cy.get(INSURANCE_ADD_ON_CHECKBOX).check();
+        getPvi().should("contain", "66.000");
+        getBaoViet().should("contain", "66.000");
+      });
 
       it("render field years of insurance with 3 values 1 year, 2 years, 3 years, preselected value 1 year", () => {
         cy.get(INSURANCE_YEAR_RADIO).should("have.length", 3);
