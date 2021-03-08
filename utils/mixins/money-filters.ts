@@ -7,6 +7,13 @@ export default Vue.extend({
         style: "currency",
         currency: "VND"
       });
+    },
+
+    toVnd(money: number): string {
+      return money.toLocaleString("it-IT", {
+        style: "currency",
+        currency: "VND"
+      });
     }
   }
 });

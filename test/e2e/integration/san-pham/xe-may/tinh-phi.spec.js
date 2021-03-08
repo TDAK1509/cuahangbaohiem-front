@@ -81,9 +81,10 @@ describe("Page /san-pham/xe-may", () => {
 
       it("chooses > 50cc, shows fee for Pvi and Bao Viet, clicking next go to next page", () => {
         cy.get(MOTORBIKE_TYPE_RADIO_SELECTOR).eq(1).click();
+        getPvi().should("contain", "66.000");
+        getBaoViet().should("contain", "66.000");
+
         cy.get(NEXT_BUTTON_SELECTOR).click();
-        getPvi().should("contain", "66,000 VND");
-        getBaoViet().should("contain", "66,000 VND");
         cy.contains("BƯỚC 2:").should("be.visible");
       });
 
@@ -300,7 +301,7 @@ function assertStep4RenderingCorrectly() {
     "be.visible"
   );
 
-  cy.contains("66,000 VND").should("be.visible");
+  cy.contains("66.000").should("be.visible");
 
   cy.contains(`Họ và tên người nhận: ${BUYER_NAME}`).should("be.visible");
   cy.contains(

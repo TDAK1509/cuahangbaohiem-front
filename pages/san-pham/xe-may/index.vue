@@ -29,6 +29,12 @@ interface Step1FormValues {
   insuranceStartDate: string;
   insuranceEndDate: string;
   motorbikeType: MotorbikeType;
+  insuranceFee: InsuranceFee;
+}
+
+interface InsuranceFee {
+  pvi: number;
+  baoViet: number;
 }
 
 interface Step2FormValues {
@@ -51,7 +57,7 @@ export default Vue.extend({
       frameNumber: "",
       insuranceStartDate: "",
       insuranceEndDate: "",
-      insuranceFee: "",
+      insuranceFee: { pvi: 0, baoViet: 0 } as InsuranceFee,
       buyerName: "",
       buyerAddress: "",
       buyerCity: "",
@@ -63,7 +69,7 @@ export default Vue.extend({
   },
 
   computed: {
-    step4Props(): { [key: string]: string } {
+    step4Props(): { [key: string]: string | InsuranceFee } {
       return {
         motorbikeOwner: this.motorbikeOwner,
         motorbikeType: this.motorbikeType,
@@ -88,6 +94,7 @@ export default Vue.extend({
       this.insuranceStartDate = values.insuranceStartDate;
       this.insuranceEndDate = values.insuranceEndDate;
       this.motorbikeType = getMotorbikeTypeLabel(values.motorbikeType);
+      this.insuranceFee = values.insuranceFee;
       this.currentStep = 2;
     },
 

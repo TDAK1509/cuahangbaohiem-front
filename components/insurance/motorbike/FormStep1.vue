@@ -80,21 +80,36 @@
       </div>
     </div>
 
+    <div>
+      <div data-cy="pvi">{{ pviInsuranceFee | toVnd }}</div>
+      <div data-cy="bao-viet">{{ baoVietInsuranceFee | toVnd }}</div>
+    </div>
+
     <button data-cy="next-button">NEXT</button>
   </form>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { MotorbikeType } from "@/controller/motorbike-insurance/motorbike-insurance";
 import moment from "moment";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
+
+import mixinMoneyFilter from "@/utils/mixins/money-filters";
+
+import { MotorbikeType } from "@/controller/motorbike-insurance/motorbike-insurance";
+import PviMotorbikeInsurance from "@/controller/motorbike-insurance/pvi-motorbike-insurance";
+import BaoVietMotorbikeInsurance from "@/controller/motorbike-insurance/bao-viet-motorbike-insurance";
+
+const pvi = new PviMotorbikeInsurance();
+const baoViet = new BaoVietMotorbikeInsurance();
 
 export default Vue.extend({
   name: "MotorbikeFormStep1",
 
   components: { DatePicker },
+
+  mixins: [mixinMoneyFilter],
 
   inheritAttrs: false,
 
@@ -104,7 +119,9 @@ export default Vue.extend({
       insuranceYear: 1,
       insuranceStartDate: new Date(),
       motorbikeType: null as null | MotorbikeType,
-      motorbikeTypeValue: MotorbikeType
+      motorbikeTypeValue: MotorbikeType,
+      pviInsuranceFee: 0,
+      baoVietInsuranceFee: 0
     };
   },
 
@@ -116,6 +133,15 @@ export default Vue.extend({
     }
   },
 
+  watch: {
+    insuranceYear() {
+      this.calculateInsuranceFee();
+    },
+    motorbikeType() {
+      this.calculateInsuranceFee();
+    }
+  },
+
   methods: {
     submit() {
       const step1FormValues = {
@@ -123,9 +149,30 @@ export default Vue.extend({
           this.dateFormat
         ),
         insuranceEndDate: this.insuranceEndDate,
-        motorbikeType: this.motorbikeType
+        motorbikeType: this.motorbikeType,
+        insuranceFee: {
+          pvi: this.pviInsuranceFee,
+          baoViet: this.baoVietInsuranceFee
+        }
       };
       this.$emit("submit", step1FormValues);
+    },
+
+    calculateInsuranceFee() {
+      this.calculatePviInsuranceFee();
+      this.calculateBaoVietInsuranceFee();
+    },
+
+    calculatePviInsuranceFee() {
+      pvi.setYear(this.insuranceYear);
+      pvi.setMotorbike(this.motorbikeType as MotorbikeType);
+      this.pviInsuranceFee = pvi.getInsuranceFee();
+    },
+
+    calculateBaoVietInsuranceFee() {
+      baoViet.setYear(this.insuranceYear);
+      baoViet.setMotorbike(this.motorbikeType as MotorbikeType);
+      this.baoVietInsuranceFee = baoViet.getInsuranceFee();
     }
   }
 });
