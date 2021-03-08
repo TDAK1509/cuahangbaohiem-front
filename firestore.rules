@@ -8,5 +8,9 @@ service cloud.firestore {
     match /car_insurance_request/{request} {
       allow read, write: if true;
     }
+
+    match /motorbike_insurance_request/{request} {
+      allow read, write: if true;
+    }
   }
 }

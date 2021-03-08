@@ -303,7 +303,7 @@ describe("Page /san-pham/xe-may", () => {
           "be.visible"
         );
         cy.contains(`hasAddon: false`).should("be.visible");
-        cy.contains(`insuranceFee: {"pvi":66000,"baoViet":66000}`).should(
+        cy.contains(`insuranceFee: { "pvi": 66000, "baoViet": 66000 }`).should(
           "be.visible"
         );
         cy.contains(`buyerName: ${CORRECT_BUYER_NAME}`).should("be.visible");

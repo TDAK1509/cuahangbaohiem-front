@@ -165,7 +165,8 @@ export default Vue.extend({
         insuranceFee: {
           pvi: this.pviInsuranceFee,
           baoViet: this.baoVietInsuranceFee
-        }
+        },
+        hasAddon: this.hasAddon
       };
       this.$emit("submit", step1FormValues);
     },

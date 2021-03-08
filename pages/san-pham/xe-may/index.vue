@@ -11,7 +11,7 @@
       <FormStep3 v-else-if="currentStep === 3" @submit="submitStep3" />
       <FormStep4
         v-else-if="currentStep === 4"
-        v-bind="step4Props"
+        v-bind="insuranceRequest"
         @submit="submitStep4"
       />
     </div>
@@ -22,7 +22,8 @@
 import Vue from "vue";
 import MotorbikeInsuranceController, {
   MotorbikeType,
-  InsuranceFee
+  InsuranceFee,
+  MotorbikeInsuranceRequest
 } from "@/controller/motorbike-insurance/motorbike-insurance";
 
 const controller = new MotorbikeInsuranceController();
@@ -30,6 +31,7 @@ const controller = new MotorbikeInsuranceController();
 interface Step1FormValues {
   insuranceStartDate: string;
   insuranceEndDate: string;
+  hasAddon: boolean;
   motorbikeType: MotorbikeType;
   insuranceFee: InsuranceFee;
 }
@@ -64,6 +66,7 @@ export default Vue.extend({
       frameNumber: "",
       insuranceStartDate: "",
       insuranceEndDate: "",
+      hasAddon: false,
       insuranceFee: { pvi: 0, baoViet: 0 } as InsuranceFee,
       buyerName: "",
       buyerAddress: "",
@@ -76,7 +79,7 @@ export default Vue.extend({
   },
 
   computed: {
-    step4Props(): { [key: string]: string | InsuranceFee } {
+    insuranceRequest(): MotorbikeInsuranceRequest {
       return {
         motorbikeOwner: this.motorbikeOwner,
         motorbikeType: this.motorbikeType,
@@ -84,6 +87,7 @@ export default Vue.extend({
         frameNumber: this.frameNumber,
         insuranceStartDate: this.insuranceStartDate,
         insuranceEndDate: this.insuranceEndDate,
+        hasAddon: this.hasAddon,
         insuranceFee: this.insuranceFee,
         buyerName: this.buyerName,
         buyerAddress: this.buyerAddress,
@@ -104,6 +108,7 @@ export default Vue.extend({
         values.motorbikeType
       );
       this.insuranceFee = values.insuranceFee;
+      this.hasAddon = values.hasAddon;
       this.currentStep = 2;
     },
 
@@ -125,7 +130,8 @@ export default Vue.extend({
       this.currentStep = 4;
     },
 
-    submitStep4() {
+    async submitStep4() {
+      await controller.save(this.insuranceRequest);
       this.$router.push("xe-may/thanh-toan");
     }
   }

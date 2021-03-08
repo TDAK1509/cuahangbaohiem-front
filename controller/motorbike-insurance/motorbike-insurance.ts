@@ -8,7 +8,23 @@ export enum MotorbikeType {
   ABOVE_50_CC
 }
 
-export type MotorbikeInsuranceRequest = RawMotorbikeInsuranceRequest;
+export interface MotorbikeInsuranceRequest {
+  motorbikeOwner: string;
+  motorbikeType: string;
+  licensePlate: string;
+  frameNumber: string;
+  insuranceStartDate: string;
+  insuranceEndDate: string;
+  hasAddon: boolean;
+  insuranceFee: RawInsuranceFee;
+  buyerName: string;
+  buyerAddress: string;
+  buyerCity: string;
+  buyerDistrict: string;
+  buyerWard: string;
+  buyerPhone: string;
+  buyerEmail: string;
+}
 
 export type InsuranceFee = RawInsuranceFee;
 
