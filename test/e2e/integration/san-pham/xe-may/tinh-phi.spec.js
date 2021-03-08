@@ -5,7 +5,7 @@ const INSURANCE_YEAR_RADIO = "[data-cy=insurance-year-radio]";
 const INSURANCE_START_DATE = "[data-cy=insurance-start-date]";
 const INSURANCE_END_DATE = "[data-cy=insurance-end-date]";
 const MOTORBIKE_TYPE_RADIO_SELECTOR = "[data-cy=motorbike-type-radio]";
-const INSURANCE_ADD_ON_CHECKBOX = "[data-cy=insurance-add-on-checkbox]";
+const INSURANCE_ADD_ON_CHECKBOX = "[data-cy=insurance-addon-checkbox]";
 const MOTORBIKE_OWNER_SELECTOR = "[data-cy=owner-input]";
 const MOTORBIKE_LICENSE_PLATE_SELECTOR = "[data-cy=license-plate-input]";
 const MOTORBIKE_FRAME_NUMBER_SELECTOR = "[data-cy=frame-number-input]";
@@ -106,7 +106,7 @@ describe("Page /san-pham/xe-may", () => {
         getPvi().should("contain", "86.000");
         getBaoViet().should("contain", "86.000");
 
-        cy.get(INSURANCE_ADD_ON_CHECKBOX).check();
+        cy.get(INSURANCE_ADD_ON_CHECKBOX).uncheck();
         getPvi().should("contain", "66.000");
         getBaoViet().should("contain", "66.000");
       });

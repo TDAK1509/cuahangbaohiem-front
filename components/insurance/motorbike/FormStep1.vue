@@ -81,6 +81,14 @@
     </div>
 
     <div>
+      <input
+        v-model="hasAddon"
+        data-cy="insurance-addon-checkbox"
+        type="checkbox"
+      />
+    </div>
+
+    <div>
       <div data-cy="pvi">{{ pviInsuranceFee | toVnd }}</div>
       <div data-cy="bao-viet">{{ baoVietInsuranceFee | toVnd }}</div>
     </div>
@@ -120,6 +128,7 @@ export default Vue.extend({
       insuranceStartDate: new Date(),
       motorbikeType: null as null | MotorbikeType,
       motorbikeTypeValue: MotorbikeType,
+      hasAddon: false,
       pviInsuranceFee: 0,
       baoVietInsuranceFee: 0
     };
@@ -138,6 +147,9 @@ export default Vue.extend({
       this.calculateInsuranceFee();
     },
     motorbikeType() {
+      this.calculateInsuranceFee();
+    },
+    hasAddon() {
       this.calculateInsuranceFee();
     }
   },
@@ -166,12 +178,14 @@ export default Vue.extend({
     calculatePviInsuranceFee() {
       pvi.setYear(this.insuranceYear);
       pvi.setMotorbike(this.motorbikeType as MotorbikeType);
+      pvi.setHasAddon(this.hasAddon);
       this.pviInsuranceFee = pvi.getInsuranceFee();
     },
 
     calculateBaoVietInsuranceFee() {
       baoViet.setYear(this.insuranceYear);
       baoViet.setMotorbike(this.motorbikeType as MotorbikeType);
+      baoViet.setHasAddon(this.hasAddon);
       this.baoVietInsuranceFee = baoViet.getInsuranceFee();
     }
   }
