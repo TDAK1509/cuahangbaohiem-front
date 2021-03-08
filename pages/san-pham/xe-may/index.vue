@@ -31,6 +31,12 @@ interface Step1FormValues {
   motorbikeType: MotorbikeType;
 }
 
+interface Step2FormValues {
+  motorbikeOwner: string;
+  licensePlate: string;
+  frameNumber: string;
+}
+
 export default Vue.extend({
   name: "TinhPhiXeMay",
 
@@ -79,14 +85,16 @@ export default Vue.extend({
 
   methods: {
     submitStep1(values: Step1FormValues) {
-      console.dir(values);
       this.insuranceStartDate = values.insuranceStartDate;
       this.insuranceEndDate = values.insuranceEndDate;
       this.motorbikeType = getMotorbikeTypeLabel(values.motorbikeType);
       this.currentStep = 2;
     },
 
-    submitStep2() {
+    submitStep2(values: Step2FormValues) {
+      this.motorbikeOwner = values.motorbikeOwner;
+      this.licensePlate = values.licensePlate;
+      this.frameNumber = values.frameNumber;
       this.currentStep = 3;
     },
 
