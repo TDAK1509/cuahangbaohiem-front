@@ -1,3 +1,7 @@
+import MotorbikeInsuranceRequestModel, {
+  RawMotorbikeInsuranceRequest
+} from "@/models/motorbike-insurance-request";
+
 export enum MotorbikeType {
   UP_TO_50_CC,
   ABOVE_50_CC
@@ -13,4 +17,17 @@ export function getMotorbikeTypeLabel(type: MotorbikeType): string {
   }
 
   return "";
+}
+
+export type MotorbikeInsuranceRequest = RawMotorbikeInsuranceRequest;
+
+export default class MotorbikeInsuranceRequestController {
+  public save(requestFromClient: MotorbikeInsuranceRequest) {
+    const requestToSaveToServer: RawMotorbikeInsuranceRequest = {
+      ...requestFromClient,
+      createdAt: new Date().getTime()
+    };
+
+    return MotorbikeInsuranceRequestModel.save(requestToSaveToServer);
+  }
 }
