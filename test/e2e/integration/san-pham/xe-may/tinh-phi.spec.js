@@ -28,6 +28,10 @@ const CORRECT_BUYER_WARD = "Buyer ward";
 const CORRECT_BUYER_PHONE = "0912345678";
 const CORRECT_BUYER_EMAIL = "test@gmail.com";
 
+const today = new Date();
+const todayString = moment(today).format("DD-MM-YYYY");
+const nextYearDateString = moment(today).add(1, "year").format("DD-MM-YYYY");
+
 describe("Page /san-pham/xe-may", () => {
   beforeEach(() => {
     cy.visit("/san-pham/xe-may");
@@ -135,19 +139,17 @@ describe("Page /san-pham/xe-may", () => {
       });
 
       it("render insurance start date as input, auto generate insurance end date", () => {
-        const dateFormat = "DD-MM-YYYY";
-        const today = moment(new Date()).format(dateFormat);
-        const nextYear = moment(new Date()).add(1, "year").format(dateFormat);
-
-        cy.get(INSURANCE_START_DATE).find("input").should("have.value", today);
-        cy.get(INSURANCE_END_DATE).should("have.value", nextYear);
+        cy.get(INSURANCE_START_DATE)
+          .find("input")
+          .should("have.value", todayString);
+        cy.get(INSURANCE_END_DATE).should("have.value", nextYearDateString);
 
         selectTomorrowForInsuranceStartDate();
 
         const tomorrow = moment(new Date()).add(1, "day");
         const nextYearTomorrow = moment(new Date(tomorrow))
           .add(1, "year")
-          .format(dateFormat);
+          .format("DD-MM-YYYY");
 
         cy.get(INSURANCE_END_DATE).should("have.value", nextYearTomorrow);
       });
@@ -283,6 +285,39 @@ describe("Page /san-pham/xe-may", () => {
 
         cy.url().should("contain", "/xe-may/thanh-toan");
       });
+
+      it("check if data is saved to firestore", () => {
+        cy.visit("/san-pham/xe-may/test");
+        cy.contains(`motorbikeOwner: ${CORRECT_BIKE_OWNER}`).should(
+          "be.visible"
+        );
+        cy.contains(
+          `motorbikeType: Xe Mô tô 2 bánh dung tích trên 50cc`
+        ).should("be.visible");
+        cy.contains(`licensePlate: ${CORRECT_BIKE_LICENSE_PLATE}`).should(
+          "be.visible"
+        );
+        cy.contains(`frameNumber:`).should("be.visible");
+        cy.contains(`insuranceStartDate: ${todayString}`).should("be.visible");
+        cy.contains(`insuranceEndDate: ${nextYearDateString}`).should(
+          "be.visible"
+        );
+        cy.contains(`hasAddon: false`).should("be.visible");
+        cy.contains(`insuranceFee: {"pvi":66000,"baoViet":66000}`).should(
+          "be.visible"
+        );
+        cy.contains(`buyerName: ${CORRECT_BUYER_NAME}`).should("be.visible");
+        cy.contains(`buyerAddress: ${CORRECT_BUYER_ADDRESS}`).should(
+          "be.visible"
+        );
+        cy.contains(`buyerCity: ${CORRECT_BUYER_CITY}`).should("be.visible");
+        cy.contains(`buyerDistrict: ${CORRECT_BUYER_DISTRICT}`).should(
+          "be.visible"
+        );
+        cy.contains(`buyerWard: ${CORRECT_BUYER_WARD}`).should("be.visible");
+        cy.contains(`buyerPhone: ${CORRECT_BUYER_PHONE}`).should("be.visible");
+        cy.contains(`buyerEmail: ${CORRECT_BUYER_EMAIL}`).should("be.visible");
+      });
     });
   });
 });
@@ -320,9 +355,6 @@ function assertStep4RenderingCorrectly() {
 
   cy.contains(`Biển số: ${CORRECT_BIKE_LICENSE_PLATE}`).should("be.visible");
 
-  const today = new Date();
-  const todayString = moment(today).format("DD-MM-YYYY");
-  const nextYearDateString = moment(today).add(1, "year").format("DD-MM-YYYY");
   cy.contains(`Từ ngày ${todayString} đến ngày ${nextYearDateString}`).should(
     "be.visible"
   );
