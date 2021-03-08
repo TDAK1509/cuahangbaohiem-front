@@ -79,11 +79,21 @@ describe("Page /san-pham/xe-may", () => {
         cy.assertFailedHtml5FormValidation(MOTORBIKE_TYPE_RADIO_SELECTOR);
       });
 
-      it("chooses > 50cc, clicking next go to next page", () => {
+      it("chooses > 50cc, shows fee for Pvi and Bao Viet, clicking next go to next page", () => {
         cy.get(MOTORBIKE_TYPE_RADIO_SELECTOR).eq(1).click();
         cy.get(NEXT_BUTTON_SELECTOR).click();
+        getPvi().should("contain", "66,000 VND");
+        getBaoViet().should("contain", "66,000 VND");
         cy.contains("BƯỚC 2:").should("be.visible");
       });
+
+      function getPvi() {
+        return cy.get("[data-cy=pvi]");
+      }
+
+      function getBaoViet() {
+        return cy.get("[data-cy=bao-viet]");
+      }
 
       it("render field years of insurance with 3 values 1 year, 2 years, 3 years, preselected value 1 year", () => {
         cy.get(INSURANCE_YEAR_RADIO).should("have.length", 3);
