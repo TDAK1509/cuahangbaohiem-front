@@ -20,10 +20,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {
-  MotorbikeType,
-  getMotorbikeTypeLabel
+import MotorbikeInsuranceController, {
+  MotorbikeType
 } from "@/controller/motorbike-insurance/motorbike-insurance";
+
+const controller = new MotorbikeInsuranceController();
 
 interface Step1FormValues {
   insuranceStartDate: string;
@@ -103,7 +104,9 @@ export default Vue.extend({
     submitStep1(values: Step1FormValues) {
       this.insuranceStartDate = values.insuranceStartDate;
       this.insuranceEndDate = values.insuranceEndDate;
-      this.motorbikeType = getMotorbikeTypeLabel(values.motorbikeType);
+      this.motorbikeType = controller.getMotorbikeTypeLabel(
+        values.motorbikeType
+      );
       this.insuranceFee = values.insuranceFee;
       this.currentStep = 2;
     },

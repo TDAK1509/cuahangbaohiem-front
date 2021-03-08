@@ -7,18 +7,6 @@ export enum MotorbikeType {
   ABOVE_50_CC
 }
 
-export function getMotorbikeTypeLabel(type: MotorbikeType): string {
-  if (type === MotorbikeType.UP_TO_50_CC) {
-    return "Xe Mô tô 2 bánh dung tích từ 50cc trở xuống";
-  }
-
-  if (type === MotorbikeType.ABOVE_50_CC) {
-    return "Xe Mô tô 2 bánh dung tích trên 50cc";
-  }
-
-  return "";
-}
-
 export type MotorbikeInsuranceRequest = RawMotorbikeInsuranceRequest;
 
 export default class MotorbikeInsuranceRequestController {
@@ -29,5 +17,17 @@ export default class MotorbikeInsuranceRequestController {
     };
 
     return MotorbikeInsuranceRequestModel.save(requestToSaveToServer);
+  }
+
+  public getMotorbikeTypeLabel(type: MotorbikeType): string {
+    if (type === MotorbikeType.UP_TO_50_CC) {
+      return "Xe Mô tô 2 bánh dung tích từ 50cc trở xuống";
+    }
+
+    if (type === MotorbikeType.ABOVE_50_CC) {
+      return "Xe Mô tô 2 bánh dung tích trên 50cc";
+    }
+
+    return "";
   }
 }
