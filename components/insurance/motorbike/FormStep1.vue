@@ -37,13 +37,25 @@
     <div class="field">
       <label class="label">Thời hạn bảo hiểm</label>
 
-      <DatePicker
-        v-model="insuranceStartDate"
-        data-cy="insurance-start-date"
-        :format="dateFormat"
-      />
-
-      <input :value="insuranceEndDate" data-cy="insurance-end-date" disabled />
+      <div class="form-step-1__date-container">
+        <div class="is-flex is-align-items-center">
+          <div class="form-step-1__date-label">Từ ngày</div>
+          <DatePicker
+            v-model="insuranceStartDate"
+            data-cy="insurance-start-date"
+            :format="dateFormat"
+          />
+        </div>
+        <div class="is-flex mt-3">
+          <div class="form-step-1__date-label">đến ngày</div>
+          <DatePicker
+            v-model="insuranceEndDate"
+            data-cy="insurance-end-date"
+            :format="dateFormat"
+            disabled
+          />
+        </div>
+      </div>
     </div>
 
     <div class="field">
@@ -135,10 +147,11 @@ export default Vue.extend({
   },
 
   computed: {
-    insuranceEndDate(): string {
-      return moment(this.insuranceStartDate)
-        .add(this.insuranceYear, "year")
-        .format(this.dateFormat);
+    insuranceEndDate(): Date {
+      const year = this.insuranceStartDate.getFullYear();
+      const month = this.insuranceStartDate.getMonth();
+      const day = this.insuranceStartDate.getDate();
+      return new Date(year + 1, month, day);
     }
   },
 
@@ -160,7 +173,7 @@ export default Vue.extend({
         insuranceStartDate: moment(this.insuranceStartDate).format(
           this.dateFormat
         ),
-        insuranceEndDate: this.insuranceEndDate,
+        insuranceEndDate: moment(this.insuranceEndDate).format(this.dateFormat),
         motorbikeType: this.motorbikeType,
         insuranceFee: {
           pvi: this.pviInsuranceFee,
@@ -192,3 +205,9 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.form-step-1__date-label {
+  flex-basis: 5rem;
+}
+</style>
