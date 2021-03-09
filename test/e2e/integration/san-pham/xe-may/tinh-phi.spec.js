@@ -1,6 +1,7 @@
 const moment = require("moment");
 
 const NEXT_BUTTON_SELECTOR = "[data-cy=next-button]";
+const BACK_BUTTON_SELECTOR = "[data-cy=back-button]";
 const INSURANCE_YEAR_RADIO = "[data-cy=insurance-year-radio]";
 const INSURANCE_START_DATE = "[data-cy=insurance-start-date]";
 const INSURANCE_END_DATE = "[data-cy=insurance-end-date]";
@@ -79,7 +80,7 @@ describe("Page /san-pham/xe-may", () => {
   });
 
   describe("form handling", () => {
-    describe("step 1", () => {
+    describe.skip("step 1", () => {
       it("field motorbike type is required", () => {
         cy.get(NEXT_BUTTON_SELECTOR).click();
         cy.assertFailedHtml5FormValidation(MOTORBIKE_TYPE_RADIO_SELECTOR);
@@ -160,9 +161,15 @@ describe("Page /san-pham/xe-may", () => {
       }
     });
 
-    describe.skip("step 2", () => {
+    describe("step 2", () => {
       beforeEach(() => {
         goToStep2();
+      });
+
+      it("clicking BACK button go back to step 1", () => {
+        cy.get(BACK_BUTTON_SELECTOR).click();
+        cy.contains("BƯỚC 1: TÍNH PHÍ").should("be.visible");
+        cy.contains("BƯỚC 2:").should("not.exist");
       });
 
       it("default shows 'Biển kiểm soát:', clicking 'Số khung' shows 'Số khung:'", () => {
