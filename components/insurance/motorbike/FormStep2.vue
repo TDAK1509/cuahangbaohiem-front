@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h3>BƯỚC 2: THÔNG TIN XE</h3>
+    <h1 class="has-text-weight-bold is-size-4 has-text-primary mb-4">
+      BƯỚC 2: THÔNG TIN XE
+    </h1>
     <form @submit.prevent="submit">
       <TextField
         v-model="motorbikeOwner"
