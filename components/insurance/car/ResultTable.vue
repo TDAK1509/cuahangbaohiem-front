@@ -19,7 +19,7 @@
         </div>
 
         <div class="content">
-          <p>Phí bảo hiểm: {{ insuranceFee | millionDongs }}</p>
+          <p>Phí bảo hiểm: {{ insuranceFee | toVnd }}</p>
         </div>
 
         <div>

@@ -115,8 +115,8 @@
     </div>
 
     <div v-if="pviInsuranceFee > 0">
-      <div data-cy="pvi">{{ pviInsuranceFee | toVnd }}</div>
-      <div data-cy="bao-viet">{{ baoVietInsuranceFee | toVnd }}</div>
+      <ResultPviMotorbike :insurance-fee="pviInsuranceFee" />
+      <ResultBaoVietMotorbike :insurance-fee="pviInsuranceFee" />
     </div>
 
     <button data-cy="next-button">NEXT</button>
