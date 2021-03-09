@@ -106,17 +106,25 @@
         Bảo hiểm tai nạn người trên xe
       </label>
 
-      <div v-if="hasAddon" class="add-on__description mt-2">
-        <ul class="list">
+      <div v-if="hasAddon" class="addon__description mt-2">
+        <ul class="addon__list">
           <li>Sỗ chỗ tham gia bảo hiểm: <strong>2</strong></li>
           <li>Số tiền bảo hiểm: <strong>10.000.000 VND</strong></li>
         </ul>
       </div>
     </div>
 
-    <div v-if="pviInsuranceFee > 0">
-      <ResultPviMotorbike :insurance-fee="pviInsuranceFee" />
-      <ResultBaoVietMotorbike :insurance-fee="pviInsuranceFee" />
+    <div v-if="pviInsuranceFee > 0" class="result field">
+      <label class="label is-uppercase">Phí bảo hiểm:</label>
+
+      <ul class="result__list">
+        <li class="result__list-item">
+          <ResultPviMotorbike :insurance-fee="pviInsuranceFee" />
+        </li>
+        <li class="result__list-item">
+          <ResultBaoVietMotorbike :insurance-fee="pviInsuranceFee" />
+        </li>
+      </ul>
     </div>
 
     <button data-cy="next-button">NEXT</button>
@@ -240,12 +248,22 @@ export default Vue.extend({
   flex-basis: 5rem;
 }
 
-.add-on__description {
+.addon__description {
   font-size: 0.9rem;
 }
 
-.list {
+.addon__list {
   list-style-type: disc;
   margin-left: 1rem;
+}
+
+.result {
+  margin-top: 2em;
+  padding-top: 0.5em;
+  border-top: 1px solid black;
+
+  &__list > * + * {
+    margin-top: 1em;
+  }
 }
 </style>

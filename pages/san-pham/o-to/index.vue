@@ -19,8 +19,8 @@
         <TextField
           v-model="carValue"
           data-cy="car-value"
-          label="Giá trị xe (VND)"
-          placeholder="800000000"
+          label="Giá trị xe (triệu đồng)"
+          placeholder="800"
           required
           pattern="[0-9]*"
           title="Vui lòng điền một con số."

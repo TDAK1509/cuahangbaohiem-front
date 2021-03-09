@@ -19,27 +19,10 @@
         </div>
 
         <div class="content">
-          <p>Phí bảo hiểm: {{ insuranceFee | millionDongs }}</p>
-        </div>
-
-        <div>
-          <button
-            data-cy="buy-button"
-            class="button is-warning"
-            @click="showPopup = true"
-          >
-            MUA NGAY
-          </button>
+          <p>Phí bảo hiểm: {{ insuranceFee | toVnd }}</p>
         </div>
       </div>
     </div>
-
-    <BuyPopup
-      v-if="showPopup"
-      v-model="showPopup"
-      :insurance-company="companyName"
-      :insurance-fee="insuranceFee"
-    />
   </div>
 </template>
 
@@ -70,12 +53,6 @@ export default Vue.extend({
       required: false,
       default: 0
     }
-  },
-
-  data() {
-    return {
-      showPopup: false
-    };
   }
 });
 </script>

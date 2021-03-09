@@ -1,6 +1,6 @@
 <template>
   <div data-cy="bao-viet">
-    <ResultTable
+    <ResultTableMotorbike
       logo-file-name="logo-bao-viet.png"
       company-name="Bảo Việt"
       :insurance-fee="insuranceFee"

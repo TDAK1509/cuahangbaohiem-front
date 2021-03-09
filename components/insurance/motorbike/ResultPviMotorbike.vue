@@ -1,6 +1,6 @@
 <template>
   <div data-cy="pvi">
-    <ResultTable
+    <ResultTableMotorbike
       logo-file-name="logo-pvi.png"
       company-name="PVI"
       :insurance-fee="insuranceFee"
