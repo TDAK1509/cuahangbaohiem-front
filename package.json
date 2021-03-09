@@ -40,6 +40,7 @@
     "@nuxtjs/router-extras": "^1.1.1",
     "@types/lodash": "^4.14.165",
     "@types/moment": "^2.13.0",
+    "@types/vue2-datepicker": "^3.3.0",
     "@vue/test-utils": "^1.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
