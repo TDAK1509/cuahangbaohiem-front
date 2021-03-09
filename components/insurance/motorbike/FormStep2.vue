@@ -4,13 +4,17 @@
       BƯỚC 2: THÔNG TIN XE
     </h1>
     <form @submit.prevent="submit">
-      <TextField
-        v-model="motorbikeOwner"
-        data-cy="owner-input"
-        required
-        pattern="[a-zA-Z\s]+"
-        title="Tên của bạn có số hoặc kí tự lạ."
-      />
+      <div class="field">
+        <label class="label">Tên chủ xe:</label>
+        <TextField
+          v-model="motorbikeOwner"
+          data-cy="owner-input"
+          required
+          pattern="[a-zA-Z\s]+"
+          title="Tên của bạn có số hoặc kí tự lạ."
+          placeholder="Ghi theo đăng ký"
+        />
+      </div>
 
       <div class="field">
         <div class="control">
@@ -20,7 +24,7 @@
               :value="true"
               type="radio"
             />
-            Biển kiểm soát
+            <strong>Biển kiểm soát</strong>
           </label>
 
           <label class="radio">
@@ -29,7 +33,7 @@
               :value="false"
               type="radio"
             />
-            Số khung
+            <strong>Số khung</strong>
           </label>
         </div>
       </div>
@@ -50,7 +54,7 @@
         required
       />
 
-      <button data-cy="next-button">NEXT</button>
+      <MotorbikeNextButton />
     </form>
   </div>
 </template>
