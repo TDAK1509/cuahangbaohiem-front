@@ -127,7 +127,7 @@
       </ul>
     </div>
 
-    <button data-cy="next-button">NEXT</button>
+    <MotorbikeNextButton />
   </form>
 </template>
 
