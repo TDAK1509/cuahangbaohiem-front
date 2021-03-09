@@ -94,12 +94,17 @@
       </div>
     </div>
 
-    <div>
-      <input
-        v-model="hasAddon"
-        data-cy="insurance-addon-checkbox"
-        type="checkbox"
-      />
+    <div v-if="isMotorbikeTypeSelected" class="field">
+      <label class="label">Đăng ký bổ sung:</label>
+
+      <label class="checkbox">
+        <input
+          v-model="hasAddon"
+          data-cy="insurance-addon-checkbox"
+          type="checkbox"
+        />
+        Bảo hiểm tai nạn người trên xe
+      </label>
     </div>
 
     <div v-if="pviInsuranceFee > 0">
@@ -163,6 +168,10 @@ export default Vue.extend({
       const month = this.insuranceStartDate.getMonth();
       const day = this.insuranceStartDate.getDate();
       return new Date(year + this.insuranceYear, month, day);
+    },
+
+    isMotorbikeTypeSelected(): boolean {
+      return this.motorbikeType !== null;
     }
   },
 
@@ -196,8 +205,10 @@ export default Vue.extend({
     },
 
     calculateInsuranceFee() {
-      this.calculatePviInsuranceFee();
-      this.calculateBaoVietInsuranceFee();
+      if (this.isMotorbikeTypeSelected) {
+        this.calculatePviInsuranceFee();
+        this.calculateBaoVietInsuranceFee();
+      }
     },
 
     calculatePviInsuranceFee() {
