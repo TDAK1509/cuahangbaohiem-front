@@ -105,6 +105,13 @@
         />
         Bảo hiểm tai nạn người trên xe
       </label>
+
+      <div v-if="hasAddon" class="add-on__description mt-2">
+        <ul class="list">
+          <li>Sỗ chỗ tham gia bảo hiểm: <strong>2</strong></li>
+          <li>Số tiền bảo hiểm: <strong>10.000.000 VND</strong></li>
+        </ul>
+      </div>
     </div>
 
     <div v-if="pviInsuranceFee > 0">
@@ -231,5 +238,14 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .form-step-1__date-label {
   flex-basis: 5rem;
+}
+
+.add-on__description {
+  font-size: 0.9rem;
+}
+
+.list {
+  list-style-type: disc;
+  margin-left: 1rem;
 }
 </style>
