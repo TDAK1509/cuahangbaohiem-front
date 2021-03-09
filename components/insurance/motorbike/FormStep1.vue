@@ -1,134 +1,140 @@
 <template>
-  <form @submit.prevent="submit">
-    <div class="field">
-      <label class="label">Số năm bảo hiểm:</label>
+  <div>
+    <h1 class="has-text-weight-bold is-size-4 has-text-primary mb-4">
+      BƯỚC 1: TÍNH PHÍ
+    </h1>
 
-      <div class="control">
-        <label class="radio" data-cy="insurance-year-radio">
-          <input
-            v-model="insuranceYear"
-            type="radio"
-            name="insurance_year"
-            :value="1"
-          />
-          1 năm
-        </label>
-        <label class="radio" data-cy="insurance-year-radio">
-          <input
-            v-model="insuranceYear"
-            type="radio"
-            name="insurance_year"
-            :value="2"
-          />
-          2 năm
-        </label>
-        <label class="radio" data-cy="insurance-year-radio">
-          <input
-            v-model="insuranceYear"
-            type="radio"
-            name="insurance_year"
-            :value="3"
-          />
-          3 năm
-        </label>
-      </div>
-    </div>
+    <form @submit.prevent="submit">
+      <div class="field">
+        <label class="label">Số năm bảo hiểm:</label>
 
-    <div class="field">
-      <label class="label">Thời hạn bảo hiểm:</label>
-
-      <div class="form-step-1__date-container">
-        <div class="is-flex is-align-items-center">
-          <div class="form-step-1__date-label">Từ ngày</div>
-          <DatePicker
-            v-model="insuranceStartDate"
-            data-cy="insurance-start-date"
-            :format="dateFormat"
-            :clearable="false"
-            :editable="false"
-          />
-        </div>
-        <div class="is-flex mt-3">
-          <div class="form-step-1__date-label">đến ngày</div>
-          <DatePicker
-            v-model="insuranceEndDate"
-            data-cy="insurance-end-date"
-            :format="dateFormat"
-            disabled
-          />
+        <div class="control">
+          <label class="radio" data-cy="insurance-year-radio">
+            <input
+              v-model="insuranceYear"
+              type="radio"
+              name="insurance_year"
+              :value="1"
+            />
+            1 năm
+          </label>
+          <label class="radio" data-cy="insurance-year-radio">
+            <input
+              v-model="insuranceYear"
+              type="radio"
+              name="insurance_year"
+              :value="2"
+            />
+            2 năm
+          </label>
+          <label class="radio" data-cy="insurance-year-radio">
+            <input
+              v-model="insuranceYear"
+              type="radio"
+              name="insurance_year"
+              :value="3"
+            />
+            3 năm
+          </label>
         </div>
       </div>
-    </div>
 
-    <div class="field">
-      <label class="label">Loại xe:</label>
+      <div class="field">
+        <label class="label">Thời hạn bảo hiểm:</label>
 
-      <div class="control">
-        <p>
-          <label class="radio">
-            <input
-              v-model="motorbikeType"
-              :value="motorbikeTypeValue.UP_TO_50_CC"
-              data-cy="motorbike-type-radio"
-              name="motorbikeType"
-              type="radio"
-              required
+        <div class="form-step-1__date-container">
+          <div class="is-flex is-align-items-center">
+            <div class="form-step-1__date-label">Từ ngày</div>
+            <DatePicker
+              v-model="insuranceStartDate"
+              data-cy="insurance-start-date"
+              :format="dateFormat"
+              :clearable="false"
+              :editable="false"
             />
-            {{ motorbikeType1Label }}
-          </label>
-        </p>
-
-        <p class="mt-1">
-          <label class="radio">
-            <input
-              v-model="motorbikeType"
-              :value="motorbikeTypeValue.ABOVE_50_CC"
-              data-cy="motorbike-type-radio"
-              name="motorbikeType"
-              type="radio"
-              required
+          </div>
+          <div class="is-flex mt-3">
+            <div class="form-step-1__date-label">đến ngày</div>
+            <DatePicker
+              v-model="insuranceEndDate"
+              data-cy="insurance-end-date"
+              :format="dateFormat"
+              disabled
             />
-            {{ motorbikeType2Label }}
-          </label>
-        </p>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div v-if="isMotorbikeTypeSelected" class="field">
-      <label class="label">Đăng ký bổ sung:</label>
+      <div class="field">
+        <label class="label">Loại xe:</label>
 
-      <label class="checkbox">
-        <input
-          v-model="hasAddon"
-          data-cy="insurance-addon-checkbox"
-          type="checkbox"
-        />
-        Bảo hiểm tai nạn người trên xe
-      </label>
+        <div class="control">
+          <p>
+            <label class="radio">
+              <input
+                v-model="motorbikeType"
+                :value="motorbikeTypeValue.UP_TO_50_CC"
+                data-cy="motorbike-type-radio"
+                name="motorbikeType"
+                type="radio"
+                required
+              />
+              {{ motorbikeType1Label }}
+            </label>
+          </p>
 
-      <div v-if="hasAddon" class="addon__description mt-2">
-        <ul class="addon__list">
-          <li>Sỗ chỗ tham gia bảo hiểm: <strong>2</strong></li>
-          <li>Số tiền bảo hiểm: <strong>10.000.000 VND</strong></li>
+          <p class="mt-1">
+            <label class="radio">
+              <input
+                v-model="motorbikeType"
+                :value="motorbikeTypeValue.ABOVE_50_CC"
+                data-cy="motorbike-type-radio"
+                name="motorbikeType"
+                type="radio"
+                required
+              />
+              {{ motorbikeType2Label }}
+            </label>
+          </p>
+        </div>
+      </div>
+
+      <div v-if="isMotorbikeTypeSelected" class="field">
+        <label class="label">Đăng ký bổ sung:</label>
+
+        <label class="checkbox">
+          <input
+            v-model="hasAddon"
+            data-cy="insurance-addon-checkbox"
+            type="checkbox"
+          />
+          Bảo hiểm tai nạn người trên xe
+        </label>
+
+        <div v-if="hasAddon" class="addon__description mt-2">
+          <ul class="addon__list">
+            <li>Sỗ chỗ tham gia bảo hiểm: <strong>2</strong></li>
+            <li>Số tiền bảo hiểm: <strong>10.000.000 VND</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div v-if="pviInsuranceFee > 0" class="result field">
+        <label class="label is-uppercase">Phí bảo hiểm:</label>
+
+        <ul class="result__list">
+          <li class="result__list-item">
+            <ResultPviMotorbike :insurance-fee="pviInsuranceFee" />
+          </li>
+          <li class="result__list-item">
+            <ResultBaoVietMotorbike :insurance-fee="pviInsuranceFee" />
+          </li>
         </ul>
       </div>
-    </div>
 
-    <div v-if="pviInsuranceFee > 0" class="result field">
-      <label class="label is-uppercase">Phí bảo hiểm:</label>
-
-      <ul class="result__list">
-        <li class="result__list-item">
-          <ResultPviMotorbike :insurance-fee="pviInsuranceFee" />
-        </li>
-        <li class="result__list-item">
-          <ResultBaoVietMotorbike :insurance-fee="pviInsuranceFee" />
-        </li>
-      </ul>
-    </div>
-
-    <MotorbikeNextButton />
-  </form>
+      <MotorbikeNextButton />
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
