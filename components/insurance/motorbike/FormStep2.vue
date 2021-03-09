@@ -54,7 +54,10 @@
         required
       />
 
-      <MotorbikeNextButton />
+      <div class="is-flex is-justify-content-space-between">
+        <MotorbikeBackButton @click="clickBack" />
+        <MotorbikeNextButton />
+      </div>
     </form>
   </div>
 </template>
@@ -88,6 +91,10 @@ export default {
         frameNumber: this.frameNumber
       };
       this.$emit("submit", step2FormValues);
+    },
+
+    clickBack() {
+      this.$emit("back");
     }
   }
 };

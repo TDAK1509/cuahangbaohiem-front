@@ -1,7 +1,7 @@
 const moment = require("moment");
 
-const NEXT_BUTTON_SELECTOR = "[data-cy=next-button]";
-const BACK_BUTTON_SELECTOR = "[data-cy=back-button]";
+const NEXT_BUTTON_SELECTOR = "[data-cy=next-button]:visible";
+const BACK_BUTTON_SELECTOR = "[data-cy=back-button]:visible";
 const INSURANCE_YEAR_RADIO = "[data-cy=insurance-year-radio]";
 const INSURANCE_START_DATE = "[data-cy=insurance-start-date]";
 const INSURANCE_END_DATE = "[data-cy=insurance-end-date]";
@@ -169,7 +169,7 @@ describe("Page /san-pham/xe-may", () => {
       it("clicking BACK button go back to step 1", () => {
         cy.get(BACK_BUTTON_SELECTOR).click();
         cy.contains("BƯỚC 1: TÍNH PHÍ").should("be.visible");
-        cy.contains("BƯỚC 2:").should("not.exist");
+        cy.contains("BƯỚC 2:").should("not.be.visible");
       });
 
       it("default shows 'Biển kiểm soát:', clicking 'Số khung' shows 'Số khung:'", () => {

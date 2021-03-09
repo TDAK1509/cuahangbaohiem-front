@@ -6,11 +6,15 @@
 <template>
   <section class="section">
     <div class="container">
-      <FormStep1 v-if="currentStep === 1" @submit="submitStep1" />
-      <FormStep2 v-else-if="currentStep === 2" @submit="submitStep2" />
-      <FormStep3 v-else-if="currentStep === 3" @submit="submitStep3" />
+      <FormStep1 v-show="currentStep === 1" @submit="submitStep1" />
+      <FormStep2
+        v-show="currentStep === 2"
+        @submit="submitStep2"
+        @back="backToStep1"
+      />
+      <FormStep3 v-show="currentStep === 3" @submit="submitStep3" />
       <FormStep4
-        v-else-if="currentStep === 4"
+        v-show="currentStep === 4"
         v-bind="insuranceRequest"
         @submit="submitStep4"
       />
@@ -117,6 +121,10 @@ export default Vue.extend({
       this.licensePlate = values.licensePlate;
       this.frameNumber = values.frameNumber;
       this.currentStep = 3;
+    },
+
+    backToStep1() {
+      this.currentStep = 1;
     },
 
     submitStep3(values: Step3FormValues) {
