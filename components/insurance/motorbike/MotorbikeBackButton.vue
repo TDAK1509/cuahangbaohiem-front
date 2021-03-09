@@ -1,11 +1,12 @@
 <template>
   <button
-    class="motorbike-next-button button is-uppercase is-primary"
+    class="button is-uppercase is-primary has-text-weight-bold"
     data-cy="back-button"
     type="button"
     @click="$emit('click')"
   >
-    &lt; Quay lại
+    <span class="arrow">&lt;</span>
+    Quay lại
   </button>
 </template>
 
@@ -17,7 +18,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.motorbike-next-button {
-  margin-left: auto;
+.arrow {
+  transform: scale(1, 1.5);
+  font-size: 0.8rem;
+  display: block;
+  position: relative;
+  top: -0.15rem;
+  right: 0.4rem;
 }
 </style>
