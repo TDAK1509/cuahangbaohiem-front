@@ -44,6 +44,8 @@
             v-model="insuranceStartDate"
             data-cy="insurance-start-date"
             :format="dateFormat"
+            :clearable="false"
+            :editable="false"
           />
         </div>
         <div class="is-flex mt-3">
@@ -100,7 +102,7 @@
       />
     </div>
 
-    <div>
+    <div v-if="pviInsuranceFee > 0">
       <div data-cy="pvi">{{ pviInsuranceFee | toVnd }}</div>
       <div data-cy="bao-viet">{{ baoVietInsuranceFee | toVnd }}</div>
     </div>
@@ -160,7 +162,7 @@ export default Vue.extend({
       const year = this.insuranceStartDate.getFullYear();
       const month = this.insuranceStartDate.getMonth();
       const day = this.insuranceStartDate.getDate();
-      return new Date(year + 1, month, day);
+      return new Date(year + this.insuranceYear, month, day);
     }
   },
 
