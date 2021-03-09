@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submit">
     <div class="field">
-      <label class="label">Số năm bảo hiểm</label>
+      <label class="label">Số năm bảo hiểm:</label>
 
       <div class="control">
         <label class="radio" data-cy="insurance-year-radio">
@@ -35,7 +35,7 @@
     </div>
 
     <div class="field">
-      <label class="label">Thời hạn bảo hiểm</label>
+      <label class="label">Thời hạn bảo hiểm:</label>
 
       <div class="form-step-1__date-container">
         <div class="is-flex is-align-items-center">
@@ -59,7 +59,7 @@
     </div>
 
     <div class="field">
-      <label class="label">Loại xe</label>
+      <label class="label">Loại xe:</label>
 
       <div class="control">
         <p>
@@ -72,11 +72,11 @@
               type="radio"
               required
             />
-            &lt; 50cc
+            {{ motorbikeType1Label }}
           </label>
         </p>
 
-        <p>
+        <p class="mt-1">
           <label class="radio">
             <input
               v-model="motorbikeType"
@@ -86,7 +86,7 @@
               type="radio"
               required
             />
-            &gt; 50cc
+            {{ motorbikeType2Label }}
           </label>
         </p>
       </div>
@@ -117,12 +117,15 @@ import "vue2-datepicker/index.css";
 
 import mixinMoneyFilter from "@/utils/mixins/money-filters";
 
-import { MotorbikeType } from "@/controller/motorbike-insurance/motorbike-insurance";
+import MotorbikeInsuranceController, {
+  MotorbikeType
+} from "@/controller/motorbike-insurance/motorbike-insurance";
 import PviMotorbikeInsurance from "@/controller/motorbike-insurance/pvi-motorbike-insurance";
 import BaoVietMotorbikeInsurance from "@/controller/motorbike-insurance/bao-viet-motorbike-insurance";
 
 const pvi = new PviMotorbikeInsurance();
 const baoViet = new BaoVietMotorbikeInsurance();
+const controller = new MotorbikeInsuranceController();
 
 export default Vue.extend({
   name: "MotorbikeFormStep1",
@@ -140,6 +143,12 @@ export default Vue.extend({
       insuranceStartDate: new Date(),
       motorbikeType: null as null | MotorbikeType,
       motorbikeTypeValue: MotorbikeType,
+      motorbikeType1Label: controller.getMotorbikeTypeLabel(
+        MotorbikeType.UP_TO_50_CC
+      ),
+      motorbikeType2Label: controller.getMotorbikeTypeLabel(
+        MotorbikeType.ABOVE_50_CC
+      ),
       hasAddon: false,
       pviInsuranceFee: 0,
       baoVietInsuranceFee: 0
