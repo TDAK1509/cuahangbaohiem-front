@@ -161,7 +161,7 @@ describe("Page /san-pham/xe-may", () => {
       }
     });
 
-    describe("step 2", () => {
+    describe.skip("step 2", () => {
       beforeEach(() => {
         goToStep2();
       });
@@ -223,6 +223,12 @@ describe("Page /san-pham/xe-may", () => {
     describe("step 3", () => {
       beforeEach(() => {
         goToStep3();
+      });
+
+      it("clicking BACK button go back to step 2", () => {
+        cy.get(BACK_BUTTON_SELECTOR).click();
+        cy.contains("BƯỚC 2:").should("be.visible");
+        cy.contains("BƯỚC 3:").should("not.be.visible");
       });
 
       it("all fields are required", () => {

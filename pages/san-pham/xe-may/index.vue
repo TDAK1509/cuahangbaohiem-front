@@ -10,9 +10,13 @@
       <FormStep2
         v-show="currentStep === 2"
         @submit="submitStep2"
-        @back="backToStep1"
+        @back="goToStep(1)"
       />
-      <FormStep3 v-show="currentStep === 3" @submit="submitStep3" />
+      <FormStep3
+        v-show="currentStep === 3"
+        @submit="submitStep3"
+        @back="goToStep(2)"
+      />
       <FormStep4
         v-show="currentStep === 4"
         v-bind="insuranceRequest"
@@ -113,18 +117,18 @@ export default Vue.extend({
       );
       this.insuranceFee = values.insuranceFee;
       this.hasAddon = values.hasAddon;
-      this.currentStep = 2;
+      this.goToStep(2);
     },
 
     submitStep2(values: Step2FormValues) {
       this.motorbikeOwner = values.motorbikeOwner;
       this.licensePlate = values.licensePlate;
       this.frameNumber = values.frameNumber;
-      this.currentStep = 3;
+      this.goToStep(3);
     },
 
-    backToStep1() {
-      this.currentStep = 1;
+    goToStep(step: number) {
+      this.currentStep = step;
     },
 
     submitStep3(values: Step3FormValues) {
@@ -135,7 +139,7 @@ export default Vue.extend({
       this.buyerWard = values.buyerWard;
       this.buyerPhone = values.buyerPhone;
       this.buyerEmail = values.buyerEmail;
-      this.currentStep = 4;
+      this.goToStep(4);
     },
 
     async submitStep4() {
