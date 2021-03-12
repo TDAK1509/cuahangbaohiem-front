@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h1 class="has-text-weight-bold is-size-4 has-text-primary mb-4">
-      BƯỚC 2: THÔNG TIN XE
-    </h1>
+    <FormStepTitle> BƯỚC 2: THÔNG TIN XE </FormStepTitle>
     <form @submit.prevent="submit">
       <div class="field">
         <label class="label">Tên chủ xe:</label>

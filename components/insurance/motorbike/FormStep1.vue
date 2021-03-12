@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h1 class="has-text-weight-bold is-size-4 has-text-primary mb-4">
-      BƯỚC 1: TÍNH PHÍ
-    </h1>
+    <FormStepTitle> BƯỚC 1: TÍNH PHÍ </FormStepTitle>
 
     <form @submit.prevent="submit">
       <div class="field">

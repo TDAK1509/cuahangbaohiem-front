@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h1 class="has-text-weight-bold is-size-4 has-text-primary mb-4">
-      BƯỚC 3: THÔNG TIN NGƯỜI MUA
-    </h1>
+    <FormStepTitle> BƯỚC 3: THÔNG TIN NGƯỜI MUA </FormStepTitle>
 
     <form @submit.prevent="submit">
       <TextField

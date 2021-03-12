@@ -1,27 +1,27 @@
 <template>
   <div>
-    <h3>BƯỚC 4: TÓM TẮT ĐƠN HÀNG</h3>
+    <FormStepTitle> BƯỚC 4: TÓM TẮT ĐƠN HÀNG </FormStepTitle>
 
     <form @submit.prevent="submit">
       <section>
-        <h4>1. THÔNG TIN CHỦ XE</h4>
+        <h4 class="row__title">1. THÔNG TIN CHỦ XE</h4>
         <p>Tên chủ xe: {{ motorbikeOwner }}</p>
       </section>
 
       <section>
-        <h4>2. THÔNG TIN VỀ XE THAM GIA BẢO HIỂM</h4>
+        <h4 class="row__title">2. THÔNG TIN VỀ XE THAM GIA BẢO HIỂM</h4>
         <p>Loại xe: {{ motorbikeType }}</p>
         <p>Biển số: {{ licensePlate }}</p>
         <p>Số khung: {{ frameNumber }}</p>
       </section>
 
       <section>
-        <h4>3. THỜI HẠN BẢO HIỂM</h4>
+        <h4 class="row__title">3. THỜI HẠN BẢO HIỂM</h4>
         <p>Từ ngày {{ insuranceStartDate }} đến ngày {{ insuranceEndDate }}</p>
       </section>
 
       <section>
-        <h4>4. MỨC TRÁCH NHIỆM VÀ PHÍ BẢO HIỂM</h4>
+        <h4 class="row__title">4. MỨC TRÁCH NHIỆM VÀ PHÍ BẢO HIỂM</h4>
         <table>
           <tr>
             <td>Pvi: {{ insuranceFee.pvi | toVnd }}</td>
@@ -31,7 +31,9 @@
       </section>
 
       <section>
-        <h4>5. THÔNG TIN GIAO NHẬN GIẤY CHỨNG NHẬN BẢO HIỂM</h4>
+        <h4 class="row__title">
+          5. THÔNG TIN GIAO NHẬN GIẤY CHỨNG NHẬN BẢO HIỂM
+        </h4>
         <p>Họ và tên người nhận: {{ buyerName }}</p>
         <p>
           Địa chỉ người nhận: {{ buyerAddress }}, {{ buyerWard }},
@@ -161,3 +163,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.row__title {
+  background: var(--clr-primary);
+  color: white;
+  text-transform: uppercase;
+  padding: 0.6em;
+  font-weight: 700;
+}
+</style>
