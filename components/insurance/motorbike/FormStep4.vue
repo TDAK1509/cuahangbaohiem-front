@@ -90,11 +90,14 @@
         </div>
       </div>
 
-      <p v-if="shouldShowError">
-        Quý khách vui lòng chọn cam kết trước khi thực hiện đặt hàng
+      <p v-if="shouldShowError" class="has-text-danger">
+        Quý khách vui lòng chọn cam kết trước khi thực hiện đặt hàng.
       </p>
 
-      <button data-cy="next-button">NEXT</button>
+      <div class="is-flex is-justify-content-space-between mt-5">
+        <MotorbikeBackButton @click="clickBack" />
+        <MotorbikeNextButton />
+      </div>
     </form>
   </div>
 </template>
@@ -185,6 +188,10 @@ export default {
       }
 
       this.$emit("submit");
+    },
+
+    clickBack() {
+      this.$emit("back");
     }
   }
 };
