@@ -3,24 +3,36 @@
     <FormStepTitle> BƯỚC 4: TÓM TẮT ĐƠN HÀNG </FormStepTitle>
 
     <form @submit.prevent="submit">
-      <section>
+      <section class="row">
         <h4 class="row__title">1. THÔNG TIN CHỦ XE</h4>
-        <p>Tên chủ xe: {{ motorbikeOwner }}</p>
+        <div class="row__content">
+          <p>Tên chủ xe:</p>
+          <p>{{ motorbikeOwner }}</p>
+        </div>
       </section>
 
-      <section>
+      <section class="row">
         <h4 class="row__title">2. THÔNG TIN VỀ XE THAM GIA BẢO HIỂM</h4>
-        <p>Loại xe: {{ motorbikeType }}</p>
-        <p>Biển số: {{ licensePlate }}</p>
-        <p>Số khung: {{ frameNumber }}</p>
+        <div class="row__content">
+          <p>Loại xe:</p>
+          <p>{{ motorbikeType }}</p>
+          <p>Biển số:</p>
+          <p>{{ licensePlate }}</p>
+          <p>Số khung:</p>
+          <p>{{ frameNumber }}</p>
+        </div>
       </section>
 
-      <section>
+      <section class="row">
         <h4 class="row__title">3. THỜI HẠN BẢO HIỂM</h4>
-        <p>Từ ngày {{ insuranceStartDate }} đến ngày {{ insuranceEndDate }}</p>
+        <div>
+          <p>
+            Từ ngày {{ insuranceStartDate }} đến ngày {{ insuranceEndDate }}
+          </p>
+        </div>
       </section>
 
-      <section>
+      <section class="row">
         <h4 class="row__title">4. MỨC TRÁCH NHIỆM VÀ PHÍ BẢO HIỂM</h4>
         <table>
           <tr>
@@ -30,22 +42,33 @@
         </table>
       </section>
 
-      <section>
+      <section class="row">
         <h4 class="row__title">
           5. THÔNG TIN GIAO NHẬN GIẤY CHỨNG NHẬN BẢO HIỂM
         </h4>
-        <p>Họ và tên người nhận: {{ buyerName }}</p>
-        <p>
-          Địa chỉ người nhận: {{ buyerAddress }}, {{ buyerWard }},
-          {{ buyerDistrict }}, {{ buyerCity }}
-        </p>
-        <p>Số điện thoại liên hệ: {{ buyerPhone }}</p>
-        <p>Địa chỉ email: {{ buyerEmail }}</p>
-        <p>
-          Hình thức giao nhận: Ngay sau khi Quý khách thanh toán phí bảo hiểm
-          thành công, Bảo Việt sẽ gửi bản mềm Giấy chứng nhận bảo hiểm tới địa
-          chỉ email Quý khách đăng ký.
-        </p>
+        <div class="row__content">
+          <p>Họ tên:</p>
+          <p>{{ buyerName }}</p>
+
+          <p>Địa chỉ:</p>
+          <p>
+            {{ buyerAddress }}, {{ buyerWard }}, {{ buyerDistrict }},
+            {{ buyerCity }}
+          </p>
+
+          <p>Điện thoại:</p>
+          <p>{{ buyerPhone }}</p>
+
+          <p>Email:</p>
+          <p>{{ buyerEmail }}</p>
+
+          <p>Hình thức giao nhận:</p>
+          <p>
+            Ngay sau khi Quý khách thanh toán phí bảo hiểm thành công, Bảo Việt
+            sẽ gửi bản mềm Giấy chứng nhận bảo hiểm tới địa chỉ email Quý khách
+            đăng ký.
+          </p>
+        </div>
       </section>
 
       <div class="field">
@@ -56,10 +79,13 @@
               type="checkbox"
               data-cy="agreement-checkbox"
             />
-            Tôi/chúng tôi xác nhận rằng các thông tin nêu trên là đầy đủ và xác
-            thực theo sự hiểu biết cao nhất của tôi/chúng tôi và đồng ý rằng các
-            kê khai yêu cầu bảo hiểm là cơ sở của hợp đồng bảo hiểm và chấp nhận
-            các điều kiện bảo hiểm quy định tại hợp đồng bảo hiểm.
+            <span class="row__checkbox-label">
+              Tôi/chúng tôi xác nhận rằng các thông tin nêu trên là đầy đủ và
+              xác thực theo sự hiểu biết cao nhất của tôi/chúng tôi và đồng ý
+              rằng các kê khai yêu cầu bảo hiểm là cơ sở của hợp đồng bảo hiểm
+              và chấp nhận các điều kiện bảo hiểm quy định tại hợp đồng bảo
+              hiểm.
+            </span>
           </label>
         </div>
       </div>
@@ -165,11 +191,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.row {
+  margin-bottom: 2em;
+}
 .row__title {
+  margin-bottom: 0.8em;
   background: var(--clr-primary);
   color: white;
   text-transform: uppercase;
   padding: 0.6em;
   font-weight: 700;
+}
+
+.row__content {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  row-gap: 0.5em;
+}
+
+.row__checkbox-label {
+  line-height: 1.5;
 }
 </style>
