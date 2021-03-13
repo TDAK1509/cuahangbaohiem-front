@@ -11,6 +11,3 @@ export default {
   name: "ThanhToanXeMay"
 };
 </script>
-
-<style>
-</style>
