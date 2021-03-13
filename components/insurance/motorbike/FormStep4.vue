@@ -34,12 +34,40 @@
 
       <section class="row">
         <h4 class="row__title">4. MỨC TRÁCH NHIỆM VÀ PHÍ BẢO HIỂM</h4>
-        <table>
-          <tr>
-            <td>Pvi: {{ insuranceFee.pvi | toVnd }}</td>
-            <td>Bao Viet: {{ insuranceFee.baoViet | toVnd }}</td>
-          </tr>
-        </table>
+
+        <div class="row__table">
+          <h5 class="row__table-row-title is-size-6 has-text-weight-bold">
+            Phạm vi bảo hiểm:
+          </h5>
+          <p class="row__table-row-content">
+            Bảo hiểm Trách nhiệm dân sự bắt buộc
+          </p>
+
+          <h5 class="row__table-row-title is-size-6 has-text-weight-bold">
+            Mức trách nhiệm:
+          </h5>
+          <div class="row__table-row-content">
+            <p>Mức trách nhiệm đối với người thứ 3</p>
+            <ul>
+              <li>Về người: 150,000,000 VND/người/vụ</li>
+              <li>Về tài sản: 50,000,000 VND/vụ</li>
+            </ul>
+          </div>
+
+          <h5 class="row__table-row-title is-size-6 has-text-weight-bold">
+            Phí bảo hiểm (đã bao gồm VAT):
+          </h5>
+
+          <ResultPviMotorbike
+            class="row__table-row-insurance-fee"
+            :insurance-fee="insuranceFee.pvi"
+          />
+
+          <ResultBaoVietMotorbike
+            class="row__table-row-insurance-fee"
+            :insurance-fee="insuranceFee.baoViet"
+          />
+        </div>
       </section>
 
       <section class="row">
@@ -218,5 +246,22 @@ export default {
 
 .row__checkbox-label {
   line-height: 1.5;
+}
+
+.row__table {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.row__table-row-title {
+  margin-bottom: 0.3em;
+}
+
+.row__table-row-content {
+  margin-bottom: 1.5em;
+}
+
+.row__table-row-insurance-fee {
+  margin-top: 1em;
 }
 </style>
