@@ -275,7 +275,7 @@ describe("Page /san-pham/xe-may", () => {
         cy.assertFailedHtml5FormValidation(BUYER_EMAIL);
       });
 
-      it("input all fields, clicking NEXT go to step 4, clicking next without check agree shows error, checking agree clicking next go to step checkout", () => {
+      it.skip("input all fields, clicking NEXT go to step 4, clicking next without check agree shows error, checking agree clicking next go to step checkout", () => {
         cy.get(BUYER_NAME).type(CORRECT_BUYER_NAME);
         cy.get(BUYER_ADDRESS).type(CORRECT_BUYER_ADDRESS);
         cy.get(BUYER_CITY).type(CORRECT_BUYER_CITY);
@@ -299,7 +299,7 @@ describe("Page /san-pham/xe-may", () => {
         cy.url().should("contain", "/xe-may/thanh-toan");
       });
 
-      it("check if data is saved to firestore", () => {
+      it.skip("check if data is saved to firestore", () => {
         cy.visit("/san-pham/xe-may/test");
         cy.contains(`motorbikeOwner: ${CORRECT_BIKE_OWNER}`).should(
           "be.visible"
@@ -352,38 +352,25 @@ function goToStep3() {
 
 function assertStep4RenderingCorrectly() {
   cy.contains("BƯỚC 4: TÓM TẮT ĐƠN HÀNG").should("be.visible");
-  cy.contains("1. THÔNG TIN CHỦ XE").should("be.visible");
-  cy.contains("2. THÔNG TIN VỀ XE THAM GIA BẢO HIỂM").should("be.visible");
-  cy.contains("3. THỜI HẠN BẢO HIỂM").should("be.visible");
-  cy.contains("4. MỨC TRÁCH NHIỆM VÀ PHÍ BẢO HIỂM").should("be.visible");
-  cy.contains("5. THÔNG TIN GIAO NHẬN GIẤY CHỨNG NHẬN BẢO HIỂM").should(
-    "be.visible"
-  );
 
-  cy.contains(`Tên chủ xe: ${CORRECT_BIKE_OWNER}`).should("be.visible");
-  cy.contains(`Loại xe: Xe Mô tô 2 bánh dung tích trên 50cc`).should(
-    "be.visible"
-  );
-  cy.contains(`Biển số: ${CORRECT_BIKE_LICENSE_PLATE}`).should("be.visible");
+  cy.contains(CORRECT_BIKE_OWNER).should("be.visible");
+  cy.contains(`Xe Mô tô 2 bánh dung tích trên 50cc`).should("be.visible");
+  cy.contains(CORRECT_BIKE_LICENSE_PLATE).should("be.visible");
 
-  cy.contains(`Biển số: ${CORRECT_BIKE_LICENSE_PLATE}`).should("be.visible");
+  cy.contains(CORRECT_BIKE_LICENSE_PLATE).should("be.visible");
 
   cy.contains(`Từ ngày ${todayString} đến ngày ${nextYearDateString}`).should(
     "be.visible"
   );
 
-  cy.contains("66.000").should("be.visible");
+  cy.contains(66000).should("be.visible");
 
-  cy.contains(`Họ và tên người nhận: ${CORRECT_BUYER_NAME}`).should(
-    "be.visible"
-  );
+  cy.contains(`${CORRECT_BUYER_NAME}`).should("be.visible");
   cy.contains(
-    `Địa chỉ người nhận: ${CORRECT_BUYER_ADDRESS}, ${CORRECT_BUYER_WARD}, ${CORRECT_BUYER_DISTRICT}, ${CORRECT_BUYER_CITY}`
+    `${CORRECT_BUYER_ADDRESS}, ${CORRECT_BUYER_WARD}, ${CORRECT_BUYER_DISTRICT}, ${CORRECT_BUYER_CITY}`
   ).should("be.visible");
-  cy.contains(`Số điện thoại liên hệ: ${CORRECT_BUYER_PHONE}`).should(
-    "be.visible"
-  );
-  cy.contains(`Địa chỉ email: ${CORRECT_BUYER_EMAIL}`).should("be.visible");
+  cy.contains(`${CORRECT_BUYER_PHONE}`).should("be.visible");
+  cy.contains(`${CORRECT_BUYER_EMAIL}`).should("be.visible");
   cy.contains(`Hình thức giao nhận:`).should("be.visible");
 
   cy.get(AGREEMENT_CHECKBOX).should("be.visible");
