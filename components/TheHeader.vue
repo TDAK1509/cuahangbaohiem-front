@@ -138,7 +138,8 @@ export default {
   padding: 0.8em;
 
   &.nuxt-link-exact-active {
-    color: var(--clr-primary);
+    color: #fff;
+    background: var(--clr-primary);
   }
 }
 
@@ -189,6 +190,13 @@ export default {
 
     &:hover > .nav__sub-list {
       transform: scale(1, 1);
+    }
+
+    a {
+      &.nuxt-link-exact-active {
+        background: none;
+        color: var(--clr-primary);
+      }
     }
   }
 
