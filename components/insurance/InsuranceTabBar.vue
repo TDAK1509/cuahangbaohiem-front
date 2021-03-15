@@ -98,7 +98,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/_z-index";
+@import "~assets/scss/z-index";
 
 .insurance-tab-bar {
   z-index: $z-index-section;
