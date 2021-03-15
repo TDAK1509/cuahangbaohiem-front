@@ -113,6 +113,7 @@ export default {
   transform: scale(0, 1);
   transform-origin: left;
   transition: transform 200ms ease-in-out;
+  border-right: 1px solid var(--clr-border-grey);
 }
 
 .nav__list {
