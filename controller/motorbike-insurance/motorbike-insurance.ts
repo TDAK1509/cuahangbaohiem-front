@@ -18,6 +18,9 @@ export interface MotorbikeInsuranceRequest {
   motorbikeType: string;
   licensePlate: string;
   frameNumber: string;
+  motorbikeOwner2: string;
+  licensePlate2: string;
+  frameNumber2: string;
   promotionCode: string;
   promotion: string;
   insuranceStartDate: string;

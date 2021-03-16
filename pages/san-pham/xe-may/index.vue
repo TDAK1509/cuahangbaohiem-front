@@ -9,6 +9,7 @@
       <FormStep1 v-show="currentStep === 1" @submit="submitStep1" />
       <FormStep2
         v-show="currentStep === 2"
+        :is-promotion="isBuy1BikeAdd1Bike"
         @submit="submitStep2"
         @back="goToStep(1)"
       />
@@ -51,6 +52,9 @@ interface Step2FormValues {
   motorbikeOwner: string;
   licensePlate: string;
   frameNumber: string;
+  motorbikeOwner2: string;
+  licensePlate2: string;
+  frameNumber2: string;
 }
 
 interface Step3FormValues {
@@ -75,6 +79,9 @@ export default Vue.extend({
       motorbikeType: "",
       licensePlate: "",
       frameNumber: "",
+      motorbikeOwner2: "",
+      licensePlate2: "",
+      frameNumber2: "",
       promotionCode: "",
       promotion: null as null | Promotion,
       insuranceStartDate: "",
@@ -98,6 +105,9 @@ export default Vue.extend({
         motorbikeType: this.motorbikeType,
         licensePlate: this.licensePlate,
         frameNumber: this.frameNumber,
+        motorbikeOwner2: this.motorbikeOwner2,
+        licensePlate2: this.licensePlate2,
+        frameNumber2: this.frameNumber2,
         promotionCode: this.promotionCode,
         promotion:
           this.promotion !== null
@@ -115,6 +125,10 @@ export default Vue.extend({
         buyerPhone: this.buyerPhone,
         buyerEmail: this.buyerEmail
       };
+    },
+
+    isBuy1BikeAdd1Bike(): boolean {
+      return this.promotion === Promotion.BUY_1_BIKE_ADD_1_BIKE;
     }
   },
 
@@ -136,6 +150,9 @@ export default Vue.extend({
       this.motorbikeOwner = values.motorbikeOwner;
       this.licensePlate = values.licensePlate;
       this.frameNumber = values.frameNumber;
+      this.motorbikeOwner2 = values.motorbikeOwner2;
+      this.licensePlate2 = values.licensePlate2;
+      this.frameNumber2 = values.frameNumber2;
       this.goToStep(3);
     },
 
