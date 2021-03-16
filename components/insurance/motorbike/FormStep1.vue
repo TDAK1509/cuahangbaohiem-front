@@ -47,7 +47,7 @@
         <label class="label">Khuyến mãi:</label>
 
         <div class="control">
-          <p>
+          <p v-if="insuranceYear === 1">
             <label class="radio">
               <input
                 v-model="promotion"
