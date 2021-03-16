@@ -55,6 +55,7 @@
               :format="dateFormat"
               :clearable="false"
               :editable="false"
+              :disabled-date="dateIsNotWithin2MonthsFromToday"
             />
           </div>
           <div class="is-flex mt-3">
@@ -144,6 +145,7 @@
 <script lang="ts">
 import Vue from "vue";
 import moment from "moment";
+import { addMonths } from "date-fns";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 
@@ -250,6 +252,11 @@ export default Vue.extend({
       baoViet.setMotorbike(this.motorbikeType as MotorbikeType);
       baoViet.setHasAddon(this.hasAddon);
       this.baoVietInsuranceFee = baoViet.getInsuranceFee();
+    },
+
+    dateIsNotWithin2MonthsFromToday(date: Date): boolean {
+      const nextTwoMonthsDate = addMonths(new Date(), 1);
+      return date < new Date() || date > nextTwoMonthsDate;
     }
   }
 });
