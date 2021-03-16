@@ -43,6 +43,36 @@
         </div>
       </div>
 
+      <div v-if="isValidPromotionCode" class="field">
+        <label class="label">Khuyến mãi:</label>
+
+        <div class="control">
+          <p>
+            <label class="radio">
+              <input
+                v-model="promotion"
+                :value="promotionValues.BUY_1_YEAR_ADD_1_YEAR"
+                name="promotion"
+                type="radio"
+              />
+              {{ promotion1Label }}
+            </label>
+          </p>
+
+          <p>
+            <label class="radio">
+              <input
+                v-model="promotion"
+                :value="promotionValues.BUY_1_BIKE_ADD_1_BIKE"
+                name="promotion"
+                type="radio"
+              />
+              {{ promotion2Label }}
+            </label>
+          </p>
+        </div>
+      </div>
+
       <div class="field">
         <label class="label">Thời hạn bảo hiểm:</label>
 
@@ -52,7 +82,7 @@
             <DatePicker
               v-model="insuranceStartDate"
               data-cy="insurance-start-date"
-              :format="dateFormat"
+              format="DD-MM-YYYY"
               :clearable="false"
               :editable="false"
               :disabled-date="dateIsNotWithin2MonthsFromToday"
@@ -63,7 +93,7 @@
             <DatePicker
               v-model="insuranceEndDate"
               data-cy="insurance-end-date"
-              :format="dateFormat"
+              format="DD-MM-YYYY"
               disabled
             />
           </div>
@@ -78,7 +108,7 @@
             <label class="radio">
               <input
                 v-model="motorbikeType"
-                :value="motorbikeTypeValue.UP_TO_50_CC"
+                :value="motorbikeTypeValues.UP_TO_50_CC"
                 data-cy="motorbike-type-radio"
                 name="motorbikeType"
                 type="radio"
@@ -92,7 +122,7 @@
             <label class="radio">
               <input
                 v-model="motorbikeType"
-                :value="motorbikeTypeValue.ABOVE_50_CC"
+                :value="motorbikeTypeValues.ABOVE_50_CC"
                 data-cy="motorbike-type-radio"
                 name="motorbikeType"
                 type="radio"
@@ -151,7 +181,8 @@ import "vue2-datepicker/index.css";
 import mixinMoneyFilter from "@/utils/mixins/money-filters";
 
 import MotorbikeInsuranceController, {
-  MotorbikeType
+  MotorbikeType,
+  Promotion
 } from "@/controller/motorbike-insurance/motorbike-insurance";
 import PviMotorbikeInsurance from "@/controller/motorbike-insurance/pvi-motorbike-insurance";
 import BaoVietMotorbikeInsurance from "@/controller/motorbike-insurance/bao-viet-motorbike-insurance";
@@ -171,12 +202,19 @@ export default Vue.extend({
 
   data() {
     return {
-      dateFormat: "DD-MM-YYYY",
       promotionCode: "",
+      promotion: null as null | Promotion,
+      promotionValues: Promotion,
+      promotion1Label: controller.getPromotionLabel(
+        Promotion.BUY_1_YEAR_ADD_1_YEAR
+      ),
+      promotion2Label: controller.getPromotionLabel(
+        Promotion.BUY_1_BIKE_ADD_1_BIKE
+      ),
       insuranceYear: 1,
       insuranceStartDate: new Date(),
       motorbikeType: null as null | MotorbikeType,
-      motorbikeTypeValue: MotorbikeType,
+      motorbikeTypeValues: MotorbikeType,
       motorbikeType1Label: controller.getMotorbikeTypeLabel(
         MotorbikeType.UP_TO_50_CC
       ),
@@ -185,7 +223,8 @@ export default Vue.extend({
       ),
       hasAddon: false,
       pviInsuranceFee: 0,
-      baoVietInsuranceFee: 0
+      baoVietInsuranceFee: 0,
+      isValidPromotionCode: false
     };
   },
 
@@ -211,6 +250,9 @@ export default Vue.extend({
     },
     hasAddon() {
       this.calculateInsuranceFee();
+    },
+    promotionCode() {
+      this.checkPromotionCodeValidity();
     }
   },
 
@@ -218,8 +260,9 @@ export default Vue.extend({
     submit() {
       const step1FormValues = {
         promotionCode: this.promotionCode,
-        insuranceStartDate: format(this.insuranceStartDate, this.dateFormat),
-        insuranceEndDate: format(this.insuranceEndDate, this.dateFormat),
+        promotion: this.promotion,
+        insuranceStartDate: format(this.insuranceStartDate, "dd-MM-yyyy"),
+        insuranceEndDate: format(this.insuranceEndDate, "dd-MM-yyyy"),
         motorbikeType: this.motorbikeType,
         insuranceFee: {
           pvi: this.pviInsuranceFee,
@@ -254,6 +297,10 @@ export default Vue.extend({
     dateIsNotWithin2MonthsFromToday(date: Date): boolean {
       const nextTwoMonthsDate = addMonths(new Date(), 1);
       return date < new Date() || date > nextTwoMonthsDate;
+    },
+
+    checkPromotionCodeValidity() {
+      this.isValidPromotionCode = this.promotionCode === "banAnhKhuong";
     }
   }
 });

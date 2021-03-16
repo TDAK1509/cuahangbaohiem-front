@@ -41,8 +41,6 @@
         v-model="licensePlate"
         data-cy="license-plate-input"
         required
-        pattern="[0-9]{2}[A-Z][0-9]-[0-9]{4,5}"
-        title="Điền biển số xe theo mẫu: 55Z5-1234 hoặc 66Z6-123456."
       />
 
       <TextField

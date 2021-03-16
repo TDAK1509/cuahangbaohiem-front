@@ -8,12 +8,18 @@ export enum MotorbikeType {
   ABOVE_50_CC
 }
 
+export enum Promotion {
+  BUY_1_YEAR_ADD_1_YEAR,
+  BUY_1_BIKE_ADD_1_BIKE
+}
+
 export interface MotorbikeInsuranceRequest {
   motorbikeOwner: string;
   motorbikeType: string;
   licensePlate: string;
   frameNumber: string;
   promotionCode: string;
+  promotion: string;
   insuranceStartDate: string;
   insuranceEndDate: string;
   hasAddon: boolean;
@@ -46,6 +52,18 @@ export default class MotorbikeInsuranceRequestController {
 
     if (type === MotorbikeType.ABOVE_50_CC) {
       return "Xe Mô tô 2 bánh dung tích trên 50cc";
+    }
+
+    return "";
+  }
+
+  public getPromotionLabel(promotion: Promotion): string {
+    if (promotion === Promotion.BUY_1_BIKE_ADD_1_BIKE) {
+      return "Mua 1 xe tặng 1 xe";
+    }
+
+    if (promotion === Promotion.BUY_1_YEAR_ADD_1_YEAR) {
+      return "Mua 1 năm tặng 1 năm";
     }
 
     return "";

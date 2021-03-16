@@ -1,5 +1,6 @@
 import MotorbikeInsuranceRequestController, {
-  MotorbikeType
+  MotorbikeType,
+  Promotion
 } from "@/controller/motorbike-insurance/motorbike-insurance";
 import MotorbikeInsuranceRequestModel from "@/models/motorbike-insurance-request";
 import MockDate from "mockdate";
@@ -42,6 +43,24 @@ describe("controller/motorbike-insurance", () => {
         MotorbikeType.ABOVE_50_CC
       );
       expect(result).toBe("Xe Mô tô 2 bánh dung tích trên 50cc");
+    });
+  });
+
+  describe("getPromotionLabel()", () => {
+    it("returns 'Mua 1 năm tặng 1 năm' when arg is BUY_1_YEAR_ADD_1_YEAR", () => {
+      const controller = new MotorbikeInsuranceRequestController();
+      const result = controller.getPromotionLabel(
+        Promotion.BUY_1_YEAR_ADD_1_YEAR
+      );
+      expect(result).toBe("Mua 1 năm tặng 1 năm");
+    });
+
+    it("returns 'Mua 1 xe tặng 1 xe' when arg is BUY_1_BIKE_ADD_1_BIKE", () => {
+      const controller = new MotorbikeInsuranceRequestController();
+      const result = controller.getPromotionLabel(
+        Promotion.BUY_1_BIKE_ADD_1_BIKE
+      );
+      expect(result).toBe("Mua 1 xe tặng 1 xe");
     });
   });
 });

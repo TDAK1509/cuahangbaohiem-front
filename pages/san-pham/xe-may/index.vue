@@ -31,6 +31,7 @@ import Vue from "vue";
 import MotorbikeInsuranceController, {
   MotorbikeType,
   InsuranceFee,
+  Promotion,
   MotorbikeInsuranceRequest
 } from "@/controller/motorbike-insurance/motorbike-insurance";
 
@@ -38,6 +39,7 @@ const controller = new MotorbikeInsuranceController();
 
 interface Step1FormValues {
   promotionCode: string;
+  promotion: Promotion;
   insuranceStartDate: string;
   insuranceEndDate: string;
   hasAddon: boolean;
@@ -74,6 +76,7 @@ export default Vue.extend({
       licensePlate: "",
       frameNumber: "",
       promotionCode: "",
+      promotion: null as null | Promotion,
       insuranceStartDate: "",
       insuranceEndDate: "",
       hasAddon: false,
@@ -96,6 +99,10 @@ export default Vue.extend({
         licensePlate: this.licensePlate,
         frameNumber: this.frameNumber,
         promotionCode: this.promotionCode,
+        promotion:
+          this.promotion !== null
+            ? controller.getPromotionLabel(this.promotion)
+            : "",
         insuranceStartDate: this.insuranceStartDate,
         insuranceEndDate: this.insuranceEndDate,
         hasAddon: this.hasAddon,
@@ -114,6 +121,7 @@ export default Vue.extend({
   methods: {
     submitStep1(values: Step1FormValues) {
       this.promotionCode = values.promotionCode;
+      this.promotion = values.promotion;
       this.insuranceStartDate = values.insuranceStartDate;
       this.insuranceEndDate = values.insuranceEndDate;
       this.motorbikeType = controller.getMotorbikeTypeLabel(
