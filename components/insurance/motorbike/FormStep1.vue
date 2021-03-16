@@ -144,8 +144,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import moment from "moment";
-import { addMonths } from "date-fns";
+import { addMonths, format } from "date-fns";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 
@@ -219,10 +218,8 @@ export default Vue.extend({
     submit() {
       const step1FormValues = {
         promotionCode: this.promotionCode,
-        insuranceStartDate: moment(this.insuranceStartDate).format(
-          this.dateFormat
-        ),
-        insuranceEndDate: moment(this.insuranceEndDate).format(this.dateFormat),
+        insuranceStartDate: format(this.insuranceStartDate, this.dateFormat),
+        insuranceEndDate: format(this.insuranceEndDate, this.dateFormat),
         motorbikeType: this.motorbikeType,
         insuranceFee: {
           pvi: this.pviInsuranceFee,
