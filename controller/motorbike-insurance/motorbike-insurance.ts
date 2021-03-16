@@ -13,6 +13,7 @@ export interface MotorbikeInsuranceRequest {
   motorbikeType: string;
   licensePlate: string;
   frameNumber: string;
+  promotionCode: string;
   insuranceStartDate: string;
   insuranceEndDate: string;
   hasAddon: boolean;

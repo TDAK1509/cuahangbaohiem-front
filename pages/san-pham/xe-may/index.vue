@@ -37,6 +37,7 @@ import MotorbikeInsuranceController, {
 const controller = new MotorbikeInsuranceController();
 
 interface Step1FormValues {
+  promotionCode: string;
   insuranceStartDate: string;
   insuranceEndDate: string;
   hasAddon: boolean;
@@ -72,6 +73,7 @@ export default Vue.extend({
       motorbikeType: "",
       licensePlate: "",
       frameNumber: "",
+      promotionCode: "",
       insuranceStartDate: "",
       insuranceEndDate: "",
       hasAddon: false,
@@ -93,6 +95,7 @@ export default Vue.extend({
         motorbikeType: this.motorbikeType,
         licensePlate: this.licensePlate,
         frameNumber: this.frameNumber,
+        promotionCode: this.promotionCode,
         insuranceStartDate: this.insuranceStartDate,
         insuranceEndDate: this.insuranceEndDate,
         hasAddon: this.hasAddon,
@@ -110,6 +113,7 @@ export default Vue.extend({
 
   methods: {
     submitStep1(values: Step1FormValues) {
+      this.promotionCode = values.promotionCode;
       this.insuranceStartDate = values.insuranceStartDate;
       this.insuranceEndDate = values.insuranceEndDate;
       this.motorbikeType = controller.getMotorbikeTypeLabel(

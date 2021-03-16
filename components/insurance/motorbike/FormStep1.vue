@@ -3,6 +3,12 @@
     <FormStepTitle> BƯỚC 1: TÍNH PHÍ </FormStepTitle>
 
     <form @submit.prevent="submit">
+      <TextField
+        v-model="promotionCode"
+        label="Nhập mã khuyến mãi:"
+        placeholder="Mã khuyến mãi"
+      />
+
       <div class="field">
         <label class="label">Số năm bảo hiểm:</label>
 
@@ -165,6 +171,7 @@ export default Vue.extend({
   data() {
     return {
       dateFormat: "DD-MM-YYYY",
+      promotionCode: "",
       insuranceYear: 1,
       insuranceStartDate: new Date(),
       motorbikeType: null as null | MotorbikeType,
@@ -209,6 +216,7 @@ export default Vue.extend({
   methods: {
     submit() {
       const step1FormValues = {
+        promotionCode: this.promotionCode,
         insuranceStartDate: moment(this.insuranceStartDate).format(
           this.dateFormat
         ),
