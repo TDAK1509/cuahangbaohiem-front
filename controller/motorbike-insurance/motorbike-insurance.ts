@@ -45,6 +45,47 @@ export interface MotorbikeInsuranceRequest {
 export type InsuranceFee = RawInsuranceFee;
 
 export default class MotorbikeInsuranceRequestController {
+  private year = 0;
+  private motorbikeType = MotorbikeType.UP_TO_50_CC;
+  private addOn = MotorbikeAddOn.TEN;
+
+  public setYear(year: number) {
+    this.year = year;
+  }
+
+  public setMotorbike(motorbikeType: MotorbikeType) {
+    this.motorbikeType = motorbikeType;
+  }
+
+  public setAddon(addOn: MotorbikeAddOn) {
+    this.addOn = addOn;
+  }
+
+  public getInsuranceFee(): number {
+    return this.getOneYearInsuranceFee() * this.year;
+  }
+
+  public getAddOnFee(): number {
+    let addOnFee = 20000;
+
+    if (this.addOn === MotorbikeAddOn.TWENTY) {
+      addOnFee *= 2;
+    }
+
+    if (this.addOn === MotorbikeAddOn.THIRTY) {
+      addOnFee *= 3;
+    }
+
+    return addOnFee * this.year;
+  }
+
+  private getOneYearInsuranceFee(): number {
+    if (this.motorbikeType === MotorbikeType.ABOVE_50_CC) {
+      return 66000;
+    }
+    return 60500;
+  }
+
   public save(requestFromClient: MotorbikeInsuranceRequest) {
     const requestToSaveToServer: RawMotorbikeInsuranceRequest = {
       ...requestFromClient,
