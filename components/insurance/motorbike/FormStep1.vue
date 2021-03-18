@@ -19,6 +19,37 @@
         required
       />
 
+      <div class="spacer"></div>
+
+      <DateField
+        v-model="insuranceStartDate"
+        label="Ngày hiệu lực"
+        :disabled-date="dateIsNotWithin2MonthsFromToday"
+      />
+
+      <div class="form-step-1__date-container">
+        <div class="is-flex is-align-items-center">
+          <div class="form-step-1__date-label">Từ ngày</div>
+          <DatePicker
+            v-model="insuranceStartDate"
+            data-cy="insurance-start-date"
+            format="DD-MM-YYYY"
+            :clearable="false"
+            :editable="false"
+            :disabled-date="dateIsNotWithin2MonthsFromToday"
+          />
+        </div>
+        <div class="is-flex mt-3">
+          <div class="form-step-1__date-label">đến ngày</div>
+          <DatePicker
+            v-model="insuranceEndDate"
+            data-cy="insurance-end-date"
+            format="DD-MM-YYYY"
+            disabled
+          />
+        </div>
+      </div>
+
       <TextField
         v-model="promotionCode"
         label="Nhập mã khuyến mãi:"
@@ -52,33 +83,6 @@
               {{ promotion2Label }}
             </label>
           </p>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Thời hạn bảo hiểm:</label>
-
-        <div class="form-step-1__date-container">
-          <div class="is-flex is-align-items-center">
-            <div class="form-step-1__date-label">Từ ngày</div>
-            <DatePicker
-              v-model="insuranceStartDate"
-              data-cy="insurance-start-date"
-              format="DD-MM-YYYY"
-              :clearable="false"
-              :editable="false"
-              :disabled-date="dateIsNotWithin2MonthsFromToday"
-            />
-          </div>
-          <div class="is-flex mt-3">
-            <div class="form-step-1__date-label">đến ngày</div>
-            <DatePicker
-              v-model="insuranceEndDate"
-              data-cy="insurance-end-date"
-              format="DD-MM-YYYY"
-              disabled
-            />
-          </div>
         </div>
       </div>
 
@@ -162,15 +166,15 @@ export default Vue.extend({
       ],
       insuranceYearOptions: [
         {
-          value: 1,
+          value: "1",
           text: "1 năm"
         },
         {
-          value: 2,
+          value: "2",
           text: "2 năm"
         },
         {
-          value: 3,
+          value: "3",
           text: "3 năm"
         }
       ],
@@ -183,7 +187,7 @@ export default Vue.extend({
       promotion2Label: controller.getPromotionLabel(
         Promotion.BUY_1_BIKE_ADD_1_BIKE
       ),
-      insuranceYear: 1,
+      insuranceYear: "1",
       insuranceStartDate: new Date(),
       motorbikeType: MotorbikeType.ABOVE_50_CC,
       hasAddon: false,
@@ -198,7 +202,7 @@ export default Vue.extend({
       const year = this.insuranceStartDate.getFullYear();
       const month = this.insuranceStartDate.getMonth();
       const day = this.insuranceStartDate.getDate();
-      return new Date(year + this.insuranceYear, month, day);
+      return new Date(year + parseInt(this.insuranceYear), month, day);
     },
 
     isMotorbikeTypeSelected(): boolean {
@@ -246,14 +250,14 @@ export default Vue.extend({
     },
 
     calculatePviInsuranceFee() {
-      pvi.setYear(this.insuranceYear);
+      pvi.setYear(parseInt(this.insuranceYear));
       pvi.setMotorbike(this.motorbikeType as MotorbikeType);
       pvi.setHasAddon(this.hasAddon);
       this.pviInsuranceFee = pvi.getInsuranceFee();
     },
 
     calculateBaoVietInsuranceFee() {
-      baoViet.setYear(this.insuranceYear);
+      baoViet.setYear(parseInt(this.insuranceYear));
       baoViet.setMotorbike(this.motorbikeType as MotorbikeType);
       baoViet.setHasAddon(this.hasAddon);
       this.baoVietInsuranceFee = baoViet.getInsuranceFee();
