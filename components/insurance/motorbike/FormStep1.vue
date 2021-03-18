@@ -3,7 +3,12 @@
     <FormStepTitle>BƯỚC 1: CHỌN GÓI BẢO HIỂM</FormStepTitle>
 
     <form @submit.prevent="submit">
-      <SelectField />
+      <SelectField
+        v-model="motorbikeType"
+        label="Loại xe mua bảo hiểm"
+        :options="motorbikeTypeOptions"
+        required
+      />
 
       <TextField
         v-model="promotionCode"
@@ -103,40 +108,6 @@
       </div>
 
       <div class="field">
-        <label class="label">Loại xe:</label>
-
-        <div class="control">
-          <p>
-            <label class="radio">
-              <input
-                v-model="motorbikeType"
-                :value="motorbikeTypeValues.UP_TO_50_CC"
-                data-cy="motorbike-type-radio"
-                name="motorbikeType"
-                type="radio"
-                required
-              />
-              {{ motorbikeType1Label }}
-            </label>
-          </p>
-
-          <p class="mt-1">
-            <label class="radio">
-              <input
-                v-model="motorbikeType"
-                :value="motorbikeTypeValues.ABOVE_50_CC"
-                data-cy="motorbike-type-radio"
-                name="motorbikeType"
-                type="radio"
-                required
-              />
-              {{ motorbikeType2Label }}
-            </label>
-          </p>
-        </div>
-      </div>
-
-      <div v-if="isMotorbikeTypeSelected" class="field">
         <label class="label">Đăng ký bổ sung:</label>
 
         <label class="checkbox">
@@ -204,6 +175,16 @@ export default Vue.extend({
 
   data() {
     return {
+      motorbikeTypeOptions: [
+        {
+          value: MotorbikeType.UP_TO_50_CC,
+          text: controller.getMotorbikeTypeLabel(MotorbikeType.UP_TO_50_CC)
+        },
+        {
+          value: MotorbikeType.ABOVE_50_CC,
+          text: controller.getMotorbikeTypeLabel(MotorbikeType.ABOVE_50_CC)
+        }
+      ],
       promotionCode: "",
       promotion: null as null | Promotion,
       promotionValues: Promotion,
@@ -215,14 +196,7 @@ export default Vue.extend({
       ),
       insuranceYear: 1,
       insuranceStartDate: new Date(),
-      motorbikeType: null as null | MotorbikeType,
-      motorbikeTypeValues: MotorbikeType,
-      motorbikeType1Label: controller.getMotorbikeTypeLabel(
-        MotorbikeType.UP_TO_50_CC
-      ),
-      motorbikeType2Label: controller.getMotorbikeTypeLabel(
-        MotorbikeType.ABOVE_50_CC
-      ),
+      motorbikeType: MotorbikeType.ABOVE_50_CC,
       hasAddon: false,
       pviInsuranceFee: 0,
       baoVietInsuranceFee: 0,

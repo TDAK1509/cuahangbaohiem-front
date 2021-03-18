@@ -1,30 +1,70 @@
 <template>
   <div class="select-field">
     <label class="select-field__label">
-      Select label
-      <span class="select-field__label--required">*</span>
+      {{ label }}
+      <span v-if="required" class="select-field__label--required">*</span>
     </label>
 
-    <select ref="select" class="select-field__select">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
+    <select
+      class="select-field__select"
+      :required="required"
+      @change="$emit('change', $event.target.value)"
+    >
+      <option
+        v-for="(option, index) in options"
+        :key="index"
+        :value="option.value"
+        :selected="option.value === selected"
+      >
+        {{ option.text }}
+      </option>
     </select>
 
     <span class="select-field__arrow"></span>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue, { PropType } from "vue";
+
+interface Option {
+  value: any;
+  text: string;
+}
+
+export default Vue.extend({
   name: "SelectField",
-  methods: {
-    clickSelect() {
-      this.$refs.select.click();
+
+  inheritAttrs: false,
+
+  model: {
+    prop: "selected",
+    event: "change"
+  },
+
+  props: {
+    selected: {
+      type: [String, Number],
+      required: false,
+      default: ""
+    },
+
+    options: {
+      type: Array as PropType<Option[]>,
+      required: true
+    },
+
+    label: {
+      type: String,
+      default: "Select label"
+    },
+
+    required: {
+      type: Boolean,
+      default: false
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>
@@ -55,7 +95,8 @@ export default {
   appearance: none;
   border: none;
   background: none;
-  padding: 0.5rem 0.5rem;
+  padding: 0.8rem 0.5rem;
+  padding-right: 4rem;
   color: red;
 }
 
@@ -85,7 +126,7 @@ export default {
     border-right: var(--size) solid transparent;
     border-left: var(--size) solid transparent;
     border-top: var(--size) solid black;
-    top: 70%;
+    top: 72%;
   }
 
   &::after {
@@ -93,7 +134,7 @@ export default {
     border-right: var(--size) solid transparent;
     border-left: var(--size) solid transparent;
     border-bottom: var(--size) solid black;
-    top: 55%;
+    top: 57%;
   }
 }
 </style>
