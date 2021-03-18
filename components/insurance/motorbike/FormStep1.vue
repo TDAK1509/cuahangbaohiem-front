@@ -10,45 +10,20 @@
         required
       />
 
+      <div class="spacer"></div>
+
+      <SelectField
+        v-model="insuranceYear"
+        label="Thời gian mua"
+        :options="insuranceYearOptions"
+        required
+      />
+
       <TextField
         v-model="promotionCode"
         label="Nhập mã khuyến mãi:"
         placeholder="Mã khuyến mãi"
       />
-
-      <div class="field">
-        <label class="label">Số năm bảo hiểm:</label>
-
-        <div class="control">
-          <label class="radio" data-cy="insurance-year-radio">
-            <input
-              v-model="insuranceYear"
-              type="radio"
-              name="insurance_year"
-              :value="1"
-            />
-            1 năm
-          </label>
-          <label class="radio" data-cy="insurance-year-radio">
-            <input
-              v-model="insuranceYear"
-              type="radio"
-              name="insurance_year"
-              :value="2"
-            />
-            2 năm
-          </label>
-          <label class="radio" data-cy="insurance-year-radio">
-            <input
-              v-model="insuranceYear"
-              type="radio"
-              name="insurance_year"
-              :value="3"
-            />
-            3 năm
-          </label>
-        </div>
-      </div>
 
       <div v-if="isValidPromotionCode" class="field">
         <label class="label">Khuyến mãi:</label>
@@ -185,6 +160,20 @@ export default Vue.extend({
           text: controller.getMotorbikeTypeLabel(MotorbikeType.ABOVE_50_CC)
         }
       ],
+      insuranceYearOptions: [
+        {
+          value: 1,
+          text: "1 năm"
+        },
+        {
+          value: 2,
+          text: "2 năm"
+        },
+        {
+          value: 3,
+          text: "3 năm"
+        }
+      ],
       promotionCode: "",
       promotion: null as null | Promotion,
       promotionValues: Promotion,
@@ -304,5 +293,9 @@ export default Vue.extend({
   &__list > * + * {
     margin-top: 1em;
   }
+}
+
+.spacer {
+  height: 1rem;
 }
 </style>
