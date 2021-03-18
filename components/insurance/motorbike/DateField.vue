@@ -11,6 +11,7 @@
       :clearable="false"
       :editable="false"
       :disabled-date="disabledDate"
+      :disabled="disabled"
       @input="$emit('change', $event)"
     />
   </div>
@@ -45,6 +46,11 @@ export default Vue.extend({
     disabledDate: {
       type: Function,
       default: () => {}
+    },
+
+    disabled: {
+      type: Boolean,
+      default: false
     }
   }
 });
@@ -55,7 +61,6 @@ export default Vue.extend({
   font-weight: 700;
   font-size: 0.8rem;
   margin-left: 0.1rem;
-  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   display: block;
 

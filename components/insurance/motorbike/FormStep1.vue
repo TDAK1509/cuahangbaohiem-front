@@ -27,28 +27,7 @@
         :disabled-date="dateIsNotWithin2MonthsFromToday"
       />
 
-      <div class="form-step-1__date-container">
-        <div class="is-flex is-align-items-center">
-          <div class="form-step-1__date-label">Từ ngày</div>
-          <DatePicker
-            v-model="insuranceStartDate"
-            data-cy="insurance-start-date"
-            format="DD-MM-YYYY"
-            :clearable="false"
-            :editable="false"
-            :disabled-date="dateIsNotWithin2MonthsFromToday"
-          />
-        </div>
-        <div class="is-flex mt-3">
-          <div class="form-step-1__date-label">đến ngày</div>
-          <DatePicker
-            v-model="insuranceEndDate"
-            data-cy="insurance-end-date"
-            format="DD-MM-YYYY"
-            disabled
-          />
-        </div>
-      </div>
+      <DateField v-model="insuranceEndDate" label="Ngày kết thúc" disabled />
 
       <TextField
         v-model="promotionCode"
@@ -127,8 +106,6 @@
 <script lang="ts">
 import Vue from "vue";
 import { addMonths, format } from "date-fns";
-import DatePicker from "vue2-datepicker";
-import "vue2-datepicker/index.css";
 
 import mixinMoneyFilter from "@/utils/mixins/money-filters";
 
@@ -145,8 +122,6 @@ const controller = new MotorbikeInsuranceController();
 
 export default Vue.extend({
   name: "MotorbikeFormStep1",
-
-  components: { DatePicker },
 
   mixins: [mixinMoneyFilter],
 
