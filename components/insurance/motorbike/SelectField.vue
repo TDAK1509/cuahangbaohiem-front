@@ -95,7 +95,7 @@ export default Vue.extend({
   appearance: none;
   border: none;
   background: none;
-  padding: 0.8rem 0.5rem;
+  padding: 0.3rem 0.5rem;
   padding-right: 4rem;
   color: red;
   outline: none;
@@ -133,14 +133,6 @@ export default Vue.extend({
     border-left: var(--size) solid transparent;
     border-top: var(--size) solid black;
     top: 72%;
-  }
-
-  &::after {
-    content: "";
-    border-right: var(--size) solid transparent;
-    border-left: var(--size) solid transparent;
-    border-bottom: var(--size) solid black;
-    top: 57%;
   }
 }
 </style>
