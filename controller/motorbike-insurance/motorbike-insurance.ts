@@ -50,11 +50,11 @@ export default class MotorbikeInsuranceRequestController {
 
   public getMotorbikeTypeLabel(type: MotorbikeType): string {
     if (type === MotorbikeType.UP_TO_50_CC) {
-      return "Xe Mô tô 2 bánh dung tích từ 50cc trở xuống";
+      return "Dưới 50cc";
     }
 
     if (type === MotorbikeType.ABOVE_50_CC) {
-      return "Xe Mô tô 2 bánh dung tích trên 50cc";
+      return "Trên 50cc";
     }
 
     return "";

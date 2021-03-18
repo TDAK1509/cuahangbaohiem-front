@@ -29,20 +29,20 @@ describe("controller/motorbike-insurance", () => {
   });
 
   describe("getMotorbikeTypeLabel()", () => {
-    it("returns 'Xe Mô tô 2 bánh dung tích từ 50cc trở xuống' when arg is UP_TO_50_CC", () => {
+    it("returns 'Dưới 50cc' when arg is UP_TO_50_CC", () => {
       const controller = new MotorbikeInsuranceRequestController();
       const result = controller.getMotorbikeTypeLabel(
         MotorbikeType.UP_TO_50_CC
       );
-      expect(result).toBe("Xe Mô tô 2 bánh dung tích từ 50cc trở xuống");
+      expect(result).toBe("Dưới 50cc");
     });
 
-    it("returns 'Xe Mô tô 2 bánh dung tích trên 50cc' when arg is UP_TO_50_CC", () => {
+    it("returns 'Trên 50cc' when arg is UP_TO_50_CC", () => {
       const controller = new MotorbikeInsuranceRequestController();
       const result = controller.getMotorbikeTypeLabel(
         MotorbikeType.ABOVE_50_CC
       );
-      expect(result).toBe("Xe Mô tô 2 bánh dung tích trên 50cc");
+      expect(result).toBe("Trên 50cc");
     });
   });
 
