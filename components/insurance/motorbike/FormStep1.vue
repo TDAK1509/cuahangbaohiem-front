@@ -52,46 +52,61 @@
         </label>
       </p>
 
-      <template v-if="hasAddon">
-        <FormSpacer />
+      <FormSpacer />
 
-        <SelectField
-          v-model="addon"
-          label="Chọn quyền lợi"
-          :options="addonOptions"
-          required
-        />
-      </template>
-
-      <TextField
-        v-model="promotionCode"
-        label="Nhập mã khuyến mãi:"
-        placeholder="Mã khuyến mãi"
+      <SelectField
+        v-model="addon"
+        label="Chọn quyền lợi"
+        :options="addonOptions"
+        required
       />
+
+      <FormSpacer />
+
+      <InputField
+        label="Phí BH tai nạn lái xe, phụ xe, người ngồi trên xe"
+        value="Bla bla bla"
+        disabled
+      />
+
+      <FormSpacer />
+
+      <InputField
+        label="Tổng phí thanh toán"
+        value="66.000 + 22.000 = 88.000 VND"
+        disabled
+      />
+
+      <FormSpacer />
+
+      <InputField v-model="promotionCode" label="Mã khuyến mãi:" />
+
+      <FormSpacer />
 
       <div v-if="isValidPromotionCode" class="field">
         <label class="label">Khuyến mãi:</label>
 
         <div class="control">
-          <p v-if="insuranceYear === 1">
-            <label class="radio">
+          {{ promotion }}
+          <p v-if="insuranceYear === '1'">
+            <label class="checkbox">
               <input
                 v-model="promotion"
                 :value="promotionValues.BUY_1_YEAR_ADD_1_YEAR"
                 name="promotion"
-                type="radio"
+                type="checkbox"
               />
               {{ promotion1Label }}
             </label>
           </p>
 
           <p>
-            <label class="radio">
+            <label class="checkbox">
               <input
                 v-model="promotion"
                 :value="promotionValues.BUY_1_BIKE_ADD_1_BIKE"
                 name="promotion"
-                type="radio"
+                type="checkbox"
               />
               {{ promotion2Label }}
             </label>
@@ -99,20 +114,9 @@
         </div>
       </div>
 
-      <div v-if="pviInsuranceFee > 0" class="result field">
-        <label class="label is-uppercase">Phí bảo hiểm:</label>
-
-        <ul class="result__list">
-          <li class="result__list-item">
-            <ResultPviMotorbike :insurance-fee="pviInsuranceFee" />
-          </li>
-          <li class="result__list-item">
-            <ResultBaoVietMotorbike :insurance-fee="pviInsuranceFee" />
-          </li>
-        </ul>
+      <div style="width: 100%; text-align: right">
+        <MotorbikeNextButton />
       </div>
-
-      <MotorbikeNextButton />
     </form>
   </div>
 </template>
@@ -182,7 +186,7 @@ export default Vue.extend({
         }
       ],
       promotionCode: "",
-      promotion: null as null | Promotion,
+      promotion: [] as Promotion[],
       promotionValues: Promotion,
       promotion1Label: controller.getPromotionLabel(
         Promotion.BUY_1_YEAR_ADD_1_YEAR
