@@ -8,6 +8,12 @@ export enum MotorbikeType {
   ABOVE_50_CC
 }
 
+export enum MotorbikeAddOn {
+  TEN,
+  TWENTY,
+  THIRTY
+}
+
 export enum Promotion {
   BUY_1_YEAR_ADD_1_YEAR,
   BUY_1_BIKE_ADD_1_BIKE
@@ -67,6 +73,22 @@ export default class MotorbikeInsuranceRequestController {
 
     if (promotion === Promotion.BUY_1_YEAR_ADD_1_YEAR) {
       return "Mua 1 năm tặng 1 năm";
+    }
+
+    return "";
+  }
+
+  public getAddOnLabel(addOn: MotorbikeAddOn): string {
+    if (addOn === MotorbikeAddOn.TEN) {
+      return "10 triệu đồng/ người/ vụ";
+    }
+
+    if (addOn === MotorbikeAddOn.TWENTY) {
+      return "20 triệu đồng/ người/ vụ";
+    }
+
+    if (addOn === MotorbikeAddOn.THIRTY) {
+      return "30 triệu đồng/ người/ vụ";
     }
 
     return "";

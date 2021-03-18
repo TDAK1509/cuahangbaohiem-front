@@ -1,5 +1,6 @@
 import MotorbikeInsuranceRequestController, {
   MotorbikeType,
+  MotorbikeAddOn,
   Promotion
 } from "@/controller/motorbike-insurance/motorbike-insurance";
 import MotorbikeInsuranceRequestModel from "@/models/motorbike-insurance-request";
@@ -61,6 +62,26 @@ describe("controller/motorbike-insurance", () => {
         Promotion.BUY_1_BIKE_ADD_1_BIKE
       );
       expect(result).toBe("Mua 1 xe tặng 1 xe");
+    });
+  });
+
+  describe("getAddOnLabel()", () => {
+    it("returns '10 triệu đồng/ người/ vụ' when arg is TEN", () => {
+      const controller = new MotorbikeInsuranceRequestController();
+      const result = controller.getAddOnLabel(MotorbikeAddOn.TEN);
+      expect(result).toBe("10 triệu đồng/ người/ vụ");
+    });
+
+    it("returns '20 triệu đồng/ người/ vụ' when arg is TEN", () => {
+      const controller = new MotorbikeInsuranceRequestController();
+      const result = controller.getAddOnLabel(MotorbikeAddOn.TWENTY);
+      expect(result).toBe("20 triệu đồng/ người/ vụ");
+    });
+
+    it("returns '30 triệu đồng/ người/ vụ' when arg is TEN", () => {
+      const controller = new MotorbikeInsuranceRequestController();
+      const result = controller.getAddOnLabel(MotorbikeAddOn.THIRTY);
+      expect(result).toBe("30 triệu đồng/ người/ vụ");
     });
   });
 });
