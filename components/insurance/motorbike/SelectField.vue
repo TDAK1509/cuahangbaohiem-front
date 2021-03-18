@@ -98,6 +98,12 @@ export default Vue.extend({
   padding: 0.8rem 0.5rem;
   padding-right: 4rem;
   color: red;
+  outline: none;
+
+  &:focus {
+    border-bottom: 2px solid var(--clr-primary);
+    margin-bottom: -2px;
+  }
 }
 
 .select-field__arrow,
