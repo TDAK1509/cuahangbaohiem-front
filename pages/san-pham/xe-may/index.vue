@@ -9,7 +9,7 @@
       <FormStep1 v-show="currentStep === 1" @submit="submitStep1" />
       <FormStep2
         v-show="currentStep === 2"
-        :is-promotion="isBuy1BikeAdd1Bike"
+        :is-promotion="promotionHasBuy1BikeAdd1Bike"
         @submit="submitStep2"
         @back="goToStep(1)"
       />
@@ -30,23 +30,13 @@
 <script lang="ts">
 import Vue from "vue";
 import MotorbikeInsuranceController, {
-  MotorbikeType,
-  InsuranceFee,
   Promotion,
   MotorbikeInsuranceRequest
 } from "@/controller/motorbike-insurance/motorbike-insurance";
 
-const controller = new MotorbikeInsuranceController();
+import { Step1FormValues } from "@/components/insurance/motorbike/FormStep1.vue";
 
-interface Step1FormValues {
-  promotionCode: string;
-  promotion: Promotion;
-  insuranceStartDate: string;
-  insuranceEndDate: string;
-  hasAddon: boolean;
-  motorbikeType: MotorbikeType;
-  insuranceFee: InsuranceFee;
-}
+const controller = new MotorbikeInsuranceController();
 
 interface Step2FormValues {
   motorbikeOwner: string;
@@ -83,11 +73,13 @@ export default Vue.extend({
       licensePlate2: "",
       frameNumber2: "",
       promotionCode: "",
-      promotion: null as null | Promotion,
+      promotions: [] as string[],
+      promotionHasBuy1BikeAdd1Bike: false,
       insuranceStartDate: "",
       insuranceEndDate: "",
-      hasAddon: false,
-      insuranceFee: { pvi: 0, baoViet: 0 } as InsuranceFee,
+      addOn: "",
+      insuranceFee: 0,
+      addOnFee: 0,
       buyerName: "",
       buyerAddress: "",
       buyerCity: "",
@@ -109,14 +101,12 @@ export default Vue.extend({
         licensePlate2: this.licensePlate2,
         frameNumber2: this.frameNumber2,
         promotionCode: this.promotionCode,
-        promotion:
-          this.promotion !== null
-            ? controller.getPromotionLabel(this.promotion)
-            : "",
+        promotions: this.promotions,
         insuranceStartDate: this.insuranceStartDate,
         insuranceEndDate: this.insuranceEndDate,
-        hasAddon: this.hasAddon,
+        addOn: this.addOn,
         insuranceFee: this.insuranceFee,
+        addOnFee: this.addOnFee,
         buyerName: this.buyerName,
         buyerAddress: this.buyerAddress,
         buyerCity: this.buyerCity,
@@ -125,24 +115,27 @@ export default Vue.extend({
         buyerPhone: this.buyerPhone,
         buyerEmail: this.buyerEmail
       };
-    },
-
-    isBuy1BikeAdd1Bike(): boolean {
-      return this.promotion === Promotion.BUY_1_BIKE_ADD_1_BIKE;
     }
   },
 
   methods: {
     submitStep1(values: Step1FormValues) {
+      this.promotionHasBuy1BikeAdd1Bike = values.promotions.includes(
+        Promotion.BUY_1_BIKE_ADD_1_BIKE
+      );
+
       this.promotionCode = values.promotionCode;
-      this.promotion = values.promotion;
+      this.promotions = values.promotions.map((promotion) =>
+        controller.getPromotionLabel(promotion)
+      );
       this.insuranceStartDate = values.insuranceStartDate;
       this.insuranceEndDate = values.insuranceEndDate;
       this.motorbikeType = controller.getMotorbikeTypeLabel(
         values.motorbikeType
       );
+      this.addOn = values.addOn;
       this.insuranceFee = values.insuranceFee;
-      this.hasAddon = values.hasAddon;
+      this.addOnFee = values.addOnFee;
       this.goToStep(2);
     },
 

@@ -45,7 +45,7 @@
         <label class="checkbox">
           <input
             v-model="hasAddOn"
-            data-cy="insurance-addon-checkbox"
+            data-cy="insurance-addOn-checkbox"
             type="checkbox"
           />
           Bảo hiểm tai nạn người trên xe, phụ xe, người ngồi trên xe
@@ -55,9 +55,9 @@
       <FormSpacer />
 
       <SelectField
-        v-model="addon"
+        v-model="addOn"
         label="Chọn quyền lợi"
-        :options="addonOptions"
+        :options="addOnOptions"
         required
       />
 
@@ -135,6 +135,17 @@ import MotorbikeInsuranceController, {
 
 const controller = new MotorbikeInsuranceController();
 
+export interface Step1FormValues {
+  promotionCode: string;
+  promotions: Promotion[];
+  insuranceStartDate: string;
+  insuranceEndDate: string;
+  addOn: string;
+  motorbikeType: MotorbikeType;
+  insuranceFee: number;
+  addOnFee: number;
+}
+
 export default Vue.extend({
   name: "MotorbikeFormStep1",
 
@@ -168,7 +179,7 @@ export default Vue.extend({
           text: "3 năm"
         }
       ],
-      addonOptions: [
+      addOnOptions: [
         {
           value: "10",
           text: "10 triệu đồng/ người/ vụ"
@@ -183,7 +194,7 @@ export default Vue.extend({
         }
       ],
       promotionCode: "",
-      promotion: [] as Promotion[],
+      promotions: [] as Promotion[],
       promotionValues: Promotion,
       promotion1Label: controller.getPromotionLabel(
         Promotion.BUY_1_YEAR_ADD_1_YEAR
@@ -195,7 +206,7 @@ export default Vue.extend({
       insuranceStartDate: new Date(),
       motorbikeType: MotorbikeType.ABOVE_50_CC,
       hasAddOn: false,
-      addon: MotorbikeAddOn.TEN,
+      addOn: MotorbikeAddOn.TEN,
       insuranceFee: 0,
       addOnFee: 0,
       isValidPromotionCode: false
@@ -251,11 +262,12 @@ export default Vue.extend({
 
   methods: {
     submit() {
-      const step1FormValues = {
+      const step1FormValues: Step1FormValues = {
         promotionCode: this.promotionCode,
-        promotion: this.promotion,
+        promotions: this.promotions,
         insuranceStartDate: format(this.insuranceStartDate, "dd-MM-yyyy"),
         insuranceEndDate: format(this.insuranceEndDate, "dd-MM-yyyy"),
+        addOn: controller.getAddOnLabel(this.addOn),
         motorbikeType: this.motorbikeType,
         insuranceFee: this.insuranceFee,
         addOnFee: this.addOnFee
@@ -266,7 +278,7 @@ export default Vue.extend({
     calculateInsuranceFee() {
       controller.setYear(parseInt(this.insuranceYear));
       controller.setMotorbike(this.motorbikeType);
-      controller.setAddon(this.addon);
+      controller.setAddon(this.addOn);
       this.insuranceFee = controller.getInsuranceFee();
       this.addOnFee = this.hasAddOn ? controller.getAddOnFee() : 0;
     },
@@ -288,11 +300,11 @@ export default Vue.extend({
   flex-basis: 5rem;
 }
 
-.addon__description {
+.addOn__description {
   font-size: 0.9rem;
 }
 
-.addon__list {
+.addOn__list {
   list-style-type: disc;
   margin-left: 1rem;
 }

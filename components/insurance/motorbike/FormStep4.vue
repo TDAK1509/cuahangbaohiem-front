@@ -57,16 +57,6 @@
           <h5 class="row__table-row-title is-size-6 has-text-weight-bold">
             Phí bảo hiểm (đã bao gồm VAT):
           </h5>
-
-          <ResultPviMotorbike
-            class="row__table-row-insurance-fee"
-            :insurance-fee="insuranceFee.pvi"
-          />
-
-          <ResultBaoVietMotorbike
-            class="row__table-row-insurance-fee"
-            :insurance-fee="insuranceFee.baoViet"
-          />
         </div>
       </section>
 
@@ -143,59 +133,63 @@ export default {
   props: {
     motorbikeOwner: {
       type: String,
-      default: ""
+      required: true
     },
     motorbikeType: {
       type: String,
-      default: ""
+      required: true
     },
     licensePlate: {
       type: String,
-      default: ""
+      required: true
     },
     frameNumber: {
       type: String,
-      default: ""
+      required: true
     },
     insuranceStartDate: {
       type: String,
-      default: ""
+      required: true
     },
     insuranceEndDate: {
       type: String,
-      default: ""
+      required: true
     },
     insuranceFee: {
-      type: Object,
-      default: () => {}
+      type: Number,
+      required: true
+    },
+    addOnFee: {
+      type: Number,
+      required: true
     },
     buyerName: {
       type: String,
-      default: ""
+      required: true
     },
     buyerAddress: {
       type: String,
-      default: ""
+      required: true
     },
     buyerCity: {
       type: String,
-      default: ""
+      required: true
     },
     buyerDistrict: {
       type: String,
-      default: ""
+      required: true
     },
     buyerWard: {
       type: String,
-      default: ""
+      required: true
     },
     buyerPhone: {
       type: String,
-      default: ""
+      required: true
     },
     buyerEmail: {
       type: String,
-      default: ""
+      required: true
     }
   },
 

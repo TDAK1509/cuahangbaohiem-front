@@ -4,11 +4,6 @@ Fire.init();
 const db = Fire.getFireStoreDb();
 const FIREBASE_MOTORBIKE_INSURANCE_COLLECTION = "motorbike_insurance_request";
 
-export interface RawInsuranceFee {
-  pvi: number;
-  baoViet: number;
-}
-
 export interface RawMotorbikeInsuranceRequest {
   createdAt: number;
   motorbikeOwner: string;
@@ -17,8 +12,9 @@ export interface RawMotorbikeInsuranceRequest {
   frameNumber: string;
   insuranceStartDate: string;
   insuranceEndDate: string;
-  hasAddon: boolean;
-  insuranceFee: RawInsuranceFee;
+  addOn: string;
+  insuranceFee: number;
+  addOnFee: number;
   buyerName: string;
   buyerAddress: string;
   buyerCity: string;

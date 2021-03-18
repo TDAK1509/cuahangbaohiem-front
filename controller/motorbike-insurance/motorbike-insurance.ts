@@ -28,11 +28,12 @@ export interface MotorbikeInsuranceRequest {
   licensePlate2: string;
   frameNumber2: string;
   promotionCode: string;
-  promotion: string;
+  promotions: string[];
   insuranceStartDate: string;
   insuranceEndDate: string;
-  hasAddon: boolean;
-  insuranceFee: RawInsuranceFee;
+  addOn: string;
+  insuranceFee: number;
+  addOnFee: number;
   buyerName: string;
   buyerAddress: string;
   buyerCity: string;
@@ -41,8 +42,6 @@ export interface MotorbikeInsuranceRequest {
   buyerPhone: string;
   buyerEmail: string;
 }
-
-export type InsuranceFee = RawInsuranceFee;
 
 export default class MotorbikeInsuranceRequestController {
   private year = 0;
