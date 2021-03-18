@@ -1,8 +1,10 @@
 <template>
   <div>
-    <FormStepTitle> BƯỚC 1: TÍNH PHÍ </FormStepTitle>
+    <FormStepTitle>BƯỚC 1: CHỌN GÓI BẢO HIỂM</FormStepTitle>
 
     <form @submit.prevent="submit">
+      <SelectField />
+
       <TextField
         v-model="promotionCode"
         label="Nhập mã khuyến mãi:"
