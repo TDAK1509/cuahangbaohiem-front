@@ -1,10 +1,5 @@
 <template>
-  <div class="select-field">
-    <label class="select-field__label">
-      {{ label }}
-      <span v-if="required" class="select-field__label--required">*</span>
-    </label>
-
+  <FormField :label="label" :required="required">
     <select
       class="select-field__select"
       :required="required"
@@ -21,7 +16,7 @@
     </select>
 
     <span class="select-field__arrow"></span>
-  </div>
+  </FormField>
 </template>
 
 <script lang="ts">
@@ -68,27 +63,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.select-field {
-  border: 1px solid var(--clr-border-grey);
-  border-radius: 5px;
-  font-size: 1rem;
-  width: 100%;
-  background: none;
-  position: relative;
-}
-
-.select-field__label {
-  font-weight: 700;
-  font-size: 0.8rem;
-  margin-left: 0.7rem;
-  margin-top: 0.5rem;
-  display: block;
-
-  &--required {
-    color: red;
-  }
-}
-
 .select-field__select {
   width: 100%;
   font-size: 1rem;
