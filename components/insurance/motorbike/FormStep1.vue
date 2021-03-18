@@ -52,6 +52,17 @@
         </label>
       </p>
 
+      <template v-if="hasAddon">
+        <FormSpacer />
+
+        <SelectField
+          v-model="addon"
+          label="Chọn quyền lợi"
+          :options="addonOptions"
+          required
+        />
+      </template>
+
       <TextField
         v-model="promotionCode"
         label="Nhập mã khuyến mãi:"
@@ -85,26 +96,6 @@
               {{ promotion2Label }}
             </label>
           </p>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Đăng ký bổ sung:</label>
-
-        <label class="checkbox">
-          <input
-            v-model="hasAddon"
-            data-cy="insurance-addon-checkbox"
-            type="checkbox"
-          />
-          Bảo hiểm tai nạn người trên xe
-        </label>
-
-        <div v-if="hasAddon" class="addon__description mt-2">
-          <ul class="addon__list">
-            <li>Sỗ chỗ tham gia bảo hiểm: <strong>2</strong></li>
-            <li>Số tiền bảo hiểm: <strong>10.000.000 VND</strong></li>
-          </ul>
         </div>
       </div>
 
@@ -176,6 +167,20 @@ export default Vue.extend({
           text: "3 năm"
         }
       ],
+      addonOptions: [
+        {
+          value: "10",
+          text: "10 triệu đồng/ người/ vụ"
+        },
+        {
+          value: "20",
+          text: "20 triệu đồng/ người/ vụ"
+        },
+        {
+          value: "30",
+          text: "30 triệu đồng/ người/ vụ"
+        }
+      ],
       promotionCode: "",
       promotion: null as null | Promotion,
       promotionValues: Promotion,
@@ -189,6 +194,7 @@ export default Vue.extend({
       insuranceStartDate: new Date(),
       motorbikeType: MotorbikeType.ABOVE_50_CC,
       hasAddon: false,
+      addon: "",
       pviInsuranceFee: 0,
       baoVietInsuranceFee: 0,
       isValidPromotionCode: false
