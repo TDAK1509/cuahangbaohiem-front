@@ -10,7 +10,7 @@
         required
       />
 
-      <div class="spacer"></div>
+      <FormSpacer />
 
       <SelectField
         v-model="insuranceYear"
@@ -19,7 +19,7 @@
         required
       />
 
-      <div class="spacer"></div>
+      <FormSpacer />
 
       <DateField
         v-model="insuranceStartDate"
@@ -27,11 +27,11 @@
         :disabled-date="dateIsNotWithin2MonthsFromToday"
       />
 
-      <div class="spacer"></div>
+      <FormSpacer />
 
       <DateField v-model="insuranceEndDate" label="Ngày kết thúc" disabled />
 
-      <div class="spacer"></div>
+      <FormSpacer />
 
       <InputField
         label="Phí bảo hiểm TNDS bắt buộc"
@@ -282,9 +282,5 @@ export default Vue.extend({
   &__list > * + * {
     margin-top: 1em;
   }
-}
-
-.spacer {
-  height: 1rem;
 }
 </style>
