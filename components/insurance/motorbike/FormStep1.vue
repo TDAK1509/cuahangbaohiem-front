@@ -39,6 +39,19 @@
         disabled
       />
 
+      <FormSpacer />
+
+      <p>
+        <label class="checkbox">
+          <input
+            v-model="hasAddon"
+            data-cy="insurance-addon-checkbox"
+            type="checkbox"
+          />
+          Bảo hiểm tai nạn người trên xe, phụ xe, người ngồi trên xe
+        </label>
+      </p>
+
       <TextField
         v-model="promotionCode"
         label="Nhập mã khuyến mãi:"
