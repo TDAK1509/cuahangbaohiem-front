@@ -27,6 +27,8 @@
         :disabled-date="dateIsNotWithin2MonthsFromToday"
       />
 
+      <div class="spacer"></div>
+
       <DateField v-model="insuranceEndDate" label="Ngày kết thúc" disabled />
 
       <TextField
