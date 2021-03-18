@@ -15,8 +15,6 @@ import Vue from "vue";
 export default Vue.extend({
   name: "FormField",
 
-  inheritAttrs: false,
-
   props: {
     label: {
       type: String,
@@ -49,7 +47,7 @@ export default Vue.extend({
   display: block;
 
   &--required {
-    color: red;
+    color: chocolate;
   }
 }
 </style>

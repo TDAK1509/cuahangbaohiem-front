@@ -31,6 +31,14 @@
 
       <DateField v-model="insuranceEndDate" label="Ngày kết thúc" disabled />
 
+      <div class="spacer"></div>
+
+      <InputField
+        label="Phí bảo hiểm TNDS bắt buộc"
+        value="Bla bla bla"
+        disabled
+      />
+
       <TextField
         v-model="promotionCode"
         label="Nhập mã khuyến mãi:"
