@@ -35,7 +35,7 @@
 
       <InputField
         label="Phí bảo hiểm TNDS bắt buộc"
-        value="Bla bla bla"
+        :value="insuranceFeeString"
         disabled
       />
 
@@ -44,7 +44,7 @@
       <p>
         <label class="checkbox">
           <input
-            v-model="hasAddon"
+            v-model="hasAddOn"
             data-cy="insurance-addon-checkbox"
             type="checkbox"
           />
@@ -65,7 +65,7 @@
 
       <InputField
         label="Phí BH tai nạn lái xe, phụ xe, người ngồi trên xe"
-        value="Bla bla bla"
+        :value="addOnFeeString"
         disabled
       />
 
@@ -73,7 +73,7 @@
 
       <InputField
         label="Tổng phí thanh toán"
-        value="66.000 + 22.000 = 88.000 VND"
+        :value="`${insuranceFeeString} + ${addOnFeeString} = ${totalFee}`"
         disabled
       />
 
@@ -128,14 +128,11 @@ import { addMonths, format } from "date-fns";
 import mixinMoneyFilter from "@/utils/mixins/money-filters";
 
 import MotorbikeInsuranceController, {
+  MotorbikeAddOn,
   MotorbikeType,
   Promotion
 } from "@/controller/motorbike-insurance/motorbike-insurance";
-import PviMotorbikeInsurance from "@/controller/motorbike-insurance/pvi-motorbike-insurance";
-import BaoVietMotorbikeInsurance from "@/controller/motorbike-insurance/bao-viet-motorbike-insurance";
 
-const pvi = new PviMotorbikeInsurance();
-const baoViet = new BaoVietMotorbikeInsurance();
 const controller = new MotorbikeInsuranceController();
 
 export default Vue.extend({
@@ -197,10 +194,10 @@ export default Vue.extend({
       insuranceYear: "1",
       insuranceStartDate: new Date(),
       motorbikeType: MotorbikeType.ABOVE_50_CC,
-      hasAddon: false,
-      addon: "",
-      pviInsuranceFee: 0,
-      baoVietInsuranceFee: 0,
+      hasAddOn: false,
+      addon: MotorbikeAddOn.TEN,
+      insuranceFee: 0,
+      addOnFee: 0,
       isValidPromotionCode: false
     };
   },
@@ -215,6 +212,18 @@ export default Vue.extend({
 
     isMotorbikeTypeSelected(): boolean {
       return this.motorbikeType !== null;
+    },
+
+    insuranceFeeString(): string {
+      return this?.$options?.filters?.toVnd(this.insuranceFee);
+    },
+
+    addOnFeeString(): string {
+      return this?.$options?.filters?.toVnd(this.addOnFee);
+    },
+
+    totalFee(): string {
+      return this?.$options?.filters?.toVnd(this.insuranceFee + this.addOnFee);
     }
   },
 
@@ -225,12 +234,19 @@ export default Vue.extend({
     motorbikeType() {
       this.calculateInsuranceFee();
     },
-    hasAddon() {
+    hasAddOn() {
+      this.calculateInsuranceFee();
+    },
+    addOn() {
       this.calculateInsuranceFee();
     },
     promotionCode() {
       this.checkPromotionCodeValidity();
     }
+  },
+
+  mounted() {
+    this.calculateInsuranceFee();
   },
 
   methods: {
@@ -241,34 +257,18 @@ export default Vue.extend({
         insuranceStartDate: format(this.insuranceStartDate, "dd-MM-yyyy"),
         insuranceEndDate: format(this.insuranceEndDate, "dd-MM-yyyy"),
         motorbikeType: this.motorbikeType,
-        insuranceFee: {
-          pvi: this.pviInsuranceFee,
-          baoViet: this.baoVietInsuranceFee
-        },
-        hasAddon: this.hasAddon
+        insuranceFee: this.insuranceFee,
+        addOnFee: this.addOnFee
       };
       this.$emit("submit", step1FormValues);
     },
 
     calculateInsuranceFee() {
-      if (this.isMotorbikeTypeSelected) {
-        this.calculatePviInsuranceFee();
-        this.calculateBaoVietInsuranceFee();
-      }
-    },
-
-    calculatePviInsuranceFee() {
-      pvi.setYear(parseInt(this.insuranceYear));
-      pvi.setMotorbike(this.motorbikeType as MotorbikeType);
-      pvi.setHasAddon(this.hasAddon);
-      this.pviInsuranceFee = pvi.getInsuranceFee();
-    },
-
-    calculateBaoVietInsuranceFee() {
-      baoViet.setYear(parseInt(this.insuranceYear));
-      baoViet.setMotorbike(this.motorbikeType as MotorbikeType);
-      baoViet.setHasAddon(this.hasAddon);
-      this.baoVietInsuranceFee = baoViet.getInsuranceFee();
+      controller.setYear(parseInt(this.insuranceYear));
+      controller.setMotorbike(this.motorbikeType);
+      controller.setAddon(this.addon);
+      this.insuranceFee = controller.getInsuranceFee();
+      this.addOnFee = this.hasAddOn ? controller.getAddOnFee() : 0;
     },
 
     dateIsNotWithin2MonthsFromToday(date: Date): boolean {
