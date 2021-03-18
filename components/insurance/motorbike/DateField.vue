@@ -1,5 +1,5 @@
 <template>
-  <div class="date-field">
+  <div class="date-fiel">
     <label class="date-field__label">
       {{ label }}
       <span class="date-field__label--required">*</span>
@@ -51,24 +51,20 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.date-field {
-  border: 1px solid var(--clr-border-grey);
-  border-radius: 5px;
-  font-size: 1rem;
-  width: 100%;
-  background: none;
-  position: relative;
-}
-
 .date-field__label {
   font-weight: 700;
   font-size: 0.8rem;
-  margin-left: 0.7rem;
+  margin-left: 0.1rem;
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   display: block;
 
   &--required {
     color: red;
   }
+}
+
+.mx-datepicker {
+  width: 100%;
 }
 </style>
