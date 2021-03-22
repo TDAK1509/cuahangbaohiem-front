@@ -69,5 +69,6 @@ export default Vue.extend({
   background: none;
   font-size: 1rem;
   padding: 0.5rem 0.7rem;
+  width: 100%;
 }
 </style>

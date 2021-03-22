@@ -1,6 +1,5 @@
 import MotorbikeInsuranceRequestModel, {
-  RawMotorbikeInsuranceRequest,
-  RawInsuranceFee
+  RawMotorbikeInsuranceRequest
 } from "@/models/motorbike-insurance-request";
 
 export enum MotorbikeType {
