@@ -44,6 +44,16 @@ describe("Tinh phi xe may", () => {
     cy.get("select").eq(2).select("20 triệu đồng/ người/ vụ");
     checkAddOnFeeValue(toVnd(0));
   });
+
+  it("When ticked addon, changing addon updates add on fee", () => {
+    cy.contains(
+      "Bảo hiểm tai nạn người trên xe, phụ xe, người ngồi trên xe"
+    ).click();
+
+    checkAddOnFeeValue(toVnd(20000));
+    cy.get("select").eq(2).select("20 triệu đồng/ người/ vụ");
+    checkAddOnFeeValue(toVnd(20000 * 2));
+  });
 });
 
 function checkInsuranceFeeValue(value) {
