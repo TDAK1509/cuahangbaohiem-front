@@ -67,7 +67,9 @@ export default Vue.extend({
       insuranceEndDate: "",
       addOn: "",
       insuranceFee: 0,
-      addOnFee: 0
+      addOnFee: 0,
+      paperSampleReceiverName: "",
+      paperSampleReceiverAddress: ""
     };
   },
 
@@ -93,7 +95,9 @@ export default Vue.extend({
         insuranceEndDate: this.insuranceEndDate,
         addOn: this.addOn,
         insuranceFee: this.insuranceFee,
-        addOnFee: this.addOnFee
+        addOnFee: this.addOnFee,
+        paperSampleReceiverName: this.paperSampleReceiverName,
+        paperSampleReceiverAddress: this.paperSampleReceiverAddress
       };
     }
   },
@@ -133,6 +137,9 @@ export default Vue.extend({
       this.address2 = values.address2;
       this.phone2 = values.phone2;
       this.email2 = values.email2;
+
+      this.paperSampleReceiverName = values.paperSampleReceiverName;
+      this.paperSampleReceiverAddress = values.paperSampleReceiverAddress;
 
       await controller.save(this.insuranceRequest);
       this.$router.push("xe-may/thanh-toan");

@@ -181,6 +181,8 @@ export interface Step2FormValues {
   address2: string;
   phone2: string;
   email2: string;
+  paperSampleReceiverName: string;
+  paperSampleReceiverAddress: string;
 }
 
 export default Vue.extend({
@@ -241,7 +243,9 @@ export default Vue.extend({
         frameNumber2: this.frameNumber2,
         address2: this.address2,
         phone2: this.phone2,
-        email2: this.email2
+        email2: this.email2,
+        paperSampleReceiverName: this.paperSampleReceiverName,
+        paperSampleReceiverAddress: this.paperSampleReceiverAddress
       };
       this.$emit("submit", step2FormValues);
     },

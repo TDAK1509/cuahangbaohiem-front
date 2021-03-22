@@ -39,6 +39,8 @@ export interface MotorbikeInsuranceRequest {
   addOn: string;
   insuranceFee: number;
   addOnFee: number;
+  paperSampleReceiverName: string;
+  paperSampleReceiverAddress: string;
 }
 
 export default class MotorbikeInsuranceRequestController {

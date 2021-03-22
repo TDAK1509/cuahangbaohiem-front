@@ -26,6 +26,8 @@ export interface RawMotorbikeInsuranceRequest {
   addOn: string;
   insuranceFee: number;
   addOnFee: number;
+  paperSampleReceiverName: string;
+  paperSampleReceiverAddress: string;
 }
 
 export default class MotorbikeInsuranceRequestModel {
