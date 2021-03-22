@@ -13,11 +13,6 @@
         @submit="submitStep2"
         @back="goToStep(1)"
       />
-      <FormStep4
-        v-show="currentStep === 3"
-        v-bind="insuranceRequest"
-        @submit="submitStep4"
-      />
     </div>
   </section>
 </template>
@@ -124,7 +119,7 @@ export default Vue.extend({
       this.goToStep(2);
     },
 
-    submitStep2(values: Step2FormValues) {
+    async submitStep2(values: Step2FormValues) {
       this.motorbikeOwner = values.motorbikeOwner;
       this.licensePlate = values.licensePlate;
       this.frameNumber = values.frameNumber;
@@ -138,16 +133,13 @@ export default Vue.extend({
       this.address2 = values.address2;
       this.phone2 = values.phone2;
       this.email2 = values.email2;
-      this.goToStep(3);
+
+      await controller.save(this.insuranceRequest);
+      this.$router.push("xe-may/thanh-toan");
     },
 
     goToStep(step: number) {
       this.currentStep = step;
-    },
-
-    async submitStep4() {
-      await controller.save(this.insuranceRequest);
-      this.$router.push("xe-may/thanh-toan");
     }
   }
 });
