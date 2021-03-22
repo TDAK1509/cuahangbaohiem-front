@@ -59,6 +59,16 @@ describe("Tinh phi xe may", () => {
     const totalFee = `${toVnd(66000)} + ${toVnd(20000)} = ${toVnd(86000)}`;
     checkTotalFeeValue(toVnd(totalFee));
   });
+
+  it("Choosing promotion add 1 year plus 1 year updates end date", () => {
+    const today = new Date();
+    checkEndDateValue(format(addYears(today, 1), "dd-MM-yyyy"));
+
+    cy.get("[data-cy=promotion-code]").find("input").type("banAnhKhuong");
+    cy.contains("Mua 1 năm tặng 1 năm ").click();
+
+    checkEndDateValue(format(addYears(today, 2), "dd-MM-yyyy"));
+  });
 });
 
 function checkInsuranceFeeValue(value) {

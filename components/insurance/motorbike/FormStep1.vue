@@ -89,7 +89,9 @@
 
       <FormSpacer />
 
-      <InputField v-model="promotionCode" label="Mã khuyến mãi:" />
+      <div data-cy="promotion-code">
+        <InputField v-model="promotionCode" label="Mã khuyến mãi:" />
+      </div>
 
       <FormSpacer />
 
