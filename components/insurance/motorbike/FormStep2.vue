@@ -165,8 +165,25 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+
+export interface Step2FormValues {
+  motorbikeOwner: string;
+  licensePlate: string;
+  frameNumber: string;
+  address: string;
+  phone: string;
+  email: string;
+  motorbikeOwner2: string;
+  licensePlate2: string;
+  frameNumber2: string;
+  address2: string;
+  phone2: string;
+  email2: string;
+}
+
+export default Vue.extend({
   name: "MotorbikeFormStep2",
 
   inheritAttrs: false,
@@ -199,7 +216,7 @@ export default {
   },
 
   watch: {
-    shouldShowTNDSPaperSample(shouldShow) {
+    shouldShowTNDSPaperSample(shouldShow: boolean) {
       if (shouldShow) {
         this.paperSampleReceiverName = this.motorbikeOwner;
         this.paperSampleReceiverAddress = this.address;
@@ -212,13 +229,19 @@ export default {
 
   methods: {
     submit() {
-      const step2FormValues = {
+      const step2FormValues: Step2FormValues = {
         motorbikeOwner: this.motorbikeOwner,
         licensePlate: this.licensePlate,
         frameNumber: this.frameNumber,
+        address: this.address,
+        phone: this.phone,
+        email: this.email,
         motorbikeOwner2: this.motorbikeOwner2,
         licensePlate2: this.licensePlate2,
-        frameNumber2: this.frameNumber2
+        frameNumber2: this.frameNumber2,
+        address2: this.address2,
+        phone2: this.phone2,
+        email2: this.email2
       };
       this.$emit("submit", step2FormValues);
     },
@@ -227,7 +250,7 @@ export default {
       this.$emit("back");
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

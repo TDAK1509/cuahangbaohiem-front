@@ -23,9 +23,15 @@ export interface MotorbikeInsuranceRequest {
   motorbikeType: string;
   licensePlate: string;
   frameNumber: string;
+  address: string;
+  phone: string;
+  email: string;
   motorbikeOwner2: string;
   licensePlate2: string;
   frameNumber2: string;
+  address2: string;
+  phone2: string;
+  email2: string;
   promotionCode: string;
   promotions: string[];
   insuranceStartDate: string;
@@ -33,13 +39,6 @@ export interface MotorbikeInsuranceRequest {
   addOn: string;
   insuranceFee: number;
   addOnFee: number;
-  buyerName: string;
-  buyerAddress: string;
-  buyerCity: string;
-  buyerDistrict: string;
-  buyerWard: string;
-  buyerPhone: string;
-  buyerEmail: string;
 }
 
 export default class MotorbikeInsuranceRequestController {

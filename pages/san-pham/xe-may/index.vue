@@ -13,13 +13,8 @@
         @submit="submitStep2"
         @back="goToStep(1)"
       />
-      <FormStep3
-        v-show="currentStep === 3"
-        @submit="submitStep3"
-        @back="goToStep(2)"
-      />
       <FormStep4
-        v-show="currentStep === 4"
+        v-show="currentStep === 3"
         v-bind="insuranceRequest"
         @submit="submitStep4"
       />
@@ -35,17 +30,9 @@ import MotorbikeInsuranceController, {
 } from "@/controller/motorbike-insurance/motorbike-insurance";
 
 import { Step1FormValues } from "@/components/insurance/motorbike/FormStep1.vue";
+import { Step2FormValues } from "@/components/insurance/motorbike/FormStep2.vue";
 
 const controller = new MotorbikeInsuranceController();
-
-interface Step2FormValues {
-  motorbikeOwner: string;
-  licensePlate: string;
-  frameNumber: string;
-  motorbikeOwner2: string;
-  licensePlate2: string;
-  frameNumber2: string;
-}
 
 interface Step3FormValues {
   buyerName: string;
@@ -69,9 +56,15 @@ export default Vue.extend({
       motorbikeType: "",
       licensePlate: "",
       frameNumber: "",
+      address: "",
+      phone: "",
+      email: "",
       motorbikeOwner2: "",
       licensePlate2: "",
       frameNumber2: "",
+      address2: "",
+      phone2: "",
+      email2: "",
       promotionCode: "",
       promotions: [] as string[],
       promotionHasBuy1BikeAdd1Bike: false,
@@ -79,14 +72,7 @@ export default Vue.extend({
       insuranceEndDate: "",
       addOn: "",
       insuranceFee: 0,
-      addOnFee: 0,
-      buyerName: "",
-      buyerAddress: "",
-      buyerCity: "",
-      buyerDistrict: "",
-      buyerWard: "",
-      buyerPhone: "",
-      buyerEmail: ""
+      addOnFee: 0
     };
   },
 
@@ -97,23 +83,22 @@ export default Vue.extend({
         motorbikeType: this.motorbikeType,
         licensePlate: this.licensePlate,
         frameNumber: this.frameNumber,
+        address: this.address,
+        phone: this.phone,
+        email: this.email,
         motorbikeOwner2: this.motorbikeOwner2,
         licensePlate2: this.licensePlate2,
         frameNumber2: this.frameNumber2,
+        address2: this.address2,
+        phone2: this.phone2,
+        email2: this.email2,
         promotionCode: this.promotionCode,
         promotions: this.promotions,
         insuranceStartDate: this.insuranceStartDate,
         insuranceEndDate: this.insuranceEndDate,
         addOn: this.addOn,
         insuranceFee: this.insuranceFee,
-        addOnFee: this.addOnFee,
-        buyerName: this.buyerName,
-        buyerAddress: this.buyerAddress,
-        buyerCity: this.buyerCity,
-        buyerDistrict: this.buyerDistrict,
-        buyerWard: this.buyerWard,
-        buyerPhone: this.buyerPhone,
-        buyerEmail: this.buyerEmail
+        addOnFee: this.addOnFee
       };
     }
   },
@@ -143,25 +128,21 @@ export default Vue.extend({
       this.motorbikeOwner = values.motorbikeOwner;
       this.licensePlate = values.licensePlate;
       this.frameNumber = values.frameNumber;
+      this.address = values.address;
+      this.phone = values.phone;
+      this.email = values.email;
+
       this.motorbikeOwner2 = values.motorbikeOwner2;
       this.licensePlate2 = values.licensePlate2;
       this.frameNumber2 = values.frameNumber2;
+      this.address2 = values.address2;
+      this.phone2 = values.phone2;
+      this.email2 = values.email2;
       this.goToStep(3);
     },
 
     goToStep(step: number) {
       this.currentStep = step;
-    },
-
-    submitStep3(values: Step3FormValues) {
-      this.buyerName = values.buyerName;
-      this.buyerAddress = values.buyerAddress;
-      this.buyerCity = values.buyerCity;
-      this.buyerDistrict = values.buyerDistrict;
-      this.buyerWard = values.buyerWard;
-      this.buyerPhone = values.buyerPhone;
-      this.buyerEmail = values.buyerEmail;
-      this.goToStep(4);
     },
 
     async submitStep4() {
