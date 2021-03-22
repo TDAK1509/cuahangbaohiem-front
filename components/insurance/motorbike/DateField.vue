@@ -56,7 +56,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .date-field__label {
   font-weight: 700;
   font-size: 0.8rem;
@@ -71,5 +71,9 @@ export default Vue.extend({
 
 .mx-datepicker {
   width: 100%;
+}
+
+.mx-input:disabled {
+  color: black !important;
 }
 </style>
