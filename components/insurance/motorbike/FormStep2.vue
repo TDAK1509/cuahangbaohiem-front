@@ -39,7 +39,29 @@
       <InputField
         v-model="frameNumber"
         label="Số khung"
-        placeholder="Nếu chưa có biển kmểm soát"
+        placeholder="Nếu chưa có biển kiểm soát"
+      />
+
+      <FormSpacer />
+
+      <InputField
+        v-model="phone"
+        label="Điện thoại:"
+        placeholder="0912345678"
+        required
+        type="tel"
+        pattern="[0][0-9]+"
+        title="Định dạng số điện thoại không đúng."
+      />
+
+      <FormSpacer />
+
+      <InputField
+        v-model="email"
+        required
+        type="email"
+        label="Email:"
+        placeholder="nguyenvana@gmail.com"
       />
 
       <FormSpacer />
@@ -120,7 +142,9 @@ export default {
       motorbikeOwner2: "",
       licensePlate2: "",
       frameNumber2: "",
-      address: ""
+      address: "",
+      phone: "",
+      email: ""
     };
   },
 

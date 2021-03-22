@@ -7,7 +7,7 @@
     <input
       :value="value"
       class="input-field__input"
-      type="text"
+      :type="type"
       :disabled="disabled"
       :placeholder="placeholder"
       :pattern="pattern"
@@ -36,6 +36,11 @@ export default Vue.extend({
       type: String,
       required: false,
       default: ""
+    },
+
+    type: {
+      type: String,
+      default: "text"
     },
 
     label: {
