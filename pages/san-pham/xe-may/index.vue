@@ -9,19 +9,9 @@
       <FormStep1 v-show="currentStep === 1" @submit="submitStep1" />
       <FormStep2
         v-show="currentStep === 2"
-        :is-promotion="isBuy1BikeAdd1Bike"
+        :is-promotion="promotionHasBuy1BikeAdd1Bike"
         @submit="submitStep2"
         @back="goToStep(1)"
-      />
-      <FormStep3
-        v-show="currentStep === 3"
-        @submit="submitStep3"
-        @back="goToStep(2)"
-      />
-      <FormStep4
-        v-show="currentStep === 4"
-        v-bind="insuranceRequest"
-        @submit="submitStep4"
       />
     </div>
   </section>
@@ -30,32 +20,14 @@
 <script lang="ts">
 import Vue from "vue";
 import MotorbikeInsuranceController, {
-  MotorbikeType,
-  InsuranceFee,
   Promotion,
   MotorbikeInsuranceRequest
 } from "@/controller/motorbike-insurance/motorbike-insurance";
 
+import { Step1FormValues } from "@/components/insurance/motorbike/FormStep1.vue";
+import { Step2FormValues } from "@/components/insurance/motorbike/FormStep2.vue";
+
 const controller = new MotorbikeInsuranceController();
-
-interface Step1FormValues {
-  promotionCode: string;
-  promotion: Promotion;
-  insuranceStartDate: string;
-  insuranceEndDate: string;
-  hasAddon: boolean;
-  motorbikeType: MotorbikeType;
-  insuranceFee: InsuranceFee;
-}
-
-interface Step2FormValues {
-  motorbikeOwner: string;
-  licensePlate: string;
-  frameNumber: string;
-  motorbikeOwner2: string;
-  licensePlate2: string;
-  frameNumber2: string;
-}
 
 interface Step3FormValues {
   buyerName: string;
@@ -79,22 +51,25 @@ export default Vue.extend({
       motorbikeType: "",
       licensePlate: "",
       frameNumber: "",
+      address: "",
+      phone: "",
+      email: "",
       motorbikeOwner2: "",
       licensePlate2: "",
       frameNumber2: "",
+      address2: "",
+      phone2: "",
+      email2: "",
       promotionCode: "",
-      promotion: null as null | Promotion,
+      promotions: [] as string[],
+      promotionHasBuy1BikeAdd1Bike: false,
       insuranceStartDate: "",
       insuranceEndDate: "",
-      hasAddon: false,
-      insuranceFee: { pvi: 0, baoViet: 0 } as InsuranceFee,
-      buyerName: "",
-      buyerAddress: "",
-      buyerCity: "",
-      buyerDistrict: "",
-      buyerWard: "",
-      buyerPhone: "",
-      buyerEmail: ""
+      addOn: "",
+      insuranceFee: 0,
+      addOnFee: 0,
+      paperSampleReceiverName: "",
+      paperSampleReceiverAddress: ""
     };
   },
 
@@ -105,75 +80,73 @@ export default Vue.extend({
         motorbikeType: this.motorbikeType,
         licensePlate: this.licensePlate,
         frameNumber: this.frameNumber,
+        address: this.address,
+        phone: this.phone,
+        email: this.email,
         motorbikeOwner2: this.motorbikeOwner2,
         licensePlate2: this.licensePlate2,
         frameNumber2: this.frameNumber2,
+        address2: this.address2,
+        phone2: this.phone2,
+        email2: this.email2,
         promotionCode: this.promotionCode,
-        promotion:
-          this.promotion !== null
-            ? controller.getPromotionLabel(this.promotion)
-            : "",
+        promotions: this.promotions,
         insuranceStartDate: this.insuranceStartDate,
         insuranceEndDate: this.insuranceEndDate,
-        hasAddon: this.hasAddon,
+        addOn: this.addOn,
         insuranceFee: this.insuranceFee,
-        buyerName: this.buyerName,
-        buyerAddress: this.buyerAddress,
-        buyerCity: this.buyerCity,
-        buyerDistrict: this.buyerDistrict,
-        buyerWard: this.buyerWard,
-        buyerPhone: this.buyerPhone,
-        buyerEmail: this.buyerEmail
+        addOnFee: this.addOnFee,
+        paperSampleReceiverName: this.paperSampleReceiverName,
+        paperSampleReceiverAddress: this.paperSampleReceiverAddress
       };
-    },
-
-    isBuy1BikeAdd1Bike(): boolean {
-      return this.promotion === Promotion.BUY_1_BIKE_ADD_1_BIKE;
     }
   },
 
   methods: {
     submitStep1(values: Step1FormValues) {
+      this.promotionHasBuy1BikeAdd1Bike = values.promotions.includes(
+        Promotion.BUY_1_BIKE_ADD_1_BIKE
+      );
+
       this.promotionCode = values.promotionCode;
-      this.promotion = values.promotion;
+      this.promotions = values.promotions.map((promotion) =>
+        controller.getPromotionLabel(promotion)
+      );
       this.insuranceStartDate = values.insuranceStartDate;
       this.insuranceEndDate = values.insuranceEndDate;
       this.motorbikeType = controller.getMotorbikeTypeLabel(
         values.motorbikeType
       );
+      this.addOn = values.addOn;
       this.insuranceFee = values.insuranceFee;
-      this.hasAddon = values.hasAddon;
+      this.addOnFee = values.addOnFee;
       this.goToStep(2);
     },
 
-    submitStep2(values: Step2FormValues) {
+    async submitStep2(values: Step2FormValues) {
       this.motorbikeOwner = values.motorbikeOwner;
       this.licensePlate = values.licensePlate;
       this.frameNumber = values.frameNumber;
+      this.address = values.address;
+      this.phone = values.phone;
+      this.email = values.email;
+
       this.motorbikeOwner2 = values.motorbikeOwner2;
       this.licensePlate2 = values.licensePlate2;
       this.frameNumber2 = values.frameNumber2;
-      this.goToStep(3);
+      this.address2 = values.address2;
+      this.phone2 = values.phone2;
+      this.email2 = values.email2;
+
+      this.paperSampleReceiverName = values.paperSampleReceiverName;
+      this.paperSampleReceiverAddress = values.paperSampleReceiverAddress;
+
+      await controller.save(this.insuranceRequest);
+      this.$router.push("xe-may/thanh-toan");
     },
 
     goToStep(step: number) {
       this.currentStep = step;
-    },
-
-    submitStep3(values: Step3FormValues) {
-      this.buyerName = values.buyerName;
-      this.buyerAddress = values.buyerAddress;
-      this.buyerCity = values.buyerCity;
-      this.buyerDistrict = values.buyerDistrict;
-      this.buyerWard = values.buyerWard;
-      this.buyerPhone = values.buyerPhone;
-      this.buyerEmail = values.buyerEmail;
-      this.goToStep(4);
-    },
-
-    async submitStep4() {
-      await controller.save(this.insuranceRequest);
-      this.$router.push("xe-may/thanh-toan");
     }
   }
 });

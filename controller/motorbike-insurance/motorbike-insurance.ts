@@ -1,11 +1,16 @@
 import MotorbikeInsuranceRequestModel, {
-  RawMotorbikeInsuranceRequest,
-  RawInsuranceFee
+  RawMotorbikeInsuranceRequest
 } from "@/models/motorbike-insurance-request";
 
 export enum MotorbikeType {
   UP_TO_50_CC,
   ABOVE_50_CC
+}
+
+export enum MotorbikeAddOn {
+  TEN,
+  TWENTY,
+  THIRTY
 }
 
 export enum Promotion {
@@ -18,27 +23,68 @@ export interface MotorbikeInsuranceRequest {
   motorbikeType: string;
   licensePlate: string;
   frameNumber: string;
+  address: string;
+  phone: string;
+  email: string;
   motorbikeOwner2: string;
   licensePlate2: string;
   frameNumber2: string;
+  address2: string;
+  phone2: string;
+  email2: string;
   promotionCode: string;
-  promotion: string;
+  promotions: string[];
   insuranceStartDate: string;
   insuranceEndDate: string;
-  hasAddon: boolean;
-  insuranceFee: RawInsuranceFee;
-  buyerName: string;
-  buyerAddress: string;
-  buyerCity: string;
-  buyerDistrict: string;
-  buyerWard: string;
-  buyerPhone: string;
-  buyerEmail: string;
+  addOn: string;
+  insuranceFee: number;
+  addOnFee: number;
+  paperSampleReceiverName: string;
+  paperSampleReceiverAddress: string;
 }
 
-export type InsuranceFee = RawInsuranceFee;
-
 export default class MotorbikeInsuranceRequestController {
+  private year = 0;
+  private motorbikeType = MotorbikeType.UP_TO_50_CC;
+  private addOn = MotorbikeAddOn.TEN;
+
+  public setYear(year: number) {
+    this.year = year;
+  }
+
+  public setMotorbike(motorbikeType: MotorbikeType) {
+    this.motorbikeType = motorbikeType;
+  }
+
+  public setAddon(addOn: MotorbikeAddOn) {
+    this.addOn = addOn;
+  }
+
+  public getInsuranceFee(): number {
+    return this.getOneYearInsuranceFee() * this.year;
+  }
+
+  public getAddOnFee(): number {
+    let addOnFee = 20000;
+
+    if (this.addOn === MotorbikeAddOn.TWENTY) {
+      addOnFee *= 2;
+    }
+
+    if (this.addOn === MotorbikeAddOn.THIRTY) {
+      addOnFee *= 3;
+    }
+
+    return addOnFee * this.year;
+  }
+
+  private getOneYearInsuranceFee(): number {
+    if (this.motorbikeType === MotorbikeType.ABOVE_50_CC) {
+      return 66000;
+    }
+    return 60500;
+  }
+
   public save(requestFromClient: MotorbikeInsuranceRequest) {
     const requestToSaveToServer: RawMotorbikeInsuranceRequest = {
       ...requestFromClient,
@@ -50,11 +96,11 @@ export default class MotorbikeInsuranceRequestController {
 
   public getMotorbikeTypeLabel(type: MotorbikeType): string {
     if (type === MotorbikeType.UP_TO_50_CC) {
-      return "Xe Mô tô 2 bánh dung tích từ 50cc trở xuống";
+      return "Dưới 50cc";
     }
 
     if (type === MotorbikeType.ABOVE_50_CC) {
-      return "Xe Mô tô 2 bánh dung tích trên 50cc";
+      return "Trên 50cc";
     }
 
     return "";
@@ -67,6 +113,22 @@ export default class MotorbikeInsuranceRequestController {
 
     if (promotion === Promotion.BUY_1_YEAR_ADD_1_YEAR) {
       return "Mua 1 năm tặng 1 năm";
+    }
+
+    return "";
+  }
+
+  public getAddOnLabel(addOn: MotorbikeAddOn): string {
+    if (addOn === MotorbikeAddOn.TEN) {
+      return "10 triệu đồng/ người/ vụ";
+    }
+
+    if (addOn === MotorbikeAddOn.TWENTY) {
+      return "20 triệu đồng/ người/ vụ";
+    }
+
+    if (addOn === MotorbikeAddOn.THIRTY) {
+      return "30 triệu đồng/ người/ vụ";
     }
 
     return "";

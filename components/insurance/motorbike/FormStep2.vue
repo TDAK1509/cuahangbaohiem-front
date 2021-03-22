@@ -1,98 +1,160 @@
 <template>
   <div>
     <FormStepTitle> BƯỚC 2: THÔNG TIN XE </FormStepTitle>
+
+    <div class="notification is-warning">
+      Giấy chứng nhận điện tử TNDS sẽ được gửi vào email và số điện thoại này.
+      Bạn vui lòng điền chính xác địa chỉ email và số điện thoại.
+    </div>
+
     <form @submit.prevent="submit">
-      <div class="field">
-        <label class="label">Tên chủ xe:</label>
-        <TextField
-          v-model="motorbikeOwner"
-          data-cy="owner-input"
-          required
-          pattern="[a-zA-Z\s]+"
-          title="Tên của bạn có số hoặc kí tự lạ."
-          placeholder="Ghi theo đăng ký"
-        />
-      </div>
+      <InputField
+        v-model="motorbikeOwner"
+        label="Tên chủ xe"
+        placeholder="Ghi theo đăng ký"
+        pattern="[a-zA-Z\s]+"
+        title="Tên của bạn có số hoặc kí tự lạ."
+        required
+      />
 
-      <div class="field">
-        <div class="control">
-          <label class="radio">
-            <input
-              v-model="shouldShowLicensePlate"
-              :value="true"
-              type="radio"
-            />
-            <strong>Biển kiểm soát</strong>
-          </label>
+      <FormSpacer />
 
-          <label class="radio">
-            <input
-              v-model="shouldShowLicensePlate"
-              :value="false"
-              type="radio"
-            />
-            <strong>Số khung</strong>
-          </label>
-        </div>
-      </div>
+      <InputField
+        v-model="address"
+        label="Địa chỉ"
+        placeholder="123 Trần Hưng Đạo, P. Bến Thành, Q.1, Tp. HCM"
+        required
+      />
 
-      <TextField
-        v-if="shouldShowLicensePlate"
+      <FormSpacer />
+
+      <InputField
         v-model="licensePlate"
-        data-cy="license-plate-input"
-        required
+        label="Biển kiểm soát"
+        placeholder="55Z5-9999"
       />
 
-      <TextField
-        v-else
+      <FormSpacer />
+
+      <InputField
         v-model="frameNumber"
-        data-cy="frame-number-input"
-        required
+        label="Số khung"
+        placeholder="Nếu chưa có biển kiểm soát"
       />
+
+      <FormSpacer />
+
+      <InputField
+        v-model="phone"
+        label="Điện thoại:"
+        placeholder="0912345678"
+        required
+        type="tel"
+        pattern="[0][0-9]+"
+        title="Định dạng số điện thoại không đúng."
+      />
+
+      <FormSpacer />
+
+      <InputField
+        v-model="email"
+        required
+        type="email"
+        label="Email:"
+        placeholder="nguyenvana@gmail.com"
+      />
+
+      <FormSpacer />
 
       <template v-if="isPromotion">
-        <h1 class="form-step-2__subtitle">Thông tin xe được khuyến mãi:</h1>
+        <h4 class="form-step-2__promotion-title has-text-danger">
+          Thông tin xe được khuyến mãi
+        </h4>
 
-        <div class="field">
-          <label class="label">Tên chủ xe:</label>
-          <TextField
-            v-model="motorbikeOwner2"
-            required
-            pattern="[a-zA-Z\s]+"
-            title="Tên của bạn có số hoặc kí tự lạ."
-            placeholder="Ghi theo đăng ký"
-          />
-        </div>
-
-        <div class="field">
-          <div class="control">
-            <label class="radio">
-              <input
-                v-model="shouldShowLicensePlate2"
-                :value="true"
-                type="radio"
-              />
-              <strong>Biển kiểm soát</strong>
-            </label>
-
-            <label class="radio">
-              <input
-                v-model="shouldShowLicensePlate2"
-                :value="false"
-                type="radio"
-              />
-              <strong>Số khung</strong>
-            </label>
-          </div>
-        </div>
-
-        <TextField
-          v-if="shouldShowLicensePlate2"
-          v-model="licensePlate2"
+        <InputField
+          v-model="motorbikeOwner2"
+          label="Tên chủ xe"
+          placeholder="Ghi theo đăng ký"
+          pattern="[a-zA-Z\s]+"
+          title="Tên của bạn có số hoặc kí tự lạ."
           required
         />
 
-        <TextField v-else v-model="frameNumber2" required />
+        <FormSpacer />
+
+        <InputField
+          v-model="address2"
+          label="Địa chỉ"
+          placeholder="123 Trần Hưng Đạo, P. Bến Thành, Q.1, Tp. HCM"
+          required
+        />
+
+        <FormSpacer />
+
+        <InputField
+          v-model="licensePlate2"
+          label="Biển kiểm soát"
+          placeholder="55Z5-9999"
+        />
+
+        <FormSpacer />
+
+        <InputField
+          v-model="frameNumber2"
+          label="Số khung"
+          placeholder="Nếu chưa có biển kiểm soát"
+        />
+
+        <FormSpacer />
+
+        <InputField
+          v-model="phone2"
+          label="Điện thoại:"
+          placeholder="0912345678"
+          required
+          type="tel"
+          pattern="[0][0-9]+"
+          title="Định dạng số điện thoại không đúng."
+        />
+
+        <FormSpacer />
+
+        <InputField
+          v-model="email2"
+          required
+          type="email"
+          label="Email:"
+          placeholder="nguyenvana@gmail.com"
+        />
+
+        <FormSpacer />
+      </template>
+
+      <div class="control">
+        <label class="checkbox">
+          <input v-model="shouldShowTNDSPaperSample" type="checkbox" />
+          Tôi muốn nhận chứng nhận TNDS bản giấy
+        </label>
+      </div>
+
+      <FormSpacer />
+
+      <template v-if="shouldShowTNDSPaperSample">
+        <InputField
+          v-model="paperSampleReceiverName"
+          required
+          label="Tên người nhận"
+        />
+
+        <FormSpacer />
+
+        <InputField
+          v-model="paperSampleReceiverAddress"
+          required
+          label="Địa chỉ"
+        />
+
+        <FormSpacer />
       </template>
 
       <div class="is-flex is-justify-content-space-between">
@@ -103,8 +165,27 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+
+export interface Step2FormValues {
+  motorbikeOwner: string;
+  licensePlate: string;
+  frameNumber: string;
+  address: string;
+  phone: string;
+  email: string;
+  motorbikeOwner2: string;
+  licensePlate2: string;
+  frameNumber2: string;
+  address2: string;
+  phone2: string;
+  email2: string;
+  paperSampleReceiverName: string;
+  paperSampleReceiverAddress: string;
+}
+
+export default Vue.extend({
   name: "MotorbikeFormStep2",
 
   inheritAttrs: false,
@@ -118,32 +199,53 @@ export default {
 
   data() {
     return {
-      shouldShowLicensePlate: true,
       motorbikeOwner: "",
       licensePlate: "",
       frameNumber: "",
-      shouldShowLicensePlate2: true,
+      address: "",
+      phone: "",
+      email: "",
       motorbikeOwner2: "",
       licensePlate2: "",
-      frameNumber2: ""
+      frameNumber2: "",
+      address2: "",
+      phone2: "",
+      email2: "",
+      shouldShowTNDSPaperSample: false,
+      paperSampleReceiverName: "",
+      paperSampleReceiverAddress: ""
     };
   },
 
-  computed: {
-    shouldShowFrameNumber() {
-      return !this.shouldShowLicensePlate;
+  watch: {
+    shouldShowTNDSPaperSample(shouldShow: boolean) {
+      if (shouldShow) {
+        this.paperSampleReceiverName = this.motorbikeOwner;
+        this.paperSampleReceiverAddress = this.address;
+      } else {
+        this.paperSampleReceiverName = "";
+        this.paperSampleReceiverAddress = "";
+      }
     }
   },
 
   methods: {
     submit() {
-      const step2FormValues = {
+      const step2FormValues: Step2FormValues = {
         motorbikeOwner: this.motorbikeOwner,
         licensePlate: this.licensePlate,
         frameNumber: this.frameNumber,
+        address: this.address,
+        phone: this.phone,
+        email: this.email,
         motorbikeOwner2: this.motorbikeOwner2,
         licensePlate2: this.licensePlate2,
-        frameNumber2: this.frameNumber2
+        frameNumber2: this.frameNumber2,
+        address2: this.address2,
+        phone2: this.phone2,
+        email2: this.email2,
+        paperSampleReceiverName: this.paperSampleReceiverName,
+        paperSampleReceiverAddress: this.paperSampleReceiverAddress
       };
       this.$emit("submit", step2FormValues);
     },
@@ -152,14 +254,14 @@ export default {
       this.$emit("back");
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>
-.form-step-2__subtitle {
+.form-step-2__promotion-title {
   font-weight: 700;
   padding: 1em 0;
   font-size: 1.2rem;
-  color: var(--clr-primary);
+  text-align: center;
 }
 </style>
