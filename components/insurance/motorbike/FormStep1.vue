@@ -79,11 +79,13 @@
 
       <FormSpacer />
 
-      <InputField
-        label="Tổng phí thanh toán"
-        :value="`${insuranceFeeString} + ${addOnFeeString} = ${totalFee}`"
-        disabled
-      />
+      <div data-cy="total-fee">
+        <InputField
+          label="Tổng phí thanh toán"
+          :value="totalFeeString"
+          disabled
+        />
+      </div>
 
       <FormSpacer />
 
@@ -243,6 +245,14 @@ export default Vue.extend({
 
     totalFee(): string {
       return this?.$options?.filters?.toVnd(this.insuranceFee + this.addOnFee);
+    },
+
+    totalFeeString(): string {
+      if (this.hasAddOn) {
+        return `${this.insuranceFeeString} + ${this.addOnFeeString} = ${this.totalFee}`;
+      }
+
+      return this.insuranceFeeString;
     }
   },
 
