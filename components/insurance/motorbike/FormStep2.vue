@@ -66,6 +66,70 @@
 
       <FormSpacer />
 
+      <template v-if="isPromotion">
+        <h4 class="form-step-2__promotion-title has-text-danger">
+          Thông tin xe được khuyến mãi
+        </h4>
+
+        <InputField
+          v-model="motorbikeOwner2"
+          label="Tên chủ xe"
+          placeholder="Ghi theo đăng ký"
+          pattern="[a-zA-Z\s]+"
+          title="Tên của bạn có số hoặc kí tự lạ."
+          required
+        />
+
+        <FormSpacer />
+
+        <InputField
+          v-model="address2"
+          label="Địa chỉ"
+          placeholder="123 Trần Hưng Đạo, P. Bến Thành, Q.1, Tp. HCM"
+          required
+        />
+
+        <FormSpacer />
+
+        <InputField
+          v-model="licensePlate2"
+          label="Biển kiểm soát"
+          placeholder="55Z5-9999"
+        />
+
+        <FormSpacer />
+
+        <InputField
+          v-model="frameNumber2"
+          label="Số khung"
+          placeholder="Nếu chưa có biển kiểm soát"
+        />
+
+        <FormSpacer />
+
+        <InputField
+          v-model="phone2"
+          label="Điện thoại:"
+          placeholder="0912345678"
+          required
+          type="tel"
+          pattern="[0][0-9]+"
+          title="Định dạng số điện thoại không đúng."
+        />
+
+        <FormSpacer />
+
+        <InputField
+          v-model="email2"
+          required
+          type="email"
+          label="Email:"
+          placeholder="nguyenvana@gmail.com"
+        />
+
+        <FormSpacer />
+      </template>
+
       <div class="control">
         <label class="checkbox">
           <input v-model="shouldShowTNDSPaperSample" type="checkbox" />
@@ -116,27 +180,22 @@ export default {
 
   data() {
     return {
-      shouldShowLicensePlate: true,
       motorbikeOwner: "",
       licensePlate: "",
       frameNumber: "",
-      shouldShowLicensePlate2: true,
-      motorbikeOwner2: "",
-      licensePlate2: "",
-      frameNumber2: "",
       address: "",
       phone: "",
       email: "",
+      motorbikeOwner2: "",
+      licensePlate2: "",
+      frameNumber2: "",
+      address2: "",
+      phone2: "",
+      email2: "",
       shouldShowTNDSPaperSample: false,
       paperSampleReceiverName: "",
       paperSampleReceiverAddress: ""
     };
-  },
-
-  computed: {
-    shouldShowFrameNumber() {
-      return !this.shouldShowLicensePlate;
-    }
   },
 
   watch: {
@@ -172,10 +231,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-step-2__subtitle {
+.form-step-2__promotion-title {
   font-weight: 700;
   padding: 1em 0;
   font-size: 1.2rem;
-  color: var(--clr-primary);
+  text-align: center;
 }
 </style>
