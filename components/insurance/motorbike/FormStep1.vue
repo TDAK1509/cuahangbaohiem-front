@@ -33,11 +33,13 @@
 
       <FormSpacer />
 
-      <InputField
-        label="Phí bảo hiểm TNDS bắt buộc"
-        :value="insuranceFeeString"
-        disabled
-      />
+      <div data-cy="insurance-fee">
+        <InputField
+          label="Phí bảo hiểm TNDS bắt buộc"
+          :value="insuranceFeeString"
+          disabled
+        />
+      </div>
 
       <FormSpacer />
 
