@@ -21,15 +21,19 @@
 
       <FormSpacer />
 
-      <DateField
-        v-model="insuranceStartDate"
-        label="Ngày hiệu lực"
-        :disabled-date="dateIsNotWithin2MonthsFromToday"
-      />
+      <div data-cy="start-date">
+        <DateField
+          v-model="insuranceStartDate"
+          label="Ngày hiệu lực"
+          :disabled-date="dateIsNotWithin2MonthsFromToday"
+        />
+      </div>
 
       <FormSpacer />
 
-      <DateField v-model="insuranceEndDate" label="Ngày kết thúc" disabled />
+      <div data-cy="end-date">
+        <DateField v-model="insuranceEndDate" label="Ngày kết thúc" disabled />
+      </div>
 
       <FormSpacer />
 
@@ -125,7 +129,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { addMonths, format } from "date-fns";
+import { addMonths, addDays, format } from "date-fns";
 
 import mixinMoneyFilter from "@/utils/mixins/money-filters";
 
@@ -286,8 +290,9 @@ export default Vue.extend({
     },
 
     dateIsNotWithin2MonthsFromToday(date: Date): boolean {
+      const yesterday = addDays(new Date(), -1);
       const nextTwoMonthsDate = addMonths(new Date(), 1);
-      return date < new Date() || date > nextTwoMonthsDate;
+      return date < yesterday || date > nextTwoMonthsDate;
     },
 
     checkPromotionCodeValidity() {

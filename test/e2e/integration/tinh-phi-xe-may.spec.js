@@ -1,3 +1,5 @@
+import { addYears, addDays, format } from "date-fns";
+
 describe("Tinh phi xe may", () => {
   beforeEach(() => {
     cy.visit("/san-pham/xe-may");
@@ -20,6 +22,22 @@ describe("Tinh phi xe may", () => {
     cy.get("select").eq(1).select("3 năm");
     checkInsuranceFeeValue(toVnd(60500 * 3));
   });
+
+  it("Change start date or year update end date", () => {
+    const today = new Date();
+
+    checkEndDateValue(format(addYears(today, 1), "dd-MM-yyyy"));
+
+    cy.get("select").eq(1).select("2 năm");
+    checkEndDateValue(format(addYears(today, 2), "dd-MM-yyyy"));
+
+    cy.get("select").eq(1).select("1 năm");
+    checkEndDateValue(format(addYears(today, 1), "dd-MM-yyyy"));
+
+    selectTomorrowForInsuranceStartDate();
+    const tomorrow = addDays(today, 1);
+    checkEndDateValue(format(addYears(tomorrow, 1), "dd-MM-yyyy"));
+  });
 });
 
 function checkInsuranceFeeValue(value) {
@@ -31,4 +49,13 @@ function toVnd(money) {
     style: "currency",
     currency: "VND"
   });
+}
+
+function checkEndDateValue(value) {
+  cy.get("[data-cy=end-date]").find("input").should("have.value", value);
+}
+
+function selectTomorrowForInsuranceStartDate() {
+  cy.get("[data-cy=start-date]").find("input").click();
+  cy.get("td.cell.active ~ td").first().click();
 }
