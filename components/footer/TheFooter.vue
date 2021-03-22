@@ -1,5 +1,5 @@
 <template>
-  <footer class="the-footer footer has-background-dark has-text-white">
+  <footer class="the-footer has-background-dark has-text-white">
     <div class="columns">
       <FooterFirstColumn />
       <FooterSecondColumn />
@@ -16,6 +16,7 @@ export default {
 
 <style lang="scss" scoped>
 .the-footer {
+  padding: 1rem;
   margin-top: auto;
 }
 </style>
