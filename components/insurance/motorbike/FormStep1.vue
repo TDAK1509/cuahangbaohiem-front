@@ -272,6 +272,13 @@ export default Vue.extend({
     },
     promotionCode() {
       this.checkPromotionCodeValidity();
+    },
+    promotions() {
+      if (this.promotions.includes(Promotion.BUY_1_YEAR_ADD_1_YEAR)) {
+        this.insuranceYear = (parseInt(this.insuranceYear) + 1).toString();
+      } else {
+        this.insuranceYear = (parseInt(this.insuranceYear) - 1).toString();
+      }
     }
   },
 
