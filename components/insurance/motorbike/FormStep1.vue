@@ -69,11 +69,13 @@
 
       <FormSpacer />
 
-      <InputField
-        label="Phí BH tai nạn lái xe, phụ xe, người ngồi trên xe"
-        :value="addOnFeeString"
-        disabled
-      />
+      <div data-cy="add-on-fee">
+        <InputField
+          label="Phí BH tai nạn lái xe, phụ xe, người ngồi trên xe"
+          :value="addOnFeeString"
+          disabled
+        />
+      </div>
 
       <FormSpacer />
 

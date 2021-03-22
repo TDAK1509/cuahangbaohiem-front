@@ -38,6 +38,12 @@ describe("Tinh phi xe may", () => {
     const tomorrow = addDays(today, 1);
     checkEndDateValue(format(addYears(tomorrow, 1), "dd-MM-yyyy"));
   });
+
+  it("Without ticking addon, changing addon makes no effect", () => {
+    checkAddOnFeeValue(toVnd(0));
+    cy.get("select").eq(2).select("20 triệu đồng/ người/ vụ");
+    checkAddOnFeeValue(toVnd(0));
+  });
 });
 
 function checkInsuranceFeeValue(value) {
@@ -58,4 +64,8 @@ function checkEndDateValue(value) {
 function selectTomorrowForInsuranceStartDate() {
   cy.get("[data-cy=start-date]").find("input").click();
   cy.get("td.cell.active ~ td").first().click();
+}
+
+function checkAddOnFeeValue(value) {
+  cy.get("[data-cy=add-on-fee]").find("input").should("have.value", value);
 }
