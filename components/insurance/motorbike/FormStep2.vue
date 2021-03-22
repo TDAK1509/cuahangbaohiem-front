@@ -28,41 +28,21 @@
 
       <FormSpacer />
 
-      <div class="field">
-        <div class="control">
-          <label class="radio">
-            <input
-              v-model="shouldShowLicensePlate"
-              :value="true"
-              type="radio"
-            />
-            <strong>Biển kiểm soát</strong>
-          </label>
-
-          <label class="radio">
-            <input
-              v-model="shouldShowLicensePlate"
-              :value="false"
-              type="radio"
-            />
-            <strong>Số khung</strong>
-          </label>
-        </div>
-      </div>
-
-      <TextField
-        v-if="shouldShowLicensePlate"
+      <InputField
         v-model="licensePlate"
-        data-cy="license-plate-input"
-        required
+        label="Biển kiểm soát"
+        placeholder="55Z5-9999"
       />
 
-      <TextField
-        v-else
+      <FormSpacer />
+
+      <InputField
         v-model="frameNumber"
-        data-cy="frame-number-input"
-        required
+        label="Số khung"
+        placeholder="Nếu chưa có biển kmểm soát"
       />
+
+      <FormSpacer />
 
       <template v-if="isPromotion">
         <h1 class="form-step-2__subtitle">Thông tin xe được khuyến mãi:</h1>
