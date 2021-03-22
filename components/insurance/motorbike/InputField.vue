@@ -54,8 +54,8 @@ export default Vue.extend({
     },
 
     pattern: {
-      type: String,
-      default: ""
+      type: [String, null],
+      default: null
     },
 
     title: {

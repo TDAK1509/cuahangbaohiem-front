@@ -66,49 +66,31 @@
 
       <FormSpacer />
 
-      <template v-if="isPromotion">
-        <h1 class="form-step-2__subtitle">Thông tin xe được khuyến mãi:</h1>
+      <div class="control">
+        <label class="checkbox">
+          <input v-model="shouldShowTNDSPaperSample" type="checkbox" />
+          Tôi muốn nhận chứng nhận TNDS bản giấy
+        </label>
+      </div>
 
-        <div class="field">
-          <label class="label">Tên chủ xe:</label>
-          <TextField
-            v-model="motorbikeOwner2"
-            required
-            pattern="[a-zA-Z\s]+"
-            title="Tên của bạn có số hoặc kí tự lạ."
-            placeholder="Ghi theo đăng ký"
-          />
-        </div>
+      <FormSpacer />
 
-        <div class="field">
-          <div class="control">
-            <label class="radio">
-              <input
-                v-model="shouldShowLicensePlate2"
-                :value="true"
-                type="radio"
-              />
-              <strong>Biển kiểm soát</strong>
-            </label>
-
-            <label class="radio">
-              <input
-                v-model="shouldShowLicensePlate2"
-                :value="false"
-                type="radio"
-              />
-              <strong>Số khung</strong>
-            </label>
-          </div>
-        </div>
-
-        <TextField
-          v-if="shouldShowLicensePlate2"
-          v-model="licensePlate2"
+      <template v-if="shouldShowTNDSPaperSample">
+        <InputField
+          v-model="paperSampleReceiverName"
           required
+          label="Tên người nhận"
         />
 
-        <TextField v-else v-model="frameNumber2" required />
+        <FormSpacer />
+
+        <InputField
+          v-model="paperSampleReceiverAddress"
+          required
+          label="Địa chỉ"
+        />
+
+        <FormSpacer />
       </template>
 
       <div class="is-flex is-justify-content-space-between">
@@ -144,13 +126,28 @@ export default {
       frameNumber2: "",
       address: "",
       phone: "",
-      email: ""
+      email: "",
+      shouldShowTNDSPaperSample: false,
+      paperSampleReceiverName: "",
+      paperSampleReceiverAddress: ""
     };
   },
 
   computed: {
     shouldShowFrameNumber() {
       return !this.shouldShowLicensePlate;
+    }
+  },
+
+  watch: {
+    shouldShowTNDSPaperSample(shouldShow) {
+      if (shouldShow) {
+        this.paperSampleReceiverName = this.motorbikeOwner;
+        this.paperSampleReceiverAddress = this.address;
+      } else {
+        this.paperSampleReceiverName = "";
+        this.paperSampleReceiverAddress = "";
+      }
     }
   },
 
