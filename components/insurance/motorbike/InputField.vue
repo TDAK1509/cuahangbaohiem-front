@@ -7,12 +7,7 @@
     <input
       :value="value"
       class="input-field__input"
-      :type="type"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      :pattern="pattern"
-      :required="required"
-      :title="title"
+      v-bind="inputAttributes"
       @input="$emit('input', $event.target.value)"
     />
   </FormField>
@@ -54,8 +49,8 @@ export default Vue.extend({
     },
 
     pattern: {
-      type: [String, null],
-      default: null
+      type: String,
+      default: ""
     },
 
     title: {
@@ -71,6 +66,24 @@ export default Vue.extend({
     disabled: {
       type: Boolean,
       default: false
+    }
+  },
+
+  computed: {
+    inputAttributes() {
+      const attrs = {
+        type: this.type,
+        disabled: this.disabled,
+        placeholder: this.placeholder,
+        required: this.required,
+        title: this.title
+      };
+
+      if (this.pattern) {
+        Object.assign({ pattern: this.pattern }, attrs);
+      }
+
+      return attrs;
     }
   }
 });
