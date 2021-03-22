@@ -147,6 +147,7 @@ export default Vue.extend({
 
     goToStep(step: number) {
       this.currentStep = step;
+      (document.querySelector("html") as Element).scrollTop = 0;
     }
   }
 });
