@@ -8,9 +8,9 @@ export enum MotorbikeType {
 }
 
 export enum MotorbikeAddOn {
-  TEN,
-  TWENTY,
-  THIRTY
+  TEN = "10",
+  TWENTY = "20",
+  THIRTY = "30"
 }
 
 export enum Promotion {
