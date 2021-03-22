@@ -9,7 +9,7 @@
 
     <form @submit.prevent="submit">
       <InputField
-        v-model="motorbikeOwner"
+        v-model.trim="motorbikeOwner"
         label="Tên chủ xe"
         placeholder="Ghi theo đăng ký"
         pattern="[a-zA-Z\s]+"
@@ -20,7 +20,7 @@
       <FormSpacer />
 
       <InputField
-        v-model="address"
+        v-model.trim="address"
         label="Địa chỉ"
         placeholder="123 Trần Hưng Đạo, P. Bến Thành, Q.1, Tp. HCM"
         required
@@ -29,7 +29,7 @@
       <FormSpacer />
 
       <InputField
-        v-model="licensePlate"
+        v-model.trim="licensePlate"
         label="Biển kiểm soát"
         placeholder="55Z5-9999"
       />
@@ -37,7 +37,7 @@
       <FormSpacer />
 
       <InputField
-        v-model="frameNumber"
+        v-model.trim="frameNumber"
         label="Số khung"
         placeholder="Nếu chưa có biển kiểm soát"
       />
@@ -45,7 +45,7 @@
       <FormSpacer />
 
       <InputField
-        v-model="phone"
+        v-model.trim="phone"
         label="Điện thoại:"
         placeholder="0912345678"
         required
@@ -57,7 +57,7 @@
       <FormSpacer />
 
       <InputField
-        v-model="email"
+        v-model.trim="email"
         required
         type="email"
         label="Email:"
@@ -72,7 +72,7 @@
         </h4>
 
         <InputField
-          v-model="motorbikeOwner2"
+          v-model.trim="motorbikeOwner2"
           label="Tên chủ xe"
           placeholder="Ghi theo đăng ký"
           pattern="[a-zA-Z\s]+"
@@ -83,7 +83,7 @@
         <FormSpacer />
 
         <InputField
-          v-model="address2"
+          v-model.trim="address2"
           label="Địa chỉ"
           placeholder="123 Trần Hưng Đạo, P. Bến Thành, Q.1, Tp. HCM"
           required
@@ -92,7 +92,7 @@
         <FormSpacer />
 
         <InputField
-          v-model="licensePlate2"
+          v-model.trim="licensePlate2"
           label="Biển kiểm soát"
           placeholder="55Z5-9999"
         />
@@ -100,7 +100,7 @@
         <FormSpacer />
 
         <InputField
-          v-model="frameNumber2"
+          v-model.trim="frameNumber2"
           label="Số khung"
           placeholder="Nếu chưa có biển kiểm soát"
         />
@@ -108,7 +108,7 @@
         <FormSpacer />
 
         <InputField
-          v-model="phone2"
+          v-model.trim="phone2"
           label="Điện thoại:"
           placeholder="0912345678"
           required
@@ -120,7 +120,7 @@
         <FormSpacer />
 
         <InputField
-          v-model="email2"
+          v-model.trim="email2"
           required
           type="email"
           label="Email:"
@@ -141,7 +141,7 @@
 
       <template v-if="shouldShowTNDSPaperSample">
         <InputField
-          v-model="paperSampleReceiverName"
+          v-model.trim="paperSampleReceiverName"
           required
           label="Tên người nhận"
         />
@@ -149,7 +149,7 @@
         <FormSpacer />
 
         <InputField
-          v-model="paperSampleReceiverAddress"
+          v-model.trim="paperSampleReceiverAddress"
           required
           label="Địa chỉ"
         />
