@@ -5,7 +5,6 @@ on:
 
 jobs:
   e2e-test:
-    if: ${{ 1 == 2 }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout

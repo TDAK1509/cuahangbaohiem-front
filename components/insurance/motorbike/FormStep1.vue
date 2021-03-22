@@ -21,23 +21,29 @@
 
       <FormSpacer />
 
-      <DateField
-        v-model="insuranceStartDate"
-        label="Ngày hiệu lực"
-        :disabled-date="dateIsNotWithin2MonthsFromToday"
-      />
+      <div data-cy="start-date">
+        <DateField
+          v-model="insuranceStartDate"
+          label="Ngày hiệu lực"
+          :disabled-date="dateIsNotWithin2MonthsFromToday"
+        />
+      </div>
 
       <FormSpacer />
 
-      <DateField v-model="insuranceEndDate" label="Ngày kết thúc" disabled />
+      <div data-cy="end-date">
+        <DateField v-model="insuranceEndDate" label="Ngày kết thúc" disabled />
+      </div>
 
       <FormSpacer />
 
-      <InputField
-        label="Phí bảo hiểm TNDS bắt buộc"
-        :value="insuranceFeeString"
-        disabled
-      />
+      <div data-cy="insurance-fee">
+        <InputField
+          label="Phí bảo hiểm TNDS bắt buộc"
+          :value="insuranceFeeString"
+          disabled
+        />
+      </div>
 
       <FormSpacer />
 
@@ -63,23 +69,29 @@
 
       <FormSpacer />
 
-      <InputField
-        label="Phí BH tai nạn lái xe, phụ xe, người ngồi trên xe"
-        :value="addOnFeeString"
-        disabled
-      />
+      <div data-cy="add-on-fee">
+        <InputField
+          label="Phí BH tai nạn lái xe, phụ xe, người ngồi trên xe"
+          :value="addOnFeeString"
+          disabled
+        />
+      </div>
 
       <FormSpacer />
 
-      <InputField
-        label="Tổng phí thanh toán"
-        :value="`${insuranceFeeString} + ${addOnFeeString} = ${totalFee}`"
-        disabled
-      />
+      <div data-cy="total-fee">
+        <InputField
+          label="Tổng phí thanh toán"
+          :value="totalFeeString"
+          disabled
+        />
+      </div>
 
       <FormSpacer />
 
-      <InputField v-model="promotionCode" label="Mã khuyến mãi:" />
+      <div data-cy="promotion-code">
+        <InputField v-model="promotionCode" label="Mã khuyến mãi:" />
+      </div>
 
       <FormSpacer />
 
@@ -87,11 +99,10 @@
         <label class="label">Khuyến mãi:</label>
 
         <div class="control">
-          {{ promotion }}
           <p v-if="insuranceYear === '1'">
             <label class="checkbox">
               <input
-                v-model="promotion"
+                v-model="promotions"
                 :value="promotionValues.BUY_1_YEAR_ADD_1_YEAR"
                 name="promotion"
                 type="checkbox"
@@ -103,7 +114,7 @@
           <p>
             <label class="checkbox">
               <input
-                v-model="promotion"
+                v-model="promotions"
                 :value="promotionValues.BUY_1_BIKE_ADD_1_BIKE"
                 name="promotion"
                 type="checkbox"
@@ -123,7 +134,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { addMonths, format } from "date-fns";
+import { addMonths, addDays, format } from "date-fns";
 
 import mixinMoneyFilter from "@/utils/mixins/money-filters";
 
@@ -235,6 +246,14 @@ export default Vue.extend({
 
     totalFee(): string {
       return this?.$options?.filters?.toVnd(this.insuranceFee + this.addOnFee);
+    },
+
+    totalFeeString(): string {
+      if (this.hasAddOn) {
+        return `${this.insuranceFeeString} + ${this.addOnFeeString} = ${this.totalFee}`;
+      }
+
+      return this.insuranceFeeString;
     }
   },
 
@@ -253,6 +272,13 @@ export default Vue.extend({
     },
     promotionCode() {
       this.checkPromotionCodeValidity();
+    },
+    promotions() {
+      if (this.promotions.includes(Promotion.BUY_1_YEAR_ADD_1_YEAR)) {
+        this.insuranceYear = (parseInt(this.insuranceYear) + 1).toString();
+      } else {
+        this.insuranceYear = (parseInt(this.insuranceYear) - 1).toString();
+      }
     }
   },
 
@@ -284,8 +310,9 @@ export default Vue.extend({
     },
 
     dateIsNotWithin2MonthsFromToday(date: Date): boolean {
+      const yesterday = addDays(new Date(), -1);
       const nextTwoMonthsDate = addMonths(new Date(), 1);
-      return date < new Date() || date > nextTwoMonthsDate;
+      return date < yesterday || date > nextTwoMonthsDate;
     },
 
     checkPromotionCodeValidity() {

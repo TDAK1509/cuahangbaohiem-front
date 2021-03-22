@@ -3,14 +3,14 @@ import MotorbikeInsuranceRequestModel, {
 } from "@/models/motorbike-insurance-request";
 
 export enum MotorbikeType {
-  UP_TO_50_CC,
-  ABOVE_50_CC
+  UP_TO_50_CC = "lt50cc",
+  ABOVE_50_CC = "gt50cc"
 }
 
 export enum MotorbikeAddOn {
-  TEN,
-  TWENTY,
-  THIRTY
+  TEN = "10",
+  TWENTY = "20",
+  THIRTY = "30"
 }
 
 export enum Promotion {
