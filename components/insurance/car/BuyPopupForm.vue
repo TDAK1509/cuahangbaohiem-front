@@ -14,7 +14,7 @@
       >
         <TextField
           ref="name"
-          v-model="name"
+          v-model.trim="name"
           data-cy="name"
           label="Tên của bạn"
           pattern="^[a-zA-Z\s]*$"
@@ -22,7 +22,7 @@
         />
 
         <TextField
-          v-model="email"
+          v-model.trim="email"
           data-cy="email"
           label="Email của bạn"
           type="email"
@@ -31,7 +31,7 @@
         />
 
         <TextField
-          v-model="phone"
+          v-model.trim="phone"
           data-cy="phone"
           label="Số điện thoại của bạn"
           type="tel"
@@ -44,7 +44,7 @@
           <label class="label">Lời nhắn của bạn</label>
           <div class="control">
             <textarea
-              v-model="note"
+              v-model.trim="note"
               data-cy="note"
               class="textarea"
               name="note"
