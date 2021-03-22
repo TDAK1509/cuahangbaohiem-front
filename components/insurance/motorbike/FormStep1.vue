@@ -97,11 +97,10 @@
         <label class="label">Khuyến mãi:</label>
 
         <div class="control">
-          {{ promotion }}
           <p v-if="insuranceYear === '1'">
             <label class="checkbox">
               <input
-                v-model="promotion"
+                v-model="promotions"
                 :value="promotionValues.BUY_1_YEAR_ADD_1_YEAR"
                 name="promotion"
                 type="checkbox"
@@ -113,7 +112,7 @@
           <p>
             <label class="checkbox">
               <input
-                v-model="promotion"
+                v-model="promotions"
                 :value="promotionValues.BUY_1_BIKE_ADD_1_BIKE"
                 name="promotion"
                 type="checkbox"
