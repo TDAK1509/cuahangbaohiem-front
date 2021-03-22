@@ -229,7 +229,18 @@ export default Vue.extend({
       const year = this.insuranceStartDate.getFullYear();
       const month = this.insuranceStartDate.getMonth();
       const day = this.insuranceStartDate.getDate();
-      return new Date(year + parseInt(this.insuranceYear), month, day);
+
+      const promotionYear = this.promotions.includes(
+        Promotion.BUY_1_YEAR_ADD_1_YEAR
+      )
+        ? 1
+        : 0;
+
+      return new Date(
+        year + parseInt(this.insuranceYear) + promotionYear,
+        month,
+        day
+      );
     },
 
     isMotorbikeTypeSelected(): boolean {
@@ -272,13 +283,6 @@ export default Vue.extend({
     },
     promotionCode() {
       this.checkPromotionCodeValidity();
-    },
-    promotions() {
-      if (this.promotions.includes(Promotion.BUY_1_YEAR_ADD_1_YEAR)) {
-        this.insuranceYear = (parseInt(this.insuranceYear) + 1).toString();
-      } else {
-        this.insuranceYear = (parseInt(this.insuranceYear) - 1).toString();
-      }
     }
   },
 
