@@ -9,6 +9,10 @@
       class="input-field__input"
       type="text"
       :disabled="disabled"
+      :placeholder="placeholder"
+      :pattern="pattern"
+      :required="required"
+      :title="title"
       @input="$emit('input', $event.target.value)"
     />
   </FormField>
@@ -37,6 +41,21 @@ export default Vue.extend({
     label: {
       type: String,
       default: "Select label"
+    },
+
+    placeholder: {
+      type: String,
+      default: ""
+    },
+
+    pattern: {
+      type: String,
+      default: ""
+    },
+
+    title: {
+      type: String,
+      default: ""
     },
 
     required: {

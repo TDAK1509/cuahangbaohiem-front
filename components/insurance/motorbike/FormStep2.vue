@@ -1,18 +1,32 @@
 <template>
   <div>
     <FormStepTitle> BƯỚC 2: THÔNG TIN XE </FormStepTitle>
+
+    <div class="notification is-warning">
+      Giấy chứng nhận điện tử TNDS sẽ được gửi vào email và số điện thoại này.
+      Bạn vui lòng điền chính xác địa chỉ email và số điện thoại.
+    </div>
+
     <form @submit.prevent="submit">
-      <div class="field">
-        <label class="label">Tên chủ xe:</label>
-        <TextField
-          v-model="motorbikeOwner"
-          data-cy="owner-input"
-          required
-          pattern="[a-zA-Z\s]+"
-          title="Tên của bạn có số hoặc kí tự lạ."
-          placeholder="Ghi theo đăng ký"
-        />
-      </div>
+      <InputField
+        v-model="motorbikeOwner"
+        label="Tên chủ xe"
+        placeholder="Ghi theo đăng ký"
+        pattern="[a-zA-Z\s]+"
+        title="Tên của bạn có số hoặc kí tự lạ."
+        required
+      />
+
+      <FormSpacer />
+
+      <InputField
+        v-model="address"
+        label="Địa chỉ"
+        placeholder="123 Trần Hưng Đạo, P. Bến Thành, Q.1, Tp. HCM"
+        required
+      />
+
+      <FormSpacer />
 
       <div class="field">
         <div class="control">
@@ -125,7 +139,8 @@ export default {
       shouldShowLicensePlate2: true,
       motorbikeOwner2: "",
       licensePlate2: "",
-      frameNumber2: ""
+      frameNumber2: "",
+      address: ""
     };
   },
 
