@@ -46,13 +46,18 @@ describe("Tinh phi xe may", () => {
   });
 
   it("When ticked addon, changing addon updates add on fee", () => {
-    cy.contains(
-      "Bảo hiểm tai nạn người trên xe, phụ xe, người ngồi trên xe"
-    ).click();
-
+    clickAddOnCheckbox();
     checkAddOnFeeValue(toVnd(20000));
     cy.get("select").eq(2).select("20 triệu đồng/ người/ vụ");
     checkAddOnFeeValue(toVnd(20000 * 2));
+  });
+
+  it("Total fee shows only insurance fee if no addon, show + addon if there is addon", () => {
+    checkTotalFeeValue(toVnd(66000));
+    clickAddOnCheckbox();
+
+    const totalFee = `${toVnd(66000)} + ${toVnd(20000)} = ${toVnd(86000)}`;
+    checkTotalFeeValue(toVnd(totalFee));
   });
 });
 
@@ -78,4 +83,14 @@ function selectTomorrowForInsuranceStartDate() {
 
 function checkAddOnFeeValue(value) {
   cy.get("[data-cy=add-on-fee]").find("input").should("have.value", value);
+}
+
+function clickAddOnCheckbox() {
+  cy.contains(
+    "Bảo hiểm tai nạn người trên xe, phụ xe, người ngồi trên xe"
+  ).click();
+}
+
+function checkTotalFeeValue(value) {
+  cy.get("[data-cy=total-fee]").find("input").should("have.value", value);
 }
