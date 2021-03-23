@@ -100,24 +100,24 @@
 
         <div class="control">
           <p v-if="insuranceYear === '1'">
-            <label class="checkbox">
+            <label class="radio">
               <input
-                v-model="promotions"
+                v-model="promotion"
                 :value="promotionValues.BUY_1_YEAR_ADD_1_YEAR"
                 name="promotion"
-                type="checkbox"
+                type="radio"
               />
               {{ promotion1Label }}
             </label>
           </p>
 
           <p>
-            <label class="checkbox">
+            <label class="radio">
               <input
-                v-model="promotions"
+                v-model="promotion"
                 :value="promotionValues.BUY_1_BIKE_ADD_1_BIKE"
                 name="promotion"
-                type="checkbox"
+                type="radio"
               />
               {{ promotion2Label }}
             </label>
@@ -148,7 +148,7 @@ const controller = new MotorbikeInsuranceController();
 
 export interface Step1FormValues {
   promotionCode: string;
-  promotions: Promotion[];
+  promotion: Promotion;
   insuranceStartDate: string;
   insuranceEndDate: string;
   addOn: string;
@@ -205,7 +205,7 @@ export default Vue.extend({
         }
       ],
       promotionCode: "",
-      promotions: [] as Promotion[],
+      promotion: Promotion.NONE,
       promotionValues: Promotion,
       promotion1Label: controller.getPromotionLabel(
         Promotion.BUY_1_YEAR_ADD_1_YEAR
@@ -230,11 +230,8 @@ export default Vue.extend({
       const month = this.insuranceStartDate.getMonth();
       const day = this.insuranceStartDate.getDate();
 
-      const promotionYear = this.promotions.includes(
-        Promotion.BUY_1_YEAR_ADD_1_YEAR
-      )
-        ? 1
-        : 0;
+      const promotionYear =
+        this.promotion === Promotion.BUY_1_YEAR_ADD_1_YEAR ? 1 : 0;
 
       return new Date(
         year + parseInt(this.insuranceYear) + promotionYear,
@@ -294,7 +291,7 @@ export default Vue.extend({
     submit() {
       const step1FormValues: Step1FormValues = {
         promotionCode: this.promotionCode,
-        promotions: this.promotions,
+        promotion: this.promotion,
         insuranceStartDate: format(this.insuranceStartDate, "dd-MM-yyyy"),
         insuranceEndDate: format(this.insuranceEndDate, "dd-MM-yyyy"),
         addOn: controller.getAddOnLabel(this.addOn),
@@ -321,6 +318,10 @@ export default Vue.extend({
 
     checkPromotionCodeValidity() {
       this.isValidPromotionCode = this.promotionCode === "banAnhKhuong";
+
+      if (!this.isValidPromotionCode) {
+        this.promotion = Promotion.NONE;
+      }
     }
   }
 });

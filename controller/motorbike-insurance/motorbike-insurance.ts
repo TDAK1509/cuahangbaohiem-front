@@ -14,8 +14,9 @@ export enum MotorbikeAddOn {
 }
 
 export enum Promotion {
-  BUY_1_YEAR_ADD_1_YEAR,
-  BUY_1_BIKE_ADD_1_BIKE
+  BUY_1_YEAR_ADD_1_YEAR = "year",
+  BUY_1_BIKE_ADD_1_BIKE = "bike",
+  NONE = "none"
 }
 
 export interface MotorbikeInsuranceRequest {
@@ -33,7 +34,7 @@ export interface MotorbikeInsuranceRequest {
   phone2: string;
   email2: string;
   promotionCode: string;
-  promotions: string[];
+  promotion: string;
   insuranceStartDate: string;
   insuranceEndDate: string;
   addOn: string;
