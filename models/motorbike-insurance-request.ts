@@ -20,7 +20,7 @@ export interface RawMotorbikeInsuranceRequest {
   phone2: string;
   email2: string;
   promotionCode: string;
-  promotions: string[];
+  promotion: string;
   insuranceStartDate: string;
   insuranceEndDate: string;
   addOn: string;

@@ -29,16 +29,6 @@ import { Step2FormValues } from "@/components/insurance/motorbike/FormStep2.vue"
 
 const controller = new MotorbikeInsuranceController();
 
-interface Step3FormValues {
-  buyerName: string;
-  buyerAddress: string;
-  buyerCity: string;
-  buyerDistrict: string;
-  buyerWard: string;
-  buyerPhone: string;
-  buyerEmail: string;
-}
-
 export default Vue.extend({
   name: "TinhPhiXeMay",
 
@@ -61,7 +51,7 @@ export default Vue.extend({
       phone2: "",
       email2: "",
       promotionCode: "",
-      promotions: [] as string[],
+      promotion: "",
       promotionHasBuy1BikeAdd1Bike: false,
       insuranceStartDate: "",
       insuranceEndDate: "",
@@ -90,7 +80,7 @@ export default Vue.extend({
         phone2: this.phone2,
         email2: this.email2,
         promotionCode: this.promotionCode,
-        promotions: this.promotions,
+        promotion: this.promotion,
         insuranceStartDate: this.insuranceStartDate,
         insuranceEndDate: this.insuranceEndDate,
         addOn: this.addOn,
@@ -104,14 +94,11 @@ export default Vue.extend({
 
   methods: {
     submitStep1(values: Step1FormValues) {
-      this.promotionHasBuy1BikeAdd1Bike = values.promotions.includes(
-        Promotion.BUY_1_BIKE_ADD_1_BIKE
-      );
+      this.promotionHasBuy1BikeAdd1Bike =
+        values.promotion === Promotion.BUY_1_BIKE_ADD_1_BIKE;
 
       this.promotionCode = values.promotionCode;
-      this.promotions = values.promotions.map((promotion) =>
-        controller.getPromotionLabel(promotion)
-      );
+      this.promotion = controller.getPromotionLabel(values.promotion);
       this.insuranceStartDate = values.insuranceStartDate;
       this.insuranceEndDate = values.insuranceEndDate;
       this.motorbikeType = controller.getMotorbikeTypeLabel(
