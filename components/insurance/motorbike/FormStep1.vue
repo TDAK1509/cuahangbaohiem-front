@@ -205,6 +205,7 @@ export default Vue.extend({
         }
       ],
       promotionCode: "",
+      availablePromotionCodes: ["banAnhKhuong", "123"],
       promotion: Promotion.NONE,
       promotionValues: Promotion,
       promotion1Label: controller.getPromotionLabel(
@@ -317,7 +318,9 @@ export default Vue.extend({
     },
 
     checkPromotionCodeValidity() {
-      this.isValidPromotionCode = this.promotionCode === "banAnhKhuong";
+      this.isValidPromotionCode = this.availablePromotionCodes.includes(
+        this.promotionCode
+      );
 
       if (!this.isValidPromotionCode) {
         this.promotion = Promotion.NONE;
